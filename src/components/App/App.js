@@ -55,12 +55,7 @@ class App extends Component {
               component={UserPage}
             />
 
-            <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
-              exact
-              path="/info"
-              component={InfoPage}
-            />
+            
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
@@ -92,6 +87,44 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/user"
             />
+            {/* The 3 landing pages below */}
+            {/* <ProtectedRoute
+              exact
+              path="/login"
+              component={MyDojo}
+              authRedirect="/mydojo"
+            />
+            <ProtectedRoute
+              exact
+              path="/login"
+              component={MemberList}
+              authRedirect="/memberlist"
+            />
+              <ProtectedRoute
+              exact
+              path="/login"
+              component={DojoList}
+              authRedirect="/dojolist"
+            />
+            <ProtectedRoute
+              exact
+              path="/login"
+              component={InfoPage}
+              authRedirect="/info"
+            />
+            <ProtectedRoute
+              exact
+              path="/login"
+              component={CreateDojo}
+              authRedirect="/createdojo"
+            />
+             <ProtectedRoute
+              exact
+              path="/403"
+              component={NationalStudentList}
+              authRedirect="/nationalstudentlist"
+            /> */}
+          
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
