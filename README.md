@@ -10,7 +10,6 @@ We **STRONGLY** recommend following these instructions carefully. It's a lot, an
 
 
 ## Prerequisites
-wipee woo 
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
