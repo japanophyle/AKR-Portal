@@ -14,7 +14,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-const ProtectedRoute = (props) => {
+const SiteAdminAuthRoute = (props) => {
   // Using destructuring, this takes ComponentToProtect from component
   // prop and grabs all other props to pass them along to Route
   const {
@@ -28,7 +28,7 @@ const ProtectedRoute = (props) => {
 
   let ComponentToShow;
 
-  if (store.user.id && store.user.auth_level >= 0) {
+  if (store.user.id && store.user.auth_level >= 20) {
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
@@ -56,4 +56,4 @@ const ProtectedRoute = (props) => {
   );
 };
 
-export default connect(mapStoreToProps)(ProtectedRoute);
+export default connect(mapStoreToProps)(SiteAdminAuthRoute);
