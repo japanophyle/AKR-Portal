@@ -17,25 +17,39 @@ export default function StudentNotes() {
             <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                 notes
       </Button>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth>
                 <DialogTitle id="form-dialog-title">Student Notes</DialogTitle>
                 <DialogContent>
-                    <TextareaAutosize aria-label="minimum height" rowsMin={3} placeholder="Minimum 3 rows">
-                        wowee
-                    </TextareaAutosize>
+                    <TextField
+                        id="outlined-textarea"
+                        label="Student Notes"
+                        fullWidth
+                        placeholder="Placeholder"
+                        multiline
+                        variant="outlined"
+                        rows={7}
+
+                    />
                 </DialogContent>
                 <DialogTitle id="form-dialog-title">Equipment Rental</DialogTitle>
                 <DialogContent>
-                <TextareaAutosize aria-label="minimum height" rowsMin={3} placeholder="Minimum 3 rows">
-                        wowee
-                </TextareaAutosize>
+                    <TextField
+                        id="outlined-textarea"
+                        label="Equipment Rental"
+                        placeholder="Placeholder"
+                        multiline
+                        fullWidth
+                        rows={7}
+
+                        variant="outlined"
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
           </Button>
                     <Button onClick={handleClose} color="primary">
-                        Subscribe
+                        Save
           </Button>
                 </DialogActions>
             </Dialog>
