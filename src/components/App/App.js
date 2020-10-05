@@ -25,6 +25,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
 import MemberList from '../MemberList/MemberList';
+import NewUserRegistrationForm from '../NewUserRegistrationForm/NewUserRegistrationForm';
 
 class App extends Component {
   componentDidMount() {
@@ -135,7 +136,7 @@ class App extends Component {
               authRedirect="/nationalstudentlist"
             /> */}
           
-
+            <Route path="/new-user-registration" component={NewUserRegistrationForm} />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
