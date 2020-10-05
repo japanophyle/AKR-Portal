@@ -8,6 +8,38 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
+// NEW CODE ========
+
+router.get('/profile', rejectUnauthenticated, (req, res) => {
+  
+  queryText = `
+  SELECT
+  "user".username,
+  "user_data".*,
+  "dojo".dojo_name,
+  "region".region_name
+  FROM "user"
+  JOIN "user_data" ON "user".id = "user_data".user_id
+  JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+  JOIN "region" ON "dojo".region_id = "region".id
+  WHERE "user".id = $1
+  `;
+
+  pool
+      .query(queryText, [req.user.id])
+      .then( response => {
+          console.log('/api/profile/user get response:', response.rows[0]);
+          res.send(response.rows[0])
+          // res.sendStatus(200)
+      })
+      .catch( error => {
+          console.log('error in /api/user/profile get:', error);
+          res.sendStatus(500);
+      })
+});
+
+// BOILER PLATE ====
+
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
