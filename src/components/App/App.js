@@ -135,7 +135,7 @@ class App extends Component {
               component={NationalStudentList}
               authRedirect="/nationalstudentlist"
             /> */}
-            <Route
+            <ProtectedRoute
               exact
               path="/inactive"
               component={InactiveView}
