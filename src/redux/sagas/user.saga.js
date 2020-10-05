@@ -24,8 +24,23 @@ function* fetchUser() {
   }
 }
 
+// Saga for retrieving all of the current user's personal info
+// and storing it in a reducer
+function* fetchUserInfo() {
+  try {
+    // setting our response to what 
+    const response = yield axios.get('/api/user/profile')
+    console.log('response from get info:', response.data);
+    yield put({ type: 'SET_USER_INFO', payload: response.data });
+
+  } catch (error) {
+    console.log('User info get request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_USER_INFO', fetchUserInfo)
 }
 
 export default userSaga;
