@@ -22,6 +22,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import InactiveView from '../InactiveView/InactiveView';
 
 import './App.css';
 import MemberList from '../MemberList/MemberList';
@@ -134,6 +135,12 @@ class App extends Component {
               component={NationalStudentList}
               authRedirect="/nationalstudentlist"
             /> */}
+            <Route
+              exact
+              path="/inactive"
+              component={InactiveView}
+              authRedirect="/inactive"
+            />
           
 
             {/* If none of the other routes matched, we will show a 404. */}
