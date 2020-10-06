@@ -60,6 +60,7 @@ function NewUserPersonal(props) {
                         label="Citizenship"
                         margin="dense"
                         variant="outlined"
+                        helperText="Give your country code(s) of citizenship"
                     />
                 </Grid>
             </Grid>

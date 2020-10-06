@@ -167,13 +167,15 @@ function NewUserKyudoInfo(props) {
                     </MuiPickersUtilsProvider>
                 </Grid>
             </Grid>
-            <Grid container justify>
+            <Grid container justify="space-evenly">
                 <Grid item>
                     <TextField
                         label="IKYF Number"
                         margin="dense"
                         variant="outlined"
                     />
+                </Grid>
+                <Grid item>
                     <TextField
                         label="USA Archery Number"
                         margin="dense"

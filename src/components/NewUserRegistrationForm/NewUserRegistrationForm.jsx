@@ -6,6 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
   Paper,
   Grid,
+  Button,
 } from '@material-ui/core';
 
 import NewUserName from './NewUserName';
@@ -25,13 +26,22 @@ class NewUserForm extends Component {
       <div>
         <Grid container justify="center" alignItems="center">
           <Grid item xs={12} >
-            <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px"}}>
-              <h6 style={{ color: "red"}}>Fields with * are required.</h6>
-              <NewUserName />
-              <NewUserContact />
-              <NewUserPersonal />
-              <NewUserAddress />
-              <NewUserKyudoInfo />
+            <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px" }}>
+              <h6 style={{ color: "red" }}>Fields with * are required.</h6>
+              <form>
+                <NewUserName />
+                <NewUserContact />
+                <NewUserPersonal />
+                <NewUserAddress />
+                <NewUserKyudoInfo />
+                <Grid container justify="center">
+                  <Grid item>
+                    <Button type="submit" variant="contained" color="primary">
+                      Save
+                  </Button>
+                  </Grid>
+                </Grid>
+              </form>
             </Paper>
           </Grid>
         </Grid>
