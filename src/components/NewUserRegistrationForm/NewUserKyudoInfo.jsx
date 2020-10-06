@@ -15,12 +15,7 @@ import {
     Typography,
     InputLabel,
 } from '@material-ui/core';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
+
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -50,38 +45,13 @@ function NewUserKyudoInfo(props) {
             'Shichidan',
             'Hachidan',
             'Kudan',
-            'Judan'
+            'Jūdan'
         ]
 
     return (
         <div>
             <h3>{heading}</h3>
             {/* Choosing the dojo that the new user is trying to join. */}
-            <Grid container justify="center" alignItems="center">
-                <Grid item>
-                    <Typography variant="h6" gutterBottom>Select Dojo</Typography>
-                    <FormControl
-                        className={classes.formControl}
-                        variant="outlined"
-                    >
-                        <InputLabel>Dojo</InputLabel>
-                        <Select
-                            label="Dojo"
-                            name="dojo_id"
-                        // onChange={props.handleChange('dojo_id')}
-                        >
-                            {/* placeholder for db */}
-                            {['Minnesota', 'Iowa', 'Indiana'].map((dojo, id) => {
-                                return (
-                                    <MenuItem key={id} value={id}>{dojo}</MenuItem>
-                                )
-                            })}
-                        </Select>
-                    </FormControl>
-                </Grid>
-            </Grid>
-
-
             <Grid container>
                 <Grid item>
                     <TextField
