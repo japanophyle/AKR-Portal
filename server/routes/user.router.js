@@ -12,7 +12,7 @@ const router = express.Router();
 
 // NEW USER POST
 router.post('/profile', rejectUnauthenticated, async (req, res) => {
-    const firstQuery = `
+    const query = `
     INSERT INTO "user_data" (
       "fname", 
       "lname", 
@@ -49,7 +49,7 @@ router.post('/profile', rejectUnauthenticated, async (req, res) => {
     );
     `;
     pool
-      .query(firstQuery, [
+      .query(query, [
         req.body.fname, // $1
         req.body.lname, // $2
         // not using this, since it'll be the logged in user:
@@ -123,6 +123,9 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     })
 });
+
+// END NEW-CODE ====
+
 
 // BOILER PLATE ====
 
