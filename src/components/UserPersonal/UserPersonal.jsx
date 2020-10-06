@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Container, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
 
 
@@ -42,12 +42,15 @@ function UserPersonal(props) {
                                 <Button onClick={handleDateChange}>Edit</Button>
                             </Grid>
                         </Grid>
-                        <Typography>
-                            <h3>Citizenship: {props.store.info.citizenship}</h3>
-                            <h3>Date of birth: {moment(props.store.info.date_of_birth).format('MM-DD-YYYY')}</h3>
+                        <Typography variant="h6">
+                            Citizenship: {props.store.info.citizenship}
+                            <br/>
+                            Date of birth: {moment(props.store.info.date_of_birth).format('MM-DD-YYYY')}
+                            <br/>
                             {/* calculated using moment DIFF() operation using the date of birth */}
-                            <h3>Age: {moment().diff(props.store.info.date_of_birth, 'years')}</h3>
-                            <h3>Gender: {props.store.info.gender}</h3>
+                            Age: {moment().diff(props.store.info.date_of_birth, 'years')}
+                            <br/>
+                            Gender: {props.store.info.gender}
                         </Typography>
                     </CardContent>
                 </Card>
@@ -66,7 +69,7 @@ function UserPersonal(props) {
                                 <Button onClick={handleDateChange}>Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography>
+                        <Typography variant="h6">
                             {/* citizanship */}
                             <TextField
                                 required
@@ -92,7 +95,7 @@ function UserPersonal(props) {
                             <br />
                             
                             {/* calculated using moment DIFF() operation using the date of birth */}
-                            <h3>Age: {moment().diff(props.store.info.date_of_birth, 'years')}</h3>
+                            Age: {moment().diff(props.store.info.date_of_birth, 'years')}
 
                             {/* gender */}
                             <TextField

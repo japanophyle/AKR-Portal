@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Container, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import {  Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 
 
 // Basic functional component structure for React with default state
@@ -41,10 +41,18 @@ function UserAddress(props) {
                 <Button onClick={handleDateChange}>Edit</Button>
               </Grid>
             </Grid>
-            <Typography>
-              <h3>Address block 1</h3>
-              <h3>Address block 2</h3>
-              <h3>City, State, Zipcode, Country</h3>
+            <Typography variant="h6">
+              Address: {props.store.info.address_1}
+              <br/>
+              Address cont.:{props.store.info.address_2}
+              <br/>
+              City: {props.store.info.city}
+              <br/>
+              State: {props.store.info.state}
+              <br/>
+              Zipcode: {props.store.info.zipcode}
+              <br/>
+              Country: {props.store.info.country}
             </Typography>
           </CardContent>
         </Card>
@@ -63,7 +71,7 @@ function UserAddress(props) {
                 <Button onClick={handleDateChange}>Cancel</Button>
               </Grid>
             </Grid>
-            <Typography>
+            <Typography variant="h6">
               {/* Address 1  */}
               <TextField
                 required

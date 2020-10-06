@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Container, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import {  Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
 
 
@@ -42,11 +42,14 @@ function UserPayment(props) {
                                 <Button onClick={handleDateChange}>Edit</Button>
                             </Grid>
                         </Grid>
-                        <Typography>
-                            <h3>Dues: {props.store.info.dues_amount}</h3>
-                            <h3>Amount Paid: {props.store.info.amount_paid}</h3>
-                            <h3>Date of Payment: {moment(props.store.info.dues_date).format('MM-DD-YYYY')}</h3>
-                            <h3>Payment method: {props.store.info.dues_method}</h3>
+                        <Typography variant="h6">
+                            Dues: {props.store.info.dues_amount}
+                            <br/>
+                            Amount Paid: {props.store.info.amount_paid}
+                            <br/>
+                            Date of Payment: {moment(props.store.info.dues_date).format('MM-DD-YYYY')}
+                            <br/>
+                            Payment method: {props.store.info.dues_method}
                         </Typography>
                     </CardContent>
                 </Card>
@@ -65,7 +68,7 @@ function UserPayment(props) {
                                 <Button onClick={handleDateChange}>Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography>
+                        <Typography variant="h6">
                             {/* Dues */}
                             <TextField
                                 required

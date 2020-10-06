@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Container, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -40,9 +40,10 @@ function UserContact(props) {
                                 <Button onClick={handleDateChange}>Edit</Button>
                             </Grid>
                         </Grid>
-                        <Typography>
-                            <h3>{props.store.info.email}</h3>
-                            <h3>{props.store.info.phone_number}</h3>
+                        <Typography variant="h6">
+                            Email: {props.store.info.email}
+                            <br/>
+                            Phone: {props.store.info.phone_number}
                         </Typography>
                     </CardContent>
                 </Card>
@@ -61,7 +62,7 @@ function UserContact(props) {
                                 <Button onClick={handleDateChange}>Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography>
+                        <Typography variant="h6">
                             {/* EMAIL!  */}
                             <TextField
                                 required

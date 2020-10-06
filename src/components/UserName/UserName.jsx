@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Container, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -42,21 +42,23 @@ function UserName(props) {
             </Grid>
             <Grid container>
               <Grid item xs={6}>
-                <Typography>
+                <Typography variant="h6">
                   {/* First name */}
-                  <h3>{props.store.info.fname}</h3>
+                  {props.store.info.fname}
+                  <br/>
                   {/* japanese first name */}
-                  <h3>{props.store.info.fname_japanese}</h3>
+                  {props.store.info.fname_japanese}
                   {/* username */}
-                  <h3>Username: {props.store.info.username}</h3>
+                  <p>Username: {props.store.info.username}</p>
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography>
+                <Typography variant="h6">
                   {/* last name */}
-                  <h3>{props.store.info.lname}</h3>
+                  {props.store.info.lname}
+                  <br />
                   {/* japanese last name */}
-                  <h3>{props.store.info.lname_japanese}</h3>
+                  {props.store.info.lname_japanese}
                 </Typography>
               </Grid>
             </Grid>
@@ -80,7 +82,7 @@ function UserName(props) {
             </Grid>
             <Grid container>
               <Grid item xs={6}>
-                <Typography>
+                <Typography variant="h6">
                   {/* Firstname */}
                   <TextField
                     required
@@ -103,12 +105,12 @@ function UserName(props) {
 
                   />
                   {/* username */}
-                  <h3>Username: {props.store.info.username}</h3>
+                  <p>Username: {props.store.info.username}</p>
 
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography>
+                <Typography variant="h6">
                   {/* last name */}
                   <TextField
                     required

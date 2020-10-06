@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Container, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
 
 // LIST OF ALL STUDENT RANKS FOR SELECT BELOW 
@@ -66,18 +66,25 @@ function UserKyudo(props) {
                                 <Button onClick={handleDateChange}>Edit</Button>
                             </Grid>
                         </Grid>
-                        <Typography>
-                            <h3>Current Student Rank: {props.store.info.student_rank}</h3>
-                            <h3>Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}</h3>
-                            <h3>Current Teacher Rank: {props.store.info.teacher_rank}</h3>
-                            <h3>Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}</h3>
-                            <h3>Years Practiced: {props.store.info.years_practice}</h3>
-                            <h3>Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('MM-DD-YYYY')}</h3>
+                        <Typography variant="h6">
+                            Current Student Rank: {props.store.info.student_rank}
+                            <br/>
+                            Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
+                            <br/>
+                            Current Teacher Rank: {props.store.info.teacher_rank}
+                            <br/>
+                            Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}
+                            <br/>
+                            Years Practiced: {props.store.info.years_practice}
+                            <br/>
+                            Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('MM-DD-YYYY')}
+                            <br/>
 
                             {/* rank history goes here */}
 
-                            <h3>IKYF Member Number: {props.store.info.ikyf}</h3>
-                            <h3>USA Archery Member ID: {props.store.info.usa_archery_id}</h3>
+                            IKYF Member Number: {props.store.info.ikyf}
+                            <br/>
+                            USA Archery Member ID: {props.store.info.usa_archery_id}
                         </Typography>
                     </CardContent>
                 </Card>
@@ -96,7 +103,7 @@ function UserKyudo(props) {
                                 <Button onClick={handleDateChange}>Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography>
+                        <Typography variant="h6">
                             {/* Student rank */}
                             <FormControl variant="outlined">
                                 <InputLabel>Current Kyudo Rank</InputLabel>
