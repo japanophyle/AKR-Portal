@@ -21,7 +21,8 @@ import {
 
 function NewUserPersonal(props) {
     console.log(props.state.date_of_birth);
-    let age = moment(props.state.date_of_birth, "YYYY/MM/DD").fromNow().split(" ")[0]
+
+    let age2 = moment().diff(props.state.date_of_birth, 'years')
     const [heading, setHeading] = useState('Personal Info');
 
     return (
@@ -38,7 +39,15 @@ function NewUserPersonal(props) {
                     />
                 </Grid>
                 <Grid item>
-                    <h5>Age: {age && age}</h5>
+                    <TextField
+                        disabled
+                        label="Age"
+                        margin="dense"
+                        variant="outlined"
+                        value={!age2 ? '' : age2}
+                        name="age"
+                        onChange={(event) => props.handleChange(event)}
+                    />
                 </Grid>
                 <Grid container>
                     <Grid item>

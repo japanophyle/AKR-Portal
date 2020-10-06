@@ -18,7 +18,7 @@ function NewUserAddress(props) {
     return (
         <div>
             <h3>{heading}</h3>
-            <Grid container>
+            <Grid container spacing={2}>
                 <Grid item>
                     <TextField
                         required
@@ -28,8 +28,9 @@ function NewUserAddress(props) {
                         name="address_1"
                         onChange={props.handleChange('address_1')}
                     />
+                </Grid>
+                <Grid item>
                     <TextField
-                        
                         label="Apt, Suite, etc. #"
                         margin="dense"
                         variant="outlined"
@@ -38,8 +39,8 @@ function NewUserAddress(props) {
                     />
                 </Grid>
             </Grid>
-            <Grid container>
-                <Grid item xs={8}>
+            <Grid container spacing={2} >
+                <Grid item>
                     <TextField
                         required
                         label="City"
@@ -48,6 +49,8 @@ function NewUserAddress(props) {
                         name="city"
                         onChange={props.handleChange('city')}
                     />
+                </Grid>
+                <Grid item>
                     <TextField
                         required
                         label="State"
@@ -56,6 +59,8 @@ function NewUserAddress(props) {
                         name="state"
                         onChange={props.handleChange('state')}
                     />
+                </Grid>
+                <Grid item>
                     <TextField
                         required
                         label="Zipcode"
@@ -64,6 +69,8 @@ function NewUserAddress(props) {
                         name="zipcode"
                         onChange={props.handleChange('zipcode')}
                     />
+                </Grid>
+                <Grid item xs={12} style={{ marginTop: -8}}>
                     <TextField
                         required
                         label="Country"

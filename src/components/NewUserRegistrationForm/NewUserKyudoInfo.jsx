@@ -19,7 +19,6 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-        margin: theme.spacing(1),
         minWidth: 220,
     },
     selectEmpty: {
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 function NewUserKyudoInfo(props) {
 
     const [heading, setHeading] = useState('Kyudo Renmei Information');
-    
+
     const classes = useStyles();
 
     // ranks are mapped over the select menu
@@ -51,7 +50,7 @@ function NewUserKyudoInfo(props) {
     return (
         <div>
             <h3>{heading}</h3>
-            {/* Choosing the dojo that the new user is trying to join. */}
+
             <Grid container>
                 <Grid item>
                     <TextField
@@ -72,6 +71,8 @@ function NewUserKyudoInfo(props) {
                     />
                 </Grid>
             </Grid>
+
+            {/* current student rank form */}
             <Grid container>
                 <Grid item>
                     <FormControl
@@ -103,6 +104,8 @@ function NewUserKyudoInfo(props) {
                     />
                 </Grid>
             </Grid>
+
+            {/* teacher rank form */}
             <Grid container>
                 <Grid item>
                     <FormControl
@@ -134,7 +137,9 @@ function NewUserKyudoInfo(props) {
                     />
                 </Grid>
             </Grid>
-            <Grid container justify="space-evenly">
+
+            {/* Potential information the user might already have.  Given to them from AKR */}
+            <Grid container spacing={4}>
                 <Grid item>
                     <TextField
                         label="IKYF Number"
@@ -153,10 +158,7 @@ function NewUserKyudoInfo(props) {
                         onChange={props.handleChange('usa_archery_id')}
                     />
                 </Grid>
-
             </Grid>
-
-
         </div>
     );
 }

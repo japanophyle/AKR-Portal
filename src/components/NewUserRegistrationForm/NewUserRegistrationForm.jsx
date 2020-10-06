@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import moment from 'moment';
 
 //MATERIAL-UI
 import {
@@ -38,7 +39,6 @@ class NewUserForm extends Component {
     teaching_rank: '',
     date_teaching_rank: '',
     ikyf: '',
-    age: '',
     years_practice: '',
     address_1: '',
     address_2: '',
@@ -50,7 +50,7 @@ class NewUserForm extends Component {
     date_of_birth: '',
     date_began_kyudo: '',
     citizenship: '',
-    is_current_member: true,
+    is_current_member: !true,
     usa_archery_id: '',
   };
 
@@ -94,6 +94,7 @@ class NewUserForm extends Component {
                 <NewUserPersonal state={this.state} handleChange={this.handleChange} />
                 <NewUserAddress handleChange={this.handleChange} />
 
+                {/* Choosing the dojo that the new user is trying to join. */}
                 <FormControlLabel
                   control={
                     <Checkbox
