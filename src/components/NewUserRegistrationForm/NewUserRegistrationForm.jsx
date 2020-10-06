@@ -35,9 +35,9 @@ class NewUserForm extends Component {
     fname_japanese: '',
     lname_japanese: '',
     student_rank: '',
-    date_student_rank: '',
+    date_student_rank: null,
     teaching_rank: '',
-    date_teaching_rank: '',
+    date_teaching_rank: null,
     ikyf: '',
     years_practice: '',
     address_1: '',
@@ -47,8 +47,8 @@ class NewUserForm extends Component {
     country: '',
     zipcode: '',
     gender: '',
-    date_of_birth: '',
-    date_began_kyudo: '',
+    date_of_birth: null,
+    date_began_kyudo: null,
     citizenship: '',
     is_current_member: !true,
     usa_archery_id: '',
@@ -70,7 +70,7 @@ class NewUserForm extends Component {
     });
   }
 
-
+  // handles check box for showing a user new dojo info
   handleCheckChange = (event) => {
     this.setState
       ({
@@ -79,9 +79,19 @@ class NewUserForm extends Component {
       });
   }
 
+  // submit state to db
+  handleSaveNewUser = (event) => {
+    event.preventDefault();
+    this.props.dispatch
+      ({
+        type: 'CREATE_USER',
+        payload: this.state
+      })
+  }
+
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
     return (
       <div>
         <Grid container justify="center" alignItems="center">
