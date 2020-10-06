@@ -8,13 +8,14 @@ import {
   Grid,
 } from '@material-ui/core';
 
-import NewUserRegistrationName from './NewUserRegistrationName';
-import NewUserRegistrationContact from './NewUserRegistrationContact';
-import NewUserRegistrationPersonal from '../NewUserRegistrationForm/NewUserRegistrationPersonal';
-import { AutoComplete } from 'material-ui';
+import NewUserName from './NewUserName';
+import NewUserContact from './NewUserContact';
+import NewUserPersonal from './NewUserPersonal';
+import NewUserAddress from './NewUserAddress';
+import NewUserKyudoInfo from './NewUserKyudoInfo';
 
 
-class NewUserRegistrationForm extends Component {
+class NewUserForm extends Component {
   state = {
     heading: 'Class Component',
   };
@@ -26,9 +27,11 @@ class NewUserRegistrationForm extends Component {
           <Grid item xs={12} >
             <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px"}}>
               <h6 style={{ color: "red"}}>Fields with * are required.</h6>
-              <NewUserRegistrationName />
-              <NewUserRegistrationContact />
-              <NewUserRegistrationPersonal />
+              <NewUserName />
+              <NewUserContact />
+              <NewUserPersonal />
+              <NewUserAddress />
+              <NewUserKyudoInfo />
             </Paper>
           </Grid>
         </Grid>
@@ -37,4 +40,4 @@ class NewUserRegistrationForm extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(NewUserRegistrationForm);
+export default connect(mapStoreToProps)(NewUserForm);

@@ -8,7 +8,7 @@ import {
   TextField,
 } from '@material-ui/core';
 
-function NewUserRegistrationName(props) {
+function NewUserName(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
   const [heading, setHeading] = useState('Name');
@@ -49,4 +49,4 @@ function NewUserRegistrationName(props) {
   );
 }
 
-export default connect(mapStoreToProps)(NewUserRegistrationName);
+export default connect(mapStoreToProps)(NewUserName);

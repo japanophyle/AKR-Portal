@@ -17,16 +17,22 @@ import {
 
 
 
-function NewUserRegistrationPersonal(props) {
+function NewUserPersonal(props) {
+
+    // Sets date for now without breaking when selecting a new date
     const [selectedDate, handleDateChange] = useState(new Date());
 
     const [heading, setHeading] = useState('Personal Info');
+    let a = moment();
+    let b = moment('selectedDate', 'YYYY');
+    let diff = a.diff(b, 'years'); // calculates patient's age in years
+    
 
     return (
         <div>
             <h3>{heading}</h3>
             <Grid container>
-               
+
                 <Grid item>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <KeyboardDatePicker
@@ -41,6 +47,7 @@ function NewUserRegistrationPersonal(props) {
                         />
                     </MuiPickersUtilsProvider>
                 </Grid>
+                
                 <Grid item>
                     <TextField
                         label="Gender"
@@ -60,4 +67,4 @@ function NewUserRegistrationPersonal(props) {
     );
 }
 
-export default connect(mapStoreToProps)(NewUserRegistrationPersonal);
+export default connect(mapStoreToProps)(NewUserPersonal);

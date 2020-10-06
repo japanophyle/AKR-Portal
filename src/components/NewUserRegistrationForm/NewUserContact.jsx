@@ -9,7 +9,7 @@ import {
   } from '@material-ui/core';
 
 
-function NewUserRegistrationContact(props) {
+function NewUserContact(props) {
 
   const [heading, setHeading] = useState('Contact Info');
 
@@ -32,4 +32,4 @@ function NewUserRegistrationContact(props) {
   );
 }
 
-export default connect(mapStoreToProps)(NewUserRegistrationContact);
+export default connect(mapStoreToProps)(NewUserContact);
