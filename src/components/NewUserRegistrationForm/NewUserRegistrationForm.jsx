@@ -77,7 +77,7 @@ class NewUserForm extends Component {
           <Grid item xs={12} >
             <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px" }}>
               <h6 style={{ color: "red" }}>Fields with * are required.</h6>
-              <form>
+              <form onSubmit={this.handleSaveNewUser}>
                 <NewUserName handleChange={this.handleChange} />
                 <NewUserContact handleChange={this.handleChange} />
                 <NewUserPersonal state={this.state} handleChange={this.handleChange} />
@@ -87,10 +87,8 @@ class NewUserForm extends Component {
                   control={
                     <Checkbox
                       checked={this.state.is_current_member}
-
                       onChange={this.handleCheckChange}
                       name="is_current_member"
-
                       color="primary"
                     />
                   }
