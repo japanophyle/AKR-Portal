@@ -40,9 +40,22 @@ function* fetchUserInfo() {
   }
 }
 
+// Saga for posting a new user's info to DB
+function* createUser(action) {
+  try {
+    
+    console.log('posting new student: ', action.payload);
+    yield axios.post('/api/user/profile', action.payload)
+    
+  } catch (error) {
+    console.log('User post request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
-  yield takeLatest('FETCH_USER_INFO', fetchUserInfo)
+  yield takeLatest('FETCH_USER_INFO', fetchUserInfo);
+  yield takeLatest('CREATE_USER', createUser);
 }
 
 export default userSaga;

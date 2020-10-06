@@ -12,6 +12,7 @@ import {
 
 import UserName from '../UserName/UserName'
 import UserContact from '../UserContact/UserContact'
+import UserAddress from '../UserAddress/UserAdress'
 
 class UserPage extends Component {
 
@@ -62,7 +63,55 @@ class UserPage extends Component {
       nameEdit: !this.state.nameEdit
     })
     console.log(this.state)
+  // this component doesn't do much to start, just renders some user info to the DOM
   }
+ 
+
+  postNewUser = () => {
+    // function for testing new user POST
+    console.log('gonna post a new user');
+    this.props.dispatch({
+      type: "CREATE_USER",
+      payload: {
+        dues_date : null,
+        id : 7,
+        lname : "Aagaard",
+        country : "USA",
+        // -- "usa_archery_id" : null,
+        state : "MN",
+        // -- "lname_japanese" : null,
+        zipcode : 55408,
+        // -- "amount_paid" : null,
+        phone_number : 1231231234,
+        fname : "Emerson",
+        // -- "fname_japanese" : null,
+        // -- "dues_method" : null,
+        date_of_birth : "1991-03-06",
+        // -- "is_current_member" : null,
+        // -- "date_teaching_rank" : null,
+        email : "my.email@gmail.com",
+        address_1 : "123 Fake Street",
+        // -- "date_student_rank" : null,
+        city : "Minneapolis",
+        dojo_id : 1,
+        student_rank : "Shodan",
+        // -- "dues_amount" : null,
+        // -- "years_practice" : null,
+        user_id : 1,
+        gender : "M",
+        address_2 : "Apt 3",
+        // -- "age" : null,
+        // -- "ikyf" : null,
+        // -- "date_began_kyudo" : null,
+        // -- "citizenship" : null,
+        // -- "teaching_rank" : null,
+        // -- "notes" : null,
+        // -- "equipment_checkout" : null,
+        // -- "include_for_akr" : null
+      }
+    })
+  }
+  
 
     componentDidMount = () => {
       console.log('gonna get the profile');
@@ -89,96 +138,22 @@ class UserPage extends Component {
 
       return (
         <div>
-
+  <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+        <p>Your ID is: {this.props.store.user.id}</p>
+        <p>Your name is: {this.props.store.info.fname} {this.props.store.info.lname}</p>
+        <LogOutButton className="log-in" />
+        <button
+        >Post new User</button>
           <Container>
 
             <UserName />
 
             <UserContact />
 
-            {this.state.addressEdit ?
-              <Card>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <h1>Address</h1>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Button onClick={this.toggleAddressEdit}>Edit</Button>
-                    </Grid>
-                  </Grid>
-                  <Typography>
-                    <h3>Address block 1</h3>
-                    <h3>Address block 2</h3>
-                    <h3>City, State, Zipcode, Country</h3>
-                  </Typography>
-                </CardContent>
-              </Card>
-              :
-              <Card>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <h1>Address</h1>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Button onClick={this.toggleNameEdit}>Edit</Button>
-                    </Grid>
-                  </Grid>
-                  <Typography>
-                    <TextField
-                      required
-                      id="address_1"
-                      label="Address line 1"
-                      defaultValue="karl"
-                      variant="outlined"
-                    />
-                    <br />
-                    <br />
-                    <TextField
-                      required
-                      id="address_2"
-                      label="Address line 2"
-                      defaultValue="asdf"
-                      variant="outlined"
-                    />
-                    <br />
-                    <br />
-                    <TextField
-                      required
-                      id="country"
-                      label="Country"
-                      defaultValue="karl"
-                      variant="outlined"
-                    />
-                    <TextField
-                      required
-                      id="state"
-                      label="State"
-                      defaultValue="asdf"
-                      variant="outlined"
-                    />
-                    <TextField
-                      required
-                      id="city"
-                      label="City"
-                      defaultValue="karl"
-                      variant="outlined"
-                    />
-                    <TextField
-                      required
-                      id="zipcode"
-                      label="Zipcode"
-                      defaultValue="55104"
-                      variant="outlined"
-                    />
-                    <h3>Address block 1</h3>
-                    <h3>Address block 2</h3>
-                    <h3>City, State, Zipcode, Country</h3>
-                  </Typography>
-                </CardContent>
-              </Card>
-            }
+            <UserAddress /> 
+
+            
+            
 
             {this.state.personalEdit ?
               <Card>
@@ -479,7 +454,6 @@ class UserPage extends Component {
             }
 
           </Container>
-          <LogOutButton className="log-in" />
         </div>
       )
     }

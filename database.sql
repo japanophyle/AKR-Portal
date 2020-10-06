@@ -63,3 +63,10 @@ CREATE TABLE "user_data" (
 	"usa_archery_id" integer,
 	"include_for_akr" BOOLEAN
 );
+
+CREATE TABLE "ranks" (
+	"id" SERIAL PRIMARY KEY,
+	"rank_name" VARCHAR(30),
+	"date_rank_made" DATE,
+	"user_id" INT REFERENCES "user_data" ON DELETE CASCADE
+);
