@@ -52,10 +52,11 @@ function UserPersonal(props) {
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
-                                <h1>Address</h1>
+                                <h1>Personal Information</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Button onClick={handleDateChange}>Edit</Button>
+                            <Button onClick={handleDateChange}>Save</Button>
+                    <Button onClick={handleDateChange}>Cancel</Button>
                             </Grid>
                         </Grid>
                         <Typography>

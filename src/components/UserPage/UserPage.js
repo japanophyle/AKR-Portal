@@ -14,6 +14,7 @@ import UserName from '../UserName/UserName'
 import UserContact from '../UserContact/UserContact'
 import UserAddress from '../UserAddress/UserAdress'
 import UserPersonal from '../UserPersonal/UserPersonal'
+import UserKyudo from '../UserKyudo/UserKyudo'
 
 class UserPage extends Component {
 
@@ -122,21 +123,19 @@ class UserPage extends Component {
     }
 
     render() {
-
       const ranks =
-        [
-          '(1st Dan) Shodan',
-          '(2nd Dan) Nidan',
-          '(3rd Dan) Sandan',
-          '(4th Dan) Yondan',
-          '(5th Dan) Godan',
-          '(6th Dan) Rokudan',
-          '(7th Dan) Shichidan',
-          '(8th Dan) Hachidan',
-          '(9th Dan) Kudan',
-          '(10th Dan) Judan'
-        ]
-
+      [
+        '(1st Dan) Shodan',
+        '(2nd Dan) Nidan',
+        '(3rd Dan) Sandan',
+        '(4th Dan) Yondan',
+        '(5th Dan) Godan',
+        '(6th Dan) Rokudan',
+        '(7th Dan) Shichidan',
+        '(8th Dan) Hachidan',
+        '(9th Dan) Kudan',
+        '(10th Dan) Judan'
+      ]
       return (
         <div>
   <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
@@ -155,6 +154,8 @@ class UserPage extends Component {
 
             <UserPersonal />
 
+            <UserKyudo />
+{/* 
             {this.state.kyudoEdit ?
               <Card>
                 <CardContent>
@@ -249,10 +250,10 @@ class UserPage extends Component {
                         helperText="Date Earned"
                         label="Date Earned"
                       />
-                    </MuiPickersUtilsProvider>
+                    </MuiPickersUtilsProvider> */}
 
                     {/* HERE ILL ADD A RANK HISTORY dropdown display */}
-
+{/* 
                     <br />
                     <br />
                     <TextField
@@ -305,7 +306,7 @@ class UserPage extends Component {
                   </Typography>
                 </CardContent>
               </Card>
-            }
+            } */}
 
             {this.state.paymentEdit ?
               <Card>

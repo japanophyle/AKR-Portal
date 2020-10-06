@@ -53,7 +53,8 @@ function UserAddress(props) {
                     <h1>Address</h1>
                   </Grid>
                   <Grid item xs={1}>
-                    <Button onClick={handleDateChange}>Edit</Button>
+                  <Button onClick={handleDateChange}>Save</Button>
+                    <Button onClick={handleDateChange}>Cancel</Button>
                   </Grid>
                 </Grid>
                 <Typography>
