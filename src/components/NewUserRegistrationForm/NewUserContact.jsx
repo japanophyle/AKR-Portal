@@ -21,12 +21,14 @@ function NewUserContact(props) {
         label="name@email.com"
         margin="dense"
         variant="outlined"
+        name="email"
       />
       <TextField
         required
         label="Phone Number"
         margin="dense"
         variant="outlined"
+        name="phone_number"
       />
     </div>
   );

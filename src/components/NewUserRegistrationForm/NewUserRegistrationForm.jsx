@@ -20,18 +20,46 @@ import NewUserKyudoInfo from './NewUserKyudoInfo';
 
 class NewUserForm extends Component {
   state = {
-    heading: 'Class Component',
-    currentMember: !true,
+    fname: '',
+    lname: '',
+    user_id: '',
+    email: '',
+    phone_number: '',
+    dojo_id: '',
+    fname_japanese: '',
+    lname_japanese: '',
+    student_rank: '',
+    date_student_rank: '',
+    teaching_rank: '',
+    date_teaching_rank: '',
+    ikyf: '',
+    age: '',
+    years_practice: '',
+    address_1: '',
+    address_2: '',
+    city: '',
+    state: '',
+    country: '',
+    zipcode: '',
+    gender: '',
+    date_of_birth: '',
+    date_began_kyudo: '',
+    citizenship: '',
+    is_current_member: !true,
+    usa_archery_id: '',
   };
 
-  handleCurrentMember = (event) => {
-   
-      this.setState({ ...this.state, [event.target.name]: event.target.checked });
-
+  handleChange = (event) => {
+      this.setState
+        ({ 
+          ...this.state, 
+          [event.target.name]: event.target.checked 
+        });
   }
 
 
   render() {
+    console.log(this.state.is_current_member)
     return (
       <div>
         <Grid container justify="center" alignItems="center">
@@ -47,16 +75,19 @@ class NewUserForm extends Component {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={this.state.currentMember}
-                      onChange={this.handleCurrentMember}
-                      name="currentMember"
+                      checked={this.state.is_current_member}
+      
+                      onChange={this.handleChange}
+                      name="is_current_member"
+      
                       color="primary"
                     />
                   }
                   label="Current Member"
                 />
-                {this.state.currentMember &&
-                  <NewUserKyudoInfo />
+                {this.state.is_current_member &&
+    
+    <NewUserKyudoInfo />
                 }
                 <Grid container justify="center">
                   <Grid item>

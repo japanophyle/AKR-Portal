@@ -21,6 +21,7 @@ function NewUserName(props) {
         label="First"
         margin="dense"
         variant="outlined"
+        name="fname"
       />
     
       <TextField
@@ -28,6 +29,7 @@ function NewUserName(props) {
         label="Last"
         margin="dense"
         variant="outlined"
+        name="lname"
       />
       <Grid container>
         <Grid item>
@@ -36,12 +38,14 @@ function NewUserName(props) {
             helperText="If known"
             margin="dense"
             variant="outlined"
+            name="japanese_fname"
           />
           <TextField
             label="Katakana"
             helperText="If known"
             margin="dense"
             variant="outlined"
+            name="japanese_lname"
           />
         </Grid>
       </Grid>

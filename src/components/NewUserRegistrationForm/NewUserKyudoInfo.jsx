@@ -40,14 +40,6 @@ function NewUserKyudoInfo(props) {
     const [selectedRankDate, handleRankDateChange] = useState(new Date());
     const [selectedTeachingRankDate, handleTeachingDateChange] = useState(new Date());
 
-    const [state, setState] = useState({
-        currentMember: !true,
-
-    });
-
-    const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-    };
 
     const classes = useStyles();
 
@@ -80,6 +72,7 @@ function NewUserKyudoInfo(props) {
                         <InputLabel>Dojo</InputLabel>
                         <Select
                             label="Dojo"
+                            name="dojo_id"
                         >
                             {['Minnesota', 'Iowa', 'Indiana'].map((dojo, id) => {
                                 return (
@@ -91,13 +84,14 @@ function NewUserKyudoInfo(props) {
                 </Grid>
             </Grid>
 
-                {/*  */}
+               
             <Grid container>
                 <Grid item>
                     <TextField
                         label="Years Practiced"
                         margin="dense"
                         variant="outlined"
+                        name="years_practice"
                     />
                 </Grid>
                 <Grid item>
@@ -107,6 +101,7 @@ function NewUserKyudoInfo(props) {
                             variant="outlined"
                             format="MM/dd/yyyy"
                             margin="normal"
+                            name="date_began_kyudo"
                             value={selectedDate}
                             onChange={handleDateChange}
                             helperText="mm/dd/yyyy"
@@ -124,6 +119,7 @@ function NewUserKyudoInfo(props) {
                         <InputLabel>Current Kyudo Rank</InputLabel>
                         <Select
                             label="Current Kyudo Rank"
+                            name="student_rank"
                         >
                             {ranks.map((rank, id) => {
                                 return (
@@ -140,6 +136,7 @@ function NewUserKyudoInfo(props) {
                             variant="outlined"
                             format="MM/dd/yyyy"
                             margin="normal"
+                            name="date_student_rank"
                             value={selectedRankDate}
                             onChange={handleRankDateChange}
                             helperText="mm/dd/yyyy"
@@ -157,6 +154,7 @@ function NewUserKyudoInfo(props) {
                         <InputLabel>Current Teaching Rank</InputLabel>
                         <Select
                             label="Current Teaching Rank"
+                            name="teaching_rank"
                         >
                             {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
                                 return (
@@ -173,6 +171,7 @@ function NewUserKyudoInfo(props) {
                             variant="outlined"
                             format="MM/dd/yyyy"
                             margin="normal"
+                            name="date_teaching_rank"
                             value={selectedTeachingRankDate}
                             onChange={handleTeachingDateChange}
                             helperText="mm/dd/yyyy"
@@ -187,6 +186,7 @@ function NewUserKyudoInfo(props) {
                         label="IKYF Number"
                         margin="dense"
                         variant="outlined"
+                        name="ikyf"
                     />
                 </Grid>
                 <Grid item>
@@ -194,6 +194,7 @@ function NewUserKyudoInfo(props) {
                         label="USA Archery Number"
                         margin="dense"
                         variant="outlined"
+                        name="usa_archery_id"
                     />
                 </Grid>
 
