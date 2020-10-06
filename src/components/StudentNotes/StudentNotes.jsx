@@ -28,7 +28,6 @@ export default function StudentNotes() {
                         multiline
                         variant="outlined"
                         rows={7}
-
                     />
                 </DialogContent>
                 <DialogTitle id="form-dialog-title">Equipment Rental</DialogTitle>
