@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Container, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
 
+// LIST OF ALL STUDENT RANKS FOR SELECT BELOW 
 const ranks =
     [
         'Shodan',
@@ -21,14 +22,16 @@ const ranks =
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
 function UserKyudo(props) {
-    // Using hooks we're creating local state for a "heading" variable with
-    // a default value of 'Functional Component'
+
+    // State used to toggle the edit button on and off
     const [nameEdit, toggleNameEdit] = useState(true);
 
+    // function used to toggle edit and non edit views
     const handleDateChange = (date) => {
         toggleNameEdit(!nameEdit);
     };
 
+    // function that dispatches to the edit reducer whenever an edit is made to an input
     const handleEditChange = (event) => {
         console.log(`Handle change of ${event.target.id}`);
         props.dispatch(
@@ -38,6 +41,8 @@ function UserKyudo(props) {
             });
     }
 
+    // function FOR SELECTS ONLY (Since needs name not id)
+    //that dispatches to the edit reducer whenever an edit is made to an input
     const name = (event) => {
         console.log(`Handle change of ${event.target.name}`);
         props.dispatch(
@@ -49,144 +54,156 @@ function UserKyudo(props) {
 
     return (
         <div>
+            {/* IF the state is true this a just a view of information */}
             {nameEdit ?
-                    <Card>
-                        <CardContent>
-                            <Grid container>
-                                <Grid item xs={11}>
-                                    <h1>Kyudo Information</h1>
-                                </Grid>
-                                <Grid item xs={1}>
-                                    <Button onClick={handleDateChange}>Edit</Button>
-                                </Grid>
+                <Card>
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={11}>
+                                <h1>Kyudo Information</h1>
                             </Grid>
-                            <Typography>
-                                <h3>Current Student Rank: {props.store.info.student_rank}</h3>
-                                <h3>Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}</h3>
-                                <h3>Current Teacher Rank: {props.store.info.teacher_rank}</h3>
-                                <h3>Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}</h3>
-                                <h3>Years Practiced: {props.store.info.years_practice}</h3>
-                                <h3>Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('MM-DD-YYYY')}</h3>
-
-                                {/* rank history goes here */}
-
-                                <h3>IKYF Member Number: {props.store.info.ikyf}</h3>
-                                <h3>USA Archery Member ID: {props.store.info.usa_archery_id}</h3>
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                    :
-                    <Card>
-                        <CardContent>
-                            <Grid container>
-                                <Grid item xs={11}>
-                                    <h1>Kyudo Information</h1>
-                                </Grid>
-                                <Grid item xs={1}>
-                                    <Button onClick={handleDateChange}>Save</Button>
-                                    <Button onClick={handleDateChange}>Cancel</Button>
-                                </Grid>
+                            <Grid item xs={1}>
+                                <Button onClick={handleDateChange}>Edit</Button>
                             </Grid>
-                            <Typography>
-                                <FormControl variant="outlined">
-                                    <InputLabel>Current Kyudo Rank</InputLabel>
-                                    <Select
-                                        id="student_rank"
-                                        name="student_rank"
-                                        label="Current Kyudo Rank"
-                                        onChange={(event) => name(event)}
-                                    >
-                                        {ranks.map((rank, id) => {
-                                            return (
-                                                <MenuItem key={id} value={rank}>{rank}</MenuItem>
-                                            )
-                                        })}
-                                    </Select>
-                                </FormControl>
-                                <br />
-                                <br />
-                                <TextField
-                                    type='Date'
-                                    required
-                                    id="date_student_rank"
-                                    label="Date Earned"
-                                    defaultValue={moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}
-                                    variant="outlined"
-                                    onChange={handleEditChange}
-                                />
-                                <br />
-                                <br />
-                                <FormControl variant="outlined" >
-                                    <InputLabel>Current Teaching Rank</InputLabel>
-                                    <Select
-                                        id="teacher_rank"
-                                        label="Current Teaching Rank"
-                                        name="teacher_rank"
-                                        onChange={(event) => name(event)}
-                                    >
-                                        {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
-                                            return (
-                                                <MenuItem key={id} value={rank}>{rank}</MenuItem>
-                                            )
-                                        })}
-                                    </Select>
-                                </FormControl>
-                                <br />
-                                <br />
-                                <TextField
-                                    type='Date'
-                                    required
-                                    id="date_teacher_rank"
-                                    label="Date Earned"
-                                    defaultValue={moment(props.store.info.date_teacher_rank).format('YYYY-MM-DD')}
-                                    variant="outlined"
-                                    onChange={handleEditChange}
-                                />
-                                <br />
-                                <br />
-                                <TextField
-                                    required
-                                    id="years_practice"
-                                    label="Years of Practice"
-                                    defaultValue={props.store.info.years_practice}
-                                    variant="outlined"
-                                    onChange={handleEditChange}
-                                />
-                                <br />
-                                <br />
-                                <TextField
-                                    type='Date'
-                                    required
-                                    id="date_began_kyudo"
-                                    label="Date Began Kyudo"
-                                    defaultValue={moment(props.store.info.date_began_kyudo).format('YYYY-MM-DD')}
-                                    variant="outlined"
-                                    onChange={handleEditChange}
-                                />
-                                <br />
-                                <br />
-                                <TextField
-                                    required
-                                    id="ikyf"
-                                    label="IKFY Number"
-                                    defaultValue={props.store.info.ikyf}
-                                    variant="outlined"
-                                    onChange={handleEditChange}
-                                />
-                                <br />
-                                <br />
-                                <TextField
-                                    required
-                                    id="usa_archery_id"
-                                    label="USA archery Number"
-                                    defaultValue={props.store.info.usa_archery_id}
-                                    variant="outlined"
-                                    onChange={handleEditChange}
-                                />
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                }
+                        </Grid>
+                        <Typography>
+                            <h3>Current Student Rank: {props.store.info.student_rank}</h3>
+                            <h3>Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}</h3>
+                            <h3>Current Teacher Rank: {props.store.info.teacher_rank}</h3>
+                            <h3>Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}</h3>
+                            <h3>Years Practiced: {props.store.info.years_practice}</h3>
+                            <h3>Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('MM-DD-YYYY')}</h3>
+
+                            {/* rank history goes here */}
+
+                            <h3>IKYF Member Number: {props.store.info.ikyf}</h3>
+                            <h3>USA Archery Member ID: {props.store.info.usa_archery_id}</h3>
+                        </Typography>
+                    </CardContent>
+                </Card>
+                :
+                <Card>
+                    {/* IF the state is FALSE this You can edit */}
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={11}>
+                                <h1>Kyudo Information</h1>
+                            </Grid>
+                            <Grid item xs={1}>
+                                {/* THis button will dispatch all changed to the PUT saga/reducer */}
+                                <Button onClick={handleDateChange}>Save</Button>
+                                {/* cancel will turn the values in the edit reducer back to original info reducer */}
+                                <Button onClick={handleDateChange}>Cancel</Button>
+                            </Grid>
+                        </Grid>
+                        <Typography>
+                            {/* Student rank */}
+                            <FormControl variant="outlined">
+                                <InputLabel>Current Kyudo Rank</InputLabel>
+                                <Select
+                                    id="student_rank"
+                                    name="student_rank"
+                                    label="Current Kyudo Rank"
+                                    onChange={(event) => name(event)}
+                                >
+                                    {ranks.map((rank, id) => {
+                                        return (
+                                            <MenuItem key={id} value={rank}>{rank}</MenuItem>
+                                        )
+                                    })}
+                                </Select>
+                            </FormControl>
+                            <br />
+                            <br />
+                            {/* date got student rank */}
+                            <TextField
+                                type='Date'
+                                required
+                                id="date_student_rank"
+                                label="Date Earned"
+                                defaultValue={moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}
+                                variant="outlined"
+                                onChange={handleEditChange}
+                            />
+                            <br />
+                            <br />
+                            {/* teacher rank */}
+                            <FormControl variant="outlined" >
+                                <InputLabel>Current Teaching Rank</InputLabel>
+                                <Select
+                                    id="teacher_rank"
+                                    label="Current Teaching Rank"
+                                    name="teacher_rank"
+                                    onChange={(event) => name(event)}
+                                >
+                                    {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
+                                        return (
+                                            <MenuItem key={id} value={rank}>{rank}</MenuItem>
+                                        )
+                                    })}
+                                </Select>
+                            </FormControl>
+                            <br />
+                            <br />
+                            {/* date of teacher rank */}
+                            <TextField
+                                type='Date'
+                                required
+                                id="date_teacher_rank"
+                                label="Date Earned"
+                                defaultValue={moment(props.store.info.date_teacher_rank).format('YYYY-MM-DD')}
+                                variant="outlined"
+                                onChange={handleEditChange}
+                            />
+                            <br />
+                            <br />
+                            {/* years of practice */}
+                            <TextField
+                                required
+                                id="years_practice"
+                                label="Years of Practice"
+                                defaultValue={props.store.info.years_practice}
+                                variant="outlined"
+                                onChange={handleEditChange}
+                            />
+                            <br />
+                            <br />
+                            {/* date kyudo started for you, why did i phrase it like that ... */}
+                            <TextField
+                                type='Date'
+                                required
+                                id="date_began_kyudo"
+                                label="Date Began Kyudo"
+                                defaultValue={moment(props.store.info.date_began_kyudo).format('YYYY-MM-DD')}
+                                variant="outlined"
+                                onChange={handleEditChange}
+                            />
+                            <br />
+                            <br />
+                            {/* IKYF NUMBER */}
+                            <TextField
+                                required
+                                id="ikyf"
+                                label="IKFY Number"
+                                defaultValue={props.store.info.ikyf}
+                                variant="outlined"
+                                onChange={handleEditChange}
+                            />
+                            <br />
+                            <br />
+                            {/* USA archery Number */}
+                            <TextField
+                                required
+                                id="usa_archery_id"
+                                label="USA archery Number"
+                                defaultValue={props.store.info.usa_archery_id}
+                                variant="outlined"
+                                onChange={handleEditChange}
+                            />
+                        </Typography>
+                    </CardContent>
+                </Card>
+            }
         </div>
     );
 }

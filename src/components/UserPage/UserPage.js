@@ -10,6 +10,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+// all the imports to display the users information.
 import UserName from '../UserName/UserName'
 import UserContact from '../UserContact/UserContact'
 import UserAddress from '../UserAddress/UserAdress'
@@ -19,55 +20,8 @@ import UserPayment from '../UserPayment/UserPayment'
 
 class UserPage extends Component {
 
-  state = {
-    nameEdit: true,
-    contactEdit: true,
-    addressEdit: true,
-    personalEdit: true,
-    kyudoEdit: true,
-    paymentEdit: true,
-  };
-
-  toggleContactEdit = () => {
-    this.setState({
-      contactEdit: !this.state.contactEdit
-    })
-    console.log(this.state)
-  }
-
-  toggleAddressEdit = () => {
-    this.setState({
-      addressEdit: !this.state.addressEdit
-    })
-    console.log(this.state)
-  }
-  togglePersonalEdit = () => {
-    this.setState({
-      personalEdit: !this.state.personalEdit
-    })
-    console.log(this.state)
-  }
-
-  toggleKyudoEdit = () => {
-    this.setState({
-      kyudoEdit: !this.state.kyudoEdit
-    })
-    console.log(this.state)
-  }
-  togglePaymentEdit = () => {
-    this.setState({
-      paymentEdit: !this.state.paymentEdit
-    })
-    console.log(this.state)
-  }
-
-  toggleNameEdit = () => {
-    this.setState({
-      nameEdit: !this.state.nameEdit
-    })
-    console.log(this.state)
   // this component doesn't do much to start, just renders some user info to the DOM
-  }
+  
  
 
   postNewUser = () => {
@@ -124,19 +78,6 @@ class UserPage extends Component {
     }
 
     render() {
-      const ranks =
-      [
-        '(1st Dan) Shodan',
-        '(2nd Dan) Nidan',
-        '(3rd Dan) Sandan',
-        '(4th Dan) Yondan',
-        '(5th Dan) Godan',
-        '(6th Dan) Rokudan',
-        '(7th Dan) Shichidan',
-        '(8th Dan) Hachidan',
-        '(9th Dan) Kudan',
-        '(10th Dan) Judan'
-      ]
       return (
         <div>
   <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
@@ -147,93 +88,24 @@ class UserPage extends Component {
         >Post new User</button>
           <Container>
 
+          {/* Edit user name data component */}
             <UserName />
 
+          {/* Edit user Contact data component */}
             <UserContact />
 
+          {/* Edit user Address data component */}
             <UserAddress /> 
 
+          {/* Edit user Personal data component */}
             <UserPersonal />
 
+          {/* Edit user Kyudo data component */}
             <UserKyudo />
 
+          {/* Edit user Payment data data component */}
+          {/* Needs to have diff views depending on the admin level of the user */}
             <UserPayment />
-
-            {this.state.paymentEdit ?
-              <Card>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <h1>Payment Information</h1>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Button onClick={this.togglePaymentEdit}>Edit</Button>
-                    </Grid>
-                  </Grid>
-                  <Typography>
-                    <h3>Dues: $50</h3>
-                    <h3>Amount Payed: $50</h3>
-                    <h3>Date of Payment: 01/23/20</h3>
-                    <h3>Payment method: barter system</h3>
-                  </Typography>
-                </CardContent>
-              </Card>
-              :
-              <Card>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <h1>Payment Information</h1>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Button onClick={this.toggleNameEdit}>Edit</Button>
-                    </Grid>
-                  </Grid>
-                  <Typography>
-                    <TextField
-                      required
-                      id="dues_amount"
-                      label="Dues"
-                      defaultValue="50"
-                      variant="outlined"
-                    />
-                    <br />
-                    <br />
-                    <TextField
-                      required
-                      id="amount_paid"
-                      label="Amount paid"
-                      defaultValue="50"
-                      variant="outlined"
-                    />
-                    <br />
-                    <br />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        required
-                        id="date_dues_paid"
-                        variant="outlined"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        value="08/11/2000"
-                        helperText="Start Date"
-                        label="Start Date"
-                      />
-                    </MuiPickersUtilsProvider>
-
-                    <br />
-                    <br />
-                    <TextField
-                      required
-                      id="dues_payment_method"
-                      label="Payment Method"
-                      defaultValue="card"
-                      variant="outlined"
-                    />
-                  </Typography>
-                </CardContent>
-              </Card>
-            }
 
           </Container>
         </div>

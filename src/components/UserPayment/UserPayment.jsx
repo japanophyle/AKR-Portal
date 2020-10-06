@@ -9,14 +9,16 @@ import moment from 'moment';
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
 function UserPayment(props) {
-    // Using hooks we're creating local state for a "heading" variable with
-    // a default value of 'Functional Component'
+
+    // State used to toggle the edit button on and off
     const [nameEdit, toggleNameEdit] = useState(true);
 
+    // function used to toggle edit and non edit views
     const handleDateChange = (date) => {
         toggleNameEdit(!nameEdit);
     };
 
+    // function that dispatches to the edit reducer whenever an edit is made to an input
     const handleEditChange = (event) => {
         console.log(`Handle change of ${event.target.id}`);
         props.dispatch(
@@ -28,6 +30,7 @@ function UserPayment(props) {
 
     return (
         <div>
+            {/* IF the state is true this a just a view of information */}
             {nameEdit ?
                 <Card>
                     <CardContent>
@@ -49,18 +52,22 @@ function UserPayment(props) {
                 </Card>
                 :
                 <Card>
+                    {/* IF the state is FALSE this You can edit */}
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
                                 <h1>Payment Information</h1>
                             </Grid>
                             <Grid item xs={1}>
+                                {/* THis button will dispatch all changed to the PUT saga/reducer */}
                                 <Button onClick={handleDateChange}>Save</Button>
+                                {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateChange}>Cancel</Button>
                             </Grid>
                         </Grid>
                         <Typography>
-                        <TextField
+                            {/* Dues */}
+                            <TextField
                                 required
                                 id="dues_amount"
                                 label="Dues"
@@ -70,6 +77,7 @@ function UserPayment(props) {
                             />
                             <br />
                             <br />
+                            {/* Amount paid */}
                             <TextField
                                 required
                                 id="amount_paid"
@@ -80,6 +88,7 @@ function UserPayment(props) {
                             />
                             <br />
                             <br />
+                            {/* date of the payment */}
                             <TextField
                                 type='Date'
                                 required
@@ -91,6 +100,7 @@ function UserPayment(props) {
                             />
                             <br />
                             <br />
+                            {/* payment method */}
                             <TextField
                                 required
                                 id="dues_method"
