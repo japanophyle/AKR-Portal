@@ -14,7 +14,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // by checking req.isAuthenticated for authentication
 // and by checking req.user for authorization
 
-const AuthRoute = (props) => {
+const UserAuthRoute = (props) => {
   // Using destructuring, this takes ComponentToProtect from component
   // prop and grabs all other props to pass them along to Route
   const {
@@ -28,20 +28,11 @@ const AuthRoute = (props) => {
 
   let ComponentToShow;
 
-  if (store.user.id && store.user.auth_level >= 20) {
+  if (store.user.id && store.user.auth_level >= 5) {
     // if the user is logged in (only logged in users have ids)
     // show the component that is protected
     ComponentToShow = ComponentToProtect;
-  } else if (store.user.id && store.user.auth_level >= 10) {
-    if (ComponentToProtect === DojoList){
-      ComponentToShow = MyDojo;
-    }
-  }else if (store.user.id && store.user.auth_level >= 5) {
-    
-  }else if (store.user.id && store.user.auth_level >= 0) {
-    
-  }
-  else {
+  } else {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
@@ -65,4 +56,4 @@ const AuthRoute = (props) => {
   );
 };
 
-export default connect(mapStoreToProps)(AuthRoute);
+export default connect(mapStoreToProps)(UserAuthRoute);

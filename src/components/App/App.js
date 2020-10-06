@@ -12,6 +12,9 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import UserAuthRoute from '../ProtectedRoute/UserAuthRoute';
+import DojoAdminAuthRoute from '../ProtectedRoute/DojoAdminAuthRoute';
+import SiteAdminAuthRoute from '../ProtectedRoute/SiteAdminAuthRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -21,10 +24,12 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import MemberList from '../MemberList/MemberList';
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({ type: 'GET_RANKS' });
   }
 
   render() {
@@ -87,6 +92,12 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/user"
             />
+            <DojoAdminAuthRoute
+              exact
+              path="/memberlist"
+              component={MemberList}
+            />
+
             {/* The 3 landing pages below */}
             {/* <ProtectedRoute
               exact
