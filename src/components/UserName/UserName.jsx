@@ -9,7 +9,6 @@ import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Containe
 function UserName(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
-  const [heading, setHeading] = useState('Functional Component');
   const [nameEdit, toggleNameEdit] = useState(true);
   const [fname, setFName] = useState('a');
   const [lname, setLName] = useState('true');

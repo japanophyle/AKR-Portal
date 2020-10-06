@@ -11,6 +11,8 @@ import {
 } from '@material-ui/pickers';
 
 import UserName from '../UserName/UserName'
+import UserContact from '../UserContact/UserContact'
+
 class UserPage extends Component {
 
 
@@ -86,143 +88,10 @@ class UserPage extends Component {
         <p>Your ID is: {this.props.store.user.id}</p>
         <LogOutButton className="log-in" /> */}
         <Container>
-          <UserName />
-          {/* {this.state.nameEdit ?
-            <Card>
-              <CardContent>
-                <Grid container>
-                  <Grid item xs={11}>
-                    <h1>Name</h1>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Button onClick={this.toggleNameEdit}>Edit</Button>
-                  </Grid>
-                </Grid>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>
-                      <h3>Karl</h3>
-                      <h3>Katakana First Name</h3>
-                      <h3>Username</h3>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography>
-                      <h3>Beck</h3>
-                      <h3>Katakana Last Name</h3>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-            :
-            <Card>
-              <CardContent>
-                <Grid container>
-                  <Grid item xs={11}>
-                    <h1>Name</h1>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Button onClick={this.toggleNameEdit}>Save</Button>
-                    <Button onClick={this.toggleNameEdit}>Cancel</Button>
-                  </Grid>
-                </Grid>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>
-                      <TextField
-                        required
-                        id="fname"
-                        label="First Name"
-                        defaultValue="karl"
-                        variant="outlined"
-                      />
-                      <br />
-                      <br />
-                      <TextField
-                        required
-                        id="katakana_fname"
-                        label="Katakana First Name"
-                        defaultValue="asdf"
-                        variant="outlined"
-                      />
-                      <h3>Username</h3>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography>
-                      <TextField
-                        required
-                        id="lname"
-                        label="Last Name"
-                        defaultValue="beck"
-                        variant="outlined"
-                      />
-                      <br />
-                      <br />
-                      <TextField
-                        required
-                        id="katakana_lname"
-                        label="Katakana Last Name"
-                        defaultValue="fdsa"
-                        variant="outlined"
-                      />
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          } */}
 
-          {this.state.contactEdit ?
-            <Card>
-              <CardContent>
-                <Grid container>
-                  <Grid item xs={11}>
-                    <h1>Contact</h1>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Button onClick={this.toggleContactEdit}>Edit</Button>
-                  </Grid>
-                </Grid>
-                <Typography>
-                  <h3>Emailadress@email.what</h3>
-                  <h3>612-280-0987</h3>
-                </Typography>
-              </CardContent>
-            </Card>
-            :
-            <Card>
-              <CardContent>
-                <Grid container>
-                  <Grid item xs={11}>
-                    <h1>Contact</h1>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Button onClick={this.toggleContactEdit}>Edit</Button>
-                  </Grid>
-                </Grid>
-                <Typography>
-                  <TextField
-                    required
-                    id="email"
-                    label="Email"
-                    defaultValue="Emailadress@email.whau"
-                    variant="outlined"
-                  />
-                  <br />
-                  <br />
-                  <TextField
-                    required
-                    id="phone_number"
-                    label="Phone Number"
-                    defaultValue="6122800987"
-                    variant="outlined"
-                  />
-                </Typography>
-              </CardContent>
-            </Card>
-          }
+          <UserName />
+          
+          <UserContact />
 
           {this.state.addressEdit ?
             <Card>
