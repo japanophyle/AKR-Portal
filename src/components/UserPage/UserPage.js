@@ -15,6 +15,7 @@ import UserContact from '../UserContact/UserContact'
 import UserAddress from '../UserAddress/UserAdress'
 import UserPersonal from '../UserPersonal/UserPersonal'
 import UserKyudo from '../UserKyudo/UserKyudo'
+import UserPayment from '../UserPayment/UserPayment'
 
 class UserPage extends Component {
 
@@ -155,158 +156,8 @@ class UserPage extends Component {
             <UserPersonal />
 
             <UserKyudo />
-{/* 
-            {this.state.kyudoEdit ?
-              <Card>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <h1>Kyudo Information</h1>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Button onClick={this.toggleKyudoEdit}>Edit</Button>
-                    </Grid>
-                  </Grid>
-                  <Typography>
-                    <h3>Current Student Rank: Shogon</h3>
-                    <h3>Date Reached: 01/23/20</h3>
-                    <h3>Current Teacher Rank: None</h3>
-                    <h3>Date Reached: None</h3>
-                    <h3>Years Practiced: 1</h3>
-                    <h3>Date Began Kyudo: 01/23/20</h3>
-                    <h3>IKYF Member Number: 122335463</h3>
-                    <h3>USA Archery Member ID: 4352457</h3>
-                  </Typography>
-                </CardContent>
-              </Card>
-              :
-              <Card>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <h1>Kyudo Information</h1>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Button onClick={this.toggleNameEdit}>Edit</Button>
-                    </Grid>
-                  </Grid>
-                  <Typography>
-                    <FormControl
-                      variant="outlined"
-                    >
-                      <InputLabel>Current Kyudo Rank</InputLabel>
-                      <Select
-                        label="Current Kyudo Rank"
-                        defaultValue={ranks[0]}
-                      >
-                        {ranks.map((rank, id) => {
-                          return (
-                            <MenuItem key={id}>{rank}</MenuItem>
-                          )
-                        })}
-                      </Select>
-                    </FormControl>
-                    <br />
-                    <br />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        required
-                        id="date_current_rank"
-                        variant="outlined"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        value="08/11/2000"
-                        helperText="Date Earned"
-                        label="Date Earned"
-                      />
-                    </MuiPickersUtilsProvider>
-                    <br />
-                    <br />
-                    <FormControl
-                      variant="outlined"
-                    >
-                      <InputLabel>Current Teaching Rank</InputLabel>
-                      <Select
-                        label="Current Teaching Rank"
-                        defaultValue="Renshi"
-                      >
-                        {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
-                          return (
-                            <MenuItem key={id}>{rank}</MenuItem>
-                          )
-                        })}
-                      </Select>
-                    </FormControl>
-                    <br />
-                    <br />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        required
-                        id="date_teacher_rank"
-                        variant="outlined"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        value="08/11/2000"
-                        helperText="Date Earned"
-                        label="Date Earned"
-                      />
-                    </MuiPickersUtilsProvider> */}
 
-                    {/* HERE ILL ADD A RANK HISTORY dropdown display */}
-{/* 
-                    <br />
-                    <br />
-                    <TextField
-                      required
-                      id="years_practice"
-                      label="Years Practiced"
-                      defaultValue="1"
-                      variant="outlined"
-                    />
-                    <br />
-                    <br />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        required
-                        id="date_began_kyudo"
-                        variant="outlined"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        value="08/11/2000"
-                        helperText="Start Date"
-                        label="Start Date"
-                      />
-                    </MuiPickersUtilsProvider>
-                    <br />
-                    <br />
-                    <TextField
-                      required
-                      id="ikyf"
-                      label="IKYF Number"
-                      defaultValue="1234567789"
-                      variant="outlined"
-                    />
-                    <br />
-                    <br />
-                    <TextField
-                      required
-                      id="usa_archery_member_id"
-                      label="USA Archery Number"
-                      defaultValue="1234567789"
-                      variant="outlined"
-                    />
-                    <h3>Current Student Rank: Shogon</h3>
-                    <h3>Date Reached: 01/23/20</h3>
-                    <h3>Current Teacher Rank: None</h3>
-                    <h3>Date Reached: None</h3>
-                    <h3>Years Practiced: 1</h3>
-                    <h3>Date Began Kyudo: 01/23/20</h3>
-                    <h3>IKYF Member Number: 122335463</h3>
-                    <h3>USA Archery Member ID: 4352457</h3>
-                  </Typography>
-                </CardContent>
-              </Card>
-            } */}
+            <UserPayment />
 
             {this.state.paymentEdit ?
               <Card>

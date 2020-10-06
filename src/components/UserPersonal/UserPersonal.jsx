@@ -41,7 +41,7 @@ function UserPersonal(props) {
                         </Grid>
                         <Typography>
                             <h3>Citizenship: {props.store.info.citizenship}</h3>
-                            <h3>Date of birth: {moment(props.store.info.date_of_birth).format('YYYY-MM-DD')}</h3>
+                            <h3>Date of birth: {moment(props.store.info.date_of_birth).format('MM-DD-YYYY')}</h3>
                             <h3>Age: {moment().diff(props.store.info.date_of_birth, 'years')}</h3>
                             <h3>Gender: {props.store.info.gender}</h3>
                         </Typography>
@@ -75,7 +75,7 @@ function UserPersonal(props) {
                                 required
                                 id="date_of_birth"
                                 label="Birth Date"
-                                defaultValue={moment(props.store.info.date_of_birth).format('YYYY-MM-DD')}
+                                defaultValue={moment(props.store.info.date_of_birth).format('MM-DD-YYYYD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
                             />

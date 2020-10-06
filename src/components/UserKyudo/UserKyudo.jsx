@@ -53,11 +53,11 @@ function UserKyudo(props) {
                             </Grid>
                             <Typography>
                                 <h3>Current Student Rank: {props.store.info.student_rank}</h3>
-                                <h3>Date Reached:{moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}</h3>
+                                <h3>Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}</h3>
                                 <h3>Current Teacher Rank: {props.store.info.teacher_rank}</h3>
-                                <h3>Date Reached: {moment(props.store.info.date_teacher_rank).format('YYYY-MM-DD')}</h3>
+                                <h3>Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}</h3>
                                 <h3>Years Practiced: {props.store.info.years_practice}</h3>
-                                <h3>Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('YYYY-MM-DD')}</h3>
+                                <h3>Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('MM-DD-YYYY')}</h3>
 
                                 {/* rank history goes here */}
 
@@ -100,7 +100,7 @@ function UserKyudo(props) {
                                 <TextField
                                     type='Date'
                                     required
-                                    id="student_rank"
+                                    id="date_student_rank"
                                     label="Date Earned"
                                     defaultValue={moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}
                                     variant="outlined"
@@ -127,7 +127,7 @@ function UserKyudo(props) {
                                 <TextField
                                     type='Date'
                                     required
-                                    id="date_of_birth"
+                                    id="date_teacher_rank"
                                     label="Date Earned"
                                     defaultValue={moment(props.store.info.date_teacher_rank).format('YYYY-MM-DD')}
                                     variant="outlined"
