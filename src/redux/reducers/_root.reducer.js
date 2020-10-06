@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
+import ranks from './ranks.reducer';
 import info from './info.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -12,7 +13,8 @@ import info from './info.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  info, // will store the currently-logged-in user's user_data
+  ranks, // will have the ranks and dates for logged in user
+  info,
 });
 
 export default rootReducer;

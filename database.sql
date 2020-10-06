@@ -38,7 +38,7 @@ CREATE TABLE "user_data" (
 	"age" integer,
 	"years_practice" integer,
 	"address_1" varchar(255) NOT NULL,
-	"address_2" varchar(255) NOT NULL,
+	"address_2" varchar(255),
 	"city" varchar(255) NOT NULL,
 	"state" varchar(255) NOT NULL,
 	"country" varchar(255) NOT NULL,
@@ -56,4 +56,11 @@ CREATE TABLE "user_data" (
 	"amount_paid" MONEY,
 	"usa_archery_id" integer,
 	"include_for_akr" BOOLEAN
+);
+
+CREATE TABLE "ranks" (
+	"id" SERIAL PRIMARY KEY,
+	"rank_name" VARCHAR(30),
+	"date_rank_made" DATE,
+	"user_id" INT REFERENCES "user_data" ON DELETE CASCADE
 );
