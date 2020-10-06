@@ -51,6 +51,15 @@ function UserKyudo(props) {
                 payload: { key: event.target.name, value: event.target.value }
             });
     }
+    // cancel button resets the reducers 
+    const handleDateReset = (event) => {
+        console.log('cancel')
+        props.dispatch(
+            {
+                type: 'FETCH_USER_INFO'
+            });
+            handleDateChange()
+    }
 
     return (
         <div>
@@ -100,7 +109,7 @@ function UserKyudo(props) {
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
                                 <Button onClick={handleDateChange}>Save</Button>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
-                                <Button onClick={handleDateChange}>Cancel</Button>
+                                <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">

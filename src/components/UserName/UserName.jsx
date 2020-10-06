@@ -25,7 +25,15 @@ function UserName(props) {
         payload: { key: event.target.id, value: event.target.value }
       });
   }
-
+  // cancel button resets the reducers 
+  const handleDateReset = (event) => {
+    console.log('cancel')
+    props.dispatch(
+        {
+            type: 'FETCH_USER_INFO'
+        });
+        handleDateChange()
+}
   return (
     <div>
       {/* IF the state is true this a just a view of information */}
@@ -77,7 +85,7 @@ function UserName(props) {
                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
                 <Button onClick={handleDateChange}>Save</Button>
                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
-                <Button onClick={handleDateChange}>Cancel</Button>
+                <Button onClick={handleDateReset}>Cancel</Button>
               </Grid>
             </Grid>
             <Grid container>
