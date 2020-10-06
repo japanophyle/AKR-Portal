@@ -12,7 +12,7 @@ import info from './info.reducer';
 const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
-  info,
+  info, // will store the currently-logged-in user's user_data
 });
 
 export default rootReducer;
