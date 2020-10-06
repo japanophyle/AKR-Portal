@@ -7,7 +7,7 @@ CREATE TABLE "user" (
 	"id" serial PRIMARY KEY,
 	"username" varchar(255) NOT NULL UNIQUE,
 	"password" varchar(255) NOT NULL UNIQUE,
-	"auth_level" integer
+	"auth_level" varchar(255)
 );
 
 CREATE TABLE "dojo" (
@@ -39,15 +39,15 @@ CREATE TABLE "user_data" (
 	"date_student_rank" DATE,
 	"teaching_rank" varchar(20),
 	"date_teaching_rank" DATE,
-	"ikyf" integer,
-	"age" integer,
-	"years_practice" integer,
+	"ikyf" varchar(255),
+	"age" varchar(255),
+	"years_practice" varchar(255),
 	"address_1" varchar(255) NOT NULL,
 	"address_2" varchar(255),
 	"city" varchar(255) NOT NULL,
 	"state" varchar(255) NOT NULL,
 	"country" varchar(255) NOT NULL,
-	"zipcode" integer NOT NULL,
+	"zipcode" varchar(255) NOT NULL,
 	"gender" varchar(255),
 	"date_of_birth" DATE NOT NULL,
 	"date_began_kyudo" DATE,
@@ -59,7 +59,7 @@ CREATE TABLE "user_data" (
 	"dues_date" DATE,
 	"dues_method" varchar(255),
 	"amount_paid" MONEY,
-	"usa_archery_id" integer,
+	"usa_archery_id" varchar(255),
 	"include_for_akr" BOOLEAN
 );
 
