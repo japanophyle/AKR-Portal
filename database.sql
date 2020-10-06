@@ -9,17 +9,15 @@ CREATE TABLE "user" (
 	"password" varchar(255) NOT NULL UNIQUE,
 	"auth_level" integer
 );
-CREATE TABLE "region" (
-	"id" serial PRIMARY KEY,
-	"region_name" varchar(255)
-);
+
 CREATE TABLE "dojo" (
 	"id" serial PRIMARY KEY,
 	"dojo_name" varchar(255) NOT NULL,
-	"region_id" int references "region" ON DELETE CASCADE,
+	"region_name" VARCHAR(40),
 	"image" varchar(1000),
 	"description" TEXT
 );
+
 CREATE TABLE "user_data" (
 	"id" serial PRIMARY KEY,
 	"fname" varchar(255) NOT NULL,

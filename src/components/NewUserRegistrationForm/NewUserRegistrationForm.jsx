@@ -45,7 +45,7 @@ class NewUserForm extends Component {
     date_of_birth: '',
     date_began_kyudo: '',
     citizenship: '',
-    is_current_member: !true,
+    is_current_member: true,
     usa_archery_id: '',
   };
 

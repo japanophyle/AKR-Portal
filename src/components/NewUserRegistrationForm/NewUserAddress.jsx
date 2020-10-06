@@ -65,6 +65,7 @@ function NewUserAddress(props) {
                         onChange={props.handleChange('zipcode')}
                     />
                     <TextField
+                        required
                         label="Country"
                         margin="dense"
                         variant="outlined"

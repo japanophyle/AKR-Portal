@@ -35,12 +35,7 @@ const useStyles = makeStyles((theme) => ({
 function NewUserKyudoInfo(props) {
 
     const [heading, setHeading] = useState('Kyudo Renmei Information');
-    // Sets date for now without breaking when selecting a new date
-    const [selectedDate, handleDateChange] = useState(new Date());
-    const [selectedRankDate, handleRankDateChange] = useState(new Date());
-    const [selectedTeachingRankDate, handleTeachingDateChange] = useState(new Date());
-
-
+    
     const classes = useStyles();
 
     // ranks are mapped over the select menu
@@ -73,7 +68,7 @@ function NewUserKyudoInfo(props) {
                         <Select
                             label="Dojo"
                             name="dojo_id"
-                            // onChange={props.handleChange('dojo_id')}
+                        // onChange={props.handleChange('dojo_id')}
                         >
                             {/* placeholder for db */}
                             {['Minnesota', 'Iowa', 'Indiana'].map((dojo, id) => {
@@ -86,31 +81,25 @@ function NewUserKyudoInfo(props) {
                 </Grid>
             </Grid>
 
-               
+
             <Grid container>
                 <Grid item>
                     <TextField
                         label="Years Practiced"
-                        margin="dense"
                         variant="outlined"
                         name="years_practice"
                         onChange={props.handleChange('years_practice')}
                     />
                 </Grid>
                 <Grid item>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            required
-                            variant="outlined"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            name="date_began_kyudo"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            helperText="mm/dd/yyyy"
-                            label="Start Date"
-                        />
-                    </MuiPickersUtilsProvider>
+                    <TextField
+                        margin="dense"
+                        variant="outlined"
+                        name="date_began_kyudo"
+                        type="date"
+                        helperText="Date you began Kyudo"
+                        onChange={props.handleChange('date_began_kyudo')}
+                    />
                 </Grid>
             </Grid>
             <Grid container>
@@ -134,19 +123,14 @@ function NewUserKyudoInfo(props) {
                     </FormControl>
                 </Grid>
                 <Grid item>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            required
-                            variant="outlined"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            name="date_student_rank"
-                            value={selectedRankDate}
-                            onChange={handleRankDateChange}
-                            helperText="mm/dd/yyyy"
-                            label="Date Rank Achieved"
-                        />
-                    </MuiPickersUtilsProvider>
+                    <TextField
+                        margin="dense"
+                        variant="outlined"
+                        name="date_student_rank"
+                        type="date"
+                        helperText="Date reached current rank"
+                        onChange={props.handleChange('date_student_rank')}
+                    />
                 </Grid>
             </Grid>
             <Grid container>
@@ -170,19 +154,14 @@ function NewUserKyudoInfo(props) {
                     </FormControl>
                 </Grid>
                 <Grid item>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            required
-                            variant="outlined"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            name="date_teaching_rank"
-                            value={selectedTeachingRankDate}
-                            onChange={handleTeachingDateChange}
-                            helperText="mm/dd/yyyy"
-                            label="Date Rank Achieved"
-                        />
-                    </MuiPickersUtilsProvider>
+                    <TextField
+                        margin="dense"
+                        variant="outlined"
+                        name="date_teacher_rank"
+                        type="date"
+                        helperText="Date reached current rank"
+                        onChange={props.handleChange('date_teacher_rank')}
+                    />
                 </Grid>
             </Grid>
             <Grid container justify="space-evenly">
