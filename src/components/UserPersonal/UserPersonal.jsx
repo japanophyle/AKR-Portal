@@ -40,10 +40,10 @@ function UserPersonal(props) {
                             </Grid>
                         </Grid>
                         <Typography>
-                            <h3>Citizenship: USA, JPN</h3>
-                            <h3>Date of birth: 09/09/99</h3>
-                            <h3>Age: Math done by moment</h3>
-                            <h3>Gender: Male</h3>
+                            <h3>Citizenship: {props.store.info.citizenship}</h3>
+                            <h3>Date of birth: {moment(props.store.info.date_of_birth).format('YYYY-MM-DD')}</h3>
+                            <h3>Age: {moment().diff(props.store.info.date_of_birth, 'years')}</h3>
+                            <h3>Gender: {props.store.info.gender}</h3>
                         </Typography>
                     </CardContent>
                 </Card>
@@ -80,7 +80,7 @@ function UserPersonal(props) {
                             />
                             <br />
                             <br />
-                            <h3>{props.store.info.age}</h3>
+                            <h3>Age: {moment().diff(props.store.info.date_of_birth, 'years')}</h3>
                             <TextField
                                 required
                                 id="age"
