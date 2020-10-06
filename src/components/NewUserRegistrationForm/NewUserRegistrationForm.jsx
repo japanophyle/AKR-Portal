@@ -7,6 +7,8 @@ import {
   Paper,
   Grid,
   Button,
+  FormControlLabel,
+  Checkbox,
 } from '@material-ui/core';
 
 import NewUserName from './NewUserName';
@@ -19,7 +21,15 @@ import NewUserKyudoInfo from './NewUserKyudoInfo';
 class NewUserForm extends Component {
   state = {
     heading: 'Class Component',
+    currentMember: !true,
   };
+
+  handleCurrentMember = (event) => {
+   
+      this.setState({ ...this.state, [event.target.name]: event.target.checked });
+
+  }
+
 
   render() {
     return (
@@ -33,7 +43,21 @@ class NewUserForm extends Component {
                 <NewUserContact />
                 <NewUserPersonal />
                 <NewUserAddress />
-                <NewUserKyudoInfo />
+                
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={this.state.currentMember}
+                      onChange={this.handleCurrentMember}
+                      name="currentMember"
+                      color="primary"
+                    />
+                  }
+                  label="Current Member"
+                />
+                {this.state.currentMember &&
+                  <NewUserKyudoInfo />
+                }
                 <Grid container justify="center">
                   <Grid item>
                     <Button type="submit" variant="contained" color="primary">

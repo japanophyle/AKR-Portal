@@ -9,6 +9,8 @@ import {
     TextField,
     MenuItem,
     FormControl,
+    FormControlLabel,
+    Checkbox,
     Select,
     Typography,
     InputLabel,
@@ -38,6 +40,15 @@ function NewUserKyudoInfo(props) {
     const [selectedRankDate, handleRankDateChange] = useState(new Date());
     const [selectedTeachingRankDate, handleTeachingDateChange] = useState(new Date());
 
+    const [state, setState] = useState({
+        currentMember: !true,
+
+    });
+
+    const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+    };
+
     const classes = useStyles();
 
     // ranks are mapped over the select menu
@@ -58,6 +69,7 @@ function NewUserKyudoInfo(props) {
     return (
         <div>
             <h3>{heading}</h3>
+            {/* Choosing the dojo that the new user is trying to join. */}
             <Grid container justify="center" alignItems="center">
                 <Grid item>
                     <Typography variant="h6" gutterBottom>Select Dojo</Typography>
@@ -78,6 +90,8 @@ function NewUserKyudoInfo(props) {
                     </FormControl>
                 </Grid>
             </Grid>
+
+                {/*  */}
             <Grid container>
                 <Grid item>
                     <TextField
@@ -182,7 +196,9 @@ function NewUserKyudoInfo(props) {
                         variant="outlined"
                     />
                 </Grid>
+
             </Grid>
+
 
         </div>
     );
