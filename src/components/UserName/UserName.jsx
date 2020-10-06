@@ -10,28 +10,19 @@ function UserName(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
   const [nameEdit, toggleNameEdit] = useState(true);
-  const [fname, setFName] = useState('a');
-  const [lname, setLName] = useState('true');
-  const [fname_japanese, setFNameJapanese] = useState('スシ');
-  const [lname_japanese, setLNameJapanese] = useState('スシ');
 
   const handleDateChange = (date) => {
     toggleNameEdit(!nameEdit);
   };
 
-  const handleFName = (event) => {
-    setFName(event.target.value)
-    console.log(fname)
-  }
-  const handleLName = (event) => {
-    setLName(event.target.value)
-  }
-  const handleFNameJapanese = (event) => {
-    setFNameJapanese(event.target.value)
-  }
-  const handleLNameJapanese = (event) => {
-    setLNameJapanese(event.target.value)
-  }
+  const handleEditChange = (event) => {
+    console.log(`Handle change of ${event.target.id}`);
+    props.dispatch(
+        {
+            type: 'SET_EDIT',
+            payload: { key: event.target.id, value: event.target.value }
+        });
+}
 
   return (
     <div>
@@ -49,15 +40,15 @@ function UserName(props) {
                 <Grid container>
                   <Grid item xs={6}>
                     <Typography>
-                      <h3>Karl</h3>
-                      <h3>Katakana First Name</h3>
-                      <h3>Username</h3>
+                      <h3>{props.store.info.fname}</h3>
+                      <h3>{props.store.info.fname_japanese}</h3>
+                      <h3>Username: {props.store.info.username}</h3>
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
                     <Typography>
-                      <h3>Beck</h3>
-                      <h3>Katakana Last Name</h3>
+                      <h3>{props.store.info.lname}</h3>
+                      <h3>{props.store.info.lname_japanese}</h3>
                     </Typography>
                   </Grid>
                 </Grid>
@@ -82,9 +73,9 @@ function UserName(props) {
                         required
                         id="fname"
                         label="First Name"
-                        defaultValue={fname}
+                        defaultValue={props.store.info.fname}
                         variant="outlined"
-                        onChange={handleFName}
+                        onChange={handleEditChange}
                       />
                       <br />
                       <br />
@@ -92,12 +83,12 @@ function UserName(props) {
                         required
                         id="fname_japanese"
                         label="Katakana First Name"
-                        defaultValue={fname_japanese}
+                        defaultValue={props.store.info.fname_japanese}
                         variant="outlined"
-                        onChange={handleFNameJapanese}
+                        onChange={handleEditChange}
 
                       />
-                      <h3>Username</h3>
+                      <h3>Username: {props.store.info.username}</h3>
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
@@ -106,9 +97,9 @@ function UserName(props) {
                         required
                         id="lname"
                         label="Last Name"
-                        defaultValue={lname}
+                        defaultValue={props.store.info.lname}
                         variant="outlined"
-                        onChange={handleLName}
+                        onChange={handleEditChange}
 
                       />
                       <br />
@@ -117,9 +108,9 @@ function UserName(props) {
                         required
                         id="lname_japanese"
                         label="Katakana Last Name"
-                        defaultValue={lname_japanese}
+                        defaultValue={props.store.info.lname_japanese}
                         variant="outlined"
-                        onChange={handleLNameJapanese}
+                        onChange={handleEditChange}
 
                       />
                     </Typography>

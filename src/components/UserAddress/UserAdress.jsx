@@ -10,35 +10,18 @@ function UserAddress(props) {
   // a default value of 'Functional Component'
   const [nameEdit, toggleNameEdit] = useState(true);
 
-  const [address_1, setAddressOne] = useState('Address block 1');
-  const [address_2, setAddressTwo] = useState('Address block 2');
-  const [state, setState] = useState('City');
-  const [city, setCity] = useState('State');
-  const [zipcode, setZipcode] = useState('Zipcode');
-  const [country, setCountry] = useState('Country');
-
   const handleDateChange = (date) => {
     toggleNameEdit(!nameEdit);
   };
 
-  const handleAddressOne = (event) => {
-    setAddressOne(event.target.value)
-  }
-  const handleAddressTwo = (event) => {
-    setAddressTwo(event.target.value)
-  }
-  const handleState = (event) => {
-    setState(event.target.value)
-  }
-  const handleCity = (event) => {
-    setCity(event.target.value)
-  }
-  const handleZip = (event) => {
-    setZipcode(event.target.value)
-  }
-  const handleCountry = (event) => {
-    setCountry(event.target.value)
-  }
+  const handleEditChange = (event) => {
+    console.log(`Handle change of ${event.target.id}`);
+    props.dispatch(
+        {
+            type: 'SET_EDIT',
+            payload: { key: event.target.id, value: event.target.value }
+        });
+}
 
   return (
     <div>
@@ -76,9 +59,9 @@ function UserAddress(props) {
                     required
                     id="address_1"
                     label="Address line 1"
-                    defaultValue={address_1}
+                    defaultValue={props.store.info.address_1}
                     variant="outlined"
-                    onChange={handleAddressOne}
+                    onChange={handleEditChange}
                   />
                   <br />
                   <br />
@@ -86,9 +69,9 @@ function UserAddress(props) {
                     required
                     id="address_2"
                     label="Address line 2"
-                    defaultValue={address_2}
+                    defaultValue={props.store.info.address_2}
                     variant="outlined"
-                    onChange={handleAddressTwo}
+                    onChange={handleEditChange}
                   />
                   <br />
                   <br />
@@ -96,35 +79,35 @@ function UserAddress(props) {
                     required
                     id="country"
                     label="Country"
-                    defaultValue={country}
+                    defaultValue={props.store.info.country}
                     variant="outlined"
-                    onChange={handleCountry}
+                    onChange={handleEditChange}
 
                   />
                   <TextField
                     required
                     id="state"
                     label="State"
-                    defaultValue="asdf"
+                    defaultValue={props.store.info.state}
                     variant="outlined"
+                    onChange={handleEditChange}
                   />
                   <TextField
                     required
                     id="city"
                     label="City"
-                    defaultValue="karl"
+                    defaultValue={props.store.info.city}
                     variant="outlined"
+                    onChange={handleEditChange}
                   />
                   <TextField
                     required
                     id="zipcode"
                     label="Zipcode"
-                    defaultValue="55104"
+                    defaultValue={props.store.info.zipcode}
                     variant="outlined"
+                    onChange={handleEditChange}
                   />
-                  <h3>Address block 1</h3>
-                  <h3>Address block 2</h3>
-                  <h3>City, State, Zipcode, Country</h3>
                 </Typography>
               </CardContent>
             </Card>

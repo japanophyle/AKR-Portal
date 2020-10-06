@@ -30,6 +30,7 @@ import MemberList from '../MemberList/MemberList';
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({ type: 'GET_RANKS' });
   }
 
   render() {

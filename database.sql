@@ -20,6 +20,12 @@ CREATE TABLE "dojo" (
 	"image" varchar(1000),
 	"description" TEXT
 );
+CREATE TABLE "ranks" (
+	"id" SERIAL PRIMARY KEY,
+	"rank_name" VARCHAR(30),
+	"date_rank_made" DATE,
+	"user_id" INT REFERENCES "user_data" ON DELETE CASCADE
+);
 CREATE TABLE "user_data" (
 	"id" serial PRIMARY KEY,
 	"fname" varchar(255) NOT NULL,
@@ -57,8 +63,3 @@ CREATE TABLE "user_data" (
 	"usa_archery_id" integer,
 	"include_for_akr" BOOLEAN
 );
-
-
-
-
-
