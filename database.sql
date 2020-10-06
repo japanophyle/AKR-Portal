@@ -17,6 +17,7 @@ CREATE TABLE "dojo" (
 	"image" varchar(1000),
 	"description" TEXT
 );
+
 CREATE TABLE "ranks" (
 	"id" SERIAL PRIMARY KEY,
 	"rank_name" VARCHAR(30),
