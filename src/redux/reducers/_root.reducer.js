@@ -3,6 +3,7 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import ranks from './ranks.reducer';
 import info from './info.reducer';
+import dojos from './dojos.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   ranks, // will have the ranks and dates for logged in user
   info,
+  dojos, // will have the dojo names, ids, and region ids
 });
 
 export default rootReducer;
