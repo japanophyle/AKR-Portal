@@ -13,6 +13,7 @@ import {
 import UserName from '../UserName/UserName'
 import UserContact from '../UserContact/UserContact'
 import UserAddress from '../UserAddress/UserAdress'
+import UserPersonal from '../UserPersonal/UserPersonal'
 
 class UserPage extends Component {
 
@@ -152,78 +153,7 @@ class UserPage extends Component {
 
             <UserAddress /> 
 
-            
-            
-
-            {this.state.personalEdit ?
-              <Card>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <h1>Personal Information</h1>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Button onClick={this.togglePersonalEdit}>Edit</Button>
-                    </Grid>
-                  </Grid>
-                  <Typography>
-                    <h3>Citizenship: USA, JPN</h3>
-                    <h3>Date of birth: 09/09/99</h3>
-                    <h3>Age: Math done by moment</h3>
-                    <h3>Gender: Male</h3>
-                  </Typography>
-                </CardContent>
-              </Card>
-              :
-              <Card>
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={11}>
-                      <h1>Personal Information</h1>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Button onClick={this.toggleNameEdit}>Edit</Button>
-                    </Grid>
-                  </Grid>
-                  <Typography>
-                    <TextField
-                      required
-                      id="citizenship"
-                      label="Citizenship"
-                      defaultValue="USA"
-                      variant="outlined"
-                    />
-                    <br />
-                    <br />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        required
-                        id="date_of_birth"
-                        variant="outlined"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        value="08/11/2000"
-                        helperText="Date of Birth"
-                        label="Start Date"
-                      />
-                    </MuiPickersUtilsProvider>
-                    <br />
-                    <br />
-                    <TextField
-                      required
-                      id="gender"
-                      label="Gender"
-                      defaultValue="Male"
-                      variant="outlined"
-                    />
-                    <h3>Citizenship: USA, JPN</h3>
-                    <h3>Date of birth: 09/09/99</h3>
-                    <h3>Age: Math done by moment</h3>
-                    <h3>Gender: Male</h3>
-                  </Typography>
-                </CardContent>
-              </Card>
-            }
+            <UserPersonal />
 
             {this.state.kyudoEdit ?
               <Card>
