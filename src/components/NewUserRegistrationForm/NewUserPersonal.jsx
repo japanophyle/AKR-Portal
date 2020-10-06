@@ -20,13 +20,9 @@ import {
 
 
 function NewUserPersonal(props) {
+    console.log(props.state.date_of_birth);
 
-    // Sets date for now without breaking when selecting a new date
-    const [selectedDate, handleDateChange] = useState(new Date());
-    let dateToSend = moment(selectedDate).format('L')
-    console.log(JSON.stringify(dateToSend));
-
-    let age = moment(selectedDate, "MM/DD/YYYY").fromNow().split(" ")[0]
+    let age2 = moment().diff(props.state.date_of_birth, 'years')
     const [heading, setHeading] = useState('Personal Info');
 
     return (
@@ -34,39 +30,45 @@ function NewUserPersonal(props) {
             <h3>{heading}</h3>
             <Grid container>
                 <Grid item>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DatePicker
-                            disableFuture
-                            openTo="year"
-                            format="MM/dd/yyyy"
-                            label="Date of birth"
-                            views={["year", "month", "date"]}
-                            value={dateToSend}
-                            onChange={handleDateChange}
-                            // onAccept={props.handleChange('date_of_birth')}
-                            name="date_of_birth"
+                    <TextField
+                        margin="dense"
+                        variant="outlined"
+                        name="date_of_birth"
+                        type="date"
+                        onChange={props.handleChange('date_of_birth')}
+                    />
+                </Grid>
+                <Grid item>
+                    <TextField
+                        disabled
+                        label="Age"
+                        margin="dense"
+                        variant="outlined"
+                        value={!age2 ? '' : age2}
+                        name="age"
+                        onChange={(event) => props.handleChange(event)}
+                    />
+                </Grid>
+                <Grid container>
+                    <Grid item>
+                        <TextField
+                            label="Gender"
+                            margin="dense"
+                            variant="outlined"
+                            name="gender"
+                            onChange={props.handleChange('gender')}
                         />
-                    </MuiPickersUtilsProvider>
-                </Grid>
-                <h5>Age: {age}</h5>
-                <Grid item>
-                    <TextField
-                        label="Gender"
-                        margin="dense"
-                        variant="outlined"
-                        name="gender"
-                        onChange={props.handleChange('gender')}
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        label="Citizenship"
-                        margin="dense"
-                        variant="outlined"
-                        helperText="Give your country code(s) of citizenship"
-                        name="citizenship"
-                        onChange={props.handleChange('citizenship')}
-                    />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            label="Citizenship"
+                            margin="dense"
+                            variant="outlined"
+                            helperText="Give your country code(s) of citizenship"
+                            name="citizenship"
+                            onChange={props.handleChange('citizenship')}
+                        />
+                    </Grid>
                 </Grid>
             </Grid>
         </div>

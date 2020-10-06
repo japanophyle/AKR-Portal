@@ -15,16 +15,10 @@ import {
     Typography,
     InputLabel,
 } from '@material-ui/core';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
+
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
-        margin: theme.spacing(1),
         minWidth: 220,
     },
     selectEmpty: {
@@ -35,11 +29,6 @@ const useStyles = makeStyles((theme) => ({
 function NewUserKyudoInfo(props) {
 
     const [heading, setHeading] = useState('Kyudo Renmei Information');
-    // Sets date for now without breaking when selecting a new date
-    const [selectedDate, handleDateChange] = useState(new Date());
-    const [selectedRankDate, handleRankDateChange] = useState(new Date());
-    const [selectedTeachingRankDate, handleTeachingDateChange] = useState(new Date());
-
 
     const classes = useStyles();
 
@@ -55,64 +44,35 @@ function NewUserKyudoInfo(props) {
             'Shichidan',
             'Hachidan',
             'Kudan',
-            'Judan'
+            'Jūdan'
         ]
 
     return (
         <div>
             <h3>{heading}</h3>
-            {/* Choosing the dojo that the new user is trying to join. */}
-            <Grid container justify="center" alignItems="center">
-                <Grid item>
-                    <Typography variant="h6" gutterBottom>Select Dojo</Typography>
-                    <FormControl
-                        className={classes.formControl}
-                        variant="outlined"
-                    >
-                        <InputLabel>Dojo</InputLabel>
-                        <Select
-                            label="Dojo"
-                            name="dojo_id"
-                            // onChange={props.handleChange('dojo_id')}
-                        >
-                            {/* placeholder for db */}
-                            {['Minnesota', 'Iowa', 'Indiana'].map((dojo, id) => {
-                                return (
-                                    <MenuItem key={id} value={id}>{dojo}</MenuItem>
-                                )
-                            })}
-                        </Select>
-                    </FormControl>
-                </Grid>
-            </Grid>
 
-               
             <Grid container>
                 <Grid item>
                     <TextField
                         label="Years Practiced"
-                        margin="dense"
                         variant="outlined"
                         name="years_practice"
                         onChange={props.handleChange('years_practice')}
                     />
                 </Grid>
                 <Grid item>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            required
-                            variant="outlined"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            name="date_began_kyudo"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            helperText="mm/dd/yyyy"
-                            label="Start Date"
-                        />
-                    </MuiPickersUtilsProvider>
+                    <TextField
+                        margin="dense"
+                        variant="outlined"
+                        name="date_began_kyudo"
+                        type="date"
+                        helperText="Date you began Kyudo"
+                        onChange={props.handleChange('date_began_kyudo')}
+                    />
                 </Grid>
             </Grid>
+
+            {/* current student rank form */}
             <Grid container>
                 <Grid item>
                     <FormControl
@@ -134,21 +94,18 @@ function NewUserKyudoInfo(props) {
                     </FormControl>
                 </Grid>
                 <Grid item>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            required
-                            variant="outlined"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            name="date_student_rank"
-                            value={selectedRankDate}
-                            onChange={handleRankDateChange}
-                            helperText="mm/dd/yyyy"
-                            label="Date Rank Achieved"
-                        />
-                    </MuiPickersUtilsProvider>
+                    <TextField
+                        margin="dense"
+                        variant="outlined"
+                        name="date_student_rank"
+                        type="date"
+                        helperText="Date reached current rank"
+                        onChange={props.handleChange('date_student_rank')}
+                    />
                 </Grid>
             </Grid>
+
+            {/* teacher rank form */}
             <Grid container>
                 <Grid item>
                     <FormControl
@@ -170,22 +127,19 @@ function NewUserKyudoInfo(props) {
                     </FormControl>
                 </Grid>
                 <Grid item>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            required
-                            variant="outlined"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            name="date_teaching_rank"
-                            value={selectedTeachingRankDate}
-                            onChange={handleTeachingDateChange}
-                            helperText="mm/dd/yyyy"
-                            label="Date Rank Achieved"
-                        />
-                    </MuiPickersUtilsProvider>
+                    <TextField
+                        margin="dense"
+                        variant="outlined"
+                        name="date_teacher_rank"
+                        type="date"
+                        helperText="Date reached current rank"
+                        onChange={props.handleChange('date_teacher_rank')}
+                    />
                 </Grid>
             </Grid>
-            <Grid container justify="space-evenly">
+
+            {/* Potential information the user might already have.  Given to them from AKR */}
+            <Grid container spacing={4}>
                 <Grid item>
                     <TextField
                         label="IKYF Number"
@@ -204,10 +158,7 @@ function NewUserKyudoInfo(props) {
                         onChange={props.handleChange('usa_archery_id')}
                     />
                 </Grid>
-
             </Grid>
-
-
         </div>
     );
 }
