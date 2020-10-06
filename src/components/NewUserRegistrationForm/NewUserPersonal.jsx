@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import MomentUtils from '@date-io/moment';
+// import MomentUtils from '@date-io/moment';
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,

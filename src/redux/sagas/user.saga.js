@@ -32,6 +32,8 @@ function* fetchUserInfo() {
     const response = yield axios.get('/api/user/profile')
     console.log('response from get info:', response.data);
     yield put({ type: 'SET_USER_INFO', payload: response.data });
+    yield put({ type: 'SET_EDIT_USER_INFO', payload: response.data });
+
 
   } catch (error) {
     console.log('User info get request failed', error);
