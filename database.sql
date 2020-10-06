@@ -38,7 +38,7 @@ CREATE TABLE "user_data" (
 	"age" integer,
 	"years_practice" integer,
 	"address_1" varchar(255) NOT NULL,
-	"address_2" varchar(255) NOT NULL,
+	"address_2" varchar(255),
 	"city" varchar(255) NOT NULL,
 	"state" varchar(255) NOT NULL,
 	"country" varchar(255) NOT NULL,

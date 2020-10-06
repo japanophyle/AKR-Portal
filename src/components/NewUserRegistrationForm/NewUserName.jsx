@@ -22,6 +22,7 @@ function NewUserName(props) {
         margin="dense"
         variant="outlined"
         name="fname"
+        onChange={props.handleChange('fname')}
       />
     
       <TextField
@@ -30,6 +31,7 @@ function NewUserName(props) {
         margin="dense"
         variant="outlined"
         name="lname"
+        onChange={props.handleChange('lname')}
       />
       <Grid container>
         <Grid item>
@@ -39,6 +41,7 @@ function NewUserName(props) {
             margin="dense"
             variant="outlined"
             name="japanese_fname"
+            onChange={props.handleChange('japanese_fname')}
           />
           <TextField
             label="Katakana"
@@ -46,6 +49,7 @@ function NewUserName(props) {
             margin="dense"
             variant="outlined"
             name="japanese_lname"
+            onChange={props.handleChange('japanese_lname')}
           />
         </Grid>
       </Grid>

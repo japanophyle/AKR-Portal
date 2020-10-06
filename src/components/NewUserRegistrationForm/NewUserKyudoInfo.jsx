@@ -46,16 +46,16 @@ function NewUserKyudoInfo(props) {
     // ranks are mapped over the select menu
     const ranks =
         [
-            '(1st Dan) Shodan',
-            '(2nd Dan) Nidan',
-            '(3rd Dan) Sandan',
-            '(4th Dan) Yondan',
-            '(5th Dan) Godan',
-            '(6th Dan) Rokudan',
-            '(7th Dan) Shichidan',
-            '(8th Dan) Hachidan',
-            '(9th Dan) Kudan',
-            '(10th Dan) Judan'
+            'Shodan',
+            'Nidan',
+            'Sandan',
+            'Yondan',
+            'Godan',
+            'Rokudan',
+            'Shichidan',
+            'Hachidan',
+            'Kudan',
+            'Judan'
         ]
 
     return (
@@ -73,10 +73,12 @@ function NewUserKyudoInfo(props) {
                         <Select
                             label="Dojo"
                             name="dojo_id"
+                            // onChange={props.handleChange('dojo_id')}
                         >
+                            {/* placeholder for db */}
                             {['Minnesota', 'Iowa', 'Indiana'].map((dojo, id) => {
                                 return (
-                                    <MenuItem key={id}>{dojo}</MenuItem>
+                                    <MenuItem key={id} value={id}>{dojo}</MenuItem>
                                 )
                             })}
                         </Select>
@@ -92,6 +94,7 @@ function NewUserKyudoInfo(props) {
                         margin="dense"
                         variant="outlined"
                         name="years_practice"
+                        onChange={props.handleChange('years_practice')}
                     />
                 </Grid>
                 <Grid item>
@@ -120,10 +123,11 @@ function NewUserKyudoInfo(props) {
                         <Select
                             label="Current Kyudo Rank"
                             name="student_rank"
+                            onChange={props.handleChange('student_rank')}
                         >
                             {ranks.map((rank, id) => {
                                 return (
-                                    <MenuItem key={id}>{rank}</MenuItem>
+                                    <MenuItem key={id} value={rank}>{rank}</MenuItem>
                                 )
                             })}
                         </Select>
@@ -155,10 +159,11 @@ function NewUserKyudoInfo(props) {
                         <Select
                             label="Current Teaching Rank"
                             name="teaching_rank"
+                            onChange={props.handleChange('teaching_rank')}
                         >
                             {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
                                 return (
-                                    <MenuItem key={id}>{rank}</MenuItem>
+                                    <MenuItem key={id} value={rank}>{rank}</MenuItem>
                                 )
                             })}
                         </Select>
@@ -187,6 +192,7 @@ function NewUserKyudoInfo(props) {
                         margin="dense"
                         variant="outlined"
                         name="ikyf"
+                        onChange={props.handleChange('ikyf')}
                     />
                 </Grid>
                 <Grid item>
@@ -195,6 +201,7 @@ function NewUserKyudoInfo(props) {
                         margin="dense"
                         variant="outlined"
                         name="usa_archery_id"
+                        onChange={props.handleChange('usa_archery_id')}
                     />
                 </Grid>
 

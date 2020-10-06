@@ -22,6 +22,7 @@ function NewUserContact(props) {
         margin="dense"
         variant="outlined"
         name="email"
+        onChange={props.handleChange('email')}
       />
       <TextField
         required
@@ -29,6 +30,7 @@ function NewUserContact(props) {
         margin="dense"
         variant="outlined"
         name="phone_number"
+        onChange={props.handleChange('phone_number')}
       />
     </div>
   );

@@ -10,9 +10,11 @@ import {
 } from '@material-ui/core';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import MomentUtils from '@date-io/moment';
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
+    DatePicker,
 } from '@material-ui/pickers';
 
 
@@ -21,38 +23,39 @@ function NewUserPersonal(props) {
 
     // Sets date for now without breaking when selecting a new date
     const [selectedDate, handleDateChange] = useState(new Date());
+    let dateToSend = moment(selectedDate).format('L')
+    console.log(JSON.stringify(dateToSend));
 
+    let age = moment(selectedDate, "MM/DD/YYYY").fromNow().split(" ")[0]
     const [heading, setHeading] = useState('Personal Info');
-    let a = moment();
-    let b = moment('selectedDate', 'YYYY');
-    let diff = a.diff(b, 'years'); // calculates patient's age in years
-    
 
     return (
         <div>
             <h3>{heading}</h3>
             <Grid container>
-
                 <Grid item>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <KeyboardDatePicker
-                            required
-                            variant="outlined"
+                        <DatePicker
+                            disableFuture
+                            openTo="year"
                             format="MM/dd/yyyy"
-                            margin="normal"
-                            value={selectedDate}
+                            label="Date of birth"
+                            views={["year", "month", "date"]}
+                            value={dateToSend}
                             onChange={handleDateChange}
-                            helperText="mm/dd/yyyy"
-                            label="Date of Birth"
+                            // onAccept={props.handleChange('date_of_birth')}
+                            name="date_of_birth"
                         />
                     </MuiPickersUtilsProvider>
                 </Grid>
-                
+                <h5>Age: {age}</h5>
                 <Grid item>
                     <TextField
                         label="Gender"
                         margin="dense"
                         variant="outlined"
+                        name="gender"
+                        onChange={props.handleChange('gender')}
                     />
                 </Grid>
                 <Grid item>
@@ -61,6 +64,8 @@ function NewUserPersonal(props) {
                         margin="dense"
                         variant="outlined"
                         helperText="Give your country code(s) of citizenship"
+                        name="citizenship"
+                        onChange={props.handleChange('citizenship')}
                     />
                 </Grid>
             </Grid>

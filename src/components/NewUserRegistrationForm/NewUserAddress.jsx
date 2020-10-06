@@ -26,13 +26,15 @@ function NewUserAddress(props) {
                         margin="dense"
                         variant="outlined"
                         name="address_1"
+                        onChange={props.handleChange('address_1')}
                     />
                     <TextField
-                        required
+                        
                         label="Apt, Suite, etc. #"
                         margin="dense"
                         variant="outlined"
                         name="address_2"
+                        onChange={props.handleChange('address_2')}
                     />
                 </Grid>
             </Grid>
@@ -44,6 +46,7 @@ function NewUserAddress(props) {
                         margin="dense"
                         variant="outlined"
                         name="city"
+                        onChange={props.handleChange('city')}
                     />
                     <TextField
                         required
@@ -51,6 +54,7 @@ function NewUserAddress(props) {
                         margin="dense"
                         variant="outlined"
                         name="state"
+                        onChange={props.handleChange('state')}
                     />
                     <TextField
                         required
@@ -58,12 +62,14 @@ function NewUserAddress(props) {
                         margin="dense"
                         variant="outlined"
                         name="zipcode"
+                        onChange={props.handleChange('zipcode')}
                     />
                     <TextField
                         label="Country"
                         margin="dense"
                         variant="outlined"
                         name="country"
+                        onChange={props.handleChange('country')}
                     />
                 </Grid>
             </Grid>
