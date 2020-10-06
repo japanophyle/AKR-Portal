@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import StudentNotes from '../StudentNotes/StudentNotes'
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import FormSuccess from '../FormSuccess/FormSuccess';
 
 class RegisterPage extends Component {
   state = {
@@ -16,6 +17,7 @@ class RegisterPage extends Component {
       <div>
         <RegisterForm />
         <StudentNotes />
+        <FormSuccess />
         <center>
           <button
             type="button"

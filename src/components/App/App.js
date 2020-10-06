@@ -22,6 +22,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import InactiveView from '../InactiveView/InactiveView';
 
 import './App.css';
 import MemberList from '../MemberList/MemberList';
@@ -30,6 +31,7 @@ import NewUserRegistrationForm from '../NewUserRegistrationForm/NewUserRegistrat
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
+    this.props.dispatch({ type: 'GET_RANKS' });
   }
 
   render() {
@@ -135,6 +137,12 @@ class App extends Component {
               component={NationalStudentList}
               authRedirect="/nationalstudentlist"
             /> */}
+            <Route
+              exact
+              path="/inactive"
+              component={InactiveView}
+              authRedirect="/inactive"
+            />
           
             <Route path="/new-user-registration" component={NewUserRegistrationForm} />
             {/* If none of the other routes matched, we will show a 404. */}

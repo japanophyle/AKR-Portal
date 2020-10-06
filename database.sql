@@ -34,7 +34,7 @@ CREATE TABLE "user_data" (
 	"date_student_rank" DATE,
 	"teaching_rank" varchar(20),
 	"date_teaching_rank" DATE,
-	"IKYF" integer,
+	"ikyf" integer,
 	"age" integer,
 	"years_practice" integer,
 	"address_1" varchar(255) NOT NULL,
@@ -64,6 +64,3 @@ CREATE TABLE "ranks" (
 	"date_rank_made" DATE,
 	"user_id" INT REFERENCES "user_data" ON DELETE CASCADE
 );
-
-
-
