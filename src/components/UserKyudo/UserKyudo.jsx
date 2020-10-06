@@ -6,16 +6,16 @@ import moment from 'moment';
 
 const ranks =
     [
-        '(1st Dan) Shodan',
-        '(2nd Dan) Nidan',
-        '(3rd Dan) Sandan',
-        '(4th Dan) Yondan',
-        '(5th Dan) Godan',
-        '(6th Dan) Rokudan',
-        '(7th Dan) Shichidan',
-        '(8th Dan) Hachidan',
-        '(9th Dan) Kudan',
-        '(10th Dan) Judan'
+        'Shodan',
+        'Nidan',
+        'Sandan',
+        'Yondan',
+        'Godan',
+        'Rokudan',
+        'Shichidan',
+        'Hachidan',
+        'Kudan',
+        'Judan'
     ]
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -35,6 +35,15 @@ function UserKyudo(props) {
             {
                 type: 'SET_EDIT',
                 payload: { key: event.target.id, value: event.target.value }
+            });
+    }
+
+    const name = (event) => {
+        console.log(`Handle change of ${event.target.name}`);
+        props.dispatch(
+            {
+                type: 'SET_EDIT',
+                payload: { key: event.target.name, value: event.target.value }
             });
     }
 
@@ -79,18 +88,17 @@ function UserKyudo(props) {
                                 </Grid>
                             </Grid>
                             <Typography>
-                                <FormControl
-                                    variant="outlined"
-                                >
+                                <FormControl variant="outlined">
                                     <InputLabel>Current Kyudo Rank</InputLabel>
                                     <Select
                                         id="student_rank"
+                                        name="student_rank"
                                         label="Current Kyudo Rank"
-                                        defaultValue={props.store.info.student_rank}
+                                        onChange={(event) => name(event)}
                                     >
                                         {ranks.map((rank, id) => {
                                             return (
-                                                <MenuItem key={id}>{rank}</MenuItem>
+                                                <MenuItem key={id} value={rank}>{rank}</MenuItem>
                                             )
                                         })}
                                     </Select>
@@ -113,11 +121,12 @@ function UserKyudo(props) {
                                     <Select
                                         id="teacher_rank"
                                         label="Current Teaching Rank"
-                                        defaultValue="Renshi"
+                                        name="teacher_rank"
+                                        onChange={(event) => name(event)}
                                     >
                                         {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
                                             return (
-                                                <MenuItem key={id}>{rank}</MenuItem>
+                                                <MenuItem key={id} value={rank}>{rank}</MenuItem>
                                             )
                                         })}
                                     </Select>

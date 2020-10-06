@@ -75,7 +75,7 @@ function UserPersonal(props) {
                                 required
                                 id="date_of_birth"
                                 label="Birth Date"
-                                defaultValue={moment(props.store.info.date_of_birth).format('MM-DD-YYYYD')}
+                                defaultValue={moment(props.store.info.date_of_birth).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
                             />
