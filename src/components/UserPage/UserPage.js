@@ -10,6 +10,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+import UserName from '../UserName/UserName'
 class UserPage extends Component {
 
 
@@ -85,7 +86,8 @@ class UserPage extends Component {
         <p>Your ID is: {this.props.store.user.id}</p>
         <LogOutButton className="log-in" /> */}
         <Container>
-          {this.state.nameEdit ?
+          <UserName />
+          {/* {this.state.nameEdit ?
             <Card>
               <CardContent>
                 <Grid container>
@@ -170,7 +172,7 @@ class UserPage extends Component {
                 </Grid>
               </CardContent>
             </Card>
-          }
+          } */}
 
           {this.state.contactEdit ?
             <Card>
