@@ -103,6 +103,7 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
   SELECT
   "user".username,
   "user_data".*,
+  "dojo".region_name,
   "dojo".dojo_name
   FROM "user"
   JOIN "user_data" ON "user".id = "user_data".user_id
