@@ -12,7 +12,7 @@ const router = express.Router();
 
 // NEW USER POST
 router.post('/profile', rejectUnauthenticated, async (req, res) => {
-    const firstQuery = `
+    const query = `
     INSERT INTO "user_data" (
       "fname", 
       "lname", 
@@ -49,7 +49,7 @@ router.post('/profile', rejectUnauthenticated, async (req, res) => {
     );
     `;
     pool
-      .query(firstQuery, [
+      .query(query, [
         req.body.fname, // $1
         req.body.lname, // $2
         // not using this, since it'll be the logged in user:
@@ -103,12 +103,11 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
   SELECT
   "user".username,
   "user_data".*,
-  "dojo".dojo_name,
-  "region".region_name
+  "dojo".region_name,
+  "dojo".dojo_name
   FROM "user"
   JOIN "user_data" ON "user".id = "user_data".user_id
   JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-  JOIN "region" ON "dojo".region_id = "region".id
   WHERE "user".id = $1
   `;
   pool
@@ -123,6 +122,9 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     })
 });
+
+// END NEW-CODE ====
+
 
 // BOILER PLATE ====
 
