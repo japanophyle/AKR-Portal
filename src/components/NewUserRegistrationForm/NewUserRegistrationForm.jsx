@@ -28,7 +28,7 @@ class NewUserForm extends Component {
   state = {
     fname: '',
     lname: '',
-    user_id: '',
+    user_id: this.props.store.user.id,
     email: '',
     phone_number: '',
     dojo_id: '',
