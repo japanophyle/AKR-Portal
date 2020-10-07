@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import ranksSaga from './ranks.saga';
 import dojosSaga from './dojos.saga';
 import membersSaga from './members.saga';
+import myDojoSaga from './myDojo.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     ranksSaga(),
     dojosSaga(),
     membersSaga(),
+    myDojoSaga(),
   ]);
 }

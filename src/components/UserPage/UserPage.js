@@ -63,6 +63,14 @@ class UserPage extends Component {
       }
     })
   }
+
+  getMyDojo = () => {
+    console.log('Getting "my dojo"')
+    this.props.dispatch({
+      type: "GET_MY_DOJO"
+    })
+
+  }
   
 
     componentDidMount = () => {
@@ -79,8 +87,8 @@ class UserPage extends Component {
         <p>Your ID is: {this.props.store.user.id}</p>
         <p>Your name is: {this.props.store.info.fname} {this.props.store.info.lname}</p>
         <LogOutButton className="log-in" />
-        <button
-        >Post new User</button>
+        <button onClick={() => this.getMyDojo()}
+        >Get My Dojo</button>
           <Container>
 
           {/* Edit user name data component */}
