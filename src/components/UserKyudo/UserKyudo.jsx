@@ -128,9 +128,11 @@ function UserKyudo(props) {
                             <FormControl variant="outlined">
                                 <InputLabel>Current Kyudo Rank</InputLabel>
                                 <Select
+                                    width="50px"
                                     id="student_rank"
                                     name="student_rank"
                                     label="Current Kyudo Rank"
+                                    defaultValue={props.store.info.student_rank}
                                     onChange={(event) => name(event)}
                                 >
                                     {ranks.map((rank, id) => {
@@ -156,11 +158,13 @@ function UserKyudo(props) {
                             <br />
                             {/* teacher rank */}
                             <FormControl variant="outlined" >
-                                <InputLabel>Current Teaching Rank</InputLabel>
+                                <InputLabel>Teaching Rank</InputLabel>
                                 <Select
                                     id="teaching_rank"
-                                    label="Current Teaching Rank"
+                                    label="Teaching Rank"
                                     name="teaching_rank"
+                                    width="70px"
+                                    defaultValue={props.store.info.teaching_rank}
                                     onChange={(event) => name(event)}
                                 >
                                     {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {

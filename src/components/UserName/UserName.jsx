@@ -116,7 +116,7 @@ function UserName(props) {
                   <br />
                   {/* japanese first name */}
                   <TextField
-                    required
+                    
                     id="fname_japanese"
                     label="Katakana First Name"
                     defaultValue={props.store.info.fname_japanese}
@@ -145,7 +145,7 @@ function UserName(props) {
                   <br />
                   {/* japanese last name */}
                   <TextField
-                    required
+                    
                     id="lname_japanese"
                     label="Katakana Last Name"
                     defaultValue={props.store.info.lname_japanese}
