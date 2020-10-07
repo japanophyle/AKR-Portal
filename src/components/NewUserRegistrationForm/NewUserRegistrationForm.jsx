@@ -136,7 +136,7 @@ class NewUserForm extends Component {
                         name="dojo_id"
                         onChange={this.handleChange('dojo_id')}
                       >
-                        {/* placeholder for db */}
+                        
                         {this.props.store.dojos.map((dojo, id) => {
                           return (
                             <MenuItem key={id} value={dojo.id}>{dojo.dojo_name}</MenuItem>
