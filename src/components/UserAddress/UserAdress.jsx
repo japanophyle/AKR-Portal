@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import {  Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 
 
 // Basic functional component structure for React with default state
@@ -27,6 +27,27 @@ function UserAddress(props) {
       });
   }
 
+  // cancel button resets the reducers 
+  const handleDateReset = (event) => {
+    console.log('cancel')
+    props.dispatch(
+      {
+        type: 'FETCH_USER_INFO'
+      });
+    handleDateChange()
+  }
+
+  // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
+  const handleSaveEdit = (event) => {
+    console.log(props.store.editInfo);
+    props.dispatch(
+      {
+        type: 'UPDATE_USER_DATA',
+        payload: props.store.editInfo
+      })
+    handleDateChange()
+  };
+
   return (
     <div>
       {/* IF the state is true this a just a view of information */}
@@ -43,15 +64,15 @@ function UserAddress(props) {
             </Grid>
             <Typography variant="h6">
               Address: {props.store.info.address_1}
-              <br/>
+              <br />
               Address cont.:{props.store.info.address_2}
-              <br/>
+              <br />
               City: {props.store.info.city}
-              <br/>
+              <br />
               State: {props.store.info.state}
-              <br/>
+              <br />
               Zipcode: {props.store.info.zipcode}
-              <br/>
+              <br />
               Country: {props.store.info.country}
             </Typography>
           </CardContent>
@@ -66,9 +87,9 @@ function UserAddress(props) {
               </Grid>
               <Grid item xs={1}>
                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                <Button onClick={handleDateChange}>Save</Button>
+                <Button onClick={handleSaveEdit}>Save</Button>
                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
-                <Button onClick={handleDateChange}>Cancel</Button>
+                <Button onClick={handleDateReset}>Cancel</Button>
               </Grid>
             </Grid>
             <Typography variant="h6">

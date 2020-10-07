@@ -25,6 +25,26 @@ function UserName(props) {
         payload: { key: event.target.id, value: event.target.value }
       });
   }
+  // cancel button resets the reducers 
+  const handleDateReset = (event) => {
+    console.log('cancel')
+    props.dispatch(
+      {
+        type: 'FETCH_USER_INFO'
+      });
+    handleDateChange()
+  }
+
+  // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
+  const handleSaveEdit = (event) => {
+    console.log(props.store.editInfo);
+    props.dispatch(
+      {
+        type: 'UPDATE_USER_DATA',
+        payload: props.store.editInfo
+      })
+    handleDateChange()
+  };
 
   return (
     <div>
@@ -45,7 +65,7 @@ function UserName(props) {
                 <Typography variant="h6">
                   {/* First name */}
                   {props.store.info.fname}
-                  <br/>
+                  <br />
                   {/* japanese first name */}
                   {props.store.info.fname_japanese}
                   {/* username */}
@@ -75,9 +95,9 @@ function UserName(props) {
               </Grid>
               <Grid item xs={1}>
                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                <Button onClick={handleDateChange}>Save</Button>
+                <Button onClick={handleSaveEdit}>Save</Button>
                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
-                <Button onClick={handleDateChange}>Cancel</Button>
+                <Button onClick={handleDateReset}>Cancel</Button>
               </Grid>
             </Grid>
             <Grid container>

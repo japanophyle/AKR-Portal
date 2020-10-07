@@ -100,7 +100,9 @@ class UserPage extends Component {
 
           {/* Edit user Payment data data component */}
           {/* Needs to have diff views depending on the admin level of the user */}
-            <UserPayment />
+
+          
+          <UserPayment />
 
           </Container>
         </div>
