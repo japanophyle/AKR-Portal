@@ -28,7 +28,7 @@ class NewUserForm extends Component {
   state = {
     fname: '',
     lname: '',
-    user_id: '',
+    user_id: this.props.store.user.id,
     email: '',
     phone_number: '',
     dojo_id: '',
@@ -57,6 +57,9 @@ class NewUserForm extends Component {
   componentDidMount = () => {
     this.props.dispatch({
       type: 'GET_DOJOS',
+    })
+    this.props.dispatch({
+      type: 'FETCH_USER',
     })
   }
 
@@ -98,7 +101,7 @@ class NewUserForm extends Component {
           <Grid item xs={12} >
             <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px" }}>
               <h6 style={{ color: "red" }}>Fields with * are required.</h6>
-              <form onSubmit={this.handleSaveNewUser}>
+              <form onSubmit={this.handleSaveNewUser} autocomplete="on">
                 <NewUserName handleChange={this.handleChange} />
                 <NewUserContact handleChange={this.handleChange} />
                 <NewUserPersonal state={this.state} handleChange={this.handleChange} />
@@ -136,7 +139,7 @@ class NewUserForm extends Component {
                         name="dojo_id"
                         onChange={this.handleChange('dojo_id')}
                       >
-                        {/* placeholder for db */}
+                        
                         {this.props.store.dojos.map((dojo, id) => {
                           return (
                             <MenuItem key={id} value={dojo.id}>{dojo.dojo_name}</MenuItem>

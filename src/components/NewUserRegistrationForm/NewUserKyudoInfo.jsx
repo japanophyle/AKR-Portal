@@ -130,10 +130,10 @@ function NewUserKyudoInfo(props) {
                     <TextField
                         margin="dense"
                         variant="outlined"
-                        name="date_teacher_rank"
+                        name="date_teaching_rank"
                         type="date"
                         helperText="Date reached current rank"
-                        onChange={props.handleChange('date_teacher_rank')}
+                        onChange={props.handleChange('date_teaching_rank')}
                     />
                 </Grid>
             </Grid>
