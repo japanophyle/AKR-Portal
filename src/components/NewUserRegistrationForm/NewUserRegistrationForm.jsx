@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import moment from 'moment';
 
+// import Dialog for success submit 
+import FormSuccess from '../FormSuccess/FormSuccess'
+
 //MATERIAL-UI
 import {
   Paper,
@@ -155,12 +158,14 @@ class NewUserForm extends Component {
                 }
                 <Grid container justify="center">
                   <Grid item>
-                    <Button type="submit" variant="contained" color="primary">
-                      Save
-                  </Button>
+                    
+                  {/* Dialog button/popup */}
+                  <FormSuccess/>
+
                   </Grid>
                 </Grid>
               </form>
+              
             </Paper>
           </Grid>
         </Grid>
