@@ -91,9 +91,9 @@ function UserKyudo(props) {
                             <br />
                             Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
                             <br />
-                            Current Teacher Rank: {props.store.info.teacher_rank}
+                            Current Teacher Rank: {props.store.info.teaching_rank}
                             <br />
-                            Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}
+                            Date Reached: {moment(props.store.info.date_teaching_rank).format('MM-DD-YYYY')}
                             <br />
                             Years Practiced: {props.store.info.years_practice}
                             <br />
@@ -160,7 +160,7 @@ function UserKyudo(props) {
                                 <Select
                                     id="teaching_rank"
                                     label="Current Teaching Rank"
-                                    name="teacher_rank"
+                                    name="teaching_rank"
                                     onChange={(event) => name(event)}
                                 >
                                     {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
@@ -176,9 +176,9 @@ function UserKyudo(props) {
                             <TextField
                                 type='Date'
                                 required
-                                id="date_teacher_rank"
+                                id="date_teaching_rank"
                                 label="Date Earned"
-                                defaultValue={moment(props.store.info.date_teacher_rank).format('YYYY-MM-DD')}
+                                defaultValue={moment(props.store.info.date_teaching_rank).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
                             />
