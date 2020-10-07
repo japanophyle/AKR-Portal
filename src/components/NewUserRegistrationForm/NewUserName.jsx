@@ -40,16 +40,16 @@ function NewUserName(props) {
             helperText="If known"
             margin="dense"
             variant="outlined"
-            name="japanese_fname"
-            onChange={props.handleChange('japanese_fname')}
+            name="fname_japanese"
+            onChange={props.handleChange('fname_japanese')}
           />
           <TextField
             label="Katakana"
             helperText="If known"
             margin="dense"
             variant="outlined"
-            name="japanese_lname"
-            onChange={props.handleChange('japanese_lname')}
+            name="lname_japanese"
+            onChange={props.handleChange('lname_japanese')}
           />
         </Grid>
       </Grid>
