@@ -158,7 +158,7 @@ function UserKyudo(props) {
                             <FormControl variant="outlined" >
                                 <InputLabel>Current Teaching Rank</InputLabel>
                                 <Select
-                                    id="teacher_rank"
+                                    id="teaching_rank"
                                     label="Current Teaching Rank"
                                     name="teacher_rank"
                                     onChange={(event) => name(event)}

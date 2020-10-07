@@ -129,32 +129,36 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
   const queryText = 
   `UPDATE "user_data" 
     SET
-      "fname" = $1
-      "lname" = $2
-      "email" = $4
-      "phone_number" = $5
-      "dojo_id" = $6
-      "fname_japanese" = $7 
-      "lname_japanese" = $8
-      "student_rank" = $9
-      "date_student_rank" = $10
-      "teaching_rank" = $11
-      "date_teaching_rank" = $12
-      "ikyf" = $13
-      "age" = $14
-      "years_practice" = $15
-      "address_1" = $16
-      "address_2" = $17
-      "city" = $18
-      "state" = $19
-      "country" = $20
-      "zipcode" = $21
-      "gender" = $22
-      "date_of_birth" = $23
-      "date_began_kyudo" = $24
-      "citizenship" = $25
-      "usa_archery_id" = $26
-      "is_current_member" = $27
+      "fname" = $1,
+      "lname" = $2,
+      "email" = $4,
+      "phone_number" = $5,
+      "dojo_id" = $6,
+      "fname_japanese" = $7 ,
+      "lname_japanese" = $8,
+      "student_rank" = $9,
+      "date_student_rank" = $10,
+      "teaching_rank" = $11,
+      "date_teaching_rank" = $12,
+      "ikyf" = $13,
+      "age" = $14,
+      "years_practice" = $15,
+      "address_1" = $16,
+      "address_2" = $17,
+      "city" = $18,
+      "state" = $19,
+      "country" = $20,
+      "zipcode" = $21,
+      "gender" = $22,
+      "date_of_birth" = $23,
+      "date_began_kyudo" = $24,
+      "citizenship" = $25,
+      "usa_archery_id" = $26,
+      "is_current_member" = $27,
+      "dues_amount" = $28,
+      "amount_paid" = $29,
+      "dues_date"  = $29,
+      "dues_method" = $30,
       WHERE "id" = $3;`;      
   pool.query(queryText, [
     req.body.fname, // $1
@@ -190,6 +194,11 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     req.body.citizenship, // $25
     req.body.usa_archery_id, // $26
     req.body.is_current_member, // $27
+    req.body.dues_amount, //$28
+    req.body.amount_paid, //$29
+    req.body.dues_date, // $29
+    req.body.dues_method, //$30
+
   ])
   .then(response => {
     console.log('/api/user/edit PUT ');
