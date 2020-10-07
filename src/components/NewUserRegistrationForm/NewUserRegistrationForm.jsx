@@ -58,6 +58,9 @@ class NewUserForm extends Component {
     this.props.dispatch({
       type: 'GET_DOJOS',
     })
+    this.props.dispatch({
+      type: 'FETCH_USER',
+    })
   }
 
   // handle change for note state
@@ -98,7 +101,7 @@ class NewUserForm extends Component {
           <Grid item xs={12} >
             <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px" }}>
               <h6 style={{ color: "red" }}>Fields with * are required.</h6>
-              <form onSubmit={this.handleSaveNewUser}>
+              <form onSubmit={this.handleSaveNewUser} autocomplete="on">
                 <NewUserName handleChange={this.handleChange} />
                 <NewUserContact handleChange={this.handleChange} />
                 <NewUserPersonal state={this.state} handleChange={this.handleChange} />

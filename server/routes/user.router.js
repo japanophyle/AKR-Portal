@@ -103,12 +103,10 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
   SELECT
   "user".username,
   "user_data".*,
-  "dojo".dojo_name,
-  "region".region_name
+  "dojo".dojo_name
   FROM "user"
   JOIN "user_data" ON "user".id = "user_data".user_id
   JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-  JOIN "region" ON "dojo".region_id = "region".id
   WHERE "user".id = $1
   `;
   pool
