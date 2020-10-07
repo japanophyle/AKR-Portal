@@ -41,10 +41,9 @@ const useStyles = makeStyles({
 function MemberList(props) {
 
   useEffect(() => {
-    props.dispatch
-      ({
-        type: 'GET_ACTIVE_USERS',
-      })
+    props.dispatch({ type: 'GET_ACTIVE_USERS' })
+    props.dispatch({ type: 'GET_INACTIVE_USERS' })
+    
   }, []);
 
   const classes = useStyles();
@@ -71,7 +70,7 @@ function MemberList(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            
+
           </TableBody>
         </Table>
       </TableContainer>
