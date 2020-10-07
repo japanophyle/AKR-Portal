@@ -58,8 +58,14 @@ function MemberList(props) {
               <StyledTableCell align="center">Status</StyledTableCell>
               <StyledTableCell align="center">More</StyledTableCell>
               <StyledTableCell align="center">Notes</StyledTableCell>
+              {props.store.user.auth_level >= 20 &&
+                <StyledTableCell align="center">Remove</StyledTableCell>
+              }
             </TableRow>
           </TableHead>
+          <TableBody>
+            
+          </TableBody>
         </Table>
       </TableContainer>
     </div>
