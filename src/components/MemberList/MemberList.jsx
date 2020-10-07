@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
@@ -39,6 +39,13 @@ const useStyles = makeStyles({
 });
 
 function MemberList(props) {
+
+  useEffect(() => {
+    props.dispatch
+      ({
+        type: 'GET_ACTIVE_USERS',
+      })
+  }, []);
 
   const classes = useStyles();
 

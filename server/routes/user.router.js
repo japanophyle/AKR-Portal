@@ -115,7 +115,6 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
     .then(response => {
       console.log('/api/user/profile get response:', response.rows[0]);
       res.send(response.rows[0])
-      // res.sendStatus(200)
     })
     .catch(error => {
       console.log('error in /api/user/profile get:', error);

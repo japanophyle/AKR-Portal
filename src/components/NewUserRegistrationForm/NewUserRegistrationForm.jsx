@@ -155,7 +155,11 @@ class NewUserForm extends Component {
                 }
                 <Grid container justify="center">
                   <Grid item>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button 
+                      type="submit" 
+                      variant="contained" 
+                      color="primary"
+                    >
                       Save
                   </Button>
                   </Grid>
