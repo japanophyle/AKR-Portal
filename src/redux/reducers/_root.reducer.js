@@ -5,6 +5,8 @@ import ranks from './ranks.reducer';
 import info from './info.reducer';
 import editInfo from './infoEdit.reducer'
 import dojos from './dojos.reducer';
+import activeMembers from './members.reducer';
+import inactiveMembers from './members.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -17,10 +19,11 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   ranks, // will have the ranks and dates for logged in user
-  info,
-  editInfo,
+  info, // will have the currently logged-in user's info
   dojos, // will have the dojo names, ids, and region ids
-
+  activeMembers, // will have the user_data for all active members
+  inactiveMembers, // will have the user_data for all *inactive* members
+  editInfo, // for editing info on a sepecific user
 });
 
 export default rootReducer;

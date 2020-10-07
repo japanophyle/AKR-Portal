@@ -32,6 +32,8 @@ function* fetchUserInfo() {
     const response = yield axios.get('/api/user/profile')
     console.log('response from get info:', response.data);
     yield put({ type: 'SET_USER_INFO', payload: response.data });
+
+    //store same data in a edit reducer for the userinfo edits
     yield put({ type: 'SET_EDIT_USER_INFO', payload: response.data });
 
 
@@ -43,12 +45,23 @@ function* fetchUserInfo() {
 // Saga for posting a new user's info to DB
 function* createUser(action) {
   try {
-    
     console.log('posting new student: ', action.payload);
     yield axios.post('/api/user/profile', action.payload)
-    
   } catch (error) {
     console.log('User post request failed', error);
+  }
+}
+
+// saga listens for then a put request should be done for user_data
+function* updateUserData(action) {
+  try {
+    console.log('updating user_data: ', action.payload);
+    // PUT request for the edit changes 
+    yield axios.put('/api/user', action.payload)
+    //GET the new data that data! 
+    yield put({ type: 'FETCH_USER_INFO' })
+  } catch (error) {
+    console.log('User_data PUT request failed', error);
   }
 }
 
@@ -56,6 +69,8 @@ function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_INFO', fetchUserInfo);
   yield takeLatest('CREATE_USER', createUser);
+  yield takeLatest('UPDATE_USER_DATA', updateUserData)
+
 }
 
 export default userSaga;
