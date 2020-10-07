@@ -28,6 +28,27 @@ function UserPersonal(props) {
             });
     }
 
+    // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
+    const handleSaveEdit = (event) => {
+        console.log(props.store.editInfo);
+        props.dispatch(
+            {
+                type: 'UPDATE_USER_DATA',
+                payload: props.store.editInfo
+            })
+        handleDateChange()
+    };
+
+    // cancel button resets the reducers 
+    const handleDateReset = (event) => {
+        console.log('cancel')
+        props.dispatch(
+            {
+                type: 'FETCH_USER_INFO'
+            });
+        handleDateChange()
+    }
+
     return (
         <div>
             {/* IF the state is true this a just a view of information */}
@@ -44,12 +65,12 @@ function UserPersonal(props) {
                         </Grid>
                         <Typography variant="h6">
                             Citizenship: {props.store.info.citizenship}
-                            <br/>
+                            <br />
                             Date of birth: {moment(props.store.info.date_of_birth).format('MM-DD-YYYY')}
-                            <br/>
+                            <br />
                             {/* calculated using moment DIFF() operation using the date of birth */}
                             Age: {moment().diff(props.store.info.date_of_birth, 'years')}
-                            <br/>
+                            <br />
                             Gender: {props.store.info.gender}
                         </Typography>
                     </CardContent>
@@ -64,9 +85,9 @@ function UserPersonal(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <Button onClick={handleDateChange}>Save</Button>
+                                <Button onClick={handleSaveEdit}>Save</Button>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
-                                <Button onClick={handleDateChange}>Cancel</Button>
+                                <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
@@ -93,7 +114,7 @@ function UserPersonal(props) {
                             />
                             <br />
                             <br />
-                            
+
                             {/* calculated using moment DIFF() operation using the date of birth */}
                             Age: {moment().diff(props.store.info.date_of_birth, 'years')}
 
