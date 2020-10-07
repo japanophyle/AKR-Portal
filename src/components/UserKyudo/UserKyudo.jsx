@@ -58,8 +58,19 @@ function UserKyudo(props) {
             {
                 type: 'FETCH_USER_INFO'
             });
-            handleDateChange()
+        handleDateChange()
     }
+
+    // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
+    const handleSaveEdit = (event) => {
+        console.log(props.store.editInfo);
+        props.dispatch(
+            {
+                type: 'UPDATE_USER_DATA',
+                payload: props.store.editInfo
+            })
+        handleDateChange()
+    };
 
     return (
         <div>
@@ -77,22 +88,22 @@ function UserKyudo(props) {
                         </Grid>
                         <Typography variant="h6">
                             Current Student Rank: {props.store.info.student_rank}
-                            <br/>
+                            <br />
                             Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
-                            <br/>
+                            <br />
                             Current Teacher Rank: {props.store.info.teacher_rank}
-                            <br/>
+                            <br />
                             Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}
-                            <br/>
+                            <br />
                             Years Practiced: {props.store.info.years_practice}
-                            <br/>
+                            <br />
                             Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('MM-DD-YYYY')}
-                            <br/>
+                            <br />
 
                             {/* rank history goes here */}
 
                             IKYF Member Number: {props.store.info.ikyf}
-                            <br/>
+                            <br />
                             USA Archery Member ID: {props.store.info.usa_archery_id}
                         </Typography>
                     </CardContent>
@@ -107,7 +118,7 @@ function UserKyudo(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <Button onClick={handleDateChange}>Save</Button>
+                                <Button onClick={handleSaveEdit}>Save</Button>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>

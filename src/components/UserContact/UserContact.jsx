@@ -32,8 +32,19 @@ function UserContact(props) {
             {
                 type: 'FETCH_USER_INFO'
             });
-            handleDateChange()
+        handleDateChange()
     }
+
+    // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
+    const handleSaveEdit = (event) => {
+        console.log(props.store.editInfo);
+        props.dispatch(
+            {
+                type: 'UPDATE_USER_DATA',
+                payload: props.store.editInfo
+            })
+        handleDateChange()
+    };
 
     return (
         <div>
@@ -51,7 +62,7 @@ function UserContact(props) {
                         </Grid>
                         <Typography variant="h6">
                             Email: {props.store.info.email}
-                            <br/>
+                            <br />
                             Phone: {props.store.info.phone_number}
                         </Typography>
                     </CardContent>
@@ -66,7 +77,7 @@ function UserContact(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <Button onClick={handleDateChange}>Save</Button>
+                                <Button onClick={handleSaveEdit}>Save</Button>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
