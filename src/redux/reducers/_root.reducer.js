@@ -7,6 +7,7 @@ import editInfo from './infoEdit.reducer'
 import dojos from './dojos.reducer';
 import activeMembers from './members.reducer';
 import inactiveMembers from './members.reducer';
+import myDojo from './myDojo.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   activeMembers, // will have the user_data for all active members
   inactiveMembers, // will have the user_data for all *inactive* members
   editInfo, // for editing info on a sepecific user
+  myDojo, // holds names and ranks of the current user's dojo
 });
 
 export default rootReducer;
