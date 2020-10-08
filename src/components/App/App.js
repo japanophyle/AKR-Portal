@@ -33,6 +33,9 @@ class App extends Component {
     this.props.dispatch({ type: 'FETCH_USER' });
     // this.props.dispatch({ type: 'GET_RANKS' });
     this.props.dispatch({ type: 'GET_DOJOS' });
+    this.props.dispatch({
+      type: "FETCH_USER_INFO",
+    })
   }
 
   render() {
@@ -97,7 +100,7 @@ class App extends Component {
             />
             <DojoAdminAuthRoute
               exact
-              path="/memberlist"
+              path="/memberlist/:id"
               component={MemberList}
             />
 

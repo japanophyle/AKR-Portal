@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* getActiveUsers() {
+function* getActiveUsers(action) {
+    console.log(action.payload);
+
     try {
-        let response = yield axios.get('/api/members/active');
+        let response = yield axios.get(`/api/members/active/${action.payload}`);
         console.log('Active users:', response.data);
         yield put({ type:'SET_ACTIVE_USERS', payload: response.data })
     } catch (error) {
@@ -11,9 +13,9 @@ function* getActiveUsers() {
     }
 }
 
-function* getInactiveUsers() {
+function* getInactiveUsers(action) {
     try {
-        let response = yield axios.get('/api/members/inactive');
+        let response = yield axios.get(`/api/members/inactive/${action.payload}`);
         console.log('Inactive users:', response.data);
         yield put({ type:'SET_INACTIVE_USERS', payload: response.data })
     } catch (error) {

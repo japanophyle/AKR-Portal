@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import ActiveMembers from './ActiveMembers';
@@ -13,9 +13,18 @@ function MemberList(props) {
   const [activeHeading, setActiveHeading] = useState('Current Members');
   const [inactiveHeading, setInactiveHeading] = useState('Non-Active Members');
 
-  
+  useEffect(() => {
+    const id = props.match.params.id
+    props.dispatch({ type: 'GET_ACTIVE_USERS', payload: id })
+    
+  }, [])
 
-  
+  useEffect(() => {
+    const id = props.match.params.id
+    props.dispatch({ type: 'GET_INACTIVE_USERS', payload: id })
+  }, [])
+
+
 
   return (
     <div>
