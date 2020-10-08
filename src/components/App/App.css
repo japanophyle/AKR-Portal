@@ -110,3 +110,12 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+/* stuff */
+.table {
+  max-height: 33.9em;
+}
+
+.papertable {
+  max-width: 90vw;
+}
