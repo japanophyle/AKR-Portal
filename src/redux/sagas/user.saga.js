@@ -44,6 +44,7 @@ function* fetchUserInfo(action) {
 
 // Saga for posting a new user's info to DB
 function* createUser(action) {
+  console.log('posting new student: ', action.payload);
   try {
     console.log('posting new student: ', action.payload);
     yield axios.post('/api/user/profile', action.payload)
@@ -57,7 +58,7 @@ function* updateUserData(action) {
   try {
     console.log('updating user_data: ', action.payload);
     // PUT request for the edit changes 
-    yield axios.put('/api/user', action.payload)
+    yield axios.put('/api/user/edit', action.payload)
     //GET the new data that data! 
     yield put({ type: 'FETCH_USER_INFO' })
   } catch (error) {

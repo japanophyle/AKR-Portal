@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
+import EditIcon from '@material-ui/icons/Edit';
+
+// dialog for save success
+import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
 
 // LIST OF ALL STUDENT RANKS FOR SELECT BELOW 
 const ranks =
@@ -83,7 +87,7 @@ function UserKyudo(props) {
                                 <h1>Kyudo Information</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Button onClick={handleDateChange}>Edit</Button>
+                            <EditIcon fontSize="large" onClick={handleDateChange} />
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
@@ -91,9 +95,9 @@ function UserKyudo(props) {
                             <br />
                             Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
                             <br />
-                            Current Teacher Rank: {props.store.info.teacher_rank}
+                            Current Teacher Rank: {props.store.info.teaching_rank}
                             <br />
-                            Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}
+                            Date Reached: {moment(props.store.info.date_teaching_rank).format('MM-DD-YYYY')}
                             <br />
                             Years Practiced: {props.store.info.years_practice}
                             <br />
@@ -111,6 +115,7 @@ function UserKyudo(props) {
                 :
                 <Card>
                     {/* IF the state is FALSE this You can edit */}
+                    <form  onSubmit={handleSaveEdit} >
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -118,7 +123,7 @@ function UserKyudo(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <Button onClick={handleSaveEdit}>Save</Button>
+                                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
@@ -128,9 +133,11 @@ function UserKyudo(props) {
                             <FormControl variant="outlined">
                                 <InputLabel>Current Kyudo Rank</InputLabel>
                                 <Select
+                                    width="50px"
                                     id="student_rank"
                                     name="student_rank"
                                     label="Current Kyudo Rank"
+                                    defaultValue={props.store.info.student_rank}
                                     onChange={(event) => name(event)}
                                 >
                                     {ranks.map((rank, id) => {
@@ -145,7 +152,7 @@ function UserKyudo(props) {
                             {/* date got student rank */}
                             <TextField
                                 type='Date'
-                                required
+                                
                                 id="date_student_rank"
                                 label="Date Earned"
                                 defaultValue={moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}
@@ -156,11 +163,13 @@ function UserKyudo(props) {
                             <br />
                             {/* teacher rank */}
                             <FormControl variant="outlined" >
-                                <InputLabel>Current Teaching Rank</InputLabel>
+                                <InputLabel>Teaching Rank</InputLabel>
                                 <Select
-                                    id="teacher_rank"
-                                    label="Current Teaching Rank"
-                                    name="teacher_rank"
+                                    id="teaching_rank"
+                                    label="Teaching Rank"
+                                    name="teaching_rank"
+                                    width="70px"
+                                    defaultValue={props.store.info.teaching_rank}
                                     onChange={(event) => name(event)}
                                 >
                                     {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
@@ -175,10 +184,10 @@ function UserKyudo(props) {
                             {/* date of teacher rank */}
                             <TextField
                                 type='Date'
-                                required
-                                id="date_teacher_rank"
+                                
+                                id="date_teaching_rank"
                                 label="Date Earned"
-                                defaultValue={moment(props.store.info.date_teacher_rank).format('YYYY-MM-DD')}
+                                defaultValue={moment(props.store.info.date_teaching_rank).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
                             />
@@ -186,7 +195,7 @@ function UserKyudo(props) {
                             <br />
                             {/* years of practice */}
                             <TextField
-                                required
+                                
                                 id="years_practice"
                                 label="Years of Practice"
                                 defaultValue={props.store.info.years_practice}
@@ -198,7 +207,7 @@ function UserKyudo(props) {
                             {/* date kyudo started for you, why did i phrase it like that ... */}
                             <TextField
                                 type='Date'
-                                required
+                                
                                 id="date_began_kyudo"
                                 label="Date Began Kyudo"
                                 defaultValue={moment(props.store.info.date_began_kyudo).format('YYYY-MM-DD')}
@@ -209,7 +218,7 @@ function UserKyudo(props) {
                             <br />
                             {/* IKYF NUMBER */}
                             <TextField
-                                required
+                                
                                 id="ikyf"
                                 label="IKFY Number"
                                 defaultValue={props.store.info.ikyf}
@@ -220,7 +229,7 @@ function UserKyudo(props) {
                             <br />
                             {/* USA archery Number */}
                             <TextField
-                                required
+                                
                                 id="usa_archery_id"
                                 label="USA archery Number"
                                 defaultValue={props.store.info.usa_archery_id}
@@ -229,6 +238,7 @@ function UserKyudo(props) {
                             />
                         </Typography>
                     </CardContent>
+                    </form>
                 </Card>
             }
         </div>

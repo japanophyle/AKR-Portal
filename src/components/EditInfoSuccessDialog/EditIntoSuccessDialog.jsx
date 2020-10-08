@@ -1,18 +1,31 @@
 import React from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core/';
+import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
-export default function FormSuccess(props) {
+function EditInfoSuccessDialog(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        // setOpen(true);
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setOpen(false); 
     };
 
     
+
+    const handleSaveEdit = (event) => {
+        props.dispatch(
+          {
+            type: 'UPDATE_USER_DATA',
+            payload: props.store.editInfo
+          })
+            
+          props.handleDateChange()
+          handleClickOpen() 
+      };
 
     return (
         <div>
@@ -20,12 +33,11 @@ export default function FormSuccess(props) {
                 Submit
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
-            <DialogContent>
-                <DialogTitle id="form-dialog-title">Success! Your information has been saved.</DialogTitle>
-                <DialogContentText id="alert-dialog-description">
-            Thanks for signing up. Your account will start out being inactive until you contact
-            you local Dojo and request to be come an active member. 
-          </DialogContentText>
+                <DialogContent>
+                    <DialogTitle id="form-dialog-title">Success! </DialogTitle>
+                    <DialogContentText id="alert-dialog-description">
+                        Your edits have been saved.
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
@@ -36,3 +48,5 @@ export default function FormSuccess(props) {
         </div>
     );
 }
+
+export default  connect(mapStoreToProps)(EditInfoSuccessDialog)

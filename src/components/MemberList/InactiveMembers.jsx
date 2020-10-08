@@ -56,9 +56,10 @@ function InactiveMembers(props) {
 
     }, []);
 
-    // function to deactivate a user
-    const handleDeactivateUser = (event) => {
-
+    // function to Activate a user
+    const handleActivateUser = (id) => {
+        console.log(id);
+        props.dispatch({ type: 'ACTIVATE_USER', payload: {id: id} })
     }
 
     const classes = useStyles();
@@ -85,28 +86,21 @@ function InactiveMembers(props) {
                                         <StyledTableRow component="tr" scope="row" key={id}>
                                             <StyledTableCell align="center">{member.fname} {member.lname}</StyledTableCell>
                                             <StyledTableCell align="center">
-                                                {!member.is_current_member || member.auth_level === 0
+                                                {member.auth_level === 0
                                                     ?
-                                                    <Button>Activate</Button>
+                                                    <Button
+                                                        onClick={() => handleActivateUser(member.user_id)}
+                                                    >
+                                                        Activate
+                                                    </Button>
                                                     : ''}
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
-                                                <Tooltip title="Add Note" placement="left">
+                                                <Tooltip title="Member Details" placement="left">
                                                     <IconButton>
-                                                        <NoteAddIcon
-                                                            color="primary"
-                                                        ></NoteAddIcon>
+                                                        <ViewListIcon></ViewListIcon>
                                                     </IconButton>
                                                 </Tooltip>
-                                                {member.notes || member.equipment_checkout ?
-                                                    <Tooltip title="Instructor Notes" placement="left">
-                                                        <IconButton>
-                                                            <SpeakerNotesIcon></SpeakerNotesIcon>
-                                                        </IconButton>
-                                                    </Tooltip>
-                                                    :
-                                                    ''
-                                                }
                                             </StyledTableCell>
                                             {props.store.user.auth_level >= 20 &&
                                                 <StyledTableCell align="center">
