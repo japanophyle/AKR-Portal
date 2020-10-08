@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GETs all dojos
 router.get('/', (req, res) => {
-    let queryText = `SELECT * from "dojo";`;
+    let queryText = `SELECT * from "dojo" ORDER BY "dojo".region_name ASC;`;
     pool.query(queryText).then(result => {
         res.send(result.rows);
     })
@@ -15,18 +15,27 @@ router.get('/', (req, res) => {
 })
 
 // POSTs new dojo
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     console.log('Adding new dojo:', req.body);
-    let queryText = `INSERT INTO "dojo" ("dojo_name", "region_name")
-                     VALUES ($1, $2);`;
-    pool.query(queryText, [req.body.dojo_name, req.body.region_name])
-    .then(result => {
-        res.sendStatus(201);
-    })
-    .catch(error => {
-        console.log(`Error adding dojo`, error); 
-        res.sendStatus(500);
-    });
+    const client = await pool.connect();
+    try {
+        const firstQuery = `INSERT INTO "dojo" ("dojo_name", "region_name")
+                            VALUES ($1, $2) RETURNING "id";`;
+        const secondQuery = `UPDATE "user_data"
+                             SET "dojo_id" = $1
+                             WHERE "user_id"= $2;`;
+        await client.query('BEGIN');
+        const result = await client.query(firstQuery, [req.body.dojo_name, req.body.region_name])
+        await client.query(secondQuery, [result.rows[0].id, req.body.admin_id])
+        await client.query('COMMIT');
+        res.sendStatus(201)
+    }  catch (error) {
+        console.log('error in adding dojo', error);
+        await client.query('ROLLBACK')
+        res.sendStatus(500)
+      } finally {
+        await client.release();
+      }
 });
 
 // DELETE a dojo

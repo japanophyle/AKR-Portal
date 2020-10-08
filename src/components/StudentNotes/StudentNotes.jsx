@@ -103,6 +103,5 @@ function StudentNotes(props) {
             </Dialog>
         </div>
     );
-}
- 
+
 export default connect(mapStoreToProps)(StudentNotes);
