@@ -57,9 +57,9 @@ function InactiveMembers(props) {
     }, []);
 
     // function to Activate a user
-    const handleActivateUser = (id) => {
-        console.log(id);
-        props.dispatch({ type: 'ACTIVATE_USER', payload: {id: id} })
+    const handleActivateUser = (member) => {
+        console.log(member);
+        props.dispatch({ type: 'ACTIVATE_USER', payload: member })
     }
 
     const classes = useStyles();
@@ -89,7 +89,7 @@ function InactiveMembers(props) {
                                                 {member.auth_level === 0
                                                     ?
                                                     <Button
-                                                        onClick={() => handleActivateUser(member.user_id)}
+                                                        onClick={() => handleActivateUser(member)}
                                                     >
                                                         Activate
                                                     </Button>

@@ -25,13 +25,14 @@ function* getInactiveUsers(action) {
 
 // activate user saga
 function* activateUser(action) {
+    const id = {id : action.payload.user_id}
     console.log(`in activateUser ${action.payload.id}`);
     
     try {
-        yield axios.put('/api/members/activate', action.payload)
+        yield axios.put('/api/members/activate', id)
         //reset dojo list view
-        yield put({type: 'GET_ACTIVE_USERS'});
-        yield put({type: 'GET_INACTIVE_USERS'});
+        yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
+        yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
     } catch (err) {
         console.log('error in activateUser', err)
     }
@@ -39,13 +40,14 @@ function* activateUser(action) {
 
 //deactivate user saga
 function* deactivateUser(action) {
-    console.log(`in activateUser ${action.payload.id}`);
+    const id = {id : action.payload.user_id}
+    console.log(`in activateUser ${id}`);
     
     try {
-        yield axios.put('/api/members/deactivate', action.payload)
+        yield axios.put('/api/members/deactivate', id)
         //reset dojo view
-        yield put({type: 'GET_ACTIVE_USERS'});
-        yield put({type: 'GET_INACTIVE_USERS'});
+        yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
+        yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
     } catch (err) {
         console.log('error in activateUser', err)
     }

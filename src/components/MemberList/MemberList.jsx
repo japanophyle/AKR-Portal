@@ -13,15 +13,21 @@ function MemberList(props) {
   const [activeHeading, setActiveHeading] = useState('Current Members');
   const [inactiveHeading, setInactiveHeading] = useState('Non-Active Members');
 
-  useEffect(() => {
-    const id = props.match.params.id
-    props.dispatch({ type: 'GET_ACTIVE_USERS', payload: id })
-    
-  }, [])
+  //get active members by dojo id
 
   useEffect(() => {
     const id = props.match.params.id
-    props.dispatch({ type: 'GET_INACTIVE_USERS', payload: id })
+    props.dispatch({ type: 'GET_ACTIVE_USERS', payload: id })
+
+  }, [])
+
+
+  // get inactive members by dojo id
+
+  useEffect(() => {
+    const id = props.match.params.id
+      props.dispatch({ type: 'GET_INACTIVE_USERS', payload: id })
+
   }, [])
 
 

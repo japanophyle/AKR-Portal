@@ -62,9 +62,9 @@ function ActiveMembers(props) {
     }, []);
 
     // function to deactivate a user
-    const handleDeactiveUser = (id) => {
-        console.log(`deactivate ${id}`);
-        props.dispatch({ type: 'DEACTIVATE_USER', payload: { id: id } })
+    const handleDeactivateMember = (member) => {
+        console.log(`deactivate ${member}`);
+        props.dispatch({ type: 'DEACTIVATE_USER', payload: member })
     }
 
     const classes = useStyles();
@@ -102,7 +102,7 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">
                                                 {member.auth_level > 0 &&
                                                     <Button
-                                                        onClick={() => handleDeactiveUser(member.user_id)}
+                                                        onClick={() => handleDeactivateMember(member)}
                                                     >
                                                         Deactivate
                                                     </Button>
