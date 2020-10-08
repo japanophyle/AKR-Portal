@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
-
+import EditIcon from '@material-ui/icons/Edit';
 // dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
 
@@ -60,7 +60,7 @@ function UserName(props) {
                 <h1>Name</h1>
               </Grid>
               <Grid item xs={1}>
-                <Button onClick={handleDateChange}>Edit</Button>
+                <EditIcon fontSize="large" onClick={handleDateChange} />
               </Grid>
             </Grid>
             <Grid container>

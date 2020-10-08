@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
+import EditIcon from '@material-ui/icons/Edit';
 
 // dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
@@ -86,7 +87,7 @@ function UserKyudo(props) {
                                 <h1>Kyudo Information</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Button onClick={handleDateChange}>Edit</Button>
+                            <EditIcon fontSize="large" onClick={handleDateChange} />
                             </Grid>
                         </Grid>
                         <Typography variant="h6">

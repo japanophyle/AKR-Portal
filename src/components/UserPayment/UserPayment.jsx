@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
+import EditIcon from '@material-ui/icons/Edit';
 
 // dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
@@ -63,7 +64,7 @@ function UserPayment(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {props.store.user.auth_level > 5 &&
-                                    <Button onClick={handleDateChange}>Edit</Button>
+                                    <EditIcon fontSize="large" onClick={handleDateChange} />
                                 }
                             </Grid>
                         </Grid>
@@ -88,7 +89,7 @@ function UserPayment(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
+                                <EditInfoSuccessDialog handleDateChange={handleDateChange} />
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
