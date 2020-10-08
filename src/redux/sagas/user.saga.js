@@ -28,16 +28,15 @@ function* fetchUser() {
 // and storing it in a reducer
 function* fetchUserInfo(action) {
   try {
-    // setting our response to what 
-    console.log('testing testing', action.payload)
     const response = yield axios.get(`/api/user/profile/${action.payload}`)
     console.log('response from get info:', response.data);
-    yield put({ type: 'SET_USER_INFO', payload: response.data });
-
-    //store same data in a edit reducer for the userinfo edits
-    yield put({ type: 'SET_EDIT_USER_INFO', payload: response.data });
-
-
+    if (response.data === 'unauthorized') {
+      // this is what we do in that case
+    } else {
+      yield put({ type: 'SET_USER_INFO', payload: response.data });
+      //store same data in a edit reducer for the userinfo edits
+      yield put({ type: 'SET_EDIT_USER_INFO', payload: response.data });
+    }
   } catch (error) {
     console.log('User info get request failed', error);
   }
