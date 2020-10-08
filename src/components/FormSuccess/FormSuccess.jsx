@@ -1,7 +1,7 @@
 import React from 'react';
-import { TextareaAutosize, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core/';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core/';
 
-export default function FormSuccess() {
+export default function FormSuccess(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -12,9 +12,11 @@ export default function FormSuccess() {
         setOpen(false);
     };
 
+    
+
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            <Button type="submit" variant="contained" color="primary" onClick={handleClickOpen}>
                 Submit
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >

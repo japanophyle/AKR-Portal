@@ -57,7 +57,7 @@ function* updateUserData(action) {
   try {
     console.log('updating user_data: ', action.payload);
     // PUT request for the edit changes 
-    yield axios.put('/api/user', action.payload)
+    yield axios.put('/api/user/edit', action.payload)
     //GET the new data that data! 
     yield put({ type: 'FETCH_USER_INFO' })
   } catch (error) {
