@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 
+// dialog for save success
+import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
+
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
@@ -95,7 +98,7 @@ function UserName(props) {
               </Grid>
               <Grid item xs={1}>
                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                <Button onClick={handleSaveEdit}>Save</Button>
+                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                 <Button onClick={handleDateReset}>Cancel</Button>
               </Grid>

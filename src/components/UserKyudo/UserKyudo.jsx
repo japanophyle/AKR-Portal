@@ -4,6 +4,9 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
 
+// dialog for save success
+import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
+
 // LIST OF ALL STUDENT RANKS FOR SELECT BELOW 
 const ranks =
     [
@@ -118,7 +121,7 @@ function UserKyudo(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <Button onClick={handleSaveEdit}>Save</Button>
+                                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
