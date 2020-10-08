@@ -31,7 +31,7 @@ import NewUserRegistrationForm from '../NewUserRegistrationForm/NewUserRegistrat
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
-    this.props.dispatch({ type: 'GET_RANKS' });
+    // this.props.dispatch({ type: 'GET_RANKS' });
     this.props.dispatch({ type: 'GET_DOJOS' });
   }
 
