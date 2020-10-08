@@ -22,6 +22,9 @@ import {
     Button,
 } from '@material-ui/core';
 
+// IMPORT DIALOG
+import NotesDialog from '../StudentNotes/StudentNotes'
+
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -58,9 +61,10 @@ function ActiveMembers(props) {
 
     }, []);
 
-    // function to activate a user
-    const handleActiveUser = (event) => {
-
+    // function to deactivate a user
+    const handleDeactiveUser = (id) => {
+        console.log(`deactivate ${id}`);
+        props.dispatch({ type: 'DEACTIVATE_USER', payload: { id: id } })
     }
 
     const classes = useStyles();
@@ -97,7 +101,11 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">Dues Paydate</StyledTableCell>
                                             <StyledTableCell align="center">
                                                 {member.auth_level > 0 &&
-                                                    <Button>Deactivate</Button>
+                                                    <Button
+                                                        onClick={() => handleDeactiveUser(member.user_id)}
+                                                    >
+                                                        Deactivate
+                                                    </Button>
                                                 }
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
@@ -108,13 +116,17 @@ function ActiveMembers(props) {
                                                 </Tooltip>
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
-                                                <Tooltip title="Add Note" placement="left">
+
+                                                {/* STUDENT NOTES DIALOG */}
+                                                <NotesDialog />
+
+                                                {/* <Tooltip title="Add Note" placement="left">
                                                     <IconButton>
                                                         <NoteAddIcon
                                                             color="primary"
                                                         ></NoteAddIcon>
                                                     </IconButton>
-                                                </Tooltip>
+                                                </Tooltip> */}
                                                 {member.notes || member.equipment_checkout ?
                                                     <Tooltip title="Instructor Notes" placement="left">
                                                         <IconButton>

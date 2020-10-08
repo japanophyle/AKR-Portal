@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
         await client.query('COMMIT');
         res.sendStatus(201)
     }  catch (error) {
-        console.log(error);
+        console.log('error in rank router post', error);
         await client.query('ROLLBACK')
         res.sendStatus(500)
       } finally {

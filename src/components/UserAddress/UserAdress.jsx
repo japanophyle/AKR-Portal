@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 
 // dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
@@ -61,7 +62,7 @@ function UserAddress(props) {
                 <h1>Address</h1>
               </Grid>
               <Grid item xs={1}>
-                <Button onClick={handleDateChange}>Edit</Button>
+              <EditIcon fontSize="large" onClick={handleDateChange} />
               </Grid>
             </Grid>
             <Typography variant="h6">
@@ -82,6 +83,7 @@ function UserAddress(props) {
         :
         <Card>
           {/* IF the state is FALSE this You can edit */}
+          <form  onSubmit={handleSaveEdit} >
           <CardContent>
             <Grid container>
               <Grid item xs={11}>
@@ -108,7 +110,7 @@ function UserAddress(props) {
               <br />
               {/* Address 2 */}
               <TextField
-                required
+                
                 id="address_2"
                 label="Address line 2"
                 defaultValue={props.store.info.address_2}
@@ -156,6 +158,7 @@ function UserAddress(props) {
               />
             </Typography>
           </CardContent>
+          </form>
         </Card>
       }
     </div>
