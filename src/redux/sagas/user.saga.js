@@ -44,6 +44,7 @@ function* fetchUserInfo() {
 
 // Saga for posting a new user's info to DB
 function* createUser(action) {
+  console.log('posting new student: ', action.payload);
   try {
     console.log('posting new student: ', action.payload);
     yield axios.post('/api/user/profile', action.payload)
