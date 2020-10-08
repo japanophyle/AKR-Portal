@@ -158,9 +158,11 @@ class NewUserForm extends Component {
                 }
                 <Grid container justify="center">
                   <Grid item>
+
                     
                   {/* Dialog button/popup */}
                   <FormSuccess/>
+
 
                   </Grid>
                 </Grid>
