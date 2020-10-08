@@ -7,8 +7,7 @@ function EditInfoSuccessDialog(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
-        // props.handleSaveEdit();
-        setOpen(true);
+        // setOpen(true);
     };
 
     const handleClose = () => {
@@ -30,8 +29,8 @@ function EditInfoSuccessDialog(props) {
 
     return (
         <div>
-            <Button type="submit" variant="contained" color="primary" onClick={handleSaveEdit}>
-                Save
+            <Button type="submit" variant="contained" color="primary" onClick={handleClickOpen}>
+                Submit
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
                 <DialogContent>

@@ -89,6 +89,7 @@ function UserName(props) {
         </Card>
         :
         <Card>
+          <form  onSubmit={handleSaveEdit} >
           {/* IF the state is FALSE this You can edit */}
 
           <CardContent>
@@ -160,6 +161,7 @@ function UserName(props) {
               </Grid>
             </Grid>
           </CardContent>
+          </form>
         </Card>
       }
     </div>

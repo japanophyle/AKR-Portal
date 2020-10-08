@@ -74,6 +74,7 @@ function UserContact(props) {
                 :
                 <Card>
                     {/* IF the state is FALSE this You can edit */}
+                    <form  onSubmit={handleSaveEdit} >
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -109,6 +110,7 @@ function UserContact(props) {
                             />
                         </Typography>
                     </CardContent>
+                    </form>
                 </Card>
             }
         </div>

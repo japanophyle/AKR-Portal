@@ -51,7 +51,7 @@ class UserPage extends Component {
         <button onClick={() => this.getMyDojo()}
         >Get My Dojo</button>
           <Container>
-
+          
 
           {/* Edit user name data component */}
           <UserName />
@@ -73,7 +73,6 @@ class UserPage extends Component {
 
 
           <UserPayment />
-
         </Container>
       </div>
     )

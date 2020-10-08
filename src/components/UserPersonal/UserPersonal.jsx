@@ -82,6 +82,7 @@ function UserPersonal(props) {
                 :
                 <Card>
                     {/* IF the state is FALSE this You can edit */}
+                    <form  onSubmit={handleSaveEdit} >
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -97,7 +98,6 @@ function UserPersonal(props) {
                         <Typography variant="h6">
                             {/* citizanship */}
                             <TextField
-                                required
                                 id="citizenship"
                                 label="Citizenship"
                                 defaultValue={props.store.info.citizenship}
@@ -122,6 +122,9 @@ function UserPersonal(props) {
                             {/* calculated using moment DIFF() operation using the date of birth */}
                             Age: {moment().diff(props.store.info.date_of_birth, 'years')}
 
+                            <br />
+                            <br /> 
+
                             {/* gender */}
                             <TextField
                                 required
@@ -133,6 +136,7 @@ function UserPersonal(props) {
                             />
                         </Typography>
                     </CardContent>
+                    </form>
                 </Card>
             }
         </div>
