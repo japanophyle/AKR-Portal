@@ -114,6 +114,7 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
     .query(queryText, [req.user.id])
     .then(response => {
       console.log('/api/user/profile get response:', response.rows[0]);
+      // GET routes don't send res.sendStatuses
       res.send(response.rows[0])
     })
     .catch(error => {

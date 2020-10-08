@@ -6,6 +6,7 @@ import info from './info.reducer';
 import editInfo from './infoEdit.reducer'
 import dojos from './dojos.reducer';
 import members from './members.reducer';
+import myDojo from './myDojo.reducer';
 
 
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   dojos, // will have the dojo names, ids, and region ids
   members,
   editInfo, // for editing info on a sepecific user
+  myDojo, // holds names and ranks of the current user's dojo
 });
 
 export default rootReducer;

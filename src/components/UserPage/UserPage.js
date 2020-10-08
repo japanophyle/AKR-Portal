@@ -24,15 +24,34 @@ class UserPage extends Component {
     })
   }
 
-  render() {
-    return (
-      <div>
-        <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+
+  getMyDojo = () => {
+    console.log('Getting "my dojo"')
+    this.props.dispatch({
+      type: "GET_MY_DOJO"
+    })
+
+  }
+  
+
+    componentDidMount = () => {
+      console.log('gonna get the profile');
+      this.props.dispatch({
+        type: "FETCH_USER_INFO",
+      })
+    }
+
+    render() {
+      return (
+        <div>
+  <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
         <p>Your ID is: {this.props.store.user.id}</p>
         <p>Your name is: {this.props.store.info.fname} {this.props.store.info.lname}</p>
         <LogOutButton className="log-in" />
-       
-        <Container>
+        <button onClick={() => this.getMyDojo()}
+        >Get My Dojo</button>
+          <Container>
+
 
           {/* Edit user name data component */}
           <UserName />
