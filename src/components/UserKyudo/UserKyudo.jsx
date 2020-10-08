@@ -29,10 +29,18 @@ function UserKyudo(props) {
 
     // State used to toggle the edit button on and off
     const [nameEdit, toggleNameEdit] = useState(true);
+    const [moreEdit, toggleMoreEdit] = useState(true);
+    const [teacherEdit, toggleTeacher] = useState(true);
 
-    // function used to toggle edit and non edit views
+    // functions used to toggle edit and non edit views
     const handleDateChange = (date) => {
         toggleNameEdit(!nameEdit);
+    };
+    const handleMoreChange = (date) => {
+        toggleMoreEdit(!moreEdit);
+    };
+    const handleTeacherChange = (date) => {
+        toggleTeacher(!teacherEdit);
     };
 
     // function that dispatches to the edit reducer whenever an edit is made to an input
@@ -62,7 +70,9 @@ function UserKyudo(props) {
             {
                 type: 'FETCH_USER_INFO'
             });
-        handleDateChange()
+            toggleNameEdit(true)
+            toggleMoreEdit(true)
+            toggleTeacher(true)
     }
 
     // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
@@ -73,7 +83,9 @@ function UserKyudo(props) {
                 type: 'UPDATE_USER_DATA',
                 payload: props.store.editInfo
             })
-        handleDateChange()
+            toggleNameEdit(true)
+            toggleMoreEdit(true)
+            toggleTeacher(true)
     };
 
     return (
@@ -84,7 +96,7 @@ function UserKyudo(props) {
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
-                                <h1>Kyudo Information</h1>
+                                <h1>Kyudo Student Rank</h1>
                             </Grid>
                             <Grid item xs={1}>
                             <EditIcon fontSize="large" onClick={handleDateChange} />
@@ -94,21 +106,8 @@ function UserKyudo(props) {
                             Current Student Rank: {props.store.info.student_rank}
                             <br />
                             Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
-                            <br />
-                            Current Teacher Rank: {props.store.info.teaching_rank}
-                            <br />
-                            Date Reached: {moment(props.store.info.date_teaching_rank).format('MM-DD-YYYY')}
-                            <br />
-                            Years Practiced: {props.store.info.years_practice}
-                            <br />
-                            Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('MM-DD-YYYY')}
-                            <br />
-
-                            {/* rank history goes here */}
-
-                            IKYF Member Number: {props.store.info.ikyf}
-                            <br />
-                            USA Archery Member ID: {props.store.info.usa_archery_id}
+                            
+                            
                         </Typography>
                     </CardContent>
                 </Card>
@@ -119,7 +118,7 @@ function UserKyudo(props) {
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
-                                <h1>Kyudo Information</h1>
+                                <h1>Kyudo Student Rank</h1>
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
@@ -131,7 +130,7 @@ function UserKyudo(props) {
                         <Typography variant="h6">
                             {/* Student rank */}
                             <FormControl variant="outlined">
-                                <InputLabel>Current Kyudo Rank</InputLabel>
+                                <InputLabel>Kyudo Student Rank</InputLabel>
                                 <Select
                                     width="50px"
                                     id="student_rank"
@@ -159,8 +158,51 @@ function UserKyudo(props) {
                                 variant="outlined"
                                 onChange={handleEditChange}
                             />
+                        
+                        </Typography>
+                    </CardContent>
+                    </form>
+                </Card>
+            }
+
+            {teacherEdit ?
+                <Card>
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={11}>
+                                <h1>Kyudo Teaching Rank</h1>
+                            </Grid>
+                            <Grid item xs={1}>
+                            <EditIcon fontSize="large" onClick={handleTeacherChange} />
+                            </Grid>
+                        </Grid>
+                        <Typography variant="h6">
+                          
+                            Current Teacher Rank: {props.store.info.teaching_rank}
                             <br />
-                            <br />
+                            Date Reached: {moment(props.store.info.date_teaching_rank).format('MM-DD-YYYY')}
+                            
+                        </Typography>
+                    </CardContent>
+                </Card>
+                :
+                <Card>
+                    {/* IF the state is FALSE this You can edit */}
+                    <form  onSubmit={handleSaveEdit} >
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={11}>
+                                <h1>Kyudo Teaching Rank</h1>
+                            </Grid>
+                            <Grid item xs={1}>
+                                {/* THis button will dispatch all changed to the PUT saga/reducer */}
+                                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
+                                {/* cancel will turn the values in the edit reducer back to original info reducer */}
+                                <Button onClick={handleDateReset}>Cancel</Button>
+                            </Grid>
+                        </Grid>
+                        <Typography variant="h6">
+                            
                             {/* teacher rank */}
                             <FormControl variant="outlined" >
                                 <InputLabel>Teaching Rank</InputLabel>
@@ -191,8 +233,55 @@ function UserKyudo(props) {
                                 variant="outlined"
                                 onChange={handleEditChange}
                             />
+                            
+                        </Typography>
+                    </CardContent>
+                    </form>
+                </Card>
+            }
+            {moreEdit ?
+                <Card>
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={11}>
+                                <h1>More Kyudo Information</h1>
+                            </Grid>
+                            <Grid item xs={1}>
+                            <EditIcon fontSize="large" onClick={handleMoreChange} />
+                            </Grid>
+                        </Grid>
+                        <Typography variant="h6">
+                            
+                            Years Practiced: {props.store.info.years_practice}
                             <br />
+                            Date Began Kyudo: {moment(props.store.info.date_began_kyudo).format('MM-DD-YYYY')}
                             <br />
+
+                            {/* rank history goes here */}
+
+                            IKYF Member Number: {props.store.info.ikyf}
+                            <br />
+                            USA Archery Member ID: {props.store.info.usa_archery_id}
+                        </Typography>
+                    </CardContent>
+                </Card>
+                :
+                <Card>
+                    {/* IF the state is FALSE this You can edit */}
+                    <form  onSubmit={handleSaveEdit} >
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={11}>
+                                <h1>More Kyudo Information</h1>
+                            </Grid>
+                            <Grid item xs={1}>
+                                {/* THis button will dispatch all changed to the PUT saga/reducer */}
+                                <EditInfoSuccessDialog handleDateChange={handleMoreChange}/>
+                                {/* cancel will turn the values in the edit reducer back to original info reducer */}
+                                <Button onClick={handleDateReset}>Cancel</Button>
+                            </Grid>
+                        </Grid>
+                        <Typography variant="h6">
                             {/* years of practice */}
                             <TextField
                                 
