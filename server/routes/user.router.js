@@ -97,30 +97,82 @@ router.post('/profile', rejectUnauthenticated, async (req, res) => {
       )
 });
 
-// CURRENTLY-LOGGED-IN USER_DATA GET
-router.get('/profile', rejectUnauthenticated, (req, res) => {
-  queryText = `
-  SELECT
-  "user".username,
-  "user_data".*,
-  "dojo".region_name,
-  "dojo".dojo_name
-  FROM "user"
-  JOIN "user_data" ON "user".id = "user_data".user_id
-  JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-  WHERE "user".id = $1
-  `;
-  pool
-    .query(queryText, [req.user.id])
-    .then(response => {
-      console.log('/api/user/profile get response:', response.rows[0]);
-      // GET routes don't send res.sendStatuses
-      res.send(response.rows[0])
-    })
-    .catch(error => {
-      console.log('error in /api/user/profile get:', error);
-      res.sendStatus(500);
-    })
+
+// USER_DATA GET
+// This Route serves to either get the current-user's user_data
+// (in the case that :id is 'user')
+// Or to get a specific member's,
+// selected by admin in the member list and sent as an integer
+// in :id
+router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
+  let userToGet = req.params.id;
+  const client = await pool.connect();
+  const queryText = `
+    SELECT
+    "user".username,
+    "user_data".*,
+    "dojo".region_name,
+    "dojo".dojo_name
+    FROM "user"
+    JOIN "user_data" ON "user".id = "user_data".user_id
+    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+    WHERE "user".id = $1
+    `;
+  // If the user is just getting their own info
+  if (userToGet === 'user') {
+    console.log('userToGet = ', userToGet);
+    userToGet = req.user.id
+    // just do the regular thing
+      pool
+      .query(queryText, [userToGet])
+        .then(response => {
+          console.log('/api/user/profile get response:', response.rows[0]);
+          // GET routes don't send res.sendStatuses
+          res.send(response.rows[0])
+        })
+        .catch(error => {
+          console.log('error in /api/user/profile get:', error);
+          res.sendStatus(500);
+        })
+  // else if the user is getting another user's info...
+  } else if (Number.isInteger( Number(userToGet) )) {
+    userToGet = Number(userToGet);
+    // console.log(`${userToGet} times 2 is ${userToGet + userToGet}`);
+    // get their auth level from DB first
+    // if it's high enough, then proceed to get
+    // the desired user's data,
+    // if not, then kick them out... (how?)
+    let userData = [];
+    try {
+      const firstQuery = `
+        SELECT "user".auth_level FROM "user"
+        WHERE "user".id = $1;
+      `;
+      const secondQuery = `
+      `;
+      await client.query('BEGIN');
+      let authLevel = await client.query(firstQuery, [req.user.id]);
+      authLevel = authLevel.rows[0].auth_level;
+      if (authLevel === 10 || authLevel === 15 || authLevel === 20) {
+        userData = await client.query(queryText, [userToGet])
+      } else {
+        console.log('unauthorized');
+        await client.query('ROLLBACK')
+        res.send('unauthorized');
+      }
+      await client.query('COMMIT');
+      res.send(userData.rows[0])
+    } catch (error) {
+      console.log('error getting member\'s data', error)
+      await client.query('ROLLBACK')
+      res.sendStatus(500)
+    } finally {
+      await client.release();
+    }
+  } else {
+    console.log('invalid req.param value');
+    userToGet = NaN;
+  }
 });
 
 // END NEW-CODE ====

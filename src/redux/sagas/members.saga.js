@@ -21,9 +21,39 @@ function* getInactiveUsers() {
     }
 }
 
+// activate user saga
+function* activateUser(action) {
+    console.log(`in activateUser ${action.payload.id}`);
+    
+    try {
+        yield axios.put('/api/members/activate', action.payload)
+        //reset dojo list view
+        yield put({type: 'GET_ACTIVE_USERS'});
+        yield put({type: 'GET_INACTIVE_USERS'});
+    } catch (err) {
+        console.log('error in activateUser', err)
+    }
+};
+
+//deactivate user saga
+function* deactivateUser(action) {
+    console.log(`in activateUser ${action.payload.id}`);
+    
+    try {
+        yield axios.put('/api/members/deactivate', action.payload)
+        //reset dojo view
+        yield put({type: 'GET_ACTIVE_USERS'});
+        yield put({type: 'GET_INACTIVE_USERS'});
+    } catch (err) {
+        console.log('error in activateUser', err)
+    }
+};
+
 function* membersSaga() {
     yield takeLatest('GET_ACTIVE_USERS', getActiveUsers);
     yield takeLatest('GET_INACTIVE_USERS', getInactiveUsers);
+    yield takeLatest('ACTIVATE_USER', activateUser); 
+    yield takeLatest('DEACTIVATE_USER', deactivateUser);
 }
 
 export default membersSaga;
