@@ -21,6 +21,7 @@ class UserPage extends Component {
     console.log('gonna get the profile');
     this.props.dispatch({
       type: "FETCH_USER_INFO",
+      payload: "user"
     })
   }
 
@@ -32,14 +33,6 @@ class UserPage extends Component {
     })
 
   }
-  
-
-    componentDidMount = () => {
-      console.log('gonna get the profile');
-      this.props.dispatch({
-        type: "FETCH_USER_INFO",
-      })
-    }
 
     render() {
       return (
@@ -51,7 +44,7 @@ class UserPage extends Component {
         <button onClick={() => this.getMyDojo()}
         >Get My Dojo</button>
           <Container>
-
+          
 
           {/* Edit user name data component */}
           <UserName />
@@ -73,13 +66,11 @@ class UserPage extends Component {
 
 
           <UserPayment />
-
         </Container>
       </div>
     )
   }
 }
-
 
 // this allows us to use <App /> in index.js
 export default connect(mapStoreToProps)(UserPage)
