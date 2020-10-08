@@ -64,7 +64,7 @@ function StudentNotes(props) {
                 <DialogContent>
                     {/* Textfield that can edit the student notes */}
                     <TextField
-                        id="equipment_checkout"
+                        id="notes"
                         label="Student Notes"
                         fullWidth
                         placeholder="Placeholder"
