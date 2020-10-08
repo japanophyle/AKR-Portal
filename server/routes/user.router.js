@@ -159,6 +159,8 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
       "amount_paid" = $29,
       "dues_date"  = $30,
       "dues_method" = $31
+      "notes" = $32
+      equipment_checkout = $33
       WHERE "id" = $3;`;      
   pool.query(queryText, [
     req.body.fname, // $1
@@ -197,7 +199,9 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     req.body.dues_amount, //$28
     req.body.amount_paid, //$29
     req.body.dues_date, // $30
-    req.body.dues_method //$31
+    req.body.dues_method, //$31
+    req.body.notes, // $32
+    req.body.equipment_checkout // $33
 
   ])
   .then(response => {
