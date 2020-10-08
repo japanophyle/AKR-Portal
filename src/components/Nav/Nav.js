@@ -15,6 +15,7 @@ const Nav = (props) => {
     loginLinkData.path = '/user';
     loginLinkData.text = 'Home';
   }
+  
 
   let dojoAdminMemberList = {
     path: `/memberlist/${props.store.info.dojo_id}`,
