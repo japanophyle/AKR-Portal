@@ -22,6 +22,9 @@ import {
     Button,
 } from '@material-ui/core';
 
+// IMPORT DIALOG
+import NotesDialog from '../StudentNotes/StudentNotes'
+
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -108,13 +111,17 @@ function ActiveMembers(props) {
                                                 </Tooltip>
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
-                                                <Tooltip title="Add Note" placement="left">
+
+                                                {/* STUDENT NOTES DIALOG */}
+                                                <NotesDialog />
+
+                                                {/* <Tooltip title="Add Note" placement="left">
                                                     <IconButton>
                                                         <NoteAddIcon
                                                             color="primary"
                                                         ></NoteAddIcon>
                                                     </IconButton>
-                                                </Tooltip>
+                                                </Tooltip> */}
                                                 {member.notes || member.equipment_checkout ?
                                                     <Tooltip title="Instructor Notes" placement="left">
                                                         <IconButton>

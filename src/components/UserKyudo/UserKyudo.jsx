@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
+import EditIcon from '@material-ui/icons/Edit';
 
 // dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
@@ -86,7 +87,7 @@ function UserKyudo(props) {
                                 <h1>Kyudo Information</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Button onClick={handleDateChange}>Edit</Button>
+                            <EditIcon fontSize="large" onClick={handleDateChange} />
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
@@ -114,6 +115,7 @@ function UserKyudo(props) {
                 :
                 <Card>
                     {/* IF the state is FALSE this You can edit */}
+                    <form  onSubmit={handleSaveEdit} >
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -150,7 +152,7 @@ function UserKyudo(props) {
                             {/* date got student rank */}
                             <TextField
                                 type='Date'
-                                required
+                                
                                 id="date_student_rank"
                                 label="Date Earned"
                                 defaultValue={moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}
@@ -182,7 +184,7 @@ function UserKyudo(props) {
                             {/* date of teacher rank */}
                             <TextField
                                 type='Date'
-                                required
+                                
                                 id="date_teaching_rank"
                                 label="Date Earned"
                                 defaultValue={moment(props.store.info.date_teaching_rank).format('YYYY-MM-DD')}
@@ -193,7 +195,7 @@ function UserKyudo(props) {
                             <br />
                             {/* years of practice */}
                             <TextField
-                                required
+                                
                                 id="years_practice"
                                 label="Years of Practice"
                                 defaultValue={props.store.info.years_practice}
@@ -205,7 +207,7 @@ function UserKyudo(props) {
                             {/* date kyudo started for you, why did i phrase it like that ... */}
                             <TextField
                                 type='Date'
-                                required
+                                
                                 id="date_began_kyudo"
                                 label="Date Began Kyudo"
                                 defaultValue={moment(props.store.info.date_began_kyudo).format('YYYY-MM-DD')}
@@ -216,7 +218,7 @@ function UserKyudo(props) {
                             <br />
                             {/* IKYF NUMBER */}
                             <TextField
-                                required
+                                
                                 id="ikyf"
                                 label="IKFY Number"
                                 defaultValue={props.store.info.ikyf}
@@ -227,7 +229,7 @@ function UserKyudo(props) {
                             <br />
                             {/* USA archery Number */}
                             <TextField
-                                required
+                                
                                 id="usa_archery_id"
                                 label="USA archery Number"
                                 defaultValue={props.store.info.usa_archery_id}
@@ -236,6 +238,7 @@ function UserKyudo(props) {
                             />
                         </Typography>
                     </CardContent>
+                    </form>
                 </Card>
             }
         </div>
