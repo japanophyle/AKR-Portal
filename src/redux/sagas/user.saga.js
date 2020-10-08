@@ -26,10 +26,11 @@ function* fetchUser() {
 
 // Saga for retrieving all of the current user's personal info
 // and storing it in a reducer
-function* fetchUserInfo() {
+function* fetchUserInfo(action) {
   try {
     // setting our response to what 
-    const response = yield axios.get('/api/user/profile')
+    console.log('testing testing', action.payload)
+    const response = yield axios.get(`/api/user/profile/${action.payload}`)
     console.log('response from get info:', response.data);
     yield put({ type: 'SET_USER_INFO', payload: response.data });
 
