@@ -21,7 +21,7 @@ class UserPage extends Component {
     console.log('gonna get the profile');
     this.props.dispatch({
       type: "FETCH_USER_INFO",
-      payload: 1
+      payload: "user"
     })
   }
 
