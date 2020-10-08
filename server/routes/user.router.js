@@ -114,8 +114,8 @@ router.get('/profile', rejectUnauthenticated, (req, res) => {
     .query(queryText, [req.user.id])
     .then(response => {
       console.log('/api/user/profile get response:', response.rows[0]);
+      // GET routes don't send res.sendStatuses
       res.send(response.rows[0])
-      // res.sendStatus(200)
     })
     .catch(error => {
       console.log('error in /api/user/profile get:', error);
@@ -141,8 +141,8 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const queryText = `INSERT INTO "user" (username, password)
-    VALUES ($1, $2) RETURNING id`;
+  const queryText = `INSERT INTO "user" (username, password, auth_level)
+    VALUES ($1, $2, 0) RETURNING id`;
   pool
     .query(queryText, [username, password])
     .then(() => res.sendStatus(201))
