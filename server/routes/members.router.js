@@ -35,6 +35,7 @@ router.get('/inactive', (req, res) => {
     JOIN "user_data" ON "user".id = "user_data".user_id
     WHERE "user_data".is_current_member = FALSE OR "user".auth_level = 0;
     `;
+    
     pool
         .query(queryText)
         .then((response) => {
