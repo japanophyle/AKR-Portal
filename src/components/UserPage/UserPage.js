@@ -16,53 +16,14 @@ import UserPayment from '../UserPayment/UserPayment'
 class UserPage extends Component {
 
   // this component doesn't do much to start, just renders some user info to the DOM
-  
- 
 
-  postNewUser = () => {
-    // function for testing new user POST
-    console.log('gonna post a new user');
+  componentDidMount = () => {
+    console.log('gonna get the profile');
     this.props.dispatch({
-      type: "CREATE_USER",
-      payload: {
-        dues_date : null,
-        id : 7,
-        lname : "Aagaard",
-        country : "USA",
-        // -- "usa_archery_id" : null,
-        state : "MN",
-        // -- "lname_japanese" : null,
-        zipcode : 55408,
-        // -- "amount_paid" : null,
-        phone_number : 1231231234,
-        fname : "Emerson",
-        // -- "fname_japanese" : null,
-        // -- "dues_method" : null,
-        date_of_birth : "1991-03-06",
-        // -- "is_current_member" : null,
-        // -- "date_teaching_rank" : null,
-        email : "my.email@gmail.com",
-        address_1 : "123 Fake Street",
-        // -- "date_student_rank" : null,
-        city : "Minneapolis",
-        dojo_id : 1,
-        student_rank : "Shodan",
-        // -- "dues_amount" : null,
-        // -- "years_practice" : null,
-        user_id : 1,
-        gender : "M",
-        address_2 : "Apt 3",
-        // -- "age" : null,
-        // -- "ikyf" : null,
-        // -- "date_began_kyudo" : null,
-        // -- "citizenship" : null,
-        // -- "teaching_rank" : null,
-        // -- "notes" : null,
-        // -- "equipment_checkout" : null,
-        // -- "include_for_akr" : null
-      }
+      type: "FETCH_USER_INFO",
     })
   }
+
 
   getMyDojo = () => {
     console.log('Getting "my dojo"')
@@ -91,32 +52,33 @@ class UserPage extends Component {
         >Get My Dojo</button>
           <Container>
 
+
           {/* Edit user name data component */}
-            <UserName />
+          <UserName />
 
           {/* Edit user Contact data component */}
-            <UserContact />
+          <UserContact />
 
           {/* Edit user Address data component */}
-            <UserAddress /> 
+          <UserAddress />
 
           {/* Edit user Personal data component */}
-            <UserPersonal />
+          <UserPersonal />
 
           {/* Edit user Kyudo data component */}
-            <UserKyudo />
+          <UserKyudo />
 
           {/* Edit user Payment data data component */}
           {/* Needs to have diff views depending on the admin level of the user */}
 
-          
+
           <UserPayment />
 
-          </Container>
-        </div>
-      )
-    }
+        </Container>
+      </div>
+    )
   }
+}
 
 
 // this allows us to use <App /> in index.js

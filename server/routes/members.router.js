@@ -27,13 +27,15 @@ router.get('/active', rejectUnauthenticated, (req, res) => {
 });
 
 // GET ALL INACTIVE MEMBERS
-router.get('/active', rejectUnauthenticated, (req, res) => {
+
+router.get('/inactive', rejectUnauthenticated, (req, res) => {
+
     const queryText = `
     SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
     JOIN "user_data" ON "user".id = "user_data".user_id
-    WHERE "user_data".is_current_member = FALSE
-    OR "user".auth_level = 0;
+    WHERE "user_data".is_current_member = FALSE OR "user".auth_level = 0;
     `;
+    
     pool
         .query(queryText)
         .then((response) => {

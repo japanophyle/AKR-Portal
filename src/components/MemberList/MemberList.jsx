@@ -1,73 +1,38 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import ActiveMembers from './ActiveMembers';
+import InactiveMembers from './InactiveMembers';
 
-//MATERIAL-UI
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
 
 function MemberList(props) {
 
-  const classes = useStyles();
+  const [activeHeading, setActiveHeading] = useState('Current Members');
+  const [inactiveHeading, setInactiveHeading] = useState('Non-Active Members');
 
-  const [heading, setHeading] = useState('Admins only');
+  
+
+  
 
   return (
     <div>
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="center">Name</StyledTableCell>
-              <StyledTableCell align="center">Rank</StyledTableCell>
-              <StyledTableCell align="center">Role</StyledTableCell>
-              <StyledTableCell align="center">Dues</StyledTableCell>
-              <StyledTableCell align="center">Dues Paydate</StyledTableCell>
-              <StyledTableCell align="center">Status</StyledTableCell>
-              <StyledTableCell align="center">More</StyledTableCell>
-              <StyledTableCell align="center">Notes</StyledTableCell>
-              {props.store.user.auth_level >= 20 &&
-                <StyledTableCell align="center">Remove</StyledTableCell>
-              }
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Grid container justify="center">
+        <Grid item>
+          <h3>{activeHeading}</h3>
+
+        </Grid>
+      </Grid>
+      <ActiveMembers />
+      <Grid container justify="center">
+        <Grid item>
+          <h3>{inactiveHeading}</h3>
+
+        </Grid>
+      </Grid>
+      <InactiveMembers />
     </div>
   );
 }
