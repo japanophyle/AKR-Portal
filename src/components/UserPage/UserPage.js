@@ -21,6 +21,7 @@ class UserPage extends Component {
     console.log('gonna get the profile');
     this.props.dispatch({
       type: "FETCH_USER_INFO",
+      payload: "user"
     })
   }
 
@@ -32,7 +33,7 @@ class UserPage extends Component {
     })
 
   }
-  
+
     render() {
       return (
         <div>
