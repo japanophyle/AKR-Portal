@@ -70,8 +70,6 @@ function ActiveMembers(props) {
 
     return (
         <div>
-                                                            <NotesDialog />
-
             <Grid container justify="center" alignItems="center">
                 <Grid item xs={12} align="center">
                     <TableContainer component={Paper} className={classes.table}>
@@ -117,13 +115,13 @@ function ActiveMembers(props) {
                                                 {/* STUDENT NOTES DIALOG */}
                                                 <NotesDialog />
 
-                                                <Tooltip title="Add Note" placement="left">
+                                                {/* <Tooltip title="Add Note" placement="left">
                                                     <IconButton>
                                                         <NoteAddIcon
                                                             color="primary"
                                                         ></NoteAddIcon>
                                                     </IconButton>
-                                                </Tooltip>
+                                                </Tooltip> */}
                                                 {member.notes || member.equipment_checkout ?
                                                     <Tooltip title="Instructor Notes" placement="left">
                                                         <IconButton>
