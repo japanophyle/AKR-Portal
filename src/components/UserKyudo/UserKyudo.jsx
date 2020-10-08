@@ -4,6 +4,9 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
 import moment from 'moment';
 
+// dialog for save success
+import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
+
 // LIST OF ALL STUDENT RANKS FOR SELECT BELOW 
 const ranks =
     [
@@ -91,9 +94,9 @@ function UserKyudo(props) {
                             <br />
                             Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
                             <br />
-                            Current Teacher Rank: {props.store.info.teacher_rank}
+                            Current Teacher Rank: {props.store.info.teaching_rank}
                             <br />
-                            Date Reached: {moment(props.store.info.date_teacher_rank).format('MM-DD-YYYY')}
+                            Date Reached: {moment(props.store.info.date_teaching_rank).format('MM-DD-YYYY')}
                             <br />
                             Years Practiced: {props.store.info.years_practice}
                             <br />
@@ -118,7 +121,7 @@ function UserKyudo(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <Button onClick={handleSaveEdit}>Save</Button>
+                                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
@@ -128,9 +131,11 @@ function UserKyudo(props) {
                             <FormControl variant="outlined">
                                 <InputLabel>Current Kyudo Rank</InputLabel>
                                 <Select
+                                    width="50px"
                                     id="student_rank"
                                     name="student_rank"
                                     label="Current Kyudo Rank"
+                                    defaultValue={props.store.info.student_rank}
                                     onChange={(event) => name(event)}
                                 >
                                     {ranks.map((rank, id) => {
@@ -156,11 +161,13 @@ function UserKyudo(props) {
                             <br />
                             {/* teacher rank */}
                             <FormControl variant="outlined" >
-                                <InputLabel>Current Teaching Rank</InputLabel>
+                                <InputLabel>Teaching Rank</InputLabel>
                                 <Select
-                                    id="teacher_rank"
-                                    label="Current Teaching Rank"
-                                    name="teacher_rank"
+                                    id="teaching_rank"
+                                    label="Teaching Rank"
+                                    name="teaching_rank"
+                                    width="70px"
+                                    defaultValue={props.store.info.teaching_rank}
                                     onChange={(event) => name(event)}
                                 >
                                     {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
@@ -176,9 +183,9 @@ function UserKyudo(props) {
                             <TextField
                                 type='Date'
                                 required
-                                id="date_teacher_rank"
+                                id="date_teaching_rank"
                                 label="Date Earned"
-                                defaultValue={moment(props.store.info.date_teacher_rank).format('YYYY-MM-DD')}
+                                defaultValue={moment(props.store.info.date_teaching_rank).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
                             />
