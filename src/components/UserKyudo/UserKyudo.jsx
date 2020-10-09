@@ -177,11 +177,11 @@ function UserKyudo(props) {
                                 <h1>Kyudo Teaching Rank</h1>
                             </Grid>
                             <Grid item xs={1}>
-                            <Tooltip title="Edit">
-                                <IconButton  onClick={handleTeacherChange} >
-                                    <EditIcon fontSize="large" color="primary"/>
-                                </IconButton>
-                            </Tooltip>
+                                <Tooltip title="Edit">
+                                    <IconButton  onClick={handleTeacherChange} >
+                                        <EditIcon fontSize="large" color="primary"/>
+                                    </IconButton>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
