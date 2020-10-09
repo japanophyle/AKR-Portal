@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import { Typography, Button, Card, CardContent, Grid, TextField, Tooltip, IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
 // dialog for save success
@@ -61,7 +61,11 @@ function UserContact(props) {
                                 <h1>Contact</h1>
                             </Grid>
                             <Grid item xs={1}>
-                            <EditIcon fontSize="large" onClick={handleDateChange} />
+                                <Tooltip title="Edit">
+                                    <IconButton  onClick={handleDateChange} >
+                                        <EditIcon fontSize="large" color="primary"/>
+                                    </IconButton>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
