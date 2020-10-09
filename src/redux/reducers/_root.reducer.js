@@ -7,8 +7,7 @@ import editInfo from './infoEdit.reducer'
 import dojos from './dojos.reducer';
 import members from './members.reducer';
 import myDojo from './myDojo.reducer';
-
-
+import admins from './admins.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +24,7 @@ const rootReducer = combineReducers({
   members,
   editInfo, // for editing info on a sepecific user
   myDojo, // holds names and ranks of the current user's dojo
+  admins, // cotains all user with dojo admin status and above
 });
 
 export default rootReducer;

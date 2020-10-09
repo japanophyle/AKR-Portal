@@ -27,6 +27,8 @@ import InactiveView from '../InactiveView/InactiveView';
 import './App.css';
 import MemberList from '../MemberList/MemberList';
 import NewUserRegistrationForm from '../NewUserRegistrationForm/NewUserRegistrationForm';
+import DojoList from '../DojoList/DojoList.jsx';
+import CreateDojo from '../CreateDojo/CreateDojo.jsx';
 
 class App extends Component {
   componentDidMount() {
@@ -103,7 +105,16 @@ class App extends Component {
               path="/memberlist/:id"
               component={MemberList}
             />
-
+            <SiteAdminAuthRoute
+              exact
+              path="/managedojos"
+              component={DojoList}
+            />
+              <SiteAdminAuthRoute
+              exact
+              path="/createdojo"
+              component={CreateDojo}
+            />
             {/* The 3 landing pages below */}
             {/* <ProtectedRoute
               exact
