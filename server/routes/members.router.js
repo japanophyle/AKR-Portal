@@ -40,14 +40,16 @@ router.put('/deactivate', rejectUnauthenticated, (req, res) => {
 
 // GET ALL ACTIVE MEMBERS
 // WHERE "user_data".is_current_member = TRUE
-router.get('/active', rejectUnauthenticated, (req, res) => {
+router.get('/active/:id', rejectUnauthenticated, (req, res) => {
+
   const queryText = `
-    SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
-    JOIN "user_data" ON "user".id = "user_data".user_id
-    WHERE "user".auth_level > 0;
+  SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
+  JOIN "user_data" ON "user".id = "user_data".user_id
+  JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+  WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
     `;
   pool
-    .query(queryText)
+    .query(queryText, [req.params.id])
     .then((response) => {
       const result = response.rows;
       console.log('active member response from db:', result);
@@ -62,16 +64,17 @@ router.get('/active', rejectUnauthenticated, (req, res) => {
 //  "user_data".is_current_member = FALSE OR 
 // GET ALL INACTIVE MEMBERS
 
-router.get('/inactive', rejectUnauthenticated, (req, res) => {
+router.get('/inactive/:id', rejectUnauthenticated, (req, res) => {
 
   const queryText = `
     SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
     JOIN "user_data" ON "user".id = "user_data".user_id
-    WHERE "user".auth_level = 0;
+    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+    WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1;
     `;
 
   pool
-    .query(queryText)
+    .query(queryText, [req.params.id])
     .then((response) => {
       const result = response.rows;
       console.log('inactive member response from db:', result);

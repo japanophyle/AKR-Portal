@@ -15,6 +15,14 @@ const Nav = (props) => {
     loginLinkData.path = '/user';
     loginLinkData.text = 'Home';
   }
+  
+
+  let dojoAdminMemberList = {
+    path: `/memberlist/${props.store.info.dojo_id}`,
+    text: 'Member List',
+  };
+
+
 
   return (
     <div className="nav">
@@ -28,6 +36,16 @@ const Nav = (props) => {
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
         </Link>
+
+        {/* if authorized show members list */}
+        {props.store.user.auth_level >= 10 && (
+          <>
+            <Link className="nav-link" to={dojoAdminMemberList.path} >
+              {dojoAdminMemberList.text}
+            </Link>
+          </>
+        )}
+
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (
           <>

@@ -35,6 +35,9 @@ class App extends Component {
     this.props.dispatch({ type: 'FETCH_USER' });
     // this.props.dispatch({ type: 'GET_RANKS' });
     this.props.dispatch({ type: 'GET_DOJOS' });
+    this.props.dispatch({
+      type: "FETCH_USER_INFO",
+    })
   }
 
   render() {
@@ -96,11 +99,13 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/user"
             />
+          
             <DojoAdminAuthRoute
               exact
-              path="/memberlist"
+              path="/memberlist/:id"
               component={MemberList}
             />
+          
             <SiteAdminAuthRoute
               exact
               path="/managedojos"
