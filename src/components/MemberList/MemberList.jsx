@@ -5,6 +5,7 @@ import ActiveMembers from './ActiveMembers';
 import InactiveMembers from './InactiveMembers';
 
 import { Grid } from '@material-ui/core';
+import DojoDues from '../DojoDues/DojoDues';
 
 
 
@@ -24,9 +25,14 @@ function MemberList(props) {
 
     <div>
       <Grid container justify="center">
-        <Grid item>
+        <Grid item xs={12} align="center">
           <h3>{activeHeading}</h3>
         </Grid>
+        
+          <Grid item >
+            <DojoDues />
+          </Grid>
+ 
       </Grid>
       <ActiveMembers />
       <Grid container justify="center">
