@@ -14,6 +14,7 @@ function UserAddress(props) {
 
   // State used to toggle the edit button on and off
   const [nameEdit, toggleNameEdit] = useState(true);
+  const [open, setOpen] = React.useState(false);
 
   // function used to toggle edit and non edit views
   const handleDateChange = (date) => {
@@ -35,7 +36,8 @@ function UserAddress(props) {
     console.log('cancel')
     props.dispatch(
       {
-        type: 'FETCH_USER_INFO'
+        type: 'FETCH_USER_INFO',
+                payload: props.id
       });
     handleDateChange()
   }
@@ -63,7 +65,7 @@ function UserAddress(props) {
               </Grid>
               <Grid item xs={1}>
                 <Tooltip title="Edit">
-                    <IconButton  onClick={handleDateChange} >
+                    <IconButton onClick={handleDateChange} >
                       <EditIcon fontSize="large" color="primary"/>
                     </IconButton>
                 </Tooltip>
@@ -95,7 +97,7 @@ function UserAddress(props) {
               </Grid>
               <Grid item xs={1}>
                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
+                <EditInfoSuccessDialog openOne={open} setOpen={setOpen} handleDateChange={handleDateChange}/>
                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                 <Button onClick={handleDateReset}>Cancel</Button>
               </Grid>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter, Link } from 'react-router-dom';
+
+
 
 //MATERIAL-UI
 import ViewListIcon from '@material-ui/icons/ViewList';
@@ -97,7 +100,7 @@ function InactiveMembers(props) {
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
                                                 <Tooltip title="Member Details" placement="left">
-                                                    <IconButton>
+                                                    <IconButton component={Link} to={`/user/${member.user_id}`}>
                                                         <ViewListIcon></ViewListIcon>
                                                     </IconButton>
                                                 </Tooltip>
@@ -124,5 +127,7 @@ function InactiveMembers(props) {
         </div>
     );
 }
+const withRouteInactiveMembers = withRouter(InactiveMembers)
 
-export default connect(mapStoreToProps)(InactiveMembers);
+
+export default connect(mapStoreToProps)(withRouteInactiveMembers);
