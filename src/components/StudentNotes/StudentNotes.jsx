@@ -102,6 +102,7 @@ function StudentNotes(props) {
                 </DialogActions>
             </Dialog>
         </div>
+
     );
 }
 
