@@ -10,6 +10,11 @@ function StudentNotes(props) {
     // when you click the button open the dialog
     const handleClickOpen = () => {
         setOpen(true);
+        console.log(props.id)
+                props.dispatch({
+                    type: "FETCH_USER_INFO",
+                    payload: props.id
+            });
     };
 
     // WHne you click off the dialog close it
@@ -38,10 +43,10 @@ function StudentNotes(props) {
 
     const handleDateReset = (event) => {
         console.log('cancel')
-        props.dispatch(
-            {
-                type: 'FETCH_USER_INFO'
-            });
+        props.dispatch({
+            type: "FETCH_USER_INFO",
+            payload: props.id
+    });
         handleClose()
     }
 
@@ -84,6 +89,7 @@ function StudentNotes(props) {
                         label="Equipment Rental"
                         placeholder="Placeholder"
                         defaultValue={props.store.info.equipment_checkout}
+                        onChange={handleEditChange}
                         multiline
                         fullWidth
                         rows={7}

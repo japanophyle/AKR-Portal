@@ -41,7 +41,7 @@ router.put('/deactivate', rejectUnauthenticated, (req, res) => {
 // GET ALL ACTIVE MEMBERS
 // WHERE "user_data".is_current_member = TRUE
 router.get('/active/:id', rejectUnauthenticated, (req, res) => {
-
+  console.log(req.params.id)
   const queryText = `
   SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
   JOIN "user_data" ON "user".id = "user_data".user_id
@@ -106,7 +106,7 @@ router.get('/mydojo', async (req, res) => {
     `;
     await client.query('BEGIN');
     // await client.query(firstQuery, [req.user.id]);
-    userDojoId = await client.query(firstQuery, [req.user.id]);
+    userDojoId = await client.query(firstQuery, [[req.user.id]]);
     userDojoId = userDojoId.rows[0].dojo_id;
     // console.log('we got the userDojoId',userDojoId);
     response = await client.query(secondQuery, [userDojoId]);

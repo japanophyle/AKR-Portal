@@ -35,7 +35,8 @@ function UserAddress(props) {
     console.log('cancel')
     props.dispatch(
       {
-        type: 'FETCH_USER_INFO'
+        type: 'FETCH_USER_INFO',
+                payload: props.id
       });
     handleDateChange()
   }
