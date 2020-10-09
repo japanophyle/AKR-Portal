@@ -105,6 +105,5 @@ function StudentNotes(props) {
     );
 }
 
-        }
 
 export default connect(mapStoreToProps)(StudentNotes);
