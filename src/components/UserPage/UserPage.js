@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Container, } from '@material-ui/core';
+
 import 'date-fns';
 
 // all the imports to display the users information.
@@ -15,16 +16,14 @@ import UserPayment from '../UserPayment/UserPayment'
 
 class UserPage extends Component {
 
-  // this component doesn't do much to start, just renders some user info to the DOM
-
+// this component doesn't do much to start, just renders some user info to the DOM
   componentDidMount = () => {
     console.log('gonna get the profile');
     this.props.dispatch({
       type: "FETCH_USER_INFO",
-      payload: "user"
+      payload: this.props.match.params.id
     })
   }
-
 
   getMyDojo = () => {
     console.log('Getting "my dojo"')
@@ -33,7 +32,6 @@ class UserPage extends Component {
     })
 
   }
-
 
     render() {
       return (

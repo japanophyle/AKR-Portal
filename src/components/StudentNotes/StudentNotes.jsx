@@ -104,4 +104,6 @@ function StudentNotes(props) {
         </div>
     );
 
+        }
+
 export default connect(mapStoreToProps)(StudentNotes);

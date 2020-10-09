@@ -60,8 +60,7 @@ class App extends Component {
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
-              exact
-              path="/user"
+              path="/user/:id"
               component={UserPage}
             />
 
