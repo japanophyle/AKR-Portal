@@ -68,14 +68,6 @@ function ActiveMembers(props) {
         props.dispatch({ type: 'DEACTIVATE_USER', payload: member })
     }
 
-    const handleClickOpen = (member) => {
-        console.log(props.id)
-                props.dispatch({
-                    type: "FETCH_USER_INFO",
-                    payload: member
-            });
-    };
-
     const classes = useStyles();
 
     return (
@@ -127,7 +119,7 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">
 
                                                 {/* STUDENT NOTES DIALOG */}
-                                                <NotesDialog id={member.user_id}/>
+                                                <NotesDialog id={member.user_id} />
 
                                                 {/* <Tooltip title="Add Note" placement="left">
                                                     <IconButton>
