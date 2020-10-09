@@ -32,7 +32,6 @@ function MemberList(props) {
       <Grid container justify="center">
         <Grid item>
           <h3>{inactiveHeading}</h3>
-
         </Grid>
       </Grid>
       <InactiveMembers />

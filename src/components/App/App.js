@@ -100,11 +100,13 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/user"
             />
+          
             <DojoAdminAuthRoute
               exact
               path="/memberlist/:id"
               component={MemberList}
             />
+          
             <SiteAdminAuthRoute
               exact
               path="/managedojos"
