@@ -65,6 +65,11 @@ function InactiveMembers(props) {
         props.dispatch({ type: 'ACTIVATE_USER', payload: member })
     }
 
+    const deleteUser = (member) => {
+        console.log('Deleting;', member);
+        props.dispatch({ type: 'DELETE_USER', payload: member })
+    }
+
     const classes = useStyles();
 
     return (
@@ -107,11 +112,9 @@ function InactiveMembers(props) {
                                             </StyledTableCell>
                                             {props.store.user.auth_level >= 20 &&
                                                 <StyledTableCell align="center">
-                                                    <Tooltip title="Delete User" placement="left">
-                                                        <IconButton>
-                                                            <DeleteIcon
-                                                                color="secondary"
-                                                            ></DeleteIcon>
+                                                    <Tooltip title="Delete User" placement="left" >
+                                                        <IconButton onClick={() => deleteUser(member)} >
+                                                            <DeleteIcon color="error" /> 
                                                         </IconButton>
                                                     </Tooltip>
                                                 </StyledTableCell>

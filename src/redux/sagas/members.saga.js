@@ -53,11 +53,23 @@ function* deactivateUser(action) {
     }
 };
 
+// Delete a user
+function* deleteUser(action) {
+    try {
+        yield axios.delete(`/api/members/${action.payload.user_id}`)
+        yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
+        yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
+    } catch (error) {
+        console.log('error in deleteUser', error);
+    }
+}
+
 function* membersSaga() {
     yield takeLatest('GET_ACTIVE_USERS', getActiveUsers);
     yield takeLatest('GET_INACTIVE_USERS', getInactiveUsers);
     yield takeLatest('ACTIVATE_USER', activateUser); 
     yield takeLatest('DEACTIVATE_USER', deactivateUser);
+    yield takeLatest('DELETE_USER', deleteUser);
 }
 
 export default membersSaga;
