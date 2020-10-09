@@ -21,7 +21,7 @@ class UserPage extends Component {
     console.log('gonna get the profile');
     this.props.dispatch({
       type: "FETCH_USER_INFO",
-      payload: "user"
+      payload: this.props.match.params.id
     })
   }
 
@@ -48,19 +48,19 @@ class UserPage extends Component {
           
 
           {/* Edit user name data component */}
-          <UserName />
+          <UserName id={this.props.match.params.id}/>
 
           {/* Edit user Contact data component */}
-          <UserContact />
+          <UserContact id={this.props.match.params.id}/>
 
           {/* Edit user Address data component */}
-          <UserAddress />
+          <UserAddress id={this.props.match.params.id}/>
 
           {/* Edit user Personal data component */}
-          <UserPersonal />
+          <UserPersonal id={this.props.match.params.id}/>
 
           {/* Edit user Kyudo data component */}
-          <UserKyudo />
+          <UserKyudo id={this.props.match.params.id}/>
 
           {/* Edit user Payment data data component */}
           {/* Needs to have diff views depending on the admin level of the user */}
