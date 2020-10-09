@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField } from '@material-ui/core';
+import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField, Tooltip, IconButton } from '@material-ui/core';
 import moment from 'moment';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -99,7 +99,11 @@ function UserKyudo(props) {
                                 <h1>Kyudo Student Rank</h1>
                             </Grid>
                             <Grid item xs={1}>
-                            <EditIcon fontSize="large" onClick={handleDateChange} />
+                                <Tooltip title="Edit">
+                                    <IconButton  onClick={handleDateChange} >
+                                        <EditIcon fontSize="large" color="primary"/>
+                                    </IconButton>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
@@ -173,7 +177,11 @@ function UserKyudo(props) {
                                 <h1>Kyudo Teaching Rank</h1>
                             </Grid>
                             <Grid item xs={1}>
-                            <EditIcon fontSize="large" onClick={handleTeacherChange} />
+                                <Tooltip title="Edit">
+                                    <IconButton  onClick={handleTeacherChange} >
+                                        <EditIcon fontSize="large" color="primary"/>
+                                    </IconButton>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
@@ -247,7 +255,11 @@ function UserKyudo(props) {
                                 <h1>More Kyudo Information</h1>
                             </Grid>
                             <Grid item xs={1}>
-                            <EditIcon fontSize="large" onClick={handleMoreChange} />
+                                <Tooltip title="Edit">
+                                    <IconButton  onClick={handleMoreChange} >
+                                        <EditIcon fontSize="large" color="primary"/>
+                                    </IconButton>
+                                </Tooltip>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
