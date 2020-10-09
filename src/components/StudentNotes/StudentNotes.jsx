@@ -1,5 +1,5 @@
 import React from 'react';
-import {IconButton, Tooltip, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core/';
+import { IconButton, Tooltip, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core/';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
@@ -33,7 +33,7 @@ function StudentNotes(props) {
                 type: 'UPDATE_USER_DATA',
                 payload: props.store.editInfo
             })
-            handleClose()
+        handleClose()
     };
 
     const handleDateReset = (event) => {
@@ -42,7 +42,7 @@ function StudentNotes(props) {
             {
                 type: 'FETCH_USER_INFO'
             });
-            handleClose()
+        handleClose()
     }
 
     return (
@@ -103,5 +103,6 @@ function StudentNotes(props) {
             </Dialog>
         </div>
     );
+}
 
 export default connect(mapStoreToProps)(StudentNotes);

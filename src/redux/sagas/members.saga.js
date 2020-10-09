@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* getActiveUsers() {
+function* getActiveUsers(action) {
+    console.log(action.payload);
+
     try {
-        let response = yield axios.get('/api/members/active');
+        let response = yield axios.get(`/api/members/active/${action.payload}`);
         console.log('Active users:', response.data);
         yield put({ type:'SET_ACTIVE_USERS', payload: response.data })
     } catch (error) {
@@ -11,9 +13,9 @@ function* getActiveUsers() {
     }
 }
 
-function* getInactiveUsers() {
+function* getInactiveUsers(action) {
     try {
-        let response = yield axios.get('/api/members/inactive');
+        let response = yield axios.get(`/api/members/inactive/${action.payload}`);
         console.log('Inactive users:', response.data);
         yield put({ type:'SET_INACTIVE_USERS', payload: response.data })
     } catch (error) {
@@ -23,13 +25,14 @@ function* getInactiveUsers() {
 
 // activate user saga
 function* activateUser(action) {
+    const id = {id : action.payload.user_id}
     console.log(`in activateUser ${action.payload.id}`);
     
     try {
-        yield axios.put('/api/members/activate', action.payload)
+        yield axios.put('/api/members/activate', id)
         //reset dojo list view
-        yield put({type: 'GET_ACTIVE_USERS'});
-        yield put({type: 'GET_INACTIVE_USERS'});
+        yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
+        yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
     } catch (err) {
         console.log('error in activateUser', err)
     }
@@ -37,13 +40,14 @@ function* activateUser(action) {
 
 //deactivate user saga
 function* deactivateUser(action) {
-    console.log(`in activateUser ${action.payload.id}`);
+    const id = {id : action.payload.user_id}
+    console.log(`in activateUser ${id}`);
     
     try {
-        yield axios.put('/api/members/deactivate', action.payload)
+        yield axios.put('/api/members/deactivate', id)
         //reset dojo view
-        yield put({type: 'GET_ACTIVE_USERS'});
-        yield put({type: 'GET_INACTIVE_USERS'});
+        yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
+        yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
     } catch (err) {
         console.log('error in activateUser', err)
     }

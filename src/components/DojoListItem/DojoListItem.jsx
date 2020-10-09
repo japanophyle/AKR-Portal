@@ -5,6 +5,7 @@ import swal from '@sweetalert/with-react';
 import { TextField, Tooltip, IconButton, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LaunchIcon from '@material-ui/icons/Launch';
+import { withRouter } from "react-router";
 
 class DojoListItem extends Component {
   state = {
@@ -32,6 +33,7 @@ class DojoListItem extends Component {
 
   manageDojo = (id) => {
     console.log('Route to individual dojo view;', id);
+    this.props.history.push(`/memberlist/${id}`)
   }
 
   render() {
@@ -58,4 +60,6 @@ class DojoListItem extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(DojoListItem);
+const DojoListItemWithRouter = withRouter(DojoListItem);
+
+export default connect(mapStoreToProps)(DojoListItemWithRouter);
