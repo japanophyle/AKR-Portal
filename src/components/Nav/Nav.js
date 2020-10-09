@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import image from './customLogo.png';
 
 const Nav = (props) => {
   let loginLinkData = {
@@ -23,11 +24,15 @@ const Nav = (props) => {
   };
 
 
-
+  
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Prime GROUP Project   >8^) </h2>
+        {/* <h2 className="nav-title">Prime GROUP Project   >8^) </h2> */}
+    {/* <img id="logo-img-id" src='http://www.kyudousa.com/_/rsrc/1488844290586/config/customLogo.gif?revision=7' alt="American Kyudo Renmei" class="sites-logo  "></img> */}
+        
+        <img id="logo-img-id" src={image} alt="American Kyudo Renmei" className="sites-logo  "></img>
+        
       </Link>
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
@@ -45,6 +50,7 @@ const Nav = (props) => {
             </Link>
           </>
         )}
+
 
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id && (

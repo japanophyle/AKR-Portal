@@ -8,7 +8,9 @@
 
 .nav {
   margin: 0 0 30px;
-  background-color: #00acb0;
+  /* background-color: #00acb0; */
+  background-image: url('Kyudoka.jpg');
+  background-position: center;
   overflow: hidden;
 }
 
@@ -34,4 +36,8 @@
 
 .nav-right {
   float: right;
+}
+
+.sites-logo {
+  margin: 20px;
 }
