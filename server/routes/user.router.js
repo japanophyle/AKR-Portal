@@ -172,6 +172,7 @@ router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
   } else {
     console.log('invalid req.param value');
     userToGet = NaN;
+    client.release();
   }
 });
 
@@ -220,7 +221,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     // not using this, since it'll be the logged in user:
     // req.body.user_id,
     // using this instead:
-    req.user.id, // $3
+    req.body.id, // $3
     req.body.email, // $4
     req.body.phone_number, // $5
     // dojo_id will be sent over as an integer value from client

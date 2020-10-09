@@ -33,6 +33,7 @@ function* fetchUserInfo(action) {
     if (response.data === 'unauthorized') {
       // this is what we do in that case
     } else {
+      console.log()
       yield put({ type: 'SET_USER_INFO', payload: response.data });
       //store same data in a edit reducer for the userinfo edits
       yield put({ type: 'SET_EDIT_USER_INFO', payload: response.data });
@@ -60,7 +61,9 @@ function* updateUserData(action) {
     // PUT request for the edit changes 
     yield axios.put('/api/user/edit', action.payload)
     //GET the new data that data! 
-    yield put({ type: 'FETCH_USER_INFO' })
+    console.log('updating user_data: ', action.payload.user_id);
+
+    yield put({ type: 'FETCH_USER_INFO', payload: action.payload.user_id})
   } catch (error) {
     console.log('User_data PUT request failed', error);
   }

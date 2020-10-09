@@ -10,6 +10,11 @@ function StudentNotes(props) {
     // when you click the button open the dialog
     const handleClickOpen = () => {
         setOpen(true);
+        console.log(props.id)
+                props.dispatch({
+                    type: "FETCH_USER_INFO",
+                    payload: props.id
+            });
     };
 
     // WHne you click off the dialog close it
@@ -38,10 +43,10 @@ function StudentNotes(props) {
 
     const handleDateReset = (event) => {
         console.log('cancel')
-        props.dispatch(
-            {
-                type: 'FETCH_USER_INFO'
-            });
+        props.dispatch({
+            type: "FETCH_USER_INFO",
+            payload: props.id
+    });
         handleClose()
     }
 
@@ -52,7 +57,7 @@ function StudentNotes(props) {
                 notes
             </Button> */}
             <Tooltip title="Add Note" placement="left">
-                <IconButton onClick={handleClickOpen}>
+                <IconButton  onClick={handleClickOpen}>
                     <NoteAddIcon
                         color="primary"
                     ></NoteAddIcon>
@@ -68,7 +73,7 @@ function StudentNotes(props) {
                         label="Student Notes"
                         fullWidth
                         placeholder="Placeholder"
-                        defaultValue={props.store.info.notes}
+                        value={props.store.editInfo.notes}
                         onChange={handleEditChange}
                         multiline
                         variant="outlined"
@@ -83,7 +88,8 @@ function StudentNotes(props) {
                         id="equipment_checkout"
                         label="Equipment Rental"
                         placeholder="Placeholder"
-                        defaultValue={props.store.info.equipment_checkout}
+                        value={props.store.editInfo.equipment_checkout}
+                        onChange={handleEditChange}
                         multiline
                         fullWidth
                         rows={7}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter, Link } from 'react-router-dom';
 
 //MATERIAL-UI
 import ViewListIcon from '@material-ui/icons/ViewList';
@@ -110,7 +111,7 @@ function ActiveMembers(props) {
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
                                                 <Tooltip title="Member Details" placement="left">
-                                                    <IconButton>
+                                                    <IconButton component={Link} to={`/user/${member.user_id}`} >
                                                         <ViewListIcon></ViewListIcon>
                                                     </IconButton>
                                                 </Tooltip>
@@ -118,7 +119,7 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">
 
                                                 {/* STUDENT NOTES DIALOG */}
-                                                <NotesDialog />
+                                                <NotesDialog id={member.user_id} />
 
                                                 {/* <Tooltip title="Add Note" placement="left">
                                                     <IconButton>
@@ -160,4 +161,7 @@ function ActiveMembers(props) {
     );
 }
 
-export default connect(mapStoreToProps)(ActiveMembers);
+const withRouteActiveMembers = withRouter(ActiveMembers)
+
+
+export default connect(mapStoreToProps)(withRouteActiveMembers);
