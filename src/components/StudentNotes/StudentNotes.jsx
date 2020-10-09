@@ -57,7 +57,7 @@ function StudentNotes(props) {
                 notes
             </Button> */}
             <Tooltip title="Add Note" placement="left">
-                <IconButton onClick={handleClickOpen}>
+                <IconButton  onClick={handleClickOpen}>
                     <NoteAddIcon
                         color="primary"
                     ></NoteAddIcon>
@@ -73,7 +73,7 @@ function StudentNotes(props) {
                         label="Student Notes"
                         fullWidth
                         placeholder="Placeholder"
-                        defaultValue={props.store.info.notes}
+                        value={props.store.editInfo.notes}
                         onChange={handleEditChange}
                         multiline
                         variant="outlined"
@@ -88,7 +88,7 @@ function StudentNotes(props) {
                         id="equipment_checkout"
                         label="Equipment Rental"
                         placeholder="Placeholder"
-                        defaultValue={props.store.info.equipment_checkout}
+                        value={props.store.editInfo.equipment_checkout}
                         onChange={handleEditChange}
                         multiline
                         fullWidth
