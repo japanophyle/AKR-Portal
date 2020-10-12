@@ -53,7 +53,7 @@ function StudentNotes(props) {
     });
         handleClose()
     }
-
+    
     return (
         <div>
             {/* Button that will open p the dialog */}

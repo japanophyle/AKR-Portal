@@ -72,7 +72,7 @@ const Nav = (props) => {
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.id >= 5 && (
           <>
-            <Link className="nav-link" to="/user/user">
+            <Link onClick={() => props.dispatch({type: "FETCH_USER_INFO", payload: 'user'})} className="nav-link" to="/user/user">
               Info Page
             </Link>
             <LogOutButton className="nav-link" />

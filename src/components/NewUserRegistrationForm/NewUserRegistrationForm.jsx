@@ -93,6 +93,7 @@ class NewUserForm extends Component {
         type: 'CREATE_USER',
         payload: this.state
       })
+      this.props.history.push('/inactive')
   }
 
 
