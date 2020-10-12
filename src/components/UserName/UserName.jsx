@@ -47,7 +47,7 @@ function UserName(props) {
         type: 'UPDATE_USER_DATA',
         payload: props.store.editInfo
       })
-    handleDateChange()
+      handleDateChange()
   };
 
   return (

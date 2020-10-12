@@ -8,33 +8,21 @@ function EditInfoSuccessDialog(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
-        handleSaveEdit();
-        console.log('woo00000000000000000000000000')
     };
 
     const handleClose = () => {
         setOpen(false); 
+    //    props.handleDateChange()
     };
-
-    
-
-    const handleSaveEdit = (event) => {
-        props.dispatch(
-          {
-            type: 'UPDATE_USER_DATA',
-            payload: props.store.editInfo
-          })
-          
-            
-        //   props.handleDateChange()
-      };
 
     return (
         <div>
-            <Button type="submit" variant="contained" color="primary" onClick={(event) => handleClickOpen}>
+            <Button type="submit" variant="contained" color="primary" 
+            onClick={handleClickOpen}
+            >
                 Submit
             </Button>
-            <Dialog open={props.openOne} onClose={handleClose} aria-labelledby="form-dialog-title" >
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
                 <DialogContent>
                     <DialogTitle id="form-dialog-title">Success! </DialogTitle>
                     <DialogContentText id="alert-dialog-description">

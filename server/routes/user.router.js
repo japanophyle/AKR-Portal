@@ -106,6 +106,7 @@ router.post('/profile', rejectUnauthenticated, async (req, res) => {
 // in :id
 router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
   let userToGet = req.params.id;
+  console.log(req.params.id)
   const client = await pool.connect();
   const queryText = `
     SELECT
@@ -119,7 +120,7 @@ router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
     WHERE "user".id = $1
     `;
   // If the user is just getting their own info
-  if (userToGet === 'user') {
+  if (userToGet === 'user' || Number(userToGet) === req.user.id) {
     console.log('userToGet = ', userToGet);
     userToGet = req.user.id
     // just do the regular thing
@@ -129,10 +130,12 @@ router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
           console.log('/api/user/profile get response:', response.rows[0]);
           // GET routes don't send res.sendStatuses
           res.send(response.rows[0])
+          client.release();
         })
         .catch(error => {
           console.log('error in /api/user/profile get:', error);
           res.sendStatus(500);
+          client.release();
         })
   // else if the user is getting another user's info...
   } else if (Number.isInteger( Number(userToGet) )) {
@@ -158,7 +161,7 @@ router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
       } else {
         console.log('unauthorized');
         await client.query('ROLLBACK')
-        res.send('unauthorized');
+        res.sendStatus(200);
       }
       await client.query('COMMIT');
       res.send(userData.rows[0])
@@ -179,6 +182,14 @@ router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
 // END NEW-CODE ====
 
 router.put('/edit', rejectUnauthenticated, (req, res) => {
+
+  let who
+  if (req.user.auth_level <= 5) {
+    who = req.user.id
+  } else {
+    who = req.body.id
+  }
+
   const queryText = 
   `UPDATE "user_data" 
     SET
@@ -221,7 +232,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     // not using this, since it'll be the logged in user:
     // req.body.user_id,
     // using this instead:
-    req.body.id, // $3
+    who, // $3
     req.body.email, // $4
     req.body.phone_number, // $5
     // dojo_id will be sent over as an integer value from client
@@ -257,7 +268,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     req.body.equipment_checkout // $33
   ])
   .then(response => {
-    console.log('/api/user/edit PUT ');
+    console.log('/api/user/edit PUT');
     res.sendStatus(200)
   })
   .catch(error => {

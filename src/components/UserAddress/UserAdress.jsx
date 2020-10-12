@@ -97,7 +97,7 @@ function UserAddress(props) {
               </Grid>
               <Grid item xs={1}>
                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                <EditInfoSuccessDialog openOne={open} setOpen={setOpen} handleDateChange={handleDateChange}/>
+                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                 <Button onClick={handleDateReset}>Cancel</Button>
               </Grid>

@@ -48,7 +48,7 @@ function UserContact(props) {
                 type: 'UPDATE_USER_DATA',
                 payload: props.store.editInfo
             })
-        handleDateChange()
+       
     };
 
     return (
