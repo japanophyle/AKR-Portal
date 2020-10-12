@@ -25,6 +25,7 @@ import {
 
 // IMPORT DIALOG
 import NotesDialog from '../StudentNotes/StudentNotes'
+import DeactivateDialog from '../DeactivateDialog/DeactivateDialog'
 
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
@@ -107,11 +108,9 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">Dues Paydate</StyledTableCell>
                                             <StyledTableCell align="center">
                                                 {member.auth_level > 0 &&
-                                                    <Button
-                                                        onClick={() => handleDeactivateMember(member)}
-                                                    >
-                                                        Deactivate
-                                                    </Button>
+                                                <>
+                                                    <DeactivateDialog handleDeactivateMember={handleDeactivateMember} member={member}/>
+                                                </>
                                                 }
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
@@ -124,7 +123,7 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">
 
                                                 {/* STUDENT NOTES DIALOG */}
-                                                <NotesDialog id={member.user_id} />
+                                                <NotesDialog member={member} id={member.user_id} />
 
                                                 {/* <Tooltip title="Add Note" placement="left">
                                                     <IconButton>
