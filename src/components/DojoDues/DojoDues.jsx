@@ -65,7 +65,12 @@ class DojoDues extends Component {
         console.log(this.state.newDues);
         return (
             <div>
-                <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+                <Button
+                    style={{ marginBottom: 10}} 
+                    variant="outlined" 
+                    color="primary" 
+                    onClick={this.handleClickOpen}
+                >
                     Set Dues
                 </Button>
                 <Dialog open={this.state.open} onClose={this.handleClose}>

@@ -24,7 +24,7 @@ function DeactivateDialog(props) {
 
     return (
         <div>
-            <Button type="submit" variant="contained" color="primary" onClick={handleClickOpen}>
+            <Button type="submit" onClick={handleClickOpen}>
                 Deactivate
             </Button>
             <Dialog open={open} onClose={handleClickOpen} aria-labelledby="form-dialog-title" >

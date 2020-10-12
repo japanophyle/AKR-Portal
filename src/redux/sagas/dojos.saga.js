@@ -39,7 +39,7 @@ function* setDojoDues(action) {
         yield axios.put(`/api/dojos/dues`, action.payload)
 
         // reset the views of the dojo to show new dues
-        // yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
+        yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
         // yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
     } catch (err) {
         console.log('Error in setDojoDues saga', err);
