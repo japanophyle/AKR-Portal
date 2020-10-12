@@ -14,8 +14,7 @@ function StudentNotes(props) {
                 props.dispatch({
                     type: "FETCH_USER_INFO",
                     payload: props.id
-            });
-            
+            });    
     };
 
     // WHne you click off the dialog close it

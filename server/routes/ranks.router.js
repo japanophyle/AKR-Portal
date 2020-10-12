@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
 // GETs all ranks, and dates for ranks for logged in user
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * from "ranks" where "user_id" = $1;`;
     pool.query(queryText, [req.user.id]).then(result => {
         res.send(result.rows);
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
 })
 
 // POSTs new rank to rank table and PUTs the new userdata rank info
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
     console.log('Adding new rank:', req.body);
     const client = await pool.connect();
     try {
@@ -39,7 +40,7 @@ router.post('/', async (req, res) => {
 });
 
 // DELETE a rank from ranks history table
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     console.log('In Delete:', req.params.id);
     let queryText = `
         DELETE FROM "ranks"
