@@ -21,11 +21,10 @@ class DojoDues extends Component {
         open: false,
         newDues: {
             dues_amount: '',
-            dues_date: '',
+            dues_date: null,
             dojo_id: this.props.match.params.id,
         }
     };
-
 
     handleClickOpen = () => {
         this.setState({
@@ -40,7 +39,7 @@ class DojoDues extends Component {
     };
 
     // handleDues for setting state
-    handleDues= (propertyValue) => (event) => {
+    handleDues = (propertyValue) => (event) => {
         console.log(`changing dues ${propertyValue}`);
         this.setState({
             newDues: {
@@ -48,6 +47,18 @@ class DojoDues extends Component {
                 [propertyValue]: event.target.value,
             }
         })
+    };
+
+    // send newDues to dojos saga
+    handleSaveDues = (event) => {
+        event.preventDefault();
+        console.log(this.state.newDues);
+        this.props.dispatch
+            ({
+                type: 'SET_DOJO_DUES',
+                payload: this.state.newDues
+            })
+        this.handleClose();
     };
 
     render() {
@@ -78,6 +89,10 @@ class DojoDues extends Component {
                             name="dues_date"
                             type="date"
                             onChange={this.handleDues('dues_date')}
+                            label="Dues Date"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
                             fullWidth
                         />
                     </DialogContent>
@@ -85,7 +100,7 @@ class DojoDues extends Component {
                         <Button onClick={this.handleClose} color="primary">
                             Cancel
                         </Button>
-                        <Button color="primary">
+                        <Button onClick={this.handleSaveDues} color="primary">
                             Save
                         </Button>
                     </DialogActions>

@@ -28,11 +28,9 @@ function MemberList(props) {
         <Grid item xs={12} align="center">
           <h3>{activeHeading}</h3>
         </Grid>
-        
-          <Grid item >
-            <DojoDues />
-          </Grid>
- 
+        <Grid item >
+          <DojoDues />
+        </Grid>
       </Grid>
       <ActiveMembers />
       <Grid container justify="center">

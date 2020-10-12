@@ -1,4 +1,5 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
@@ -68,6 +69,24 @@ router.put('/', (req, res) => {
         console.log(`Error updating dojo`, error); 
         res.sendStatus(500);
     });
+});
+
+//route for setting dojo dues
+router.put('/dues', rejectUnauthenticated, (req, res) => {
+    console.log(req.body);
+    const {dues_amount, dues_date, dojo_id} = req.body
+
+    const updateDuesQuery = `
+        UPDATE "user_data" 
+        SET "dues_amount" = $1, "dues_date" = $2
+        WHERE "dojo_id" = $3;    
+        `
+    pool.query(updateDuesQuery, [dues_amount, dues_date, dojo_id ])
+        .then(result => { res.sendStatus(200)})
+        .catch(err => {
+            console.log('Error in /dues route', err);
+            res.sendStatus(500)
+        });
 });
 
 
