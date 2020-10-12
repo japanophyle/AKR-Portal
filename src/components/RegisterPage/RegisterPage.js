@@ -16,8 +16,6 @@ class RegisterPage extends Component {
     return (
       <div>
         <RegisterForm />
-        <StudentNotes />
-        <FormSuccess />
         <center>
           <button
             type="button"
