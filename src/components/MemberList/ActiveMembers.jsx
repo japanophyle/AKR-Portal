@@ -104,13 +104,6 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">
                                                 {member.auth_level > 0 &&
                                                 <>
-                                                    {/* <Button
-                                                        onClick={() => handleDeactivateMember(member)}
-                                                    >
-                                                        Deactivate
-                                                    </Button>
-                                                     */}
-                                                    {/* // Deactivate dialog */}
                                                     <DeactivateDialog handleDeactivateMember={handleDeactivateMember} member={member}/>
                                                 </>
                                                 }
@@ -125,7 +118,7 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">
 
                                                 {/* STUDENT NOTES DIALOG */}
-                                                <NotesDialog id={member.user_id} />
+                                                <NotesDialog member={member} id={member.user_id} />
 
                                                 {/* <Tooltip title="Add Note" placement="left">
                                                     <IconButton>
