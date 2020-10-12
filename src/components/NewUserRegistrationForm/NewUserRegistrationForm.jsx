@@ -93,6 +93,7 @@ class NewUserForm extends Component {
         type: 'CREATE_USER',
         payload: this.state
       })
+      this.props.history.push('/inactive')
   }
 
 
@@ -138,6 +139,7 @@ class NewUserForm extends Component {
                     >
                       <InputLabel>Dojo</InputLabel>
                       <Select
+                        required
                         label="Dojo"
                         name="dojo_id"
                         onChange={this.handleChange('dojo_id')}

@@ -13,18 +13,23 @@ const Nav = (props) => {
   };
 
   if (props.store.user.id != null) {
-    loginLinkData.path = '/user/user';
+    loginLinkData.path = '/mydojo';
     loginLinkData.text = 'Home';
-  }
-  
+  };
+
 
   let dojoAdminMemberList = {
     path: `/memberlist/${props.store.info.dojo_id}`,
     text: 'Member List',
   };
 
+  let siteAdminDojoList = {
+    path: '/managedojos',
+    text: 'National Dojos'
+  };
 
-  
+
+
   return (
     <div className="nav">
 
@@ -34,9 +39,9 @@ const Nav = (props) => {
       </Link>
 
 
-        {/* <h2 className="nav-title">Prime GROUP Project   >8^) </h2> */}
-        <h1 id="title" className="nav-left">American Kyudo Renmei Portal</h1>
-      
+      {/* <h2 className="nav-title">Prime GROUP Project   >8^) </h2> */}
+      <h1 id="title" className="nav-left">American Kyudo Renmei Portal</h1>
+
 
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
@@ -47,7 +52,7 @@ const Nav = (props) => {
         </Link>
 
         {/* conditional rendering -- if authorized, show members list */}
-        {props.store.user.auth_level >= 10 && (
+        {props.store.user.auth_level === 10 && (
           <>
             <Link className="nav-link" to={dojoAdminMemberList.path} >
               {dojoAdminMemberList.text}
@@ -55,11 +60,19 @@ const Nav = (props) => {
           </>
         )}
 
+        {props.store.user.auth_level >= 20 && (
+          <>
+            <Link className="nav-link" to={siteAdminDojoList.path} >
+              {siteAdminDojoList.text}
+            </Link>
+          </>
+        )}
+
 
         {/* Show the link to the info page and the logout button if the user is logged in */}
-        {props.store.user.id && (
+        {props.store.user.id >= 5 && (
           <>
-            <Link className="nav-link" to="/info">
+            <Link onClick={() => props.dispatch({type: "FETCH_USER_INFO", payload: 'user'})} className="nav-link" to="/user/user">
               Info Page
             </Link>
             <LogOutButton className="nav-link" />

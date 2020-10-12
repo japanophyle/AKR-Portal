@@ -15,6 +15,7 @@ function StudentNotes(props) {
                     type: "FETCH_USER_INFO",
                     payload: props.id
             });
+            
     };
 
     // WHne you click off the dialog close it
@@ -38,6 +39,9 @@ function StudentNotes(props) {
                 type: 'UPDATE_USER_DATA',
                 payload: props.store.editInfo
             })
+    //         const id = props.member.dojo_id
+    // props.dispatch({ type: 'GET_ACTIVE_USERS', payload: id })
+    // props.dispatch({ type: 'GET_INACTIVE_USERS', payload: id })
         handleClose()
     };
 
@@ -49,7 +53,7 @@ function StudentNotes(props) {
     });
         handleClose()
     }
-
+    
     return (
         <div>
             {/* Button that will open p the dialog */}
@@ -73,7 +77,7 @@ function StudentNotes(props) {
                         label="Student Notes"
                         fullWidth
                         placeholder="Placeholder"
-                        value={props.store.editInfo.notes}
+                        defaultValue={props.member.notes}
                         onChange={handleEditChange}
                         multiline
                         variant="outlined"
@@ -88,7 +92,7 @@ function StudentNotes(props) {
                         id="equipment_checkout"
                         label="Equipment Rental"
                         placeholder="Placeholder"
-                        value={props.store.editInfo.equipment_checkout}
+                        defaultValue={props.member.equipment_checkout}
                         onChange={handleEditChange}
                         multiline
                         fullWidth
@@ -111,5 +115,6 @@ function StudentNotes(props) {
 
     );
 }
+
 
 export default connect(mapStoreToProps)(StudentNotes);

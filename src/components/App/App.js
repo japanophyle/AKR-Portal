@@ -29,6 +29,7 @@ import MemberList from '../MemberList/MemberList';
 import NewUserRegistrationForm from '../NewUserRegistrationForm/NewUserRegistrationForm';
 import DojoList from '../DojoList/DojoList.jsx';
 import CreateDojo from '../CreateDojo/CreateDojo.jsx';
+import MyDojo from '../MyDojo/MyDojo';
 
 class App extends Component {
   componentDidMount() {
@@ -63,7 +64,6 @@ class App extends Component {
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
-              exact
               path="/user/:id"
               component={UserPage}
             />
@@ -80,7 +80,7 @@ class App extends Component {
               exact
               path="/login"
               component={LoginPage}
-              authRedirect="/user"
+              authRedirect="/mydojo"
             />
             <ProtectedRoute
               // with authRedirect:
@@ -98,7 +98,12 @@ class App extends Component {
               exact
               path="/home"
               component={LandingPage}
-              authRedirect="/user"
+              authRedirect="/mydojo"
+            />
+            <UserAuthRoute 
+              exact
+              path="/mydojo"
+              component={MyDojo}
             />
           
             <DojoAdminAuthRoute

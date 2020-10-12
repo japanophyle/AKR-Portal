@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withRouter, Link } from 'react-router-dom';
+import moment from 'moment';
 
 //MATERIAL-UI
 import ViewListIcon from '@material-ui/icons/ViewList';
@@ -25,6 +26,7 @@ import {
 
 // IMPORT DIALOG
 import NotesDialog from '../StudentNotes/StudentNotes'
+import DeactivateDialog from '../DeactivateDialog/DeactivateDialog'
 
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
@@ -75,6 +77,7 @@ function ActiveMembers(props) {
 
     const classes = useStyles();
 
+    // moment(member.dues_date).calendar()
     return (
         <div>
             <Grid container justify="center" alignItems="center">
@@ -104,14 +107,12 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">{member.teaching_rank ? member.teaching_rank : member.student_rank}</StyledTableCell>
                                             <StyledTableCell align="center">{member.auth_level >= 10 ? 'Dojo Admin' : 'Student'}</StyledTableCell>
                                             <StyledTableCell align="center">{member.dues_amount}</StyledTableCell>
-                                            <StyledTableCell align="center">Dues Paydate</StyledTableCell>
+                                            <StyledTableCell align="center">{member.dues_date && moment(member.dues_date).format('ll')}</StyledTableCell>
                                             <StyledTableCell align="center">
                                                 {member.auth_level > 0 &&
-                                                    <Button
-                                                        onClick={() => handleDeactivateMember(member)}
-                                                    >
-                                                        Deactivate
-                                                    </Button>
+                                                <>
+                                                    <DeactivateDialog handleDeactivateMember={handleDeactivateMember} member={member}/>
+                                                </>
                                                 }
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
@@ -124,7 +125,7 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">
 
                                                 {/* STUDENT NOTES DIALOG */}
-                                                <NotesDialog id={member.user_id} />
+                                                <NotesDialog member={member} id={member.user_id} />
 
                                                 {/* <Tooltip title="Add Note" placement="left">
                                                     <IconButton>
