@@ -5,7 +5,9 @@ const router = express.Router();
 
 // GETs all ranks, and dates for ranks for logged in user
 router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * from "ranks" where "user_id" = $1;`;
+    let queryText = `SELECT * from "ranks" 
+                    WHERE "user_id" = $1 
+                    ORDER BY "date_rank_made" DESC;`;
     pool.query(queryText, [req.user.id]).then(result => {
         res.send(result.rows);
     })
@@ -26,8 +28,8 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
                             SET "student_rank" = $1, "date_student_rank" = $2
                             WHERE "user_id" = $3;`;
         await client.query('BEGIN');
-        await client.query(firstQuery, [req.body.rank_name, req.body.date_rank_made, req.user.id])
-        await client.query(secondQuery, [req.body.rank_name, req.body.date_rank_made, req.user.id])
+        await client.query(firstQuery, [req.body.student_rank, req.body.date_student_rank, req.user.id])
+        await client.query(secondQuery, [req.body.student_rank, req.body.date_student_rank, req.user.id])
         await client.query('COMMIT');
         res.sendStatus(201)
     }  catch (error) {

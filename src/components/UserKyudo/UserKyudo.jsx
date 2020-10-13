@@ -96,6 +96,14 @@ function UserKyudo(props) {
             toggleTeacher(true)
     };
 
+    const submitRankHistory = (event) => {
+        props.dispatch(
+            {
+                type: 'ADD_RANK',
+                payload:  props.store.editInfo 
+            })
+    }
+
     return (
         <div>
             {/* IF the state is true this a just a view of information */}
@@ -122,27 +130,27 @@ function UserKyudo(props) {
                             
                         </Typography>
                         {historyEdit ?
-                        <Tooltip title="Show Rank History">
-                            <IconButton  onClick={handleHistoryChange} >
-                                <TimelineIcon fontSize="large" color="primary"/>
-                            </IconButton>
-                        </Tooltip>
+                            <Tooltip title="Show Rank History">
+                                <IconButton  onClick={handleHistoryChange} >
+                                    <TimelineIcon fontSize="large" color="primary"/>
+                                </IconButton>
+                            </Tooltip>
                         :
-                        <>
-                        <Tooltip title="Hide Rank History">
-                            <IconButton  onClick={handleHistoryChange} >
-                                <VisibilityOffIcon fontSize="large" color="primary"/>
-                            </IconButton>
-                        </Tooltip>
-                        <UserRankHistory />
-                        </>
+                            <>
+                            <Tooltip title="Hide Rank History">
+                                <IconButton  onClick={handleHistoryChange} >
+                                    <VisibilityOffIcon fontSize="large" color="primary"/>
+                                </IconButton>
+                            </Tooltip>
+                            <UserRankHistory />
+                            </>
                         }
                     </CardContent>
                 </Card>
                 :
                 <Card>
                     {/* IF the state is FALSE this You can edit */}
-                    <form  onSubmit={handleSaveEdit} >
+                    <form  onSubmit={submitRankHistory} >
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -189,20 +197,20 @@ function UserKyudo(props) {
                         
                         </Typography>
                         {historyEdit ?
-                        <Tooltip title="Show Rank History">
-                            <IconButton  onClick={handleHistoryChange} >
-                                <TimelineIcon fontSize="large" color="primary"/>
-                            </IconButton>
-                        </Tooltip>
+                            <Tooltip title="Show Rank History">
+                                <IconButton  onClick={handleHistoryChange} >
+                                    <TimelineIcon fontSize="large" color="primary"/>
+                                </IconButton>
+                            </Tooltip>
                         :
-                        <>
-                        <Tooltip title="Hide Rank History">
-                            <IconButton  onClick={handleHistoryChange} >
-                                <VisibilityOffIcon fontSize="large" color="primary"/>
-                            </IconButton>
-                        </Tooltip>
-                        <UserRankHistory />
-                        </>
+                            <>
+                            <Tooltip title="Hide Rank History">
+                                <IconButton  onClick={handleHistoryChange} >
+                                    <VisibilityOffIcon fontSize="large" color="primary"/>
+                                </IconButton>
+                            </Tooltip>
+                            <UserRankHistory />
+                            </>
                         }
                     </CardContent>
                     </form>
