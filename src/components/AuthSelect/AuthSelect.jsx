@@ -31,6 +31,12 @@ const handleSave = () => {
     setOpen(false); 
     console.log('WOOOOOO')
     console.log(auth);
+    props.dispatch({ type: 'NEW_AUTH_LEVEL', 
+    payload: {
+        dojo_id: props.member.dojo_id,
+        id: props.member.user_id, 
+        value: auth
+    } })
 }
 
 // Open the Dialog when you select a new level of auth

@@ -13,8 +13,8 @@ router.put('/promote', rejectUnauthenticated, (req, res) => {
 
   const queryText = `
     UPDATE "user"
-    SET "auth_level" = $1
-    WHERE "user".id = $2;`
+    SET "auth_level" = $2
+    WHERE "user".id = $1;`
 
     if (req.user.auth_level >= 10 && req.body.value <= 10) {
   pool.query(queryText, [req.body.id, req.body.value])
