@@ -64,12 +64,24 @@ function* deleteUser(action) {
     }
 }
 
+function* UpdateAuthLevel(action) {
+    try {
+        yield axios.put(`/api/members/promote`, action.payload)
+        console.log(action.payload)
+        yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
+        yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
+    } catch (error) {
+        console.log('error in UpdateAuthLevel in the member saga', error)
+    }
+}
+
 function* membersSaga() {
     yield takeLatest('GET_ACTIVE_USERS', getActiveUsers);
     yield takeLatest('GET_INACTIVE_USERS', getInactiveUsers);
     yield takeLatest('ACTIVATE_USER', activateUser); 
     yield takeLatest('DEACTIVATE_USER', deactivateUser);
     yield takeLatest('DELETE_USER', deleteUser);
+    yield takeLatest('NEW_AUTH_LEVEL', UpdateAuthLevel)
 }
 
 export default membersSaga;
