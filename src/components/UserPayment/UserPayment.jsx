@@ -44,13 +44,13 @@ function UserPayment(props) {
 
     // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
     const handleSaveEdit = (event) => {
+        event.preventDefault()
         console.log(props.store.editInfo);
         props.dispatch(
             {
                 type: 'UPDATE_USER_DATA',
                 payload: props.store.editInfo
             })
-        handleDateChange()
     };
 
     return (

@@ -22,7 +22,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import InactiveView from '../InactiveView/InactiveView';
+import InactiveView from '../InactiveView/InactiveView'
 
 import './App.css';
 import MemberList from '../MemberList/MemberList';
@@ -100,6 +100,8 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/mydojo"
             />
+
+            
             <UserAuthRoute 
               exact
               path="/mydojo"
@@ -159,14 +161,17 @@ class App extends Component {
               component={NationalStudentList}
               authRedirect="/nationalstudentlist"
             /> */}
+
             <ProtectedRoute
-              exact
               path="/inactive"
               component={InactiveView}
-              authRedirect="/inactive"
             />
           
-            <Route path="/new-user-registration" component={NewUserRegistrationForm} />
+          <ProtectedRoute
+           path="/new-user-registration" 
+           component={NewUserRegistrationForm} 
+           />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
