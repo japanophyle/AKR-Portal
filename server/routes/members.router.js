@@ -5,6 +5,36 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+//UPDATE ROUTE TO PROMOTE AUTH LEVEL
+router.put('/promote', rejectUnauthenticated, (req, res) => {
+  console.log(req.body.id);
+  console.log(req.body.value);
+
+
+  const queryText = `
+    UPDATE "user"
+    SET "auth_level" = $1
+    WHERE "user".id = $2;`
+
+    if (req.user.auth_level >= 10 && req.body.value <= 10) {
+  pool.query(queryText, [req.body.id, req.body.value])
+    .then(result => { res.sendStatus(200) })
+    .catch(err => {
+      console.log('error with activate user route', err);
+      res.sendStatus(500);
+    })
+  } else if (req.user.auth_level >= 20 && req.body.value <= 20) {
+    pool.query(queryText, [req.body.id, req.body.value])
+    .then(result => { res.sendStatus(200) })
+    .catch(err => {
+      console.log('error with activate user route', err);
+      res.sendStatus(500);
+    })
+  } else {
+    res.sendStatus(403);
+  }
+});
+
 //UPDATE ROUTE TO ACTIVATE A MEMBER
 router.put('/activate', rejectUnauthenticated, (req, res) => {
 
