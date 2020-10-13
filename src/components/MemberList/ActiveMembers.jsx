@@ -27,6 +27,7 @@ import {
 // IMPORT DIALOG
 import NotesDialog from '../StudentNotes/StudentNotes'
 import DeactivateDialog from '../DeactivateDialog/DeactivateDialog'
+import AuthSelect from '../AuthSelect/AuthSelect'
 
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
@@ -105,7 +106,11 @@ function ActiveMembers(props) {
                                         <StyledTableRow component="tr" scope="row" key={id}>
                                             <StyledTableCell align="center">{member.fname} {member.lname}</StyledTableCell>
                                             <StyledTableCell align="center">{member.teaching_rank ? member.teaching_rank : member.student_rank}</StyledTableCell>
-                                            <StyledTableCell align="center">{member.auth_level >= 10 ? 'Dojo Admin' : 'Student'}</StyledTableCell>
+
+                                            <StyledTableCell align="center"> <AuthSelect member={member}/>
+                                                {/* {member.auth_level >= 10 ? 'Dojo Admin' : 'Student'} */}
+                                                </StyledTableCell>
+
                                             <StyledTableCell align="center">{member.dues_amount}</StyledTableCell>
                                             <StyledTableCell align="center">{member.dues_date && moment(member.dues_date).format('ll')}</StyledTableCell>
                                             <StyledTableCell align="center">

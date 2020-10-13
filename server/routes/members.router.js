@@ -5,6 +5,36 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+//UPDATE ROUTE TO PROMOTE AUTH LEVEL
+router.put('/promote', rejectUnauthenticated, (req, res) => {
+  console.log(req.body.id);
+  console.log(req.body.value);
+
+
+  const queryText = `
+    UPDATE "user"
+    SET "auth_level" = $2
+    WHERE "user".id = $1;`
+
+    if (req.user.auth_level >= 10 && req.body.value <= 10) {
+  pool.query(queryText, [req.body.id, req.body.value])
+    .then(result => { res.sendStatus(200) })
+    .catch(err => {
+      console.log('error with activate user route', err);
+      res.sendStatus(500);
+    })
+  } else if (req.user.auth_level >= 20 && req.body.value <= 20) {
+    pool.query(queryText, [req.body.id, req.body.value])
+    .then(result => { res.sendStatus(200) })
+    .catch(err => {
+      console.log('error with activate user route', err);
+      res.sendStatus(500);
+    })
+  } else {
+    res.sendStatus(403);
+  }
+});
+
 //UPDATE ROUTE TO ACTIVATE A MEMBER
 router.put('/activate', rejectUnauthenticated, (req, res) => {
 
@@ -182,11 +212,13 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
 
   if (req.user.auth_level >= 5) {
 
+
     const client = await pool.connect();
 
     try {
 
       const firstQuery = `
+
     SELECT "user_data".dojo_id FROM "user_data"
     WHERE "user_data".user_id = $1 LIMIT 1;
     `;
@@ -198,6 +230,7 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
     FROM "user_data"
     WHERE "user_data".dojo_id = $1;
     `;
+
 
       await client.query('BEGIN');
 
@@ -227,6 +260,7 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
     }
   } else {
     res.sendStatus(403)
+
   }
 })
 

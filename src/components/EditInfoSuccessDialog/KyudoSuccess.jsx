@@ -3,7 +3,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-function EditInfoSuccessDialog(props) {
+function KyudoSuccess(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -13,6 +13,9 @@ function EditInfoSuccessDialog(props) {
     const handleClose = () => {
         setOpen(false); 
        props.handleDateChange()
+    props.toggleNameEdit(true) 
+    props.toggleMoreEdit(true) 
+    props.toggleTeacher(true)
     };
 
     return (
@@ -39,4 +42,4 @@ function EditInfoSuccessDialog(props) {
     );
 }
 
-export default  connect(mapStoreToProps)(EditInfoSuccessDialog)
+export default  connect(mapStoreToProps)(KyudoSuccess)

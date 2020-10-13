@@ -6,7 +6,7 @@ import moment from 'moment';
 import EditIcon from '@material-ui/icons/Edit';
 
 // dialog for save success
-import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
+import KyudoSuccess from '../EditInfoSuccessDialog/KyudoSuccess'
 
 // LIST OF ALL STUDENT RANKS FOR SELECT BELOW 
 const ranks =
@@ -78,15 +78,16 @@ function UserKyudo(props) {
 
     // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
     const handleSaveEdit = (event) => {
+        event.preventDefault()
         console.log(props.store.editInfo);
         props.dispatch(
             {
                 type: 'UPDATE_USER_DATA',
                 payload: props.store.editInfo
             })
-            toggleNameEdit(true)
-            toggleMoreEdit(true)
-            toggleTeacher(true)
+            // toggleNameEdit(true)
+            // toggleMoreEdit(true)
+            // toggleTeacher(true)
     };
 
     return (
@@ -127,7 +128,7 @@ function UserKyudo(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
+                                <KyudoSuccess handleDateChange={handleDateChange} toggleNameEdit={toggleNameEdit} toggleMoreEdit={toggleMoreEdit} toggleTeacher={toggleTeacher}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
@@ -141,7 +142,7 @@ function UserKyudo(props) {
                                     id="student_rank"
                                     name="student_rank"
                                     label="Current Kyudo Rank"
-                                    defaultValue={props.store.info.student_rank}
+                                    value={props.store.editInfo.student_rank}
                                     onChange={(event) => name(event)}
                                 >
                                     {ranks.map((rank, id) => {
@@ -205,7 +206,7 @@ function UserKyudo(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <EditInfoSuccessDialog handleDateChange={handleDateChange}/>
+                                <KyudoSuccess handleDateChange={handleDateChange} toggleNameEdit={toggleNameEdit} toggleMoreEdit={toggleMoreEdit} toggleTeacher={toggleTeacher}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
@@ -220,7 +221,7 @@ function UserKyudo(props) {
                                     label="Teaching Rank"
                                     name="teaching_rank"
                                     width="70px"
-                                    defaultValue={props.store.info.teaching_rank}
+                                    value={props.store.editInfo.teaching_rank}
                                     onChange={(event) => name(event)}
                                 >
                                     {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
@@ -289,7 +290,7 @@ function UserKyudo(props) {
                             </Grid>
                             <Grid item xs={1}>
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
-                                <EditInfoSuccessDialog handleDateChange={handleMoreChange}/>
+                                <KyudoSuccess handleDateChange={handleDateChange} toggleNameEdit={toggleNameEdit} toggleMoreEdit={toggleMoreEdit} toggleTeacher={toggleTeacher}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                 <Button onClick={handleDateReset}>Cancel</Button>
                             </Grid>
