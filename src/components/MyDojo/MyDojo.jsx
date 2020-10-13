@@ -36,8 +36,8 @@ function MyDojo(props) {
       {props.store.myDojo.map((member, id) => {
         return (
         <Paper 
-          elevation={10}
-          style={{padding:20, margin:20}}>
+          elevation={5}
+          style={{padding:10, margin:20}}>
             <Grid container justify="center" alignItems="center">
               <Grid item xs={4} align="left">
                 <Typography variant="overline" display="block">
