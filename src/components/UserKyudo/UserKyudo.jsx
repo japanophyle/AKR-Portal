@@ -102,6 +102,10 @@ function UserKyudo(props) {
                 type: 'ADD_RANK',
                 payload:  props.store.editInfo 
             })
+            toggleNameEdit(true)
+            toggleMoreEdit(true)
+            toggleTeacher(true)
+
     }
 
     return (
