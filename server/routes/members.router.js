@@ -111,6 +111,7 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
   if (req.user.auth_level >= 5) {
 
   const client = await pool.connect();
+  
   try {
     const firstQuery = `
     SELECT "user_data".dojo_id FROM "user_data"
@@ -125,13 +126,14 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
     `;
     await client.query('BEGIN');
     // await client.query(firstQuery, [req.user.id]);
-    userDojoId = await client.query(firstQuery, [[req.user.id]]);
+    userDojoId = await client.query(firstQuery, [req.user.id]);
     userDojoId = userDojoId.rows[0].dojo_id;
     // console.log('we got the userDojoId',userDojoId);
     response = await client.query(secondQuery, [userDojoId]);
     await client.query('COMMIT');
     // set our response deals to send back
     res.send(response.rows)
+    // res.send('idk')
     // res.sendStatus(200);
   } catch (error) {
     console.log('error in mydojo get', error);
