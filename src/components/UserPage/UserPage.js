@@ -23,6 +23,7 @@ class UserPage extends Component {
       type: "FETCH_USER_INFO",
       payload: this.props.match.params.id
     })
+    this.props.dispatch({ type: 'GET_RANKS'})
   }
 
   getMyDojo = () => {

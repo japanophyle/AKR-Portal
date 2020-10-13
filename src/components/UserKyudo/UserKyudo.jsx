@@ -4,6 +4,9 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { MenuItem, Select, InputLabel, FormControl, Typography, Button, Card, CardContent, Grid, TextField, Tooltip, IconButton } from '@material-ui/core';
 import moment from 'moment';
 import EditIcon from '@material-ui/icons/Edit';
+import TimelineIcon from '@material-ui/icons/Timeline';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import UserRankHistory from '../UserRankHistory/UserRankHistory.jsx'
 
 // dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
@@ -31,6 +34,7 @@ function UserKyudo(props) {
     const [nameEdit, toggleNameEdit] = useState(true);
     const [moreEdit, toggleMoreEdit] = useState(true);
     const [teacherEdit, toggleTeacher] = useState(true);
+    const [historyEdit, toggleHistory] = useState(true);
 
     // functions used to toggle edit and non edit views
     const handleDateChange = (date) => {
@@ -41,6 +45,9 @@ function UserKyudo(props) {
     };
     const handleTeacherChange = (date) => {
         toggleTeacher(!teacherEdit);
+    };
+    const handleHistoryChange = () => {
+        toggleHistory(!historyEdit);
     };
 
     // function that dispatches to the edit reducer whenever an edit is made to an input
@@ -114,6 +121,22 @@ function UserKyudo(props) {
                             
                             
                         </Typography>
+                        {historyEdit ?
+                        <Tooltip title="Show Rank History">
+                            <IconButton  onClick={handleHistoryChange} >
+                                <TimelineIcon fontSize="large" color="primary"/>
+                            </IconButton>
+                        </Tooltip>
+                        :
+                        <>
+                        <Tooltip title="Hide Rank History">
+                            <IconButton  onClick={handleHistoryChange} >
+                                <VisibilityOffIcon fontSize="large" color="primary"/>
+                            </IconButton>
+                        </Tooltip>
+                        <UserRankHistory />
+                        </>
+                        }
                     </CardContent>
                 </Card>
                 :
@@ -165,6 +188,22 @@ function UserKyudo(props) {
                             />
                         
                         </Typography>
+                        {historyEdit ?
+                        <Tooltip title="Show Rank History">
+                            <IconButton  onClick={handleHistoryChange} >
+                                <TimelineIcon fontSize="large" color="primary"/>
+                            </IconButton>
+                        </Tooltip>
+                        :
+                        <>
+                        <Tooltip title="Hide Rank History">
+                            <IconButton  onClick={handleHistoryChange} >
+                                <VisibilityOffIcon fontSize="large" color="primary"/>
+                            </IconButton>
+                        </Tooltip>
+                        <UserRankHistory />
+                        </>
+                        }
                     </CardContent>
                     </form>
                 </Card>
