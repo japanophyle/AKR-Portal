@@ -13,13 +13,13 @@ router.put('/activate', rejectUnauthenticated, (req, res) => {
     SET "auth_level" = 5
     WHERE "user".id = $1;`
 
-    if (req.user.auth_level >= 10) {
-  pool.query(queryText, [req.body.id])
-    .then(result => { res.sendStatus(200) })
-    .catch(err => {
-      console.log('error with activate user route', err);
-      res.sendStatus(500);
-    })
+  if (req.user.auth_level >= 10) {
+    pool.query(queryText, [req.body.id])
+      .then(result => { res.sendStatus(200) })
+      .catch(err => {
+        console.log('error with activate user route', err);
+        res.sendStatus(500);
+      })
   } else {
     res.sendStatus(403);
   }
@@ -34,13 +34,13 @@ router.put('/deactivate', rejectUnauthenticated, (req, res) => {
     SET "auth_level" = 0
     WHERE "user".id = $1;`
 
-    if (req.user.auth_level >= 10) {
-  pool.query(queryText, [req.body.id])
-    .then(result => { res.sendStatus(200) })
-    .catch(err => {
-      console.log('error with activate user route', err);
-      res.sendStatus(500);
-    })
+  if (req.user.auth_level >= 10) {
+    pool.query(queryText, [req.body.id])
+      .then(result => { res.sendStatus(200) })
+      .catch(err => {
+        console.log('error with activate user route', err);
+        res.sendStatus(500);
+      })
   } else {
     res.sendStatus(403);
   }
@@ -48,27 +48,65 @@ router.put('/deactivate', rejectUnauthenticated, (req, res) => {
 
 // GET ALL ACTIVE MEMBERS
 // WHERE "user_data".is_current_member = TRUE
-router.get('/active/:id', rejectUnauthenticated, (req, res) => {
-  console.log(req.params.id)
+router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
+  console.log('GET active member. Dojo id:', req.params.id)
+
+  const dojoAdminQueryText = `
+    SELECT "user_data".dojo_id FROM "user_data"
+    WHERE "user_data".user_id = $1 LIMIT 1;`
+
   const queryText = `
-  SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
-  JOIN "user_data" ON "user".id = "user_data".user_id
-  JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-  WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
+    SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
+    JOIN "user_data" ON "user".id = "user_data".user_id
+    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1 AND $2 = $3;
     `;
-    if (req.user.auth_level >= 10) {
-  pool
-    .query(queryText, [req.params.id])
-    .then((response) => {
-      const result = response.rows;
-      console.log('active member response from db:', result);
-      res.send(result)
-    }
-    )
-    .catch(error => {
-      console.log('error in /api/members/active get:', error);
+
+  if (req.user.auth_level === 10) {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+
+      //first query to get the admin dojo_id if they are auth_level 10
+      let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
+      adminDojoId = adminDojoId.rows[0].dojo_id
+
+      response = await client.query(queryText, [req.params.id, adminDojoId, req.params.id]);
+
+      await client.query('COMMIT');
+      console.log(response.rows);
+      res.send(response.rows)
+
+    } catch (error) {
+      console.log('Error in GET active members auth_lvl 10 access', error);
+      await client.query('ROLLBACK');
       res.sendStatus(500);
-    })
+
+    } finally {
+      await client.release();
+
+    }
+  } else if (req.user.auth_level >= 20) {
+
+    const siteAdminQueryText = `
+    SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
+    JOIN "user_data" ON "user".id = "user_data".user_id
+    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
+    `
+
+    // 
+    pool.query(siteAdminQueryText, [req.params.id])
+      .then(result => {
+        res.send(result.rows)
+
+      })
+      .catch(error => {
+        console.log('Error in GET active members auth_level 20', error);
+        res.sendStatus(500)
+
+      })
+
   } else {
     res.sendStatus(403);
   }
@@ -76,28 +114,62 @@ router.get('/active/:id', rejectUnauthenticated, (req, res) => {
 //  "user_data".is_current_member = FALSE OR 
 // GET ALL INACTIVE MEMBERS
 
-router.get('/inactive/:id', rejectUnauthenticated, (req, res) => {
+router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
+  console.log('GET inactive member. Dojo id:', req.params.id)
+
+  const dojoAdminQueryText = `
+    SELECT "user_data".dojo_id FROM "user_data"
+    WHERE "user_data".user_id = $1 LIMIT 1;`
 
   const queryText = `
     SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
     JOIN "user_data" ON "user".id = "user_data".user_id
     JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1;
-    `;
+    WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1 AND $2 = $3;
+    `
 
-    if (req.user.auth_level >= 10) {
-  pool
-    .query(queryText, [req.params.id])
-    .then((response) => {
-      const result = response.rows;
-      console.log('inactive member response from db:', result);
-      res.send(result)
-    }
-    )
-    .catch(error => {
-      console.log('error in /api/members/active get:', error);
+  if (req.user.auth_level === 10) {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+
+      //first query to get the admin dojo_id if they are auth_level 10
+      let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
+      adminDojoId = adminDojoId.rows[0].dojo_id
+
+      response = await client.query(queryText, [req.params.id, adminDojoId, req.params.id]);
+
+      await client.query('COMMIT');
+
+      res.send(response.rows)
+
+    } catch (error) {
+      console.log('Error in GET inactive members auth_lvl 10 access', error);
+      await client.query('ROLLBACK');
       res.sendStatus(500);
-    })
+
+    } finally {
+      await client.release();
+
+    }
+  } else if (req.user.auth_level >= 20) {
+
+    const siteAdminQueryText = `
+      SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
+      JOIN "user_data" ON "user".id = "user_data".user_id
+      JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+      WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1;
+      `
+
+    // 
+    pool.query(siteAdminQueryText, [req.params.id])
+      .then(result => {
+        res.send(result.rows)
+      })
+      .catch(error => {
+        console.log('Error in GET inactive members auth_level 20 access', error);
+        res.sendStatus(500)
+      })
   } else {
     res.sendStatus(403);
   }
@@ -110,39 +182,52 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
 
   if (req.user.auth_level >= 5) {
 
-  const client = await pool.connect();
-  try {
-    const firstQuery = `
+    const client = await pool.connect();
+
+    try {
+
+      const firstQuery = `
     SELECT "user_data".dojo_id FROM "user_data"
     WHERE "user_data".user_id = $1 LIMIT 1;
     `;
-    const secondQuery = `
+
+      const secondQuery = `
     SELECT "user_data".fname, "user_data".lname,
     "user_data".fname_japanese, "user_data".lname_japanese, 
     "user_data".student_rank, "user_data".teaching_rank 
     FROM "user_data"
     WHERE "user_data".dojo_id = $1;
     `;
-    await client.query('BEGIN');
-    // await client.query(firstQuery, [req.user.id]);
-    userDojoId = await client.query(firstQuery, [[req.user.id]]);
-    userDojoId = userDojoId.rows[0].dojo_id;
-    // console.log('we got the userDojoId',userDojoId);
-    response = await client.query(secondQuery, [userDojoId]);
-    await client.query('COMMIT');
-    // set our response deals to send back
-    res.send(response.rows)
-    // res.sendStatus(200);
-  } catch (error) {
-    console.log('error in mydojo get', error);
-    await client.query('ROLLBACK');
-    res.sendStatus(500);
-  } finally {
-    await client.release();
+
+      await client.query('BEGIN');
+
+      // await client.query(firstQuery, [req.user.id]);
+      userDojoId = await client.query(firstQuery, [[req.user.id]]);
+
+      userDojoId = userDojoId.rows[0].dojo_id;
+      // console.log('we got the userDojoId',userDojoId);
+
+      response = await client.query(secondQuery, [userDojoId]);
+
+      await client.query('COMMIT');
+
+      // set our response deals to send back
+      res.send(response.rows)
+
+      // res.sendStatus(200);
+    } catch (error) {
+      console.log('error in mydojo get', error);
+
+      await client.query('ROLLBACK');
+      res.sendStatus(500);
+
+    } finally {
+      await client.release();
+
+    }
+  } else {
+    res.sendStatus(403)
   }
-} else {
-  res.sendStatus(403)
-}
 })
 
 
@@ -161,19 +246,19 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       DELETE FROM "user"
       WHERE "id" = $1;
       `
-      if (req.user.auth_level >= 5) {
+  if (req.user.auth_level >= 5) {
 
-  pool.query(queryText, [req.params.id])
-      .then( (result) => {
-      res.sendStatus(200);
-  })
-  .catch( (error) => {
-      console.log('Error in delete', error);
-      res.sendStatus(500);
-  })
-} else {
-  res.sendStatus(403)
-}
+    pool.query(queryText, [req.params.id])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('Error in delete', error);
+        res.sendStatus(500);
+      })
+  } else {
+    res.sendStatus(403)
+  }
 });
 
 module.exports = router;
