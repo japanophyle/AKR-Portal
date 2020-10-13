@@ -23,7 +23,7 @@ class UserRankHistoryItem extends Component {
             swal(`${this.props.rank.rank_name} has been removed!`, {
                 icon: "success",
             });
-            this.props.dispatch({ type: 'REMOVE_RANK', payload: id})
+            this.props.dispatch({ type: 'REMOVE_RANK', payload: { rank_id: id, user_id: this.props.store.info.user_id } })
         } else {
             swal(`${this.props.rank.rank_name} was not removed!`);
         }

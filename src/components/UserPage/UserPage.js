@@ -18,12 +18,12 @@ class UserPage extends Component {
 
 // this component doesn't do much to start, just renders some user info to the DOM
   componentDidMount = () => {
-    console.log('gonna get the profile');
+    console.log(this.props.store.info.user_id);
     this.props.dispatch({
       type: "FETCH_USER_INFO",
       payload: this.props.match.params.id
     })
-    this.props.dispatch({ type: 'GET_RANKS'})
+    this.props.dispatch({ type: 'GET_RANKS', payload: this.props.match.params.id })
   }
 
   getMyDojo = () => {
@@ -31,7 +31,6 @@ class UserPage extends Component {
     this.props.dispatch({
       type: "GET_MY_DOJO"
     })
-
   }
 
     render() {
