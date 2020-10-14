@@ -6,6 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 function EditInfoSuccessDialog(props) {
     const [open, setOpen] = React.useState(false);
 
+    // checks if the edit has an empty mandetory field
     const handleClickOpen = () => {
         if (props.store.editInfo.fname == "" ||
             props.store.editInfo.lname == "" ||
@@ -35,7 +36,8 @@ function EditInfoSuccessDialog(props) {
         <div>
             <Button type="submit" variant="contained" color="primary"
                 onClick={handleClickOpen}
-            >
+                style={{margin:5}}
+                >
                 Submit
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
