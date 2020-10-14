@@ -61,7 +61,7 @@ const handleSave = () => {
           {/* <MenuItem value="">
             <em>{auth}</em>
           </MenuItem> */}
-          <MenuItem value={0}>Inactive</MenuItem>
+          {/* <MenuItem value={0}>Inactive</MenuItem> */}
           <MenuItem value={5}>Member</MenuItem>
           <MenuItem value={10}>Dojo Admin</MenuItem>
           <MenuItem value={20}>National Admin</MenuItem>
@@ -90,7 +90,7 @@ const handleSave = () => {
           {/* <MenuItem value="">
             <em>{auth}</em>
           </MenuItem> */}
-          <MenuItem value={0}>Inactive</MenuItem>
+          {/* <MenuItem value={0}>Inactive</MenuItem> */}
           <MenuItem value={5}>Member</MenuItem>
           <MenuItem value={10}>Dojo Admin</MenuItem>          
         </Select>

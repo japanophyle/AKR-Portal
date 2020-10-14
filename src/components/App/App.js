@@ -22,7 +22,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import InactiveView from '../InactiveView/InactiveView'
+import InactiveView from '../InactiveView/InactiveView';
+import NationalStudentList from '../NationalStudentList/NationalStudentList';
 
 import './App.css';
 import MemberList from '../MemberList/MemberList';
@@ -38,7 +39,7 @@ class App extends Component {
     this.props.dispatch({ type: 'GET_DOJOS' });
     this.props.dispatch({
       type: "FETCH_USER_INFO",
-      payload: 'user',
+      payload: "user"
     })
   }
 
@@ -84,6 +85,7 @@ class App extends Component {
               dojoAdminRedirect="/mydojo"
               siteAdminRedirect="/nationdojos"
             />
+
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/new-user-registration"
@@ -93,6 +95,7 @@ class App extends Component {
               component={RegisterPage}
               authRedirect="/new-user-registration"
             />
+
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
@@ -103,8 +106,7 @@ class App extends Component {
             // authRedirect="/mydojo"
             />
 
-
-            <UserAuthRoute
+            <UserAuthRoute 
               exact
               path="/mydojo"
               component={MyDojo}
@@ -121,12 +123,18 @@ class App extends Component {
               path="/nationdojos"
               component={DojoList}
             />
+
             <SiteAdminAuthRoute
               exact
               path="/createdojo"
               component={CreateDojo}
             />
 
+            <SiteAdminAuthRoute
+              exact
+              path="/nationalstudentlist"
+              component={NationalStudentList}
+            />
             <ProtectedRoute
               path="/inactive"
               component={InactiveView}
