@@ -231,7 +231,6 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
     WHERE "user_data".dojo_id = $1;
     `;
 
-
       await client.query('BEGIN');
 
       // console.log(req.user.id)

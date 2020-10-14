@@ -67,7 +67,7 @@ function* updateUserData(action) {
     // ALso refresh the dojo list 
     const id = action.payload.dojo_id
     yield put({ type: 'GET_ACTIVE_USERS', payload: id })
-    yield put({ type: 'GET_INACTIVE_USERS', payload: id })
+    // yield put({ type: 'GET_INACTIVE_USERS', payload: id })
   } catch (error) {
     console.log('User_data PUT request failed', error);
   }
