@@ -7,18 +7,34 @@ function EditInfoSuccessDialog(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
-        setOpen(true);
+        if (props.store.editInfo.fname == "" ||
+            props.store.editInfo.lname == "" ||
+            props.store.editInfo.adress_1 == "" ||
+            props.store.editInfo.city == "" ||
+            props.store.editInfo.state == "" ||
+            props.store.editInfo.country == "" ||
+            props.store.editInfo.date_of_birth == "" ||
+            props.store.editInfo.email == "" ||
+            props.store.editInfo.gender == "" ||
+            props.store.editInfo.phone_number == "" ||
+            props.store.editInfo.years_practiced == "" ||
+            props.store.editInfo.zipcode == ""
+        ) {
+
+        } else {
+            setOpen(true);
+        }
     };
 
     const handleClose = () => {
-        setOpen(false); 
-       props.handleDateChange()
+        setOpen(false);
+        props.handleDateChange()
     };
 
     return (
         <div>
-            <Button type="submit" variant="contained" color="primary" 
-            onClick={handleClickOpen}
+            <Button type="submit" variant="contained" color="primary"
+                onClick={handleClickOpen}
             >
                 Submit
             </Button>
@@ -39,4 +55,4 @@ function EditInfoSuccessDialog(props) {
     );
 }
 
-export default  connect(mapStoreToProps)(EditInfoSuccessDialog)
+export default connect(mapStoreToProps)(EditInfoSuccessDialog)
