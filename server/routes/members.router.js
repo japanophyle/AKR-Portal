@@ -265,7 +265,8 @@ router.get(`/search/:term`, rejectUnauthenticated, (req, res) => {
 
   if (req.user.auth_level >= 5) {
   queryText = `
-  SELECT "user_data".* FROM "user_data" 
+  SELECT "user_data".*, "user".* FROM "user_data" 
+  JOIN "user" ON "user_data".user_id = "user".id
   WHERE "user_data".fname ILIKE '%' || $1 || '%';
   `;
   // LIMIT ?
