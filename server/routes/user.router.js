@@ -12,7 +12,7 @@ const router = express.Router();
 
 // NEW USER POST
 router.post('/profile', rejectUnauthenticated, async (req, res) => {
-    const query = `
+  const query = `
     INSERT INTO "user_data" (
       "fname", 
       "lname", 
@@ -48,53 +48,53 @@ router.post('/profile', rejectUnauthenticated, async (req, res) => {
       $21, $22, $23, $24, $25, $26, $27
     );
     `;
-    pool
-      .query(query, [
-        req.body.fname, // $1
-        req.body.lname, // $2
-        // not using this, since it'll be the logged in user:
-        // req.body.user_id,
-        // using this instead:
-        req.user.id, // $3
-        req.body.email, // $4
-        req.body.phone_number, // $5
-        // dojo_id will be sent over as an integer value from client
-        req.body.dojo_id, // $6
-        req.body.fname_japanese, // $7
-        req.body.lname_japanese, // $8
-        // student_rank will be sent over and stored as a string
-        req.body.student_rank, // $9
-        req.body.date_student_rank, // $10
-        // likewise with teaching rank
-        req.body.teaching_rank, // $11
-        req.body.date_teaching_rank, // $12
-        req.body.ikyf, // $13
-        req.body.age, // $14
-        req.body.years_practice, // $15
-        req.body.address_1, // $16
-        req.body.address_2, // $17
-        req.body.city, // $18
-        req.body.state, // $19
-        req.body.country, // $20
-        req.body.zipcode, // $21
-        req.body.gender, // $22
-        req.body.date_of_birth, // $23
-        req.body.date_began_kyudo, // $24
-        req.body.citizenship, // $25
-        req.body.usa_archery_id, // $26
-        req.body.is_current_member, // $27
-      ])
-      .then(
-        () => {
-          res.sendStatus(201)
-        }
-      )
-      .catch(
-        error => {
-          console.log('error in /api/user/profile post:', error);
-          res.sendStatus(500);
-        }
-      )
+  pool
+    .query(query, [
+      req.body.fname, // $1
+      req.body.lname, // $2
+      // not using this, since it'll be the logged in user:
+      // req.body.user_id,
+      // using this instead:
+      req.user.id, // $3
+      req.body.email, // $4
+      req.body.phone_number, // $5
+      // dojo_id will be sent over as an integer value from client
+      req.body.dojo_id, // $6
+      req.body.fname_japanese, // $7
+      req.body.lname_japanese, // $8
+      // student_rank will be sent over and stored as a string
+      req.body.student_rank, // $9
+      req.body.date_student_rank, // $10
+      // likewise with teaching rank
+      req.body.teaching_rank, // $11
+      req.body.date_teaching_rank, // $12
+      req.body.ikyf, // $13
+      req.body.age, // $14
+      req.body.years_practice, // $15
+      req.body.address_1, // $16
+      req.body.address_2, // $17
+      req.body.city, // $18
+      req.body.state, // $19
+      req.body.country, // $20
+      req.body.zipcode, // $21
+      req.body.gender, // $22
+      req.body.date_of_birth, // $23
+      req.body.date_began_kyudo, // $24
+      req.body.citizenship, // $25
+      req.body.usa_archery_id, // $26
+      req.body.is_current_member, // $27
+    ])
+    .then(
+      () => {
+        res.sendStatus(201)
+      }
+    )
+    .catch(
+      error => {
+        console.log('error in /api/user/profile post:', error);
+        res.sendStatus(500);
+      }
+    )
 });
 
 
@@ -124,21 +124,21 @@ router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
     console.log('userToGet = ', userToGet);
     userToGet = req.user.id
     // just do the regular thing
-      pool
+    pool
       .query(queryText, [userToGet])
-        .then(response => {
-          console.log('/api/user/profile get response:', response.rows[0]);
-          // GET routes don't send res.sendStatuses
-          res.send(response.rows[0])
-          client.release();
-        })
-        .catch(error => {
-          console.log('error in /api/user/profile get:', error);
-          res.sendStatus(500);
-          client.release();
-        })
-  // else if the user is getting another user's info...
-  } else if (Number.isInteger( Number(userToGet) )) {
+      .then(response => {
+        console.log('/api/user/profile get response:', response.rows[0]);
+        // GET routes don't send res.sendStatuses
+        res.send(response.rows[0])
+        client.release();
+      })
+      .catch(error => {
+        console.log('error in /api/user/profile get:', error);
+        res.sendStatus(500);
+        client.release();
+      })
+    // else if the user is getting another user's info...
+  } else if (Number.isInteger(Number(userToGet))) {
     userToGet = Number(userToGet);
     // console.log(`${userToGet} times 2 is ${userToGet + userToGet}`);
     // get their auth level from DB first
@@ -190,8 +190,8 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     who = req.body.id
   }
 
-  const queryText = 
-  `UPDATE "user_data" 
+  const queryText =
+    `UPDATE "user_data" 
     SET
       "fname" = $1,
       "lname" = $2,
@@ -225,7 +225,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
       "dues_method" = $31,
       "notes" = $32,
       equipment_checkout = $33
-      WHERE "id" = $3;`;      
+      WHERE "id" = $3;`;
   pool.query(queryText, [
     req.body.fname, // $1
     req.body.lname, // $2
@@ -267,14 +267,14 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     req.body.notes, // $32
     req.body.equipment_checkout // $33
   ])
-  .then(response => {
-    console.log('/api/user/edit PUT');
-    res.sendStatus(200)
-  })
-  .catch(error => {
-    console.log('error in /api/user/edit PUT:', error);
-    res.sendStatus(500);
-  })
+    .then(response => {
+      console.log('/api/user/edit PUT');
+      res.sendStatus(200)
+    })
+    .catch(error => {
+      console.log('error in /api/user/edit PUT:', error);
+      res.sendStatus(500);
+    })
 })
 
 

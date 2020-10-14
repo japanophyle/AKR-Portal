@@ -62,7 +62,6 @@ class DojoDues extends Component {
     };
 
     render() {
-        console.log(this.state.newDues);
         return (
             <div>
                 <Button

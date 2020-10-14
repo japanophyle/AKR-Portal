@@ -97,13 +97,13 @@ router.put('/dues', rejectUnauthenticated, (req, res) => {
         WHERE "dojo_id" = $3;    
         `;
 
-        if (req.user.auth_level >= 10) {
-    pool.query(updateDuesQuery, [dues_amount, dues_date, dojo_id])
-        .then(result => { res.sendStatus(200) })
-        .catch(err => {
-            console.log('Error in /dues route', err);
-            res.sendStatus(500)
-        });
+    if (req.user.auth_level >= 10) {
+        pool.query(updateDuesQuery, [dues_amount, dues_date, dojo_id])
+            .then(result => { res.sendStatus(200) })
+            .catch(err => {
+                console.log('Error in /dues route', err);
+                res.sendStatus(500)
+            });
     } else {
         res.sendStatus(403)
     }

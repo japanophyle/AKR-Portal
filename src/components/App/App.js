@@ -38,6 +38,7 @@ class App extends Component {
     this.props.dispatch({ type: 'GET_DOJOS' });
     this.props.dispatch({
       type: "FETCH_USER_INFO",
+      payload: "user"
     })
   }
 

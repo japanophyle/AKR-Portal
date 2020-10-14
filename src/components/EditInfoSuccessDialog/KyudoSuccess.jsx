@@ -22,6 +22,7 @@ function KyudoSuccess(props) {
         <div>
             <Button type="submit" variant="contained" color="primary" 
             onClick={handleClickOpen}
+            style={{margin:5}}
             >
                 Submit
             </Button>
