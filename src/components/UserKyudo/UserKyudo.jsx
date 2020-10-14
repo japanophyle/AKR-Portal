@@ -130,7 +130,9 @@ function UserKyudo(props) {
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
                                 <KyudoSuccess handleDateChange={handleDateChange} toggleNameEdit={toggleNameEdit} toggleMoreEdit={toggleMoreEdit} toggleTeacher={toggleTeacher}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
-                                <Button onClick={handleDateReset}>Cancel</Button>
+                                <Button onClick={handleDateReset}
+                                style={{margin:5}}
+                                >Cancel</Button>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
@@ -208,7 +210,9 @@ function UserKyudo(props) {
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
                                 <KyudoSuccess handleDateChange={handleDateChange} toggleNameEdit={toggleNameEdit} toggleMoreEdit={toggleMoreEdit} toggleTeacher={toggleTeacher}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
-                                <Button onClick={handleDateReset}>Cancel</Button>
+                                <Button onClick={handleDateReset}
+                                style={{margin:5}}
+                                >Cancel</Button>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
@@ -292,7 +296,9 @@ function UserKyudo(props) {
                                 {/* THis button will dispatch all changed to the PUT saga/reducer */}
                                 <KyudoSuccess handleDateChange={handleDateChange} toggleNameEdit={toggleNameEdit} toggleMoreEdit={toggleMoreEdit} toggleTeacher={toggleTeacher}/>
                                 {/* cancel will turn the values in the edit reducer back to original info reducer */}
-                                <Button onClick={handleDateReset}>Cancel</Button>
+                                <Button onClick={handleDateReset}
+                                style={{margin:5}}
+                                >Cancel</Button>
                             </Grid>
                         </Grid>
                         <Typography variant="h6">
