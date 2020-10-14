@@ -78,68 +78,61 @@ router.put('/deactivate', rejectUnauthenticated, (req, res) => {
 
 // GET ALL ACTIVE MEMBERS
 // WHERE "user_data".is_current_member = TRUE
-router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
-  console.log('GET active member. Dojo id:', req.params.id)
+router.get('/active/:id', rejectUnauthenticated, (req, res) => {
 
-  const dojoAdminQueryText = `
-    SELECT "user_data".dojo_id FROM "user_data"
-    WHERE "user_data".user_id = $1 LIMIT 1;`
+  let membersToGet = req.params.id;
+  console.log(membersToGet);
+  
+  if (membersToGet === 'national') {
+    const queryText = `
+      SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
+      JOIN "user_data" ON "user".id = "user_data".user_id
+      JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+      WHERE "user".auth_level > 0;
+      `;
 
-  const queryText = `
-    SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
-    JOIN "user_data" ON "user".id = "user_data".user_id
-    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1 AND $2 = $3;
-    `;
+      if (req.user.auth_level >= 10) {
+        pool
+          .query(queryText)
+          .then((response) => {
+            const result = response.rows;
+            console.log('active member response from db:', result);
+            res.send(result)
+          }
+          )
+          .catch(error => {
+            console.log('error in /api/members/active get:', error);
+            res.sendStatus(500);
+          })
+        } else {
+          res.sendStatus(403);
+        }
+  } else if ( Number.isInteger(Number(membersToGet)) ) {
+    const queryText = `
+      SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
+      JOIN "user_data" ON "user".id = "user_data".user_id
+      JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+      WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
+      `;
 
-  if (req.user.auth_level === 10) {
-    const client = await pool.connect();
-    try {
-      await client.query('BEGIN');
-
-      //first query to get the admin dojo_id if they are auth_level 10
-      let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
-      adminDojoId = adminDojoId.rows[0].dojo_id
-
-      response = await client.query(queryText, [req.params.id, adminDojoId, req.params.id]);
-
-      await client.query('COMMIT');
-      console.log(response.rows);
-      res.send(response.rows)
-
-    } catch (error) {
-      console.log('Error in GET active members auth_lvl 10 access', error);
-      await client.query('ROLLBACK');
-      res.sendStatus(500);
-
-    } finally {
-      await client.release();
-
-    }
-  } else if (req.user.auth_level >= 20) {
-
-    const siteAdminQueryText = `
-    SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
-    JOIN "user_data" ON "user".id = "user_data".user_id
-    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
-    `
-
-    // 
-    pool.query(siteAdminQueryText, [req.params.id])
-      .then(result => {
-        res.send(result.rows)
-
-      })
+    if (req.user.auth_level >= 10) {
+    pool
+      .query(queryText, [req.params.id])
+      .then((response) => {
+        const result = response.rows;
+        console.log('active member response from db:', result);
+        res.send(result)
+      }
+      )
       .catch(error => {
-        console.log('Error in GET active members auth_level 20', error);
-        res.sendStatus(500)
-
+        console.log('error in /api/members/active get:', error);
+        res.sendStatus(500);
       })
-
-  } else {
-    res.sendStatus(403);
+    } else {
+      res.sendStatus(403);
+    }
   }
+
 });
 //  "user_data".is_current_member = FALSE OR 
 // GET ALL INACTIVE MEMBERS
@@ -267,6 +260,31 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
   }
 })
 
+router.get(`/search/:term`, rejectUnauthenticated, (req, res) => {
+  console.log(req.params.term);
+
+  if (req.user.auth_level >= 5) {
+  queryText = `
+  SELECT "user_data".*, "user".* FROM "user_data" 
+  JOIN "user" ON "user_data".user_id = "user".id
+  WHERE "user_data".fname ILIKE '%' || $1 || '%';
+  `;
+  // LIMIT ?
+  pool
+    .query(queryText, [req.params.term])
+    .then( (result) => {
+      res.send(result.rows);
+    })
+    .catch(
+      (error) => {
+        console.log('Error in search', error);
+        res.sendStatus(500);
+      })
+  } else {
+    res.sendStatus(403)
+  }
+})
+
 
 /**
  * POST route template
@@ -285,17 +303,17 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       `
   if (req.user.auth_level >= 5) {
 
-    pool.query(queryText, [req.params.id])
-      .then((result) => {
-        res.sendStatus(200);
-      })
-      .catch((error) => {
-        console.log('Error in delete', error);
-        res.sendStatus(500);
-      })
-  } else {
-    res.sendStatus(403)
-  }
+  pool.query(queryText, [req.params.id])
+      .then( (result) => {
+      res.sendStatus(200);
+  })
+  .catch( (error) => {
+      console.log('Error in delete', error);
+      res.sendStatus(500);
+  })
+} else {
+  res.sendStatus(403)
+}
 });
 
 module.exports = router;
