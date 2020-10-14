@@ -89,7 +89,7 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
     SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
     JOIN "user_data" ON "user".id = "user_data".user_id
     JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1 AND $2 = $3;
+    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1 AND $2 = $1;
     `;
 
   if (req.user.auth_level === 10) {
@@ -101,7 +101,7 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
       let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
       adminDojoId = adminDojoId.rows[0].dojo_id
 
-      response = await client.query(queryText, [req.params.id, adminDojoId, req.params.id]);
+      response = await client.query(queryText, [req.params.id, adminDojoId]);
 
       await client.query('COMMIT');
       console.log(response.rows);
@@ -155,7 +155,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
     SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
     JOIN "user_data" ON "user".id = "user_data".user_id
     JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1 AND $2 = $3;
+    WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1 AND $2 = $1;
     `
 
   if (req.user.auth_level === 10) {
@@ -167,7 +167,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
       let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
       adminDojoId = adminDojoId.rows[0].dojo_id
 
-      response = await client.query(queryText, [req.params.id, adminDojoId, req.params.id]);
+      response = await client.query(queryText, [req.params.id, adminDojoId]);
 
       await client.query('COMMIT');
 
@@ -235,7 +235,7 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
       await client.query('BEGIN');
 
       // await client.query(firstQuery, [req.user.id]);
-      userDojoId = await client.query(firstQuery, [[req.user.id]]);
+      userDojoId = await client.query(firstQuery, [req.user.id]);
 
       userDojoId = userDojoId.rows[0].dojo_id;
       // console.log('we got the userDojoId',userDojoId);

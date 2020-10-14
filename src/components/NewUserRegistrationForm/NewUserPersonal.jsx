@@ -20,8 +20,7 @@ import {
 
 
 function NewUserPersonal(props) {
-    console.log(props.state.date_of_birth);
-
+    
     let age2 = moment().diff(props.state.date_of_birth, 'years')
     const [heading, setHeading] = useState('Personal Info');
 

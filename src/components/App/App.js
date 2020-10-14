@@ -38,6 +38,7 @@ class App extends Component {
     this.props.dispatch({ type: 'GET_DOJOS' });
     this.props.dispatch({
       type: "FETCH_USER_INFO",
+      payload: 'user',
     })
   }
 
@@ -68,8 +69,6 @@ class App extends Component {
               component={UserPage}
             />
 
-            
-
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
@@ -80,7 +79,10 @@ class App extends Component {
               exact
               path="/login"
               component={LoginPage}
-              authRedirect="/mydojo"
+              authRedirect="/inactive"
+              memberRedirect="/mydojo"
+              dojoAdminRedirect="/mydojo"
+              siteAdminRedirect="/nationdojos"
             />
             <ProtectedRoute
               // with authRedirect:
@@ -98,79 +100,42 @@ class App extends Component {
               exact
               path="/home"
               component={LandingPage}
-              authRedirect="/mydojo"
+            // authRedirect="/mydojo"
             />
 
-            
-            <UserAuthRoute 
+
+            <UserAuthRoute
               exact
               path="/mydojo"
               component={MyDojo}
             />
-          
+
             <DojoAdminAuthRoute
               exact
               path="/memberlist/:id"
               component={MemberList}
             />
-          
+
             <SiteAdminAuthRoute
               exact
-              path="/managedojos"
+              path="/nationdojos"
               component={DojoList}
             />
-              <SiteAdminAuthRoute
+            <SiteAdminAuthRoute
               exact
               path="/createdojo"
               component={CreateDojo}
             />
-            {/* The 3 landing pages below */}
-            {/* <ProtectedRoute
-              exact
-              path="/login"
-              component={MyDojo}
-              authRedirect="/mydojo"
-            />
-            <ProtectedRoute
-              exact
-              path="/login"
-              component={MemberList}
-              authRedirect="/memberlist"
-            />
-              <ProtectedRoute
-              exact
-              path="/login"
-              component={DojoList}
-              authRedirect="/dojolist"
-            />
-            <ProtectedRoute
-              exact
-              path="/login"
-              component={InfoPage}
-              authRedirect="/info"
-            />
-            <ProtectedRoute
-              exact
-              path="/login"
-              component={CreateDojo}
-              authRedirect="/createdojo"
-            />
-             <ProtectedRoute
-              exact
-              path="/403"
-              component={NationalStudentList}
-              authRedirect="/nationalstudentlist"
-            /> */}
 
             <ProtectedRoute
               path="/inactive"
               component={InactiveView}
             />
-          
-          <ProtectedRoute
-           path="/new-user-registration" 
-           component={NewUserRegistrationForm} 
-           />
+
+            <ProtectedRoute
+              path="/new-user-registration"
+              component={NewUserRegistrationForm}
+            />
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
