@@ -22,7 +22,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import InactiveView from '../InactiveView/InactiveView'
+import InactiveView from '../InactiveView/InactiveView';
+import NationalStudentList from '../NationalStudentList/NationalStudentList';
 
 import './App.css';
 import MemberList from '../MemberList/MemberList';
@@ -83,6 +84,7 @@ class App extends Component {
               component={LoginPage}
               authRedirect="/mydojo"
             />
+
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/new-user-registration"
@@ -92,6 +94,7 @@ class App extends Component {
               component={RegisterPage}
               authRedirect="/new-user-registration"
             />
+
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
@@ -101,7 +104,6 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/mydojo"
             />
-
             
             <UserAuthRoute 
               exact
@@ -120,11 +122,19 @@ class App extends Component {
               path="/managedojos"
               component={DojoList}
             />
-              <SiteAdminAuthRoute
+
+            <SiteAdminAuthRoute
               exact
               path="/createdojo"
               component={CreateDojo}
             />
+
+            <SiteAdminAuthRoute
+              exact
+              path="/nationalstudentlist"
+              component={NationalStudentList}
+            />
+
             {/* The 3 landing pages below */}
             {/* <ProtectedRoute
               exact
