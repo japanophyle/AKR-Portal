@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import swal from '@sweetalert/with-react';
-import { TextField, Tooltip, IconButton, TableCell, TableRow } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { Tooltip, IconButton, TableCell, TableRow } from '@material-ui/core';
 import LaunchIcon from '@material-ui/icons/Launch';
 import { withRouter } from "react-router";
+import DojoDeleteDialog from '../DojoDeleteDialog/DojoDeleteDialog.jsx';
 
 class DojoListItem extends Component {
   state = {
@@ -13,21 +12,7 @@ class DojoListItem extends Component {
 
 
   deleteDojo = (id) => {
-    swal({
-        title: "Are you sure?",
-        text: `${this.props.dojo.dojo_name} will be removed!`,
-        icon: "warning",
-        buttons: true,
-    }).then((toDelete) => {
-        if (toDelete) {
-            swal(`${this.props.dojo.dojo_name} has been removed!`, {
-                icon: "success",
-            });
-            this.props.dispatch({ type: 'REMOVE_DOJO', payload: id})
-        } else {
-            swal(`${this.props.dojo.dojo_name} was not removed!`);
-        }
-    })
+    this.props.dispatch({ type: 'REMOVE_DOJO', payload: id})
   }
 
 
@@ -49,11 +34,7 @@ class DojoListItem extends Component {
               </Tooltip>
             </TableCell>
             <TableCell>
-              <Tooltip title="Delete" >
-                <IconButton onClick={() => this.deleteDojo(this.props.dojo.id)} >
-                    <DeleteIcon color="error" /> 
-                </IconButton>
-              </Tooltip>
+              <DojoDeleteDialog deleteDojo={this.deleteDojo} dojo={this.props.dojo}/>
             </TableCell>
         </TableRow>
       )
