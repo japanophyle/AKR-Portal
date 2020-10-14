@@ -302,19 +302,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       `
   if (req.user.auth_level >= 5) {
 
-<<<<<<< Updated upstream
-    pool.query(queryText, [req.params.id])
-      .then((result) => {
-        res.sendStatus(200);
-      })
-      .catch((error) => {
-        console.log('Error in delete', error);
-        res.sendStatus(500);
-      })
-  } else {
-    res.sendStatus(403)
-  }
-=======
   pool.query(queryText, [req.params.id])
       .then( (result) => {
       res.sendStatus(200);
@@ -326,7 +313,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 } else {
   res.sendStatus(403)
 }
->>>>>>> Stashed changes
 });
 
 module.exports = router;
