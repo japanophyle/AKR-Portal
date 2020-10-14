@@ -207,7 +207,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
 
 // GET *ONLY* NAMES AND RANKS (FOR MY DOJO)
 router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
-  // console.log('in myDojo route')
+  console.log('in myDojo route')
   // console.log(req.user.id);
 
   if (req.user.auth_level >= 5) {
@@ -231,14 +231,17 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
     WHERE "user_data".dojo_id = $1;
     `;
 
-
       await client.query('BEGIN');
 
+      // console.log(req.user.id)
       // await client.query(firstQuery, [req.user.id]);
-      userDojoId = await client.query(firstQuery, [[req.user.id]]);
+      userDojoId = await client.query(firstQuery, [req.user.id]);
+
+      console.log(userDojoId.rows[0].dojo_id)
 
       userDojoId = userDojoId.rows[0].dojo_id;
-      // console.log('we got the userDojoId',userDojoId);
+
+      console.log('we got the userDojoId',userDojoId);
 
       response = await client.query(secondQuery, [userDojoId]);
 
