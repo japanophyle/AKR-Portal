@@ -103,7 +103,7 @@ function UserPayment(props) {
                         <Typography variant="h6">
                             {/* Dues */}
                             <TextField
-                                required
+                                
                                 id="dues_amount"
                                 label="Dues"
                                 defaultValue={props.store.info.dues_amount}
@@ -114,7 +114,7 @@ function UserPayment(props) {
                             <br />
                             {/* Amount paid */}
                             <TextField
-                                required
+                                
                                 id="amount_paid"
                                 label="Amount Paid"
                                 defaultValue={props.store.info.amount_paid}
@@ -126,7 +126,7 @@ function UserPayment(props) {
                             {/* date of the payment */}
                             <TextField
                                 type='Date'
-                                required
+                                
                                 id="dues_date"
                                 label="Date of Payment"
                                 defaultValue={moment(props.store.info.dues_date).format('YYYY-MM-DD')}
@@ -137,7 +137,7 @@ function UserPayment(props) {
                             <br />
                             {/* payment method */}
                             <TextField
-                                required
+                                
                                 id="dues_method"
                                 label="Payment Method"
                                 defaultValue={props.store.info.dues_method}
