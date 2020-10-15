@@ -59,21 +59,21 @@ function UserPersonal(props) {
         <div>
             {/* IF the state is true this a just a view of information */}
             {nameEdit ?
-                <Card>
+                <Card style={{margin:5}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
                                 <h1>Personal Information</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Tooltip title="Edit">
+                                <Tooltip title={<span >Edit</span>}>
                                     <IconButton  onClick={handleDateChange} >
                                         <EditIcon fontSize="large" color="primary"/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             Citizenship: {props.store.info.citizenship}
                             <br />
                             Date of birth: {moment(props.store.info.date_of_birth).format('MM-DD-YYYY')}
@@ -86,7 +86,7 @@ function UserPersonal(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card>
+                <Card style={{margin:5}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={handleSaveEdit} >
                     <CardContent>
@@ -103,7 +103,7 @@ function UserPersonal(props) {
                                 >Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             {/* citizanship */}
                             <TextField
                                 id="citizenship"
