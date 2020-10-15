@@ -78,52 +78,61 @@ router.put('/deactivate', rejectUnauthenticated, (req, res) => {
 
 // GET ALL ACTIVE MEMBERS
 // WHERE "user_data".is_current_member = TRUE
-router.get('/active/:id', rejectUnauthenticated, (req, res) => {
 
-  let membersToGet = req.params.id;
-  console.log(membersToGet);
-  
-  if (membersToGet === 'national') {
-    const queryText = `
-      SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
-      JOIN "user_data" ON "user".id = "user_data".user_id
-      JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-      WHERE "user".auth_level > 0;
-      `;
+router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
+  console.log('GET active member. Dojo id:', req.params.id)
 
-      if (req.user.auth_level >= 10) {
-        pool
-          .query(queryText)
-          .then((response) => {
-            const result = response.rows;
-            console.log('active member response from db:', result);
-            res.send(result)
-          }
-          )
-          .catch(error => {
-            console.log('error in /api/members/active get:', error);
-            res.sendStatus(500);
-          })
-        } else {
-          res.sendStatus(403);
-        }
-  } else if ( Number.isInteger(Number(membersToGet)) ) {
-    const queryText = `
-      SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
-      JOIN "user_data" ON "user".id = "user_data".user_id
-      JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-      WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
-      `;
+  const dojoAdminQueryText = `
+    SELECT "user_data".dojo_id FROM "user_data"
+    WHERE "user_data".user_id = $1 LIMIT 1;`
 
-    if (req.user.auth_level >= 10) {
-    pool
-      .query(queryText, [req.params.id])
-      .then((response) => {
-        const result = response.rows;
-        console.log('active member response from db:', result);
-        res.send(result)
-      }
-      )
+  const queryText = `
+    SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
+    JOIN "user_data" ON "user".id = "user_data".user_id
+    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1 AND $2 = $1;
+    `;
+
+  if (req.user.auth_level === 10) {
+    const client = await pool.connect();
+    try {
+      await client.query('BEGIN');
+
+      //first query to get the admin dojo_id if they are auth_level 10
+      let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
+      adminDojoId = adminDojoId.rows[0].dojo_id
+
+      response = await client.query(queryText, [req.params.id, adminDojoId]);
+
+      await client.query('COMMIT');
+      console.log(response.rows);
+      res.send(response.rows)
+
+    } catch (error) {
+      console.log('Error in GET active members auth_lvl 10 access', error);
+      await client.query('ROLLBACK');
+      res.sendStatus(500);
+
+    } finally {
+      await client.release();
+
+    }
+  } else if (req.user.auth_level >= 20) {
+
+    const siteAdminQueryText = `
+    SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
+    JOIN "user_data" ON "user".id = "user_data".user_id
+    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
+    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
+    `
+
+    // 
+    pool.query(siteAdminQueryText, [req.params.id])
+      .then(result => {
+        res.send(result.rows)
+
+      })
+
       .catch(error => {
         console.log('error in /api/members/active get:', error);
         res.sendStatus(500);
@@ -148,7 +157,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
     SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
     JOIN "user_data" ON "user".id = "user_data".user_id
     JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1 AND $2 = $3;
+    WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1 AND $2 = $1;
     `
 
   if (req.user.auth_level === 10) {
@@ -160,7 +169,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
       let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
       adminDojoId = adminDojoId.rows[0].dojo_id
 
-      response = await client.query(queryText, [req.params.id, adminDojoId, req.params.id]);
+      response = await client.query(queryText, [req.params.id, adminDojoId]);
 
       await client.query('COMMIT');
 
@@ -230,7 +239,10 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
       // await client.query(firstQuery, [req.user.id]);
       userDojoId = await client.query(firstQuery, [req.user.id]);
 
+
+
       console.log(userDojoId.rows[0].dojo_id)
+
 
       userDojoId = userDojoId.rows[0].dojo_id;
 

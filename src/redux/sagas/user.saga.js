@@ -64,7 +64,7 @@ function* updateUserData(action) {
     //GET the new data that data! 
     console.log('updating user_data: ', action.payload.user_id);
 
-    yield put({ type: 'FETCH_USER_INFO', payload: action.payload.user_id})
+    yield put({ type: 'FETCH_USER_INFO', payload: action.payload.user_id })
     // ALso refresh the dojo list 
     const id = action.payload.dojo_id
     yield put({ type: 'GET_ACTIVE_USERS', payload: id })
