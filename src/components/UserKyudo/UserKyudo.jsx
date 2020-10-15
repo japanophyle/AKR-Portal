@@ -113,7 +113,7 @@ function UserKyudo(props) {
         <div>
             {/* IF the state is true this a just a view of information */}
             {nameEdit ?
-                <Card>
+                <Card style={{margin:5}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -127,7 +127,7 @@ function UserKyudo(props) {
                                 </Tooltip>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             Current Student Rank: {props.store.info.student_rank}
                             <br />
                             Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
@@ -153,7 +153,7 @@ function UserKyudo(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card>
+                <Card style={{margin:5}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={submitRankHistory} >
                     <CardContent>
@@ -170,7 +170,7 @@ function UserKyudo(props) {
                                 >Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             {/* Student rank */}
                             <FormControl variant="outlined">
                                 <InputLabel>Kyudo Student Rank</InputLabel>
@@ -225,7 +225,7 @@ function UserKyudo(props) {
             }
 
             {teacherEdit ?
-                <Card>
+                <Card style={{margin:5}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -239,7 +239,7 @@ function UserKyudo(props) {
                                 </Tooltip>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                           
                             Current Teacher Rank: {props.store.info.teaching_rank}
                             <br />
@@ -249,7 +249,7 @@ function UserKyudo(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card>
+                <Card style={{margin:5}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={handleSaveEdit} >
                     <CardContent>
@@ -266,7 +266,7 @@ function UserKyudo(props) {
                                 >Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             
                             {/* teacher rank */}
                             <FormControl variant="outlined" >
@@ -305,7 +305,7 @@ function UserKyudo(props) {
                 </Card>
             }
             {moreEdit ?
-                <Card>
+                <Card style={{margin:5}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -319,7 +319,7 @@ function UserKyudo(props) {
                                 </Tooltip>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             
                             Years Practiced: {props.store.info.years_practice}
                             <br />
@@ -335,7 +335,7 @@ function UserKyudo(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card>
+                <Card style={{margin:5}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={handleSaveEdit} >
                     <CardContent>
@@ -352,7 +352,7 @@ function UserKyudo(props) {
                                 >Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             {/* years of practice */}
                             <TextField
                                 

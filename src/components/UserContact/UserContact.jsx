@@ -56,7 +56,7 @@ function UserContact(props) {
         <div>
             {/* IF the state is true this a just a view of information */}
             {nameEdit ?
-                <Card>
+                <Card style={{margin:5}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -70,7 +70,7 @@ function UserContact(props) {
                                 </Tooltip>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             Email: {props.store.info.email}
                             <br />
                             Phone: {props.store.info.phone_number}
@@ -78,7 +78,7 @@ function UserContact(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card>
+                <Card style={{margin:5}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={handleSaveEdit} >
                     <CardContent>
@@ -95,7 +95,7 @@ function UserContact(props) {
                                 >Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             {/* EMAIL!  */}
                             <TextField
                                 required

@@ -57,7 +57,7 @@ function UserPayment(props) {
         <div>
             {/* IF the state is true this a just a view of information */}
             {nameEdit ?
-                <Card>
+                <Card style={{margin:5}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -73,7 +73,7 @@ function UserPayment(props) {
                                 }
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             Dues: {props.store.info.dues_amount}
                             <br />
                             Amount Paid: {props.store.info.amount_paid}
@@ -85,7 +85,7 @@ function UserPayment(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card>
+                <Card style={{margin:5}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={handleSaveEdit}>
                     <CardContent>
@@ -102,7 +102,7 @@ function UserPayment(props) {
                                 >Cancel</Button>
                             </Grid>
                         </Grid>
-                        <Typography variant="h6">
+                        <Typography variant="h5">
                             {/* Dues */}
                             <TextField
                                 
