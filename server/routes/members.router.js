@@ -140,8 +140,6 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
     } else {
       res.sendStatus(403);
     }
-  }
-
 });
 //  "user_data".is_current_member = FALSE OR 
 // GET ALL INACTIVE MEMBERS
