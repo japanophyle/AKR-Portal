@@ -62,7 +62,7 @@ function UserName(props) {
                 <h1>Name</h1>
               </Grid>
               <Grid item xs={1}>
-                <Tooltip title="Edit">
+                <Tooltip title={<h1>Edit</h1>}>
                   <IconButton  onClick={handleDateChange} >
                     <EditIcon fontSize="large" color="primary"/>
                   </IconButton>
@@ -71,7 +71,7 @@ function UserName(props) {
             </Grid>
             <Grid container>
               <Grid item xs={6}>
-                <Typography variant="h6">
+                <Typography variant="h5">
                   {/* First name */}
                   {props.store.info.fname}
                   <br />
@@ -82,7 +82,7 @@ function UserName(props) {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography variant="h6">
+                <Typography variant="h5">
                   {/* last name */}
                   {props.store.info.lname}
                   <br />

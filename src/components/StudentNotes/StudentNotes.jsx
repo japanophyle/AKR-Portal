@@ -59,7 +59,7 @@ function StudentNotes(props) {
             {/* <Button variant="outlined" color="primary" >
                 notes
             </Button> */}
-            <Tooltip title="Add Note" placement="left">
+            <Tooltip title={<h1>Add Notes</h1>} >
                 <IconButton  onClick={handleClickOpen}>
                     <NoteAddIcon
                         color="primary"

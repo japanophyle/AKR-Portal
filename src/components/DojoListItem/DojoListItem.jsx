@@ -14,19 +14,19 @@ class DojoListItem extends Component {
 
   deleteDojo = (id) => {
     swal({
-        title: "Are you sure?",
-        text: `${this.props.dojo.dojo_name} will be removed!`,
-        icon: "warning",
-        buttons: true,
+      title: "Are you sure?",
+      text: `${this.props.dojo.dojo_name} will be removed!`,
+      icon: "warning",
+      buttons: true,
     }).then((toDelete) => {
-        if (toDelete) {
-            swal(`${this.props.dojo.dojo_name} has been removed!`, {
-                icon: "success",
-            });
-            this.props.dispatch({ type: 'REMOVE_DOJO', payload: id})
-        } else {
-            swal(`${this.props.dojo.dojo_name} was not removed!`);
-        }
+      if (toDelete) {
+        swal(`${this.props.dojo.dojo_name} has been removed!`, {
+          icon: "success",
+        });
+        this.props.dispatch({ type: 'REMOVE_DOJO', payload: id })
+      } else {
+        swal(`${this.props.dojo.dojo_name} was not removed!`);
+      }
     })
   }
 
@@ -37,26 +37,26 @@ class DojoListItem extends Component {
   }
 
   render() {
-      return (
-        <TableRow>
-            <TableCell>{this.props.dojo.dojo_name}</TableCell>
-            <TableCell>{this.props.dojo.region_name}</TableCell>
-            <TableCell>
-              <Tooltip title="Manage" >
-                <IconButton onClick={() => this.manageDojo(this.props.dojo.id)} >
-                    <LaunchIcon color="primary" /> 
-                </IconButton>
-              </Tooltip>
-            </TableCell>
-            <TableCell>
-              <Tooltip title="Delete" >
-                <IconButton onClick={() => this.deleteDojo(this.props.dojo.id)} >
-                    <DeleteIcon color="error" /> 
-                </IconButton>
-              </Tooltip>
-            </TableCell>
-        </TableRow>
-      )
+    return (
+      <TableRow>
+        <TableCell>{this.props.dojo.dojo_name}</TableCell>
+        <TableCell>{this.props.dojo.region_name}</TableCell>
+        <TableCell>
+          <Tooltip title={<h1>Manage</h1>} >
+            <IconButton onClick={() => this.manageDojo(this.props.dojo.id)} >
+              <LaunchIcon color="primary" />
+            </IconButton>
+          </Tooltip>
+        </TableCell>
+        <TableCell>
+          <Tooltip title={<h1>Delete</h1>} >
+            <IconButton onClick={() => this.deleteDojo(this.props.dojo.id)} >
+              <DeleteIcon color="error" />
+            </IconButton>
+          </Tooltip>
+        </TableCell>
+      </TableRow>
+    )
   }
 }
 
