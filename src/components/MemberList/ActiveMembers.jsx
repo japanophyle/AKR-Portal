@@ -107,7 +107,7 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">{member.fname} {member.lname}</StyledTableCell>
                                             <StyledTableCell align="center">{member.teaching_rank ? member.teaching_rank : member.student_rank}</StyledTableCell>
 
-                                            <StyledTableCell align="center"> <AuthSelect member={member}/>
+                                            <StyledTableCell align="center"> {console.log(member.auth_level)}<AuthSelect member={member}/>
                                                 {/* {member.auth_level >= 10 ? 'Dojo Admin' : 'Student'} */}
                                                 </StyledTableCell>
 

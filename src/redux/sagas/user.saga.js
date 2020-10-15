@@ -18,6 +18,7 @@ function* fetchUser() {
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
+    console.log('fetchuser response:', response)
     yield put({ type: 'SET_USER', payload: response.data });
   } catch (error) {
     console.log('User get request failed', error);
@@ -63,7 +64,7 @@ function* updateUserData(action) {
     //GET the new data that data! 
     console.log('updating user_data: ', action.payload.user_id);
 
-    yield put({ type: 'FETCH_USER_INFO', payload: action.payload.user_id})
+    yield put({ type: 'FETCH_USER_INFO', payload: action.payload.user_id })
     // ALso refresh the dojo list 
     const id = action.payload.dojo_id
     yield put({ type: 'GET_ACTIVE_USERS', payload: id })

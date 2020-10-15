@@ -55,7 +55,7 @@ function UserName(props) {
     <div>
       {/* IF the state is true this a just a view of information */}
       {nameEdit ?
-        <Card>
+        <Card style={{margin:5}}>
           <CardContent>
             <Grid container>
               <Grid item xs={11}>
@@ -94,7 +94,7 @@ function UserName(props) {
           </CardContent>
         </Card>
         :
-        <Card>
+        <Card style={{margin:5}}>
           <form  onSubmit={handleSaveEdit} >
           {/* IF the state is FALSE this You can edit */}
 
@@ -114,7 +114,7 @@ function UserName(props) {
             </Grid>
             <Grid container>
               <Grid item xs={6}>
-                <Typography variant="h6">
+                <Typography variant="h5">
                   {/* Firstname */}
                   <TextField
                     required
@@ -142,7 +142,7 @@ function UserName(props) {
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography variant="h6">
+                <Typography variant="h5">
                   {/* last name */}
                   <TextField
                     required

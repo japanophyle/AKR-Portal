@@ -58,7 +58,7 @@ function UserAddress(props) {
     <div>
       {/* IF the state is true this a just a view of information */}
       {nameEdit ?
-        <Card>
+        <Card style={{margin:5}}>
           <CardContent>
             <Grid container>
               <Grid item xs={11}>
@@ -72,10 +72,8 @@ function UserAddress(props) {
                 </Tooltip>
               </Grid>
             </Grid>
-            <Typography variant="h6">
-              Address: {props.store.info.address_1}
-              <br />
-              Address cont.:{props.store.info.address_2}
+            <Typography variant="h5">
+              Address: {props.store.info.address_1} {props.store.info.address_2}
               <br />
               City: {props.store.info.city}
               <br />
@@ -88,7 +86,7 @@ function UserAddress(props) {
           </CardContent>
         </Card>
         :
-        <Card>
+        <Card style={{margin:5}}>
           {/* IF the state is FALSE this You can edit */}
           <form  onSubmit={handleSaveEdit} >
           <CardContent>
@@ -105,7 +103,7 @@ function UserAddress(props) {
                 >Cancel</Button>
               </Grid>
             </Grid>
-            <Typography variant="h6">
+            <Typography variant="h5">
               {/* Address 1  */}
               <TextField
                 required

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,MenuItem, Select, InputLabel, FormControl } from '@material-ui/core';
@@ -9,7 +9,11 @@ import { Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle
 // component name TemplateFunction with the name for the new component.
 function AuthSelect(props) {
 
-    
+    // useEffect(() => {
+    //     setAuth(props.member.auth_level)
+    // console.log(props.member.auth_level)
+    // },[])
+
     // handles storing auth level locally fore the dispatch
   const [auth, setAuth] = React.useState(props.member.auth_level);
   // handles dialog open
@@ -45,6 +49,7 @@ const handleSave = () => {
     handleClickOpen()
   };
 
+  
   return (
     <div>
         {/* IF auth level of user is 20 you can promote/demote all */}
@@ -54,7 +59,7 @@ const handleSave = () => {
         <Select
           labelId="auth_level"
           id="auth_level"
-          value={auth}
+          value={props.member.auth_level}
           onChange={handleChange}
           label="Age"
         >
@@ -83,7 +88,7 @@ const handleSave = () => {
         <Select
           labelId="auth_level"
           id="auth_level"
-          value={auth}
+          value={props.member.auth_level}
           onChange={handleChange}
           label="Age"
         >
