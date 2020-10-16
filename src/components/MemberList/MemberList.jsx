@@ -26,6 +26,11 @@ function MemberList(props) {
     <div>
       <Grid container justify="center">
         <Grid item xs={12} align="center">
+          {props.store.dojos.map((dojo ,i) => {
+            if(Number(dojo.id) == props.match.params.id) {
+            return (<h1 key={i}>Members of {dojo.dojo_name} </h1>)
+            }
+          })}
           <h3>{activeHeading}</h3>
         </Grid>
         <Grid item >
