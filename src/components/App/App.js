@@ -31,6 +31,8 @@ import NewUserRegistrationForm from '../NewUserRegistrationForm/NewUserRegistrat
 import DojoList from '../DojoList/DojoList.jsx';
 import CreateDojo from '../CreateDojo/CreateDojo.jsx';
 import MyDojo from '../MyDojo/MyDojo';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 
 class App extends Component {
   componentDidMount() {
@@ -44,7 +46,21 @@ class App extends Component {
   }
 
   render() {
+    const theme = createMuiTheme({
+      palette: {
+        primary: {
+          main: '#CFC0E7',
+        },
+        secondary: {
+          main: '#81974F',
+        },
+        error: {
+          main: '#9E6456'
+        }
+      },
+    });
     return (
+      <ThemeProvider theme={theme}>
       <Router>
         <div>
           <Nav />
@@ -151,6 +167,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
+      </ThemeProvider>
     );
   }
 }

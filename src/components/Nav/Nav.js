@@ -38,10 +38,8 @@ const Nav = (props) => {
         <img id="logo-img-id" src={image} alt="American Kyudo Renmei" className="sites-logo"></img>
       </Link>
 
-
       {/* <h2 className="nav-title">Prime GROUP Project   >8^) </h2> */}
       <h1 id="title" className="nav-left">American Kyudo Renmei Portal</h1>
-
 
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
@@ -68,20 +66,20 @@ const Nav = (props) => {
           </>
         )}
 
-
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {props.store.user.auth_level >= 5 && (
-          <>
-            <Link className="nav-link" to="/user/user">
-              Info Page
-            </Link>
-          </>
+
+          <Link className="nav-link" to="/user/user">
+            Info Page
+          </Link>
+
         )}
         <LogOutButton className="nav-link" />
         {/* Always show this link since the about page is not protected */}
         <Link className="nav-link" to="/about">
           About
         </Link>
+        <LogOutButton className="nav-link" />
       </div>
     </div>
   );
