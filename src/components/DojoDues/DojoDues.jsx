@@ -12,7 +12,6 @@ import {
     DialogContent,
     DialogContentText,
     DialogTitle,
-    InputAdornment,
 } from '@material-ui/core'
 
 class DojoDues extends Component {

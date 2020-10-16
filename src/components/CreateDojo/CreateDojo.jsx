@@ -47,9 +47,9 @@ class CreateDojo extends Component {
     render() {
         return (
             <Grid container justify="center" alignItems="center">
-                <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px" }}>
+                <Paper style={{  width: "80%", padding: "20px" }}>
                     <Grid container justify="center" alignItems="center">
-                        <Grid item><Typography><h3>Create A Dojo</h3></Typography></Grid>
+                        <Grid item><Typography variant="h5">Create A Dojo</Typography></Grid>
                         <Grid item>
                         <Tooltip title={<h1>Create Dojo</h1>} >
                             <IconButton onClick={() => this.addDojo()} >
@@ -59,13 +59,13 @@ class CreateDojo extends Component {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <TextField style={{  minWidth: "20vw" }} label="Dojo Name" variant="outlined" margin="dense" value={this.state.newDojo.dojo_name} onChange={(event) => this.handleChangeDojo(event, 'dojo_name')} />
+                        <TextField style={{  minWidth: "90%" }} label="Dojo Name" variant="outlined" margin="dense" value={this.state.newDojo.dojo_name} onChange={(event) => this.handleChangeDojo(event, 'dojo_name')} />
                     </Grid>
                     <Grid item>
-                        <TextField style={{  minWidth: "20vw" }} label="Region" variant="outlined" margin="dense" value={this.state.newDojo.region_name} onChange={(event) => this.handleChangeDojo(event, 'region_name')} />
+                        <TextField style={{  minWidth: "90%" }} label="Region" variant="outlined" margin="dense" value={this.state.newDojo.region_name} onChange={(event) => this.handleChangeDojo(event, 'region_name')} />
                     </Grid>
                     <Grid item>
-                        <FormControl style={{  minWidth: "20vw" }} variant="outlined" margin="dense" >
+                        <FormControl style={{  minWidth: "90%" }} variant="outlined" margin="dense" >
                             <InputLabel>Admin</InputLabel>
                             <Select
                                 label="Admin"
