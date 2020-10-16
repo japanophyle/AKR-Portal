@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import DojoListItem from '../DojoListItem/DojoListItem.jsx'
 import { Typography, Grid, Paper, Table, TableContainer, TableCell, TableRow, TableHead, TableBody } from '@material-ui/core';
+import CreateDojoDialog from '../CreateDojo/CreateDojoDialog';
 
 
 class DojoList extends Component {
@@ -17,6 +18,9 @@ class DojoList extends Component {
   render() {
     return (
         <Grid container justify="center" alignItems="center">
+             <Grid item xs={12} align="center">
+                <CreateDojoDialog />
+            </Grid>
             <Grid xs={6} item>
                 <h1 align="center">National Dojo List</h1>
                 <Paper className="papertable">

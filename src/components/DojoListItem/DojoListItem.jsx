@@ -41,7 +41,7 @@ class DojoListItem extends Component {
               <DeleteIcon color="error" />
             </IconButton>
           </Tooltip> */}
-          <DojoDeleteDialog deleteDojo={this.deleteDojo} dojo={this.props.dojo}/>
+          <DojoDeleteDialog dojo={this.props.dojo} deleteDojo={this.deleteDojo}/>
         </TableCell>
       </TableRow>
     )
