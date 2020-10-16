@@ -10,7 +10,7 @@ class UserRankHistory extends Component {
     };
 
   componentDidMount() {
-    this.props.dispatch({ type: 'GET_RANKS'})
+    this.props.dispatch({ type: 'GET_RANKS', payload: this.props.store.info.user_id})
   }
 
   render() {
