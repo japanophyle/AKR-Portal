@@ -55,7 +55,7 @@ function UserName(props) {
     <div>
       {/* IF the state is true this a just a view of information */}
       {nameEdit ?
-        <Card style={{margin:5}}>
+        <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
           <CardContent>
             <Grid container>
               <Grid item xs={11}>
@@ -64,7 +64,7 @@ function UserName(props) {
               <Grid item xs={1}>
                 <Tooltip title={<h1>Edit</h1>}>
                   <IconButton  onClick={handleDateChange} >
-                    <EditIcon fontSize="large" color="primary"/>
+                    <EditIcon fontSize="large" color="secondary"/>
                   </IconButton>
                 </Tooltip>
               </Grid>
@@ -94,7 +94,7 @@ function UserName(props) {
           </CardContent>
         </Card>
         :
-        <Card style={{margin:5}}>
+        <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
           <form  onSubmit={handleSaveEdit} >
           {/* IF the state is FALSE this You can edit */}
 

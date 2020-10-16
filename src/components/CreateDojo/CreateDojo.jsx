@@ -47,7 +47,7 @@ class CreateDojo extends Component {
     render() {
         return (
             <Grid container justify="center" alignItems="center">
-                <Paper style={{  width: "80%", padding: "20px" }}>
+                <Paper style={{  width: "80%", padding: "20px", backgroundColor: "#ECE7D1"}}>
                     <Grid container justify="center" alignItems="center">
                         <Grid item><Typography variant="h5">Create A Dojo</Typography></Grid>
                         <Grid item>
@@ -59,16 +59,17 @@ class CreateDojo extends Component {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <TextField style={{  minWidth: "90%" }} label="Dojo Name" variant="outlined" margin="dense" value={this.state.newDojo.dojo_name} onChange={(event) => this.handleChangeDojo(event, 'dojo_name')} />
+                        <TextField color="secondary" style={{  minWidth: "90%" }} label="Dojo Name" variant="outlined" margin="dense" value={this.state.newDojo.dojo_name} onChange={(event) => this.handleChangeDojo(event, 'dojo_name')} />
                     </Grid>
                     <Grid item>
-                        <TextField style={{  minWidth: "90%" }} label="Region" variant="outlined" margin="dense" value={this.state.newDojo.region_name} onChange={(event) => this.handleChangeDojo(event, 'region_name')} />
+                        <TextField color="secondary" style={{  minWidth: "90%" }} label="Region" variant="outlined" margin="dense" value={this.state.newDojo.region_name} onChange={(event) => this.handleChangeDojo(event, 'region_name')} />
                     </Grid>
                     <Grid item>
                         <FormControl style={{  minWidth: "90%" }} variant="outlined" margin="dense" >
-                            <InputLabel>Admin</InputLabel>
+                            <InputLabel color="secondary" >Admin</InputLabel>
                             <Select
                                 label="Admin"
+                                color="secondary"
                                 name="admin_id"
                                 // value={this.state.newDojo.admin_id}
                                 onChange={(value) => this.handleChangeDojo(value, 'admin_id')}

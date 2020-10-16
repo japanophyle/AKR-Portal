@@ -16,10 +16,10 @@
 
 .nav-link {
   float: left;
-  color: #aa3344;
-  background-color: #000000;
+  color: #E3BE56;
+  background-color: #945C39;
   text-align: center;
-  padding: 24px 10px;
+  padding: 10px 10px;
   text-decoration: none;
   font-size: 20px;
 
@@ -31,20 +31,20 @@
 }
 
 .nav-link:hover {
-  background-color: #81974F;
+  background-color: #ECE7D1;
 }
 
 .nav-left {
   float: left;
   margin-top: 40px;
-  color: #aa3344;
-  padding: 24px 10px;
-  background-color: #000000;
+  color: #E3BE56;
+  padding: 10px 10px;
+  background-color: #945C39;
 }
 
 .nav-right {
   float: right;
-  padding-top: 40px;
+  margin-top: 40px;
 }
 
 .sites-logo {

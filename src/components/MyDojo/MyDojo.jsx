@@ -29,15 +29,15 @@ function MyDojo(props) {
       {/* map through our myDojo reducer */}
       <Grid container justify="center" alignItems="center">
         <Grid item xs={8} align="center">
+        <Typography><h2>{heading}</h2></Typography>
           <Paper 
             elevation={10}
-            style={{padding:20, margin:20}}>
-              <h2>{heading}</h2>
+            style={{  width: "80%", padding: "10px", backgroundColor: "#945C39"}}>
       {props.store.myDojo.map((member, id) => {
         return (
         <Paper 
           elevation={5}
-          style={{padding:10, margin:20}}>
+          style={{padding:10, margin:10, backgroundColor: "#ECE7D1"}}>
             <Grid container justify="center" alignItems="center">
               <Grid item xs={4} align="left">
                 <Typography variant="overline" display="block">

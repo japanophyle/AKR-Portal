@@ -30,7 +30,7 @@ class DojoListItem extends Component {
         <TableCell>
           <Tooltip title={<h1>Manage</h1>} >
             <IconButton onClick={() => this.manageDojo(this.props.dojo.id)} >
-              <LaunchIcon color="primary" />
+              <LaunchIcon color="secondary" />
             </IconButton>
           </Tooltip>
         </TableCell>

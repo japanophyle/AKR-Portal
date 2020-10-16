@@ -49,13 +49,23 @@ class App extends Component {
     const theme = createMuiTheme({
       palette: {
         primary: {
-          main: '#CFC0E7',
+          main: '#FCBA03', // Gold
+          dark: '#A66E01', // Dark Gold
+          light: '#E3BE56', // Light Gold
         },
         secondary: {
-          main: '#81974F',
+          main: '#38542B', // Green
         },
         error: {
-          main: '#9E6456'
+          main: '#D03533', // Red
+        },
+        success: {
+          main: '#173A72', // Blue
+        },
+        highlight: {
+          light: '#ECE7D1', // Light Brown
+          main: '#EADCC2', // Medium Brown
+          dark: '#945C39'  // Dark Brown
         }
       },
     });
@@ -164,7 +174,6 @@ class App extends Component {
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-          <Footer />
         </div>
       </Router>
       </ThemeProvider>

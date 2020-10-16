@@ -32,8 +32,8 @@ import AuthSelect from '../AuthSelect/AuthSelect'
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.secondary.main,
-        color: theme.palette.common.white,
+        backgroundColor: theme.palette.highlight.dark,
+        color: theme.palette.primary.light,
     },
     body: {
         fontSize: 14,
@@ -44,7 +44,10 @@ const StyledTableCell = withStyles((theme) => ({
 const StyledTableRow = withStyles((theme) => ({
     root: {
         '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: theme.palette.highlight.main,
+        },
+        '&:nth-of-type(even)': {
+            backgroundColor: theme.palette.highlight.light,
         },
     },
 }))(TableRow);
@@ -122,7 +125,7 @@ function ActiveMembers(props) {
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
                                                 <Tooltip title={<h1>Member Details</h1>} >
-                                                    <IconButton component={Link} to={`/user/${member.user_id}`} >
+                                                    <IconButton color="secondary" component={Link} to={`/user/${member.user_id}`} >
                                                         <ViewListIcon></ViewListIcon>
                                                     </IconButton>
                                                 </Tooltip>
