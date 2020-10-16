@@ -40,7 +40,7 @@ class CreateDojo extends Component {
                     admin_id: 0
                 }
             })
-            this.props.history.push('/managedojos')
+            this.props.history.push('/nationdojos')
         }
     }
 
