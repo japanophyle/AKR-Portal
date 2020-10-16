@@ -13,6 +13,9 @@ function InactiveView(props) {
       type: "FETCH_USER_INFO",
       payload: "user"
     })
+    props.dispatch({
+      type: "GET_DOJOS",
+    })
   }, []);
 
   const [heading, setHeading] = useState('Currently Inactive');
