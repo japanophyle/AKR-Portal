@@ -120,7 +120,7 @@ function UserKyudo(props) {
                                 <h1>Kyudo Student Rank</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Tooltip title="Edit">
+                                <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleDateChange} >
                                         <EditIcon fontSize="large" color="primary"/>
                                     </IconButton>
@@ -135,14 +135,14 @@ function UserKyudo(props) {
                             
                         </Typography>
                         {historyEdit ?
-                            <Tooltip title="Show Rank History">
+                            <Tooltip title={<h1>Show Rank History</h1>}>
                                 <IconButton  onClick={handleHistoryChange} >
                                     <TimelineIcon fontSize="large" color="primary"/>
                                 </IconButton>
                             </Tooltip>
                         :
                             <>
-                            <Tooltip title="Hide Rank History">
+                            <Tooltip title={<h1>Hide Rank History</h1>}>
                                 <IconButton  onClick={handleHistoryChange} >
                                     <VisibilityOffIcon fontSize="large" color="primary"/>
                                 </IconButton>
@@ -204,7 +204,7 @@ function UserKyudo(props) {
                         
                         </Typography>
                         {historyEdit ?
-                            <Tooltip title="Show Rank History">
+                            <Tooltip title={<h1>Show Rank History</h1>}>
                                 <IconButton  onClick={handleHistoryChange} >
                                     <TimelineIcon fontSize="large" color="primary"/>
                                 </IconButton>
@@ -232,7 +232,7 @@ function UserKyudo(props) {
                                 <h1>Kyudo Teaching Rank</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Tooltip title="Edit">
+                                <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleTeacherChange} >
                                         <EditIcon fontSize="large" color="primary"/>
                                     </IconButton>
@@ -312,7 +312,7 @@ function UserKyudo(props) {
                                 <h1>More Kyudo Information</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Tooltip title="Edit">
+                                <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleMoreChange} >
                                         <EditIcon fontSize="large" color="primary"/>
                                     </IconButton>

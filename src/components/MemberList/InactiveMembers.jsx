@@ -104,7 +104,7 @@ function InactiveMembers(props) {
                                                     : ''}
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
-                                                <Tooltip title="Member Details" placement="left">
+                                                <Tooltip title={<h1>Member Details</h1>} >
                                                     <IconButton component={Link} to={`/user/${member.user_id}`}>
                                                         <ViewListIcon></ViewListIcon>
                                                     </IconButton>
@@ -112,7 +112,7 @@ function InactiveMembers(props) {
                                             </StyledTableCell>
                                             {props.store.user.auth_level >= 20 &&
                                                 <StyledTableCell align="center">
-                                                    <Tooltip title="Delete User" placement="left" >
+                                                    <Tooltip title={<h1>Delete User</h1>}  >
                                                         <IconButton onClick={() => deleteUser(member)} >
                                                             <DeleteIcon color="error" /> 
                                                         </IconButton>
