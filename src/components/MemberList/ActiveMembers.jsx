@@ -32,7 +32,7 @@ import AuthSelect from '../AuthSelect/AuthSelect'
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.secondary.main,
         color: theme.palette.common.white,
     },
     body: {
