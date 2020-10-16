@@ -63,7 +63,7 @@ function UserContact(props) {
                                 <h1>Contact</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Tooltip title="Edit">
+                                <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleDateChange} >
                                         <EditIcon fontSize="large" color="primary"/>
                                     </IconButton>

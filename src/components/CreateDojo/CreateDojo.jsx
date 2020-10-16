@@ -51,7 +51,7 @@ class CreateDojo extends Component {
                     <Grid container justify="center" alignItems="center">
                         <Grid item><Typography><h3>Create A Dojo</h3></Typography></Grid>
                         <Grid item>
-                        <Tooltip title="Create Dojo" >
+                        <Tooltip title={<h1>Create Dojo</h1>} >
                             <IconButton onClick={() => this.addDojo()} >
                                 <AddBoxIcon color="primary" size="medium" />
                             </IconButton>
