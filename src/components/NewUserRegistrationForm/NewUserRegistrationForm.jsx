@@ -66,6 +66,11 @@ class NewUserForm extends Component {
     })
   }
 
+  handleGo = () => {
+    console.log('why')
+    this.props.history.push('/inactive')
+  }
+
   // handle change for note state
   handleChange = (propertyName) => (event) => {
     console.log(event.target.value);
@@ -85,6 +90,8 @@ class NewUserForm extends Component {
       });
   }
 
+
+
   // submit state to db
   handleSaveNewUser = (event) => {
     event.preventDefault();
@@ -93,9 +100,10 @@ class NewUserForm extends Component {
         type: 'CREATE_USER',
         payload: this.state
       })
-      this.props.history.push('/inactive')
+      // this.props.history.push('/inactive')
   }
 
+  
 
   render() {
     console.log(this.state);
@@ -163,7 +171,8 @@ class NewUserForm extends Component {
 
                     
                   {/* Dialog button/popup */}
-                  <FormSuccess/>
+                  <FormSuccess handleGo={this.handleGo}
+                  formState={this.state}/>
 
 
                   </Grid>
