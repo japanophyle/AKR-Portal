@@ -141,9 +141,8 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
       res.sendStatus(403);
     }
 });
-//  "user_data".is_current_member = FALSE OR 
-// GET ALL INACTIVE MEMBERS
 
+// GET ALL INACTIVE MEMBERS
 router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
   console.log('GET inactive member. Dojo id:', req.params.id)
 
