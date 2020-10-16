@@ -35,11 +35,7 @@ class DojoListItem extends Component {
           </Tooltip>
         </TableCell>
         <TableCell>
-          <Tooltip title={<h1>Delete</h1>} >
-            <IconButton onClick={() => this.deleteDojo(this.props.dojo.id)} >
-              <DeleteIcon color="error" />
-            </IconButton>
-          </Tooltip>
+          <DojoDeleteDialog/>
         </TableCell>
       </TableRow>
     )

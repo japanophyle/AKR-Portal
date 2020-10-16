@@ -18,7 +18,9 @@ class DojoList extends Component {
     return (
         <Grid container justify="center" alignItems="center">
             <Grid xs={6} item>
+                <h1 align="center">National Dojo List</h1>
                 <Paper className="papertable">
+                    
                     <TableContainer className="table">
                         <Table stickyHeader>
                             <TableHead >
