@@ -65,7 +65,7 @@ function UserAddress(props) {
                 <h1>Address</h1>
               </Grid>
               <Grid item xs={1}>
-                <Tooltip title="Edit">
+                <Tooltip title={<h1>Edit</h1>}>
                     <IconButton onClick={handleDateChange} >
                       <EditIcon fontSize="large" color="primary"/>
                     </IconButton>

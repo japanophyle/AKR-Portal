@@ -66,7 +66,7 @@ function UserPersonal(props) {
                                 <h1>Personal Information</h1>
                             </Grid>
                             <Grid item xs={1}>
-                                <Tooltip title={<span >Edit</span>}>
+                                <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleDateChange} >
                                         <EditIcon fontSize="large" color="primary"/>
                                     </IconButton>

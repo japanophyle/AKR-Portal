@@ -32,7 +32,7 @@ import AuthSelect from '../AuthSelect/AuthSelect'
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.secondary.main,
         color: theme.palette.common.white,
     },
     body: {
@@ -121,7 +121,7 @@ function ActiveMembers(props) {
                                                 }
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
-                                                <Tooltip title="Member Details" placement="left">
+                                                <Tooltip title={<h1>Member Details</h1>} >
                                                     <IconButton component={Link} to={`/user/${member.user_id}`} >
                                                         <ViewListIcon></ViewListIcon>
                                                     </IconButton>
@@ -140,7 +140,7 @@ function ActiveMembers(props) {
                                                     </IconButton>
                                                 </Tooltip> */}
                                                 {member.notes || member.equipment_checkout ?
-                                                    <Tooltip title="Instructor Notes" placement="left">
+                                                    <Tooltip title={<h1>Instructor Notes</h1>} >
                                                         <IconButton>
                                                             <SpeakerNotesIcon></SpeakerNotesIcon>
                                                         </IconButton>
@@ -151,7 +151,7 @@ function ActiveMembers(props) {
                                             </StyledTableCell>
                                             {props.store.user.auth_level >= 20 &&
                                                 <StyledTableCell align="center">
-                                                    <Tooltip title="Delete User" placement="left" >
+                                                    <Tooltip title={<h1>Delete User</h1>} >
                                                         <IconButton onClick={() => deleteUser(member)} >
                                                             <DeleteIcon color="error" /> 
                                                         </IconButton>
