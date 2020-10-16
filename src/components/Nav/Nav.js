@@ -70,14 +70,14 @@ const Nav = (props) => {
 
 
         {/* Show the link to the info page and the logout button if the user is logged in */}
-        {props.store.user.id >= 5 && (
+        {props.store.user.auth_level >= 5 && (
           <>
             <Link className="nav-link" to="/user/user">
               Info Page
             </Link>
-            <LogOutButton className="nav-link" />
           </>
         )}
+        <LogOutButton className="nav-link" />
         {/* Always show this link since the about page is not protected */}
         <Link className="nav-link" to="/about">
           About
