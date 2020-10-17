@@ -71,7 +71,6 @@ const Nav = (props) => {
           <Link className="nav-link" to="/user/user">
             Info Page
           </Link>
-          </>
         )}
         {/* Always show this link since the about page is not protected */}
         <Link className="nav-link" to="/about">
