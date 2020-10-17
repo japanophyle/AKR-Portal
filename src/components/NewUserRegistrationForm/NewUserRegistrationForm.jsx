@@ -103,6 +103,40 @@ class NewUserForm extends Component {
       // this.props.history.push('/inactive')
   }
 
+  secretFunction = () => {
+    console.log('woo')
+    this.setState
+      ({
+        ...this.state,
+        fname: 'bob',
+    lname: 'me',
+    user_id: this.props.store.user.id,
+    email: 'me@me.com',
+    phone_number: '1234',
+    dojo_id: '1',
+    fname_japanese: 'sda',
+    lname_japanese: 'fdfs',
+    student_rank: 'shodan',
+    date_student_rank: null,
+    teaching_rank: '',
+    date_teaching_rank: null,
+    ikyf: '123123',
+    years_practice: '1',
+    address_1: '`123`23`',
+    address_2: '',
+    city: '`123',
+    state: '`213',
+    country: '4325',
+    zipcode: '2345',
+    gender: '2345',
+    date_of_birth: null,
+    date_began_kyudo: null,
+    citizenship: 'usa',
+    is_current_member: !true,
+    usa_archery_id: '1324',
+      })
+  }
+
   
 
   render() {
@@ -112,7 +146,7 @@ class NewUserForm extends Component {
         <Grid container justify="center" alignItems="center">
           <Grid item xs={12} >
             <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px" }}>
-              <h6 style={{ color: "red" }}>Fields with * are required.</h6>
+              <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required.</h6>
               <form onSubmit={this.handleSaveNewUser} autocomplete="on">
                 <NewUserName handleChange={this.handleChange} />
                 <NewUserContact handleChange={this.handleChange} />

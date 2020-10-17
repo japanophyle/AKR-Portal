@@ -117,7 +117,7 @@ function UserKyudo(props) {
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
-                                <h1>Kyudo Student Rank</h1>
+                                <h1>Kyudo Rank</h1>
                             </Grid>
                             <Grid item xs={1}>
                                 <Tooltip title={<h1>Edit</h1>}>
@@ -128,7 +128,7 @@ function UserKyudo(props) {
                             </Grid>
                         </Grid>
                         <Typography variant="h5">
-                            Current Student Rank: {props.store.info.student_rank}
+                            Current Rank: {props.store.info.student_rank}
                             <br />
                             Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
                             
@@ -173,7 +173,7 @@ function UserKyudo(props) {
                         <Typography variant="h5">
                             {/* Student rank */}
                             <FormControl variant="outlined">
-                                <InputLabel>Kyudo Student Rank</InputLabel>
+                                <InputLabel>Kyudo Rank</InputLabel>
                                 <Select
                                     width="50px"
                                     id="student_rank"
@@ -194,7 +194,6 @@ function UserKyudo(props) {
                             {/* date got student rank */}
                             <TextField
                                 type='Date'
-                                
                                 id="date_student_rank"
                                 label="Date Earned"
                                 defaultValue={moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}
@@ -231,6 +230,7 @@ function UserKyudo(props) {
                             <Grid item xs={11}>
                                 <h1>Kyudo Teaching Rank</h1>
                             </Grid>
+                           
                             <Grid item xs={1}>
                                 <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleTeacherChange} >
@@ -239,13 +239,22 @@ function UserKyudo(props) {
                                 </Tooltip>
                             </Grid>
                         </Grid>
-                        <Typography variant="h5">
+                        {props.store.editInfo.teaching_rank === null ?
+                            <Typography variant="h5">
                           
-                            Current Teacher Rank: {props.store.info.teaching_rank}
+                            No Teaching Rank Currently
+                            
+                        </Typography>
+                            :
+                            <Typography variant="h5">
+                          
+                            Teaching Rank: {props.store.info.teaching_rank}
                             <br />
                             Date Reached: {moment(props.store.info.date_teaching_rank).format('MM-DD-YYYY')}
                             
                         </Typography>
+                            }
+                        
                     </CardContent>
                 </Card>
                 :
