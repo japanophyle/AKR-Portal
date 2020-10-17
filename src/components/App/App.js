@@ -32,6 +32,7 @@ import DojoList from '../DojoList/DojoList.jsx';
 import CreateDojo from '../CreateDojo/CreateDojo.jsx';
 import MyDojo from '../MyDojo/MyDojo';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import 'fontsource-roboto';
 
 
 class App extends Component {
@@ -58,6 +59,9 @@ class App extends Component {
           main: '#9E6456'
         }
       },
+      typography: {
+        h5: {},
+      }
     });
     return (
       <ThemeProvider theme={theme}>
