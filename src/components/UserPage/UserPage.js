@@ -13,6 +13,7 @@ import UserAddress from '../UserAddress/UserAdress'
 import UserPersonal from '../UserPersonal/UserPersonal'
 import UserKyudo from '../UserKyudo/UserKyudo'
 import UserPayment from '../UserPayment/UserPayment'
+import UserDojoTransfer from '../UserDojoTransfer/UserDojoTransfer'
 
 class UserPage extends Component {
 
@@ -42,6 +43,7 @@ class UserPage extends Component {
         <LogOutButton className="log-in" />
         <button onClick={() => this.getMyDojo()}
         >Get My Dojo</button> */}
+          <h1 align="center">{this.props.store.info.fname}'s {this.props.store.info.lname}'s Information </h1> 
           <Container>
           
 
@@ -56,6 +58,9 @@ class UserPage extends Component {
 
           {/* Edit user Personal data component */}
           <UserPersonal id={this.props.match.params.id}/>
+
+           {/* Transfer dojo */}
+           <UserDojoTransfer id={this.props.match.params.id} />
 
           {/* Edit user Kyudo data component */}
           <UserKyudo id={this.props.match.params.id}/>
