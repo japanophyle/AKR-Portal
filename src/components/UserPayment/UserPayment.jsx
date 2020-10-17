@@ -57,7 +57,7 @@ function UserPayment(props) {
         <div>
             {/* IF the state is true this a just a view of information */}
             {nameEdit ?
-                <Card style={{margin:5}}>
+                <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -67,7 +67,7 @@ function UserPayment(props) {
                                 {props.store.user.auth_level > 5 &&
                                     <Tooltip title={<h1>Edit</h1>}>
                                         <IconButton  onClick={handleDateChange} >
-                                            <EditIcon fontSize="large" color="primary"/>
+                                            <EditIcon fontSize="large" color="secondary"/>
                                         </IconButton>
                                     </Tooltip>
                                 }
@@ -85,7 +85,7 @@ function UserPayment(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card style={{margin:5}}>
+                <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={handleSaveEdit}>
                     <CardContent>
