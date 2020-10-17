@@ -35,7 +35,7 @@ CREATE TABLE "user_data" (
 	"dojo_id" INT REFERENCES "dojo" ON DELETE SET NULL,
 	"fname_japanese" varchar(255),
 	"lname_japanese" varchar(255),
-	"student_rank" varchar(20) DEFAULT 'Shodan',
+	"student_rank" varchar(20) DEFAULT 'Mudan',
 	"date_student_rank" DATE,
 	"teaching_rank" varchar(20),
 	"date_teaching_rank" DATE,

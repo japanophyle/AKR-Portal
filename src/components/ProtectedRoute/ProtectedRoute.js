@@ -40,7 +40,7 @@ const ProtectedRoute = (props) => {
     // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
   }
-  console.log('logging in')
+  
   // redirect a logged in user if an authRedirect prop has been provided
   if (store.user.id && authRedirect != null && store.user.auth_level === 0) {
     return <Redirect exact from={otherProps.path} to={authRedirect} />
