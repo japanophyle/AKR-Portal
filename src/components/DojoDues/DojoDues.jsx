@@ -65,7 +65,7 @@ class DojoDues extends Component {
             <div>
                 <Button
                     style={{ marginBottom: 10}} 
-                    variant="outlined" 
+                    variant="contained" 
                     color="primary" 
                     onClick={this.handleClickOpen}
                 >

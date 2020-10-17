@@ -60,18 +60,18 @@ class CreateDojoDialog extends Component {
             <div>
                 <Button
                     style={{ marginBottom: 10}} 
-                    variant="outlined" 
+                    variant="contained" 
                     color="primary" 
                     onClick={this.handleClickOpen}
                 >
                     Create Dojo
                 </Button>
-                <Dialog 
+                <Dialog
                     style={{maxWidth: false}}
                     open={this.state.open} 
                     onClose={this.handleClose}
                 >
-                    <DialogContent>
+                    <DialogContent style={{backgroundColor:"#945C39"}}>
                         <CreateDojo />
                     </DialogContent>
                 </Dialog>

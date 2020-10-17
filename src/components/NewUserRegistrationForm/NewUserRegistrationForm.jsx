@@ -107,9 +107,11 @@ class NewUserForm extends Component {
     return (
       <div>
         <Grid container justify="center" alignItems="center">
+
           <Grid item>
             <Paper style={{ minWidth: "50%", maxWidth: "80%", margin: "auto", padding: "20px" }}>
               <h6 style={{ color: "red" }}>Fields with * are required.</h6>
+
               <form onSubmit={this.handleSaveNewUser} autocomplete="on">
                 <NewUserName handleChange={this.handleChange} />
                 <NewUserContact handleChange={this.handleChange} />

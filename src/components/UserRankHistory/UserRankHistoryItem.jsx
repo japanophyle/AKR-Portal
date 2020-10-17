@@ -36,7 +36,7 @@ class UserRankHistoryItem extends Component {
             <TableCell>{this.props.rank.rank_name}</TableCell>
             <TableCell>{moment(this.props.rank.date_rank_made).format('MM-DD-YYYY')}</TableCell>
             <TableCell>
-              <Tooltip title="Delete" >
+              <Tooltip title={<h1>Delete</h1>} >
                 <IconButton onClick={() => this.deleteRank(this.props.rank.id)} >
                     <DeleteIcon color="error" /> 
                 </IconButton>
