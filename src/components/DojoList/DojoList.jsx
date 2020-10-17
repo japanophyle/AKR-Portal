@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import DojoListItem from '../DojoListItem/DojoListItem.jsx'
 import { Typography, Grid, Paper, Table, TableContainer, TableCell, TableRow, TableHead, TableBody } from '@material-ui/core';
 import CreateDojoDialog from '../CreateDojo/CreateDojoDialog';
-
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 class DojoList extends Component {
     state = {
@@ -16,18 +16,26 @@ class DojoList extends Component {
   }
 
   render() {
+    const StyledTableCell = withStyles((theme) => ({
+        head: {
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.common.white,
+        },
+        body: {
+          fontSize: 14,
+        },
+      }))(TableCell);
     return (
         <Grid container justify="center" alignItems="center">
              <Grid item xs={12} align="center">
                 <CreateDojoDialog />
             </Grid>
-            <Grid xs={6} item>
-                <h1 align="center">National Dojo List</h1>
-                <Paper className="papertable">
-                    
-                    <TableContainer className="table">
+            <Grid item align="center">
+            <Typography><h2 align="center" >National Dojo List</h2></Typography>
+                <Paper className="papertable" style={{  width: "80%", padding: "20px", backgroundColor: "#945C39"}}>
+                    <TableContainer className="table" style={{ backgroundColor:"#ECE7D1"}} >
                         <Table stickyHeader>
-                            <TableHead >
+                            <TableHead style={{color: "blue"}}>
                                 <TableRow >
                                     <TableCell><Typography>Dojo</Typography></TableCell>
                                     <TableCell><Typography>Region</Typography></TableCell>

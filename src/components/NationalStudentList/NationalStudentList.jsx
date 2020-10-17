@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import ActiveMembers from '../MemberList/ActiveMembers';
 import InactiveMembers from '../MemberList/InactiveMembers';
 
-import { Grid, TextField } from '@material-ui/core';
+import { Grid, TextField, Typography } from '@material-ui/core';
 import DojoDues from '../DojoDues/DojoDues';
 
 
@@ -30,7 +30,7 @@ function NationalStudentList(props) {
     <div>
       <Grid container justify="center">
         <Grid item xs={12} align="center">
-          <h3>{activeHeading}</h3>
+          <Typography><h2>{activeHeading}</h2></Typography>
         </Grid>
         <Grid item xs={12} align="center">
           <DojoDues />

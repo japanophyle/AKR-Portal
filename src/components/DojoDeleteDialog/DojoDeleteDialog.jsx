@@ -22,7 +22,7 @@ function DojoDeleteDialog(props) {
 
     return (
         <div>
-            <Tooltip title="Delete" >
+            <Tooltip title={<h1>Delete</h1>} >
             <IconButton onClick={handleClickOpen} >
                     <DeleteIcon color="error" /> 
                 </IconButton>

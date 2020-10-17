@@ -113,7 +113,7 @@ function UserKyudo(props) {
         <div>
             {/* IF the state is true this a just a view of information */}
             {nameEdit ?
-                <Card style={{margin:5}}>
+                <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -122,7 +122,7 @@ function UserKyudo(props) {
                             <Grid item xs={1}>
                                 <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleDateChange} >
-                                        <EditIcon fontSize="large" color="primary"/>
+                                        <EditIcon fontSize="large" color="secondary"/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
@@ -153,7 +153,7 @@ function UserKyudo(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card style={{margin:5}}>
+                <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={submitRankHistory} >
                     <CardContent>
@@ -225,7 +225,7 @@ function UserKyudo(props) {
             }
 
             {teacherEdit ?
-                <Card style={{margin:5}}>
+                <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -234,7 +234,7 @@ function UserKyudo(props) {
                             <Grid item xs={1}>
                                 <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleTeacherChange} >
-                                        <EditIcon fontSize="large" color="primary"/>
+                                        <EditIcon fontSize="large" color="secondary"/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
@@ -249,7 +249,7 @@ function UserKyudo(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card style={{margin:5}}>
+                <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={handleSaveEdit} >
                     <CardContent>
@@ -305,7 +305,7 @@ function UserKyudo(props) {
                 </Card>
             }
             {moreEdit ?
-                <Card style={{margin:5}}>
+                <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
                     <CardContent>
                         <Grid container>
                             <Grid item xs={11}>
@@ -314,7 +314,7 @@ function UserKyudo(props) {
                             <Grid item xs={1}>
                                 <Tooltip title={<h1>Edit</h1>}>
                                     <IconButton  onClick={handleMoreChange} >
-                                        <EditIcon fontSize="large" color="primary"/>
+                                        <EditIcon fontSize="large" color="secondary"/>
                                     </IconButton>
                                 </Tooltip>
                             </Grid>
@@ -335,7 +335,7 @@ function UserKyudo(props) {
                     </CardContent>
                 </Card>
                 :
-                <Card style={{margin:5}}>
+                <Card style={{margin:5, backgroundColor:"#ECE7D1"}}>
                     {/* IF the state is FALSE this You can edit */}
                     <form  onSubmit={handleSaveEdit} >
                     <CardContent>

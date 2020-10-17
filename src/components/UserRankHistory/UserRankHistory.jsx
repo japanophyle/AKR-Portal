@@ -17,7 +17,7 @@ class UserRankHistory extends Component {
     return (
         <Grid container justify="center" alignItems="center">
             <Grid xs={6} item>
-                <Paper className="papertable">
+                <Paper className="papertable" style={{backgroundColor:"#EADCC2"}}>
                     <TableContainer className="table">
                         <Table stickyHeader>
                             <TableHead >
