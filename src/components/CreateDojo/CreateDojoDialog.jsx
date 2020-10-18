@@ -72,7 +72,7 @@ class CreateDojoDialog extends Component {
                     onClose={this.handleClose}
                 >
                     <DialogContent style={{backgroundColor:"#945C39"}}>
-                        <CreateDojo />
+                        <CreateDojo handleClose={this.handleClose}/>
                     </DialogContent>
                 </Dialog>
             </div>

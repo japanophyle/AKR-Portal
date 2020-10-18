@@ -23,6 +23,7 @@ function NewUserName(props) {
         variant="outlined"
         name="fname"
         onChange={props.handleChange('fname')}
+        value={props.state.fname}
       />
     
       <TextField
@@ -32,6 +33,7 @@ function NewUserName(props) {
         variant="outlined"
         name="lname"
         onChange={props.handleChange('lname')}
+        value={props.state.lname}
       />
       <Grid container>
         <Grid item>
@@ -42,6 +44,7 @@ function NewUserName(props) {
             variant="outlined"
             name="fname_japanese"
             onChange={props.handleChange('fname_japanese')}
+            value={props.state.fname_japanese}
           />
           <TextField
             label="Katakana"
@@ -50,6 +53,7 @@ function NewUserName(props) {
             variant="outlined"
             name="lname_japanese"
             onChange={props.handleChange('lname_japanese')}
+            value={props.state.lname_japanese}
           />
         </Grid>
       </Grid>

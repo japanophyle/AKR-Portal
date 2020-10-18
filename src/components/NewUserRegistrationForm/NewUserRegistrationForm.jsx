@@ -108,32 +108,32 @@ class NewUserForm extends Component {
     this.setState
       ({
         ...this.state,
-        fname: 'bob',
-    lname: 'me',
-    user_id: this.props.store.user.id,
-    email: 'me@me.com',
-    phone_number: '1234',
-    dojo_id: '1',
-    fname_japanese: 'sda',
-    lname_japanese: 'fdfs',
-    student_rank: 'shodan',
-    date_student_rank: null,
-    teaching_rank: '',
-    date_teaching_rank: null,
-    ikyf: '123123',
-    years_practice: '1',
-    address_1: '`123`23`',
-    address_2: '',
-    city: '`123',
-    state: '`213',
-    country: '4325',
-    zipcode: '2345',
-    gender: '2345',
-    date_of_birth: null,
-    date_began_kyudo: null,
-    citizenship: 'usa',
-    is_current_member: !true,
-    usa_archery_id: '1324',
+          fname: 'Alex',
+          lname: 'Severson',
+          user_id: this.props.store.user.id,
+          email: 'Alex@AKRP.io',
+          phone_number: '5556477240',
+          dojo_id: '19',
+          fname_japanese: 'アレックス',
+          lname_japanese: 'セバーソン',
+          student_rank: '',
+          date_student_rank: null,
+          teaching_rank: '',
+          date_teaching_rank: null,
+          ikyf: '',
+          years_practice: '',
+          address_1: '4441 Roberts St.',
+          address_2: 'apt. 400',
+          city: 'Saint Paul',
+          state: 'MN',
+          country: 'USA',
+          zipcode: '55104',
+          gender: 'Male',
+          date_of_birth: '1989-04-07',
+          date_began_kyudo: null,
+          citizenship: 'USA',
+          is_current_member: !true,
+          usa_archery_id: '',
       })
   }
 
@@ -148,10 +148,10 @@ class NewUserForm extends Component {
             <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px" }}>
               <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required.</h6>
               <form onSubmit={this.handleSaveNewUser} autocomplete="on">
-                <NewUserName handleChange={this.handleChange} />
-                <NewUserContact handleChange={this.handleChange} />
+                <NewUserName state={this.state} handleChange={this.handleChange} />
+                <NewUserContact state={this.state} handleChange={this.handleChange} />
                 <NewUserPersonal state={this.state} handleChange={this.handleChange} />
-                <NewUserAddress handleChange={this.handleChange} />
+                <NewUserAddress state={this.state} handleChange={this.handleChange} />
 
                 {/* Choosing the dojo that the new user is trying to join. */}
                 <FormControlLabel

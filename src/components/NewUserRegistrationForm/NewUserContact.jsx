@@ -23,6 +23,7 @@ function NewUserContact(props) {
         variant="outlined"
         name="email"
         onChange={props.handleChange('email')}
+        value={props.state.email}
       />
       <TextField
         required
@@ -31,6 +32,7 @@ function NewUserContact(props) {
         variant="outlined"
         name="phone_number"
         onChange={props.handleChange('phone_number')}
+        value={props.state.phone_number}
       />
     </div>
   );
