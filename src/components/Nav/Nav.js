@@ -31,7 +31,9 @@ const Nav = (props) => {
 
 
   return (
-    <div className="nav">
+    <div 
+    className="nav"
+    >
 
       {/* Logo and Home Link */}
       <Link to="/home">
