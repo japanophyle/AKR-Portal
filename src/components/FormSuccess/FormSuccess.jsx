@@ -34,7 +34,13 @@ export default function FormSuccess(props) {
 
     return (
         <div>
-            <Button type="submit" variant="contained" color="primary" onClick={handleClickOpen}>
+            <Button
+                style={{ marginTop: 15, minWidth: 120, }}
+                type="submit" 
+                variant="contained" 
+                color="primary" 
+                onClick={handleClickOpen}
+            >
                 Submit
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >

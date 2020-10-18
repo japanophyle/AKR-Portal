@@ -6,6 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
     Grid,
     TextField,
+    Typography,
 } from '@material-ui/core';
 
 
@@ -17,7 +18,11 @@ function NewUserAddress(props) {
 
     return (
         <div>
-            <h3>{heading}</h3>
+            
+            <Typography variant="h6">
+                {heading}
+            </Typography>
+
             <Grid container spacing={2}>
                 <Grid item>
                     <TextField
@@ -75,7 +80,7 @@ function NewUserAddress(props) {
                         value={props.state.zipcode}
                     />
                 </Grid>
-                <Grid item xs={12} style={{ marginTop: -8}}>
+                <Grid item xs={12} style={{ marginTop: -8 }}>
                     <TextField
                         required
                         label="Country"
