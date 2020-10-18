@@ -143,7 +143,7 @@ class NewUserForm extends Component {
 
           <Grid item>
             <Paper style={{ minWidth: "50%", maxWidth: "80%", margin: "auto", padding: "20px" }}>
-              <h6 style={{ color: "red" }}>Fields with * are required.</h6>
+              <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required.</h6>
 
               <form onSubmit={this.handleSaveNewUser} autocomplete="on">
                 <NewUserName state={this.state} handleChange={this.handleChange} />
