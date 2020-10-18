@@ -6,6 +6,7 @@ import LoginForm from '../LoginForm/LoginForm';
 import {
   Button,
   Link,
+  Grid,
 } from '@material-ui/core';
 
 class LoginPage extends Component {
@@ -16,8 +17,9 @@ class LoginPage extends Component {
 
         <center>
           <Link
-            // component="button"
+            component="button"
             style={{ fontSize: 20, fontWeight: "bold"}}
+            color="textPrimary"
             variant="body1"
             size="large"
             className="btn btn_asLink"
