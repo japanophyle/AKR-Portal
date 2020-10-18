@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { TextField, MenuItem, Select, IconButton, Tooltip, Grid, Paper, FormControl, InputLabel, Typography } from '@material-ui/core';
 import swal from '@sweetalert/with-react';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import { withRouter } from 'react-router';
 
 class CreateDojo extends Component {
     state = {
@@ -40,6 +41,7 @@ class CreateDojo extends Component {
                     admin_id: 0
                 }
             })
+            this.props.handleClose();
             this.props.history.push('/nationdojos')
         }
     }
@@ -88,4 +90,6 @@ class CreateDojo extends Component {
     }
 }
 
-export default connect(mapStoreToProps)(CreateDojo);
+const CreateDojoWithRouter = withRouter(CreateDojo);
+
+export default connect(mapStoreToProps)(CreateDojoWithRouter);

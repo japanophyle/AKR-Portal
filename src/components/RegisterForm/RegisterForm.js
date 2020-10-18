@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+import {
+  Button,
+  TextField,
+} from '@material-ui/core';
+
 class RegisterForm extends Component {
   state = {
     username: '',
@@ -36,19 +41,40 @@ class RegisterForm extends Component {
           </h3>
         )}
         <div>
-          <label htmlFor="username">
+          <TextField
+            label="Username"
+            type="text"
+            name="username"
+            variant="outlined"
+            margin="dense"
+            value={this.state.username}
+            required
+            onChange={this.handleInputChangeFor('username')}
+          />
+          
+          {/* <label htmlFor="username">
             Username:
             <input
               type="text"
               name="username"
               value={this.state.username}
               required
-              onChange={this.handleInputChangeFor('username')}
+              
             />
-          </label>
+          </label> */}
         </div>
         <div>
-          <label htmlFor="password">
+        <TextField
+            label="Password"
+            name="password"
+            type="password"
+            variant="outlined"
+            margin="dense"
+            value={this.state.password}
+            required
+            onChange={this.handleInputChangeFor('password')}
+          />
+          {/* <label htmlFor="password">
             Password:
             <input
               type="password"
@@ -57,10 +83,20 @@ class RegisterForm extends Component {
               required
               onChange={this.handleInputChangeFor('password')}
             />
-          </label>
+          </label> */}
         </div>
         <div>
-          <input className="btn" type="submit" name="submit" value="Register" />
+          <Button
+            style={{ marginTop: 10 }}
+            variant="contained"
+            color="primary"
+            className="btn"
+            value="submit"
+            type="submit"
+          >
+            Register
+          </Button>
+          {/* <input className="btn" type="submit" name="submit" value="Register" /> */}
         </div>
       </form>
     );

@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import LoginForm from '../LoginForm/LoginForm';
 
+import {
+  Button,
+  Link,
+} from '@material-ui/core';
+
 class LoginPage extends Component {
   render() {
     return (
@@ -10,15 +15,27 @@ class LoginPage extends Component {
         <LoginForm />
 
         <center>
-          <button
-            type="button"
+          <Link
+            // component="button"
+            style={{ fontSize: 20, fontWeight: "bold"}}
+            variant="body1"
+            size="large"
             className="btn btn_asLink"
             onClick={() => {
-              this.props.history.push('/registration');
+              this.props.history.push('/registration')
             }}
           >
             Register
-          </button>
+          </Link>
+          {/* <button
+            type="button"
+            className="btn btn_asLink"
+            onClick={() => {
+              this.props.history.push('/registration')
+            }}
+          >
+            Register
+          </button> */}
         </center>
       </div>
     );
