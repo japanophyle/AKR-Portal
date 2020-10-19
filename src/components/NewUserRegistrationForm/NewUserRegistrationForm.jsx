@@ -111,8 +111,8 @@ class NewUserForm extends Component {
           email: 'Alex@AKRP.io',
           phone_number: '5556477240',
           dojo_id: '19',
-          fname_japanese: 'アレックス',
-          lname_japanese: 'セバーソン',
+          // fname_japanese: 'アレックス',
+          // lname_japanese: 'セバーソン',
           student_rank: '',
           date_student_rank: null,
           teaching_rank: '',
@@ -134,6 +134,16 @@ class NewUserForm extends Component {
       })
   }
 
+  secretKatakana = () => {
+    this.setState({
+      ...this.state,
+      fname_japanese: 'アレックス',
+      lname_japanese: 'セバーソン'
+    })
+  }
+
+
+
 
   render() {
     console.log(this.state);
@@ -143,7 +153,9 @@ class NewUserForm extends Component {
 
           <Grid item>
             <Paper style={{ minWidth: "50%", maxWidth: "80%", margin: "auto", padding: "20px" }}>
-              <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required.</h6>
+              <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required</h6>
+              <h6 onClick={this.secretKatakana} style={{ color: "red" }}>.</h6>
+
 
               <form onSubmit={this.handleSaveNewUser} autocomplete="on">
                 <NewUserName state={this.state} handleChange={this.handleChange} />
