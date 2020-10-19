@@ -71,7 +71,17 @@ class App extends Component {
       },
       typography: {
         h5: {},
+      },
+      overrides: {
+        MuiTableRow: {
+          root: {
+            '&$hover:hover': {
+              // backgroundColor: '#acb1a7',
+            },
+          },
+        },
       }
+
     });
     return (
       <ThemeProvider theme={theme}>
@@ -174,6 +184,7 @@ class App extends Component {
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <h1>404</h1>} />
             </Switch>
+            <Footer />
           </div>
         </Router>
       </ThemeProvider>
