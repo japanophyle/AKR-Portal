@@ -191,7 +191,8 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
   } else {
     who = req.body.user_id
   }
-
+  console.log(req.body.user_id)
+  
   const queryText =
     `UPDATE "user_data" 
     SET
@@ -227,7 +228,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
       "dues_method" = $31,
       "notes" = 2,
       equipment_checkout = $33
-      WHERE "id" = $3;`;
+      WHERE "user_id" = $3;`;
   pool.query(queryText, [
     req.body.fname, // $1
     req.body.lname, // $2
