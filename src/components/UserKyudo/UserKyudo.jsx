@@ -284,7 +284,7 @@ function UserKyudo(props) {
                                     id="teaching_rank"
                                     label="Teaching Rank"
                                     name="teaching_rank"
-                                    width="70px"
+                                    style={{ minWidth: 200 }}
                                     value={props.store.editInfo.teaching_rank}
                                     onChange={(event) => name(event)}
                                 >
@@ -300,7 +300,7 @@ function UserKyudo(props) {
                             {/* date of teacher rank */}
                             <TextField
                                 type='Date'
-                                
+                                style={{ minwidth: 200}}
                                 id="date_teaching_rank"
                                 label="Date Earned"
                                 defaultValue={moment(props.store.info.date_teaching_rank).format('YYYY-MM-DD')}
