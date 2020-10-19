@@ -30,6 +30,7 @@ function NewUserContact(props) {
             variant="outlined"
             name="email"
             onChange={props.handleChange('email')}
+            value={props.state.email}
           />
         </Grid>
         <Grid item xs={6}>
@@ -40,6 +41,7 @@ function NewUserContact(props) {
             variant="outlined"
             name="phone_number"
             onChange={props.handleChange('phone_number')}
+            value={props.state.phone_number}
           />
         </Grid>
       </Grid>

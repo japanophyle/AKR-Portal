@@ -100,6 +100,39 @@ class NewUserForm extends Component {
       });
   }
 
+  secretFunction = () => {
+    console.log('woo')
+    this.setState
+      ({
+        ...this.state,
+          fname: 'Alex',
+          lname: 'Severson',
+          user_id: this.props.store.user.id,
+          email: 'Alex@AKRP.io',
+          phone_number: '5556477240',
+          dojo_id: '19',
+          fname_japanese: 'アレックス',
+          lname_japanese: 'セバーソン',
+          student_rank: '',
+          date_student_rank: null,
+          teaching_rank: '',
+          date_teaching_rank: null,
+          ikyf: '',
+          years_practice: '',
+          address_1: '4441 Roberts St.',
+          address_2: 'apt. 400',
+          city: 'Saint Paul',
+          state: 'MN',
+          country: 'USA',
+          zipcode: '55104',
+          gender: 'Male',
+          date_of_birth: '1989-04-07',
+          date_began_kyudo: null,
+          citizenship: 'USA',
+          is_current_member: !true,
+          usa_archery_id: '',
+      })
+  }
 
 
   render() {
@@ -110,13 +143,13 @@ class NewUserForm extends Component {
 
           <Grid item>
             <Paper style={{ minWidth: "50%", maxWidth: "80%", margin: "auto", padding: "20px" }}>
-              <h6 style={{ color: "red" }}>Fields with * are required.</h6>
+              <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required.</h6>
 
               <form onSubmit={this.handleSaveNewUser} autocomplete="on">
-                <NewUserName handleChange={this.handleChange} />
-                <NewUserContact handleChange={this.handleChange} />
+                <NewUserName state={this.state} handleChange={this.handleChange} />
+                <NewUserContact state={this.state} handleChange={this.handleChange} />
                 <NewUserPersonal state={this.state} handleChange={this.handleChange} />
-                <NewUserAddress handleChange={this.handleChange} />
+                <NewUserAddress state={this.state} handleChange={this.handleChange} />
 
                 <Grid container justify="center" alignItems="center" style={{ marginTop: 10 }}>
                   <Grid item>
