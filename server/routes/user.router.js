@@ -189,7 +189,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
   if (req.user.auth_level <= 5) {
     who = req.user.id
   } else {
-    who = req.body.id
+    who = req.body.user_id
   }
 
   const queryText =
@@ -225,7 +225,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
       "amount_paid" = $29,
       "dues_date"  = $30,
       "dues_method" = $31,
-      "notes" = $32,
+      "notes" = 2,
       equipment_checkout = $33
       WHERE "id" = $3;`;
   pool.query(queryText, [
@@ -234,7 +234,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     // not using this, since it'll be the logged in user:
     // req.body.user_id,
     // using this instead:
-    who, // $3
+    req.body // $3
     req.body.email, // $4
     req.body.phone_number, // $5
     // dojo_id will be sent over as an integer value from client
