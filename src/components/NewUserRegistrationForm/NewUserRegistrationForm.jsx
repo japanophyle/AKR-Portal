@@ -152,7 +152,7 @@ class NewUserForm extends Component {
         <Grid container justify="center" alignItems="center">
 
           <Grid item>
-            <Paper style={{ minWidth: "50%", maxWidth: "80%", margin: "auto", padding: "20px" }}>
+            <Paper style={{ minWidth: "50%", maxWidth: "80%", margin: "auto", padding: "20px", backgroundColor: "#ECE7D1" }}>
               <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required</h6>
               <h6 onClick={this.secretKatakana} style={{ color: "red" }}>.</h6>
 
@@ -177,12 +177,13 @@ class NewUserForm extends Component {
                       style={{ margin: 8, minWidth: 300 }}
                       variant="outlined"
                     >
-                      <InputLabel>Dojo</InputLabel>
+                      <InputLabel color="secondary">Dojo</InputLabel>
                       <Select
                         required
                         label="Dojo"
                         name="dojo_id"
                         onChange={this.handleChange('dojo_id')}
+                        color="secondary"
                       >
                         <MenuItem value=''><em>Pick a Dojo</em></MenuItem>
                         {this.props.store.dojos.map((dojo, id) => {

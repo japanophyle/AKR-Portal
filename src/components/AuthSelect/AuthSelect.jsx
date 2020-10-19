@@ -55,13 +55,14 @@ const handleSave = () => {
         {/* IF auth level of user is 20 you can promote/demote all */}
         {props.store.user.auth_level >= 20 && 
       <FormControl variant="outlined">
-        <InputLabel id="demo-simple-select-outlined-label">Role</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label" color="secondary">Role</InputLabel>
         <Select
           labelId="auth_level"
           id="auth_level"
           value={props.member.auth_level}
           onChange={handleChange}
           label="Age"
+          color="secondary"
         >
           {/* <MenuItem value="">
             <em>{auth}</em>
@@ -84,13 +85,14 @@ const handleSave = () => {
             </>
             :
             <FormControl variant="outlined">
-        <InputLabel id="demo-simple-select-outlined-label">Role</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label" color="secondary">Role</InputLabel>
         <Select
           labelId="auth_level"
           id="auth_level"
           value={props.member.auth_level}
           onChange={handleChange}
           label="Age"
+          color="secondary"
         >
           {/* <MenuItem value="">
             <em>{auth}</em>
@@ -118,7 +120,7 @@ const handleSave = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="secondary">
             Cancel
           </Button>
           <Button onClick={handleSave} color="primary">

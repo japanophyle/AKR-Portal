@@ -123,6 +123,7 @@ function UserName(props) {
                     defaultValue={props.store.info.fname}
                     variant="outlined"
                     onChange={handleEditChange}
+                    color="secondary"
                   />
                   <br />
                   <br />
@@ -134,6 +135,7 @@ function UserName(props) {
                     defaultValue={props.store.info.fname_japanese}
                     variant="outlined"
                     onChange={handleEditChange}
+                    color="secondary"
 
                   />
                   {/* username */}
@@ -151,6 +153,7 @@ function UserName(props) {
                     defaultValue={props.store.info.lname}
                     variant="outlined"
                     onChange={handleEditChange}
+                    color="secondary"
 
                   />
                   <br />
@@ -163,6 +166,7 @@ function UserName(props) {
                     defaultValue={props.store.info.lname_japanese}
                     variant="outlined"
                     onChange={handleEditChange}
+                    color="secondary"
 
                   />
                 </Typography>

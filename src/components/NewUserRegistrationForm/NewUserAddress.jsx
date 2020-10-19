@@ -32,6 +32,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="address_1"
                         onChange={props.handleChange('address_1')}
+                        color="secondary"
                         value={props.state.address_1}
                     />
                 </Grid>
@@ -42,6 +43,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="address_2"
                         onChange={props.handleChange('address_2')}
+                        color="secondary"
                         value={props.state.address_2}
                     />
                 </Grid>
@@ -55,6 +57,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="city"
                         onChange={props.handleChange('city')}
+                        color="secondary"
                         value={props.state.city}
                     />
                 </Grid>
@@ -66,6 +69,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="state"
                         onChange={props.handleChange('state')}
+                        color="secondary"
                         value={props.state.state}
                     />
                 </Grid>
@@ -77,6 +81,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="zipcode"
                         onChange={props.handleChange('zipcode')}
+                        color="secondary"
                         value={props.state.zipcode}
                     />
                 </Grid>
@@ -88,6 +93,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="country"
                         onChange={props.handleChange('country')}
+                        color="secondary"
                         value={props.state.country}
                     />
                 </Grid>
