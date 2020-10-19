@@ -120,7 +120,10 @@ function UserPersonal(props) {
                                 type='Date'
                                 required
                                 id="date_of_birth"
-                                label="Birth Date"
+                                label="Date of Birth"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                                 defaultValue={moment(props.store.info.date_of_birth).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}

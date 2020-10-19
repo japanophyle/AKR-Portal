@@ -39,6 +39,10 @@ function NewUserPersonal(props) {
                         variant="outlined"
                         name="date_of_birth"
                         type="date"
+                        label="Date of birth"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                         onChange={props.handleChange('date_of_birth')}
                         color="secondary"
                         value={props.state.date_of_birth}
