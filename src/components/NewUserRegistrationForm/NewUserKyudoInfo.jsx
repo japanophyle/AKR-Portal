@@ -49,10 +49,12 @@ function NewUserKyudoInfo(props) {
 
     return (
         <div>
-            <h3>{heading}</h3>
+            <Typography variant="h6">
+                {heading}
+            </Typography>
 
             <Grid container>
-                <Grid item>
+                <Grid item xs={6}>
                     <TextField
                         label="Years Practiced"
                         variant="outlined"
@@ -60,7 +62,7 @@ function NewUserKyudoInfo(props) {
                         onChange={props.handleChange('years_practice')}
                     />
                 </Grid>
-                <Grid item>
+                <Grid item xs={6}>
                     <TextField
                         margin="dense"
                         variant="outlined"
@@ -74,7 +76,7 @@ function NewUserKyudoInfo(props) {
 
             {/* current student rank form */}
             <Grid container>
-                <Grid item>
+                <Grid item xs={6}>
                     <FormControl
                         className={classes.formControl}
                         variant="outlined"
@@ -93,7 +95,7 @@ function NewUserKyudoInfo(props) {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item>
+                <Grid item xs={6}>
                     <TextField
                         margin="dense"
                         variant="outlined"
@@ -107,7 +109,7 @@ function NewUserKyudoInfo(props) {
 
             {/* teacher rank form */}
             <Grid container>
-                <Grid item>
+                <Grid item xs={6}>
                     <FormControl
                         className={classes.formControl}
                         variant="outlined"
@@ -118,6 +120,7 @@ function NewUserKyudoInfo(props) {
                             name="teaching_rank"
                             onChange={props.handleChange('teaching_rank')}
                         >
+                            <MenuItem value={0}>Gosho Ranks</MenuItem>
                             {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
                                 return (
                                     <MenuItem key={id} value={rank}>{rank}</MenuItem>
@@ -126,7 +129,7 @@ function NewUserKyudoInfo(props) {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item>
+                <Grid item xs={6}>
                     <TextField
                         margin="dense"
                         variant="outlined"
@@ -139,8 +142,8 @@ function NewUserKyudoInfo(props) {
             </Grid>
 
             {/* Potential information the user might already have.  Given to them from AKR */}
-            <Grid container spacing={4}>
-                <Grid item>
+            <Grid container>
+                <Grid item xs={6}>
                     <TextField
                         label="IKYF Number"
                         margin="dense"
@@ -149,7 +152,7 @@ function NewUserKyudoInfo(props) {
                         onChange={props.handleChange('ikyf')}
                     />
                 </Grid>
-                <Grid item>
+                <Grid item xs={6}>
                     <TextField
                         label="USA Archery Number"
                         margin="dense"

@@ -32,6 +32,7 @@ import DojoList from '../DojoList/DojoList.jsx';
 import CreateDojo from '../CreateDojo/CreateDojo.jsx';
 import MyDojo from '../MyDojo/MyDojo';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import 'fontsource-roboto';
 
 
 class App extends Component {
@@ -68,114 +69,124 @@ class App extends Component {
           dark: '#945C39'  // Dark Brown
         }
       },
+      typography: {
+        h5: {},
+      },
+      overrides: {
+        MuiTableRow: {
+          root: {
+            '&$hover:hover': {
+              backgroundColor: '#FEE6A5',
+            },
+          },
+        },
+      }
+
     });
     return (
       <ThemeProvider theme={theme}>
-      <Router>
-        <div>
-          <Nav />
-          <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+        <Router>
+          <div>
+            <Nav />
+            <Switch>
+              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+              <Redirect exact from="/" to="/home" />
 
-            {/* Visiting localhost:3000/about will show the about page. */}
-            <Route
-              // shows AboutPage at all times (logged in or not)
-              exact
-              path="/about"
-              component={AboutPage}
-            />
+              {/* Visiting localhost:3000/about will show the about page. */}
+              <Route
+                // shows AboutPage at all times (logged in or not)
+                exact
+                path="/about"
+                component={AboutPage}
+              />
 
-            {/* For protected routes, the view could show one of several things on the same route.
+              {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-            <ProtectedRoute
-              // logged in shows UserPage else shows LoginPage
-              path="/user/:id"
-              component={UserPage}
-            />
+              <ProtectedRoute
+                // logged in shows UserPage else shows LoginPage
+                path="/user/:id"
+                component={UserPage}
+              />
 
-            {/* When a value is supplied for the authRedirect prop the user will
+              {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
             be taken to the component and path supplied. */}
-            <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LoginPage at /login
-              exact
-              path="/login"
-              component={LoginPage}
-              authRedirect="/inactive"
-              memberRedirect="/mydojo"
-              dojoAdminRedirect="/mydojo"
-              siteAdminRedirect="/nationdojos"
-            />
+              <ProtectedRoute
+                // with authRedirect:
+                // - if logged in, redirects to "/user"
+                // - else shows LoginPage at /login
+                exact
+                path="/login"
+                component={LoginPage}
+                authRedirect="/inactive"
+                memberRedirect="/mydojo"
+                dojoAdminRedirect="/mydojo"
+                siteAdminRedirect="/nationdojos"
+              />
 
-            <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/new-user-registration"
-              // - else shows RegisterPage at "/registration"
-              exact
-              path="/registration"
-              component={RegisterPage}
-              authRedirect="/new-user-registration"
-            />
+              <ProtectedRoute
+                // with authRedirect:
+                // - if logged in, redirects to "/new-user-registration"
+                // - else shows RegisterPage at "/registration"
+                exact
+                path="/registration"
+                component={RegisterPage}
+                authRedirect="/new-user-registration"
+              />
 
-            <ProtectedRoute
-              // with authRedirect:
-              // - if logged in, redirects to "/user"
-              // - else shows LandingPage at "/home"
-              exact
-              path="/home"
-              component={LandingPage}
-            // authRedirect="/mydojo"
-            />
+              <Route
+                exact
+                path="/home"
+                component={LandingPage}
+              />
 
-            <UserAuthRoute 
-              exact
-              path="/mydojo"
-              component={MyDojo}
-            />
+              <UserAuthRoute
+                exact
+                path="/mydojo"
+                component={MyDojo}
+              />
 
-            <DojoAdminAuthRoute
-              exact
-              path="/memberlist/:id"
-              component={MemberList}
-            />
+              <DojoAdminAuthRoute
+                exact
+                path="/memberlist/:id"
+                component={MemberList}
+              />
 
-            <SiteAdminAuthRoute
-              exact
-              path="/nationdojos"
-              component={DojoList}
-            />
+              <SiteAdminAuthRoute
+                exact
+                path="/nationdojos"
+                component={DojoList}
+              />
 
-            <SiteAdminAuthRoute
-              exact
-              path="/createdojo"
-              component={CreateDojo}
-            />
+              <SiteAdminAuthRoute
+                exact
+                path="/createdojo"
+                component={CreateDojo}
+              />
 
-            <SiteAdminAuthRoute
-              exact
-              path="/nationalstudentlist"
-              component={NationalStudentList}
-            />
-            <ProtectedRoute
-              path="/inactive"
-              component={InactiveView}
-            />
+              <SiteAdminAuthRoute
+                exact
+                path="/nationalstudentlist"
+                component={NationalStudentList}
+              />
+              <ProtectedRoute
+                path="/inactive"
+                component={InactiveView}
+              />
 
-            <ProtectedRoute
-              path="/new-user-registration"
-              component={NewUserRegistrationForm}
-            />
+              <ProtectedRoute
+                path="/new-user-registration"
+                component={NewUserRegistrationForm}
+              />
 
-            {/* If none of the other routes matched, we will show a 404. */}
-            <Route render={() => <h1>404</h1>} />
-          </Switch>
-        </div>
-      </Router>
+              {/* If none of the other routes matched, we will show a 404. */}
+              <Route render={() => <h1>404</h1>} />
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
       </ThemeProvider>
     );
   }

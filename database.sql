@@ -7,7 +7,7 @@ CREATE TABLE "user" (
 	"id" serial PRIMARY KEY,
 	"username" varchar(255) NOT NULL UNIQUE,
 	"password" varchar(255) NOT NULL UNIQUE,
-	"auth_level" varchar(255)
+	"auth_level" integer(255)
 );
 
 CREATE TABLE "dojo" (
@@ -81,7 +81,6 @@ INSERT INTO "user_data" (
 "country",
 "zipcode",
 "date_of_birth",
-"date_began_kyudo",
 "citizenship" )
 VALUES 
 ('Lilly', 'Potter', '23', 'lilpot@hogwarts.edu', '221-332-4433', '19', 'Nidan', '07/01/2005',

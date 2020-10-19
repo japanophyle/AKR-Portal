@@ -6,6 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
   Grid,
   TextField,
+  Typography,
 } from '@material-ui/core';
 
 function NewUserName(props) {
@@ -15,26 +16,37 @@ function NewUserName(props) {
 
   return (
     <div>
-      <h3>{heading}</h3>
-      <TextField
-        required
-        label="First"
-        margin="dense"
-        variant="outlined"
-        name="fname"
-        onChange={props.handleChange('fname')}
-      />
-    
-      <TextField
-        required
-        label="Last"
-        margin="dense"
-        variant="outlined"
-        name="lname"
-        onChange={props.handleChange('lname')}
-      />
+      <Grid container justify="flex-start">
+        <Grid item xs={12}>
+          <Typography variant="h6">
+            {heading}
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            label="First"
+            margin="dense"
+            variant="outlined"
+            name="fname"
+            onChange={props.handleChange('fname')}
+            value={props.state.fname}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            required
+            label="Last"
+            margin="dense"
+            variant="outlined"
+            name="lname"
+            onChange={props.handleChange('lname')}
+            value={props.state.lname}
+          />
+        </Grid>
+      </Grid>
       <Grid container>
-        <Grid item>
+        <Grid item xs={6}>
           <TextField
             label="Katakana"
             helperText="If known"
@@ -42,7 +54,10 @@ function NewUserName(props) {
             variant="outlined"
             name="fname_japanese"
             onChange={props.handleChange('fname_japanese')}
+            value={props.state.fname_japanese}
           />
+        </Grid>
+        <Grid item xs={6}>
           <TextField
             label="Katakana"
             helperText="If known"
@@ -50,6 +65,7 @@ function NewUserName(props) {
             variant="outlined"
             name="lname_japanese"
             onChange={props.handleChange('lname_japanese')}
+            value={props.state.lname_japanese}
           />
         </Grid>
       </Grid>

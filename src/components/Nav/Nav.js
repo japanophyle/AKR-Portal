@@ -14,7 +14,7 @@ const Nav = (props) => {
 
   if (props.store.user.id != null) {
     loginLinkData.path = '/mydojo';
-    loginLinkData.text = 'Home';
+    loginLinkData.text = 'My Dojo';
   };
 
 

@@ -24,7 +24,7 @@ class DojoListItem extends Component {
   render() {
 
     return (
-      <TableRow>
+      <TableRow hover>
         <TableCell>{this.props.dojo.dojo_name}</TableCell>
         <TableCell>{this.props.dojo.region_name}</TableCell>
         <TableCell>
