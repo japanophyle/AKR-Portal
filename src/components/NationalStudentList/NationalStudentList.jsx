@@ -41,6 +41,7 @@ function NationalStudentList(props) {
             label="Filter by Name"
             onChange={search}
             variant='outlined'
+            color="secondary"
           />
         </Grid>
       </Grid>

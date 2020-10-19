@@ -60,6 +60,7 @@ function NewUserKyudoInfo(props) {
                         variant="outlined"
                         name="years_practice"
                         onChange={props.handleChange('years_practice')}
+                        color="secondary"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -70,6 +71,7 @@ function NewUserKyudoInfo(props) {
                         type="date"
                         helperText="Date you began Kyudo"
                         onChange={props.handleChange('date_began_kyudo')}
+                        color="secondary"
                     />
                 </Grid>
             </Grid>
@@ -81,11 +83,12 @@ function NewUserKyudoInfo(props) {
                         className={classes.formControl}
                         variant="outlined"
                     >
-                        <InputLabel>Current Kyudo Rank</InputLabel>
+                        <InputLabel color="secondary">Current Kyudo Rank</InputLabel>
                         <Select
                             label="Current Kyudo Rank"
                             name="student_rank"
                             onChange={props.handleChange('student_rank')}
+                            color="secondary"
                         >
                             {ranks.map((rank, id) => {
                                 return (
@@ -103,6 +106,7 @@ function NewUserKyudoInfo(props) {
                         type="date"
                         helperText="Date reached current rank"
                         onChange={props.handleChange('date_student_rank')}
+                        color="secondary"
                     />
                 </Grid>
             </Grid>
@@ -114,11 +118,12 @@ function NewUserKyudoInfo(props) {
                         className={classes.formControl}
                         variant="outlined"
                     >
-                        <InputLabel>Current Teaching Rank</InputLabel>
+                        <InputLabel color="secondary">Current Teaching Rank</InputLabel>
                         <Select
                             label="Current Teaching Rank"
                             name="teaching_rank"
                             onChange={props.handleChange('teaching_rank')}
+                            color="secondary"
                         >
                             <MenuItem value={0}>Gosho Ranks</MenuItem>
                             {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
@@ -137,6 +142,7 @@ function NewUserKyudoInfo(props) {
                         type="date"
                         helperText="Date reached current rank"
                         onChange={props.handleChange('date_teaching_rank')}
+                        color="secondary"
                     />
                 </Grid>
             </Grid>
@@ -150,6 +156,7 @@ function NewUserKyudoInfo(props) {
                         variant="outlined"
                         name="ikyf"
                         onChange={props.handleChange('ikyf')}
+                        color="secondary"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -159,6 +166,7 @@ function NewUserKyudoInfo(props) {
                         variant="outlined"
                         name="usa_archery_id"
                         onChange={props.handleChange('usa_archery_id')}
+                        color="secondary"
                     />
                 </Grid>
             </Grid>

@@ -111,6 +111,7 @@ function UserPersonal(props) {
                                 defaultValue={props.store.info.citizenship}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -123,6 +124,7 @@ function UserPersonal(props) {
                                 defaultValue={moment(props.store.info.date_of_birth).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -141,6 +143,7 @@ function UserPersonal(props) {
                                 defaultValue={props.store.info.gender}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                         </Typography>
                     </CardContent>

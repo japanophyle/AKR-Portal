@@ -112,6 +112,7 @@ function UserAddress(props) {
                 defaultValue={props.store.info.address_1}
                 variant="outlined"
                 onChange={handleEditChange}
+                color="secondary"
               />
               <br />
               <br />
@@ -123,6 +124,7 @@ function UserAddress(props) {
                 defaultValue={props.store.info.address_2}
                 variant="outlined"
                 onChange={handleEditChange}
+                color="secondary"
               />
               <br />
               <br />
@@ -134,6 +136,7 @@ function UserAddress(props) {
                 defaultValue={props.store.info.country}
                 variant="outlined"
                 onChange={handleEditChange}
+                color="secondary"
 
               />
               {/* State */}
@@ -144,6 +147,7 @@ function UserAddress(props) {
                 defaultValue={props.store.info.state}
                 variant="outlined"
                 onChange={handleEditChange}
+                color="secondary"
               />
               {/* City */}
               <TextField
@@ -153,6 +157,7 @@ function UserAddress(props) {
                 defaultValue={props.store.info.city}
                 variant="outlined"
                 onChange={handleEditChange}
+                color="secondary"
               />
               {/* Zipcode */}
               <TextField
@@ -162,6 +167,7 @@ function UserAddress(props) {
                 defaultValue={props.store.info.zipcode}
                 variant="outlined"
                 onChange={handleEditChange}
+                color="secondary"
               />
             </Typography>
           </CardContent>

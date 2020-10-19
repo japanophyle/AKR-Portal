@@ -111,6 +111,7 @@ function UserPayment(props) {
                                 defaultValue={props.store.info.dues_amount}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -122,6 +123,7 @@ function UserPayment(props) {
                                 defaultValue={props.store.info.amount_paid}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -134,6 +136,7 @@ function UserPayment(props) {
                                 defaultValue={moment(props.store.info.dues_date).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -145,6 +148,7 @@ function UserPayment(props) {
                                 defaultValue={props.store.info.dues_method}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                         </Typography>
                     </CardContent>

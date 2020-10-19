@@ -36,7 +36,7 @@ function DojoDeleteDialog(props) {
                 </DialogContent>
                 <DialogActions>
                     {/* Close the dialog */}
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={handleClose} color="secondary">
                         Cancel
                     </Button>
                     {/* Delete the dojo */}

@@ -31,6 +31,7 @@ function NewUserContact(props) {
             name="email"
             onChange={props.handleChange('email')}
             value={props.state.email}
+            color="secondary"
           />
         </Grid>
         <Grid item xs={6}>
@@ -42,6 +43,7 @@ function NewUserContact(props) {
             name="phone_number"
             onChange={props.handleChange('phone_number')}
             value={props.state.phone_number}
+            color="secondary"
           />
         </Grid>
       </Grid>
