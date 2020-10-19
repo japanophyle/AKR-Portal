@@ -32,28 +32,7 @@ class CreateDojoDialog extends Component {
         })
     };
 
-    // handleDues for setting state
-    // handleDues = (propertyValue) => (event) => {
-    //     console.log(`changing dues ${propertyValue}`);
-    //     this.setState({
-    //         newDues: {
-    //             ...this.state.newDues,
-    //             [propertyValue]: event.target.value,
-    //         }
-    //     })
-    // };
-
-    // send newDues to dojos saga
-    // handleSaveDues = (event) => {
-    //     event.preventDefault();
-    //     console.log(this.state.newDues);
-    //     this.props.dispatch
-    //         ({
-    //             type: 'SET_DOJO_DUES',
-    //             payload: this.state.newDues
-    //         })
-    //     this.handleClose();
-    // };
+   
 
     render() {
         return (

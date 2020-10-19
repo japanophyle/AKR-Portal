@@ -6,6 +6,7 @@ import swal from '@sweetalert/with-react';
 import { withRouter } from 'react-router';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 
+
 class CreateDojo extends Component {
     state = {
         newDojo: {
@@ -41,6 +42,7 @@ class CreateDojo extends Component {
                     admin_id: 0
                 }
             })
+            this.props.handleClose();
             this.props.history.push('/nationdojos')
             this.props.handleClose();
         }
@@ -90,4 +92,8 @@ class CreateDojo extends Component {
     }
 }
 
-export default withRouter(connect(mapStoreToProps)(CreateDojo));
+
+const CreateDojoWithRouter = withRouter(CreateDojo);
+
+export default connect(mapStoreToProps)(CreateDojoWithRouter);
+
