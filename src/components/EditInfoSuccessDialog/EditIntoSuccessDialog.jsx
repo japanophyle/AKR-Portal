@@ -10,7 +10,7 @@ function EditInfoSuccessDialog(props) {
     const handleClickOpen = () => {
         if (props.store.editInfo.fname == "" ||
             props.store.editInfo.lname == "" ||
-            props.store.editInfo.adress_1 == "" ||
+            props.store.editInfo.address_1 == "" ||
             props.store.editInfo.city == "" ||
             props.store.editInfo.state == "" ||
             props.store.editInfo.country == "" ||
