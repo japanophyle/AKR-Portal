@@ -17,6 +17,8 @@ function* addRank(action) {
     try {
         yield axios.post('/api/ranks', action.payload )
         yield put({ type: 'GET_RANKS', payload: action.payload.user_id })
+        yield put({ type: 'FETCH_USER_INFO', payload: action.payload.user_id })
+
     } catch (error) {
         console.log('error in addRank', error);
     }
