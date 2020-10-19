@@ -5,7 +5,7 @@ import { TextField, MenuItem, Select, IconButton, Tooltip, Grid, Paper, FormCont
 import swal from '@sweetalert/with-react';
 import { withRouter } from 'react-router';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import { withRouter } from 'react-router';
+
 
 class CreateDojo extends Component {
     state = {
