@@ -130,9 +130,11 @@ function UserPayment(props) {
                             {/* date of the payment */}
                             <TextField
                                 type='Date'
-                                
                                 id="dues_date"
                                 label="Date of Payment"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                                 defaultValue={moment(props.store.info.dues_date).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}

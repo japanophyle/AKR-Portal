@@ -130,7 +130,7 @@ function UserKyudo(props) {
                         <Typography variant="h5">
                             Current Rank: {props.store.info.student_rank}
                             <br />
-                            Date Reached:{moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
+                            Date Reached: {moment(props.store.info.date_student_rank).format('MM-DD-YYYY')}
                             
                             
                         </Typography>
@@ -197,6 +197,9 @@ function UserKyudo(props) {
                                 type='Date'
                                 id="date_student_rank"
                                 label="Date Earned"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                                 defaultValue={moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
@@ -241,7 +244,7 @@ function UserKyudo(props) {
                                 </Tooltip>
                             </Grid>
                         </Grid>
-                        {props.store.editInfo.teaching_rank === null ?
+                        {props.store.editInfo.teaching_rank === null || props.store.editInfo.teaching_rank === '' ?
                             <Typography variant="h5">
                           
                             No Teaching Rank Currently
@@ -286,7 +289,7 @@ function UserKyudo(props) {
                                     id="teaching_rank"
                                     label="Teaching Rank"
                                     name="teaching_rank"
-                                    width="70px"
+                                    style={{ minWidth: 200 }}
                                     value={props.store.editInfo.teaching_rank}
                                     onChange={(event) => name(event)}
                                     color="secondary"
@@ -303,9 +306,12 @@ function UserKyudo(props) {
                             {/* date of teacher rank */}
                             <TextField
                                 type='Date'
-                                
+                                style={{ minwidth: 200}}
                                 id="date_teaching_rank"
                                 label="Date Earned"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                                 defaultValue={moment(props.store.info.date_teaching_rank).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
@@ -384,6 +390,9 @@ function UserKyudo(props) {
                                 
                                 id="date_began_kyudo"
                                 label="Date Began Kyudo"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
                                 defaultValue={moment(props.store.info.date_began_kyudo).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}

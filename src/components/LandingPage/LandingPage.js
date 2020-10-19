@@ -29,7 +29,7 @@ class LandingPage extends Component {
           <div className="grid-col grid-col_8">
             <h2>{this.state.heading}</h2>
             <iframe title="American Kyudo Renmei Promotional Video" src="https://www.youtube.com/embed/eCp_ICCIkDw?rel=0&wmode=opaque"
-              allowFullScreen="true"
+              allowFullScreen={true}
             >
             </iframe>
           </div>
