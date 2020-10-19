@@ -76,7 +76,7 @@ class App extends Component {
         MuiTableRow: {
           root: {
             '&$hover:hover': {
-              // backgroundColor: '#acb1a7',
+              backgroundColor: '#FEE6A5',
             },
           },
         },
