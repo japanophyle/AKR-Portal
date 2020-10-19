@@ -37,7 +37,9 @@ const StyledTableCell = withStyles((theme) => ({
     },
     body: {
         fontSize: 14,
+        padding: 8,
     },
+    
 }))(TableCell);
 
 // styling every other table row
@@ -49,7 +51,9 @@ const StyledTableRow = withStyles((theme) => ({
         '&:nth-of-type(even)': {
             backgroundColor: theme.palette.highlight.light,
         },
+        
     },
+
 }))(TableRow);
 
 // setting styles for table
@@ -87,7 +91,7 @@ function ActiveMembers(props) {
             <Grid container justify="center" alignItems="center">
                 <Grid item xs={12} align="center">
                     <TableContainer component={Paper} className={classes.table}>
-                        <Table aria-label="customized table">
+                        <Table aria-label="customized table" >
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell align="center">Name</StyledTableCell>
@@ -106,7 +110,7 @@ function ActiveMembers(props) {
                             <TableBody>
                                 {props.store.members.activeMembersReducer.map((member, id) => {
                                     return (
-                                        <StyledTableRow component="tr" scope="row" key={id}>
+                                        <StyledTableRow hover component="tr" scope="row" key={id}>
                                             <StyledTableCell align="center">{member.fname} {member.lname}</StyledTableCell>
                                             <StyledTableCell align="center">{member.teaching_rank ? member.teaching_rank : member.student_rank}</StyledTableCell>
 

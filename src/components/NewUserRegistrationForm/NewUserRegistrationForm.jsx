@@ -67,13 +67,11 @@ class NewUserForm extends Component {
   }
 
   handleGo = () => {
-    console.log('why')
     this.props.history.push('/inactive')
   }
 
   // handle change for note state
   handleChange = (propertyName) => (event) => {
-    console.log(event.target.value);
     console.log(`Changing ${propertyName}`);
     this.setState({
       ...this.state,
@@ -99,39 +97,73 @@ class NewUserForm extends Component {
       ({
         type: 'CREATE_USER',
         payload: this.state
-      })
-      // this.props.history.push('/inactive')
+      });
   }
 
-  
+  secretFunction = () => {
+    console.log('woo')
+    this.setState
+      ({
+        ...this.state,
+          fname: 'Alex',
+          lname: 'Severson',
+          user_id: this.props.store.user.id,
+          email: 'Alex@AKRP.io',
+          phone_number: '5556477240',
+          dojo_id: '19',
+          // fname_japanese: 'アレックス',
+          // lname_japanese: 'セバーソン',
+          student_rank: '',
+          date_student_rank: null,
+          teaching_rank: '',
+          date_teaching_rank: null,
+          ikyf: '',
+          years_practice: '',
+          address_1: '4441 Roberts St.',
+          address_2: 'apt. 400',
+          city: 'Saint Paul',
+          state: 'MN',
+          country: 'USA',
+          zipcode: '55104',
+          gender: 'Male',
+          date_of_birth: '1989-04-07',
+          date_began_kyudo: null,
+          citizenship: 'USA',
+          is_current_member: !true,
+          usa_archery_id: '',
+      })
+  }
+
+  secretKatakana = () => {
+    this.setState({
+      ...this.state,
+      fname_japanese: 'アレックス',
+      lname_japanese: 'セバーソン'
+    })
+  }
+
+
+
 
   render() {
     console.log(this.state);
     return (
       <div>
         <Grid container justify="center" alignItems="center">
-          <Grid item xs={12} >
-            <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px", backgroundColor: "#ECE7D1"}}>
-              <h6 style={{ color: "red" }}>Fields with * are required.</h6>
-              <form onSubmit={this.handleSaveNewUser} autocomplete="on">
-                <NewUserName handleChange={this.handleChange} />
-                <NewUserContact handleChange={this.handleChange} />
-                <NewUserPersonal state={this.state} handleChange={this.handleChange} />
-                <NewUserAddress handleChange={this.handleChange} />
 
-                {/* Choosing the dojo that the new user is trying to join. */}
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={this.state.is_current_member}
-                      onChange={this.handleCheckChange}
-                      name="is_current_member"
-                      color="primary"
-                    />
-                  }
-                  label="Current Member"
-                />
-                <Grid container justify="center" alignItems="center">
+          <Grid item>
+            <Paper style={{ minWidth: "50%", maxWidth: "80%", margin: "auto", padding: "20px", backgroundColor: "#ECE7D1" }}>
+              <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required</h6>
+              <h6 onClick={this.secretKatakana} style={{ color: "red" }}>.</h6>
+
+
+              <form onSubmit={this.handleSaveNewUser} autocomplete="on">
+                <NewUserName state={this.state} handleChange={this.handleChange} />
+                <NewUserContact state={this.state} handleChange={this.handleChange} />
+                <NewUserPersonal state={this.state} handleChange={this.handleChange} />
+                <NewUserAddress state={this.state} handleChange={this.handleChange} />
+
+                <Grid container justify="center" alignItems="center" style={{ marginTop: 10 }}>
                   <Grid item>
                     <Typography
                       variant="h6"
@@ -153,7 +185,7 @@ class NewUserForm extends Component {
                         onChange={this.handleChange('dojo_id')}
                         color="secondary"
                       >
-                        
+                        <MenuItem value=''><em>Pick a Dojo</em></MenuItem>
                         {this.props.store.dojos.map((dojo, id) => {
                           return (
                             <MenuItem key={id} value={dojo.id}>{dojo.dojo_name}</MenuItem>
@@ -163,23 +195,38 @@ class NewUserForm extends Component {
                     </FormControl>
                   </Grid>
                 </Grid>
+                <Grid container justify="center" alignItems="center">
+                  <Grid item style={{ margin: 20 }}>
+                    {/* Choosing the dojo that the new user is trying to join. */}
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={this.state.is_current_member}
+                          onChange={this.handleCheckChange}
+                          name="is_current_member"
+                          color="primary"
+                        />
+                      }
+                      label="Current Member"
+                    />
+                  </Grid>
+                </Grid>
+                {/* Check if current member to show more kyudo information */}
                 {this.state.is_current_member &&
-
                   <NewUserKyudoInfo handleChange={this.handleChange} />
                 }
                 <Grid container justify="center">
                   <Grid item>
 
-                    
-                  {/* Dialog button/popup */}
-                  <FormSuccess handleGo={this.handleGo}
-                  formState={this.state}/>
+                    {/* Dialog button/popup */}
+                    <FormSuccess handleGo={this.handleGo}
+                      formState={this.state} />
 
 
                   </Grid>
                 </Grid>
               </form>
-              
+
             </Paper>
           </Grid>
         </Grid>

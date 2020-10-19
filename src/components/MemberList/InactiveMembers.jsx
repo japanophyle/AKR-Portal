@@ -43,6 +43,7 @@ const StyledTableRow = withStyles((theme) => ({
             backgroundColor: theme.palette.action.hover,
         },
     },
+    
 }))(TableRow);
 
 const useStyles = makeStyles({
@@ -91,7 +92,7 @@ function InactiveMembers(props) {
                             <TableBody>
                                 {props.store.members.inactiveMembersReducer.map((member, id) => {
                                     return (
-                                        <StyledTableRow component="tr" scope="row" key={id}>
+                                        <StyledTableRow hover component="tr" scope="row" key={id}>
                                             <StyledTableCell align="center">{member.fname} {member.lname}</StyledTableCell>
                                             <StyledTableCell align="center">
                                                 {member.auth_level === 0
@@ -114,7 +115,7 @@ function InactiveMembers(props) {
                                                 <StyledTableCell align="center">
                                                     <Tooltip title={<h1>Delete User</h1>}  >
                                                         <IconButton onClick={() => deleteUser(member)} >
-                                                            <DeleteIcon color="error" /> 
+                                                            <DeleteIcon color="error" />
                                                         </IconButton>
                                                     </Tooltip>
                                                 </StyledTableCell>

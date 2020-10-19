@@ -236,10 +236,7 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
       // await client.query(firstQuery, [req.user.id]);
       userDojoId = await client.query(firstQuery, [req.user.id]);
 
-
-
-      console.log(userDojoId.rows[0].dojo_id)
-
+      console.log(userDojoId.rows)
 
       userDojoId = userDojoId.rows[0].dojo_id;
 

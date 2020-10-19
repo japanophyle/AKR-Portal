@@ -6,6 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
     Grid,
     TextField,
+    Typography,
 } from '@material-ui/core';
 
 
@@ -17,7 +18,11 @@ function NewUserAddress(props) {
 
     return (
         <div>
-            <h3>{heading}</h3>
+            
+            <Typography variant="h6">
+                {heading}
+            </Typography>
+
             <Grid container spacing={2}>
                 <Grid item>
                     <TextField
@@ -28,6 +33,7 @@ function NewUserAddress(props) {
                         name="address_1"
                         onChange={props.handleChange('address_1')}
                         color="secondary"
+                        value={props.state.address_1}
                     />
                 </Grid>
                 <Grid item>
@@ -38,6 +44,7 @@ function NewUserAddress(props) {
                         name="address_2"
                         onChange={props.handleChange('address_2')}
                         color="secondary"
+                        value={props.state.address_2}
                     />
                 </Grid>
             </Grid>
@@ -51,6 +58,7 @@ function NewUserAddress(props) {
                         name="city"
                         onChange={props.handleChange('city')}
                         color="secondary"
+                        value={props.state.city}
                     />
                 </Grid>
                 <Grid item>
@@ -62,6 +70,7 @@ function NewUserAddress(props) {
                         name="state"
                         onChange={props.handleChange('state')}
                         color="secondary"
+                        value={props.state.state}
                     />
                 </Grid>
                 <Grid item>
@@ -73,9 +82,10 @@ function NewUserAddress(props) {
                         name="zipcode"
                         onChange={props.handleChange('zipcode')}
                         color="secondary"
+                        value={props.state.zipcode}
                     />
                 </Grid>
-                <Grid item xs={12} style={{ marginTop: -8}}>
+                <Grid item xs={12} style={{ marginTop: -8 }}>
                     <TextField
                         required
                         label="Country"
@@ -84,6 +94,7 @@ function NewUserAddress(props) {
                         name="country"
                         onChange={props.handleChange('country')}
                         color="secondary"
+                        value={props.state.country}
                     />
                 </Grid>
             </Grid>
