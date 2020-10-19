@@ -133,13 +133,14 @@ function UserDojoTransfer(props) {
                                     style={{ margin: 8, minWidth: 300 }}
                                     variant="outlined"
                                 >
-                                    <InputLabel>Dojo</InputLabel>
+                                    <InputLabel color="secondary">Dojo</InputLabel>
                                     <Select
                                         required
                                         label="Dojo"
                                         name="dojo_id"
                                         onChange={handleChange('dojo_id')}
                                         value={dojo_id}
+                                        color="secondary"
                                     >
 
                                         {props.store.dojos.map((dojo, id) => {
@@ -167,7 +168,7 @@ function UserDojoTransfer(props) {
           </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={changeDojo} color="primary">
+                    <Button onClick={changeDojo} color="secondary">
                         Cancel
           </Button>
                     <Button onClick={changeDojo} color="primary">

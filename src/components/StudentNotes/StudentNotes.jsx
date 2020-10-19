@@ -75,12 +75,13 @@ function StudentNotes(props) {
                         id="notes"
                         label="Student Notes"
                         fullWidth
-                        placeholder="Placeholder"
+                        placeholder="Add Notes"
                         defaultValue={props.member.notes}
                         onChange={handleEditChange}
                         multiline
                         variant="outlined"
                         rows={7}
+                        color="secondary"
                     />
                 </DialogContent>
                 <DialogTitle id="form-dialog-title">Equipment Rental</DialogTitle>
@@ -90,18 +91,19 @@ function StudentNotes(props) {
                     <TextField
                         id="equipment_checkout"
                         label="Equipment Rental"
-                        placeholder="Placeholder"
+                        placeholder="Add Checkout Equipment"
                         defaultValue={props.member.equipment_checkout}
                         onChange={handleEditChange}
                         multiline
                         fullWidth
                         rows={7}
                         variant="outlined"
+                        color="secondary"
                     />
                 </DialogContent>
                 <DialogActions>
                     {/* Cancel the edits and close the dialog */}
-                    <Button onClick={handleDateReset} color="primary">
+                    <Button onClick={handleDateReset} color="secondary">
                         Cancel
                     </Button>
                     {/* Should trigger a PUT request to update the information */}

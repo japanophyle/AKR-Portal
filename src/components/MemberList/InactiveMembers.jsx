@@ -106,7 +106,7 @@ function InactiveMembers(props) {
                                             <StyledTableCell align="center">
                                                 <Tooltip title={<h1>Member Details</h1>} >
                                                     <IconButton component={Link} to={`/user/${member.user_id}`}>
-                                                        <ViewListIcon></ViewListIcon>
+                                                        <ViewListIcon color="secondary"></ViewListIcon>
                                                     </IconButton>
                                                 </Tooltip>
                                             </StyledTableCell>

@@ -173,7 +173,7 @@ function UserKyudo(props) {
                         <Typography variant="h5">
                             {/* Student rank */}
                             <FormControl variant="outlined">
-                                <InputLabel>Kyudo Student Rank</InputLabel>
+                                <InputLabel color="secondary">Kyudo Student Rank</InputLabel>
                                 <Select
                                     width="50px"
                                     id="student_rank"
@@ -181,6 +181,7 @@ function UserKyudo(props) {
                                     label="Current Kyudo Rank"
                                     value={props.store.editInfo.student_rank}
                                     onChange={(event) => name(event)}
+                                    color="secondary"
                                 >
                                     {ranks.map((rank, id) => {
                                         return (
@@ -200,6 +201,7 @@ function UserKyudo(props) {
                                 defaultValue={moment(props.store.info.date_student_rank).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                         
                         </Typography>
@@ -270,7 +272,7 @@ function UserKyudo(props) {
                             
                             {/* teacher rank */}
                             <FormControl variant="outlined" >
-                                <InputLabel>Teaching Rank</InputLabel>
+                                <InputLabel color="secondary">Teaching Rank</InputLabel>
                                 <Select
                                     id="teaching_rank"
                                     label="Teaching Rank"
@@ -278,6 +280,7 @@ function UserKyudo(props) {
                                     width="70px"
                                     value={props.store.editInfo.teaching_rank}
                                     onChange={(event) => name(event)}
+                                    color="secondary"
                                 >
                                     {['Renshi', 'Kyoshi', 'Hanshi'].map((rank, id) => {
                                         return (
@@ -297,6 +300,7 @@ function UserKyudo(props) {
                                 defaultValue={moment(props.store.info.date_teaching_rank).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             
                         </Typography>
@@ -361,6 +365,7 @@ function UserKyudo(props) {
                                 defaultValue={props.store.info.years_practice}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -373,6 +378,7 @@ function UserKyudo(props) {
                                 defaultValue={moment(props.store.info.date_began_kyudo).format('YYYY-MM-DD')}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -384,6 +390,7 @@ function UserKyudo(props) {
                                 defaultValue={props.store.info.ikyf}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -395,6 +402,7 @@ function UserKyudo(props) {
                                 defaultValue={props.store.info.usa_archery_id}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                         </Typography>
                     </CardContent>

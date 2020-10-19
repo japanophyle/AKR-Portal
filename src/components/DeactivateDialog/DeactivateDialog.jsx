@@ -36,7 +36,7 @@ function DeactivateDialog(props) {
                 </DialogContent>
                 <DialogActions>
                     {/* Cancel the edits and close the dialog */}
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={handleClose} color="secondary">
                         Cancel
                     </Button>
                     {/* Should trigger a PUT request to update the information */}

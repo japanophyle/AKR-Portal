@@ -104,6 +104,7 @@ function UserContact(props) {
                                 defaultValue={props.store.info.email}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                             <br />
                             <br />
@@ -115,6 +116,7 @@ function UserContact(props) {
                                 defaultValue={props.store.info.phone_number}
                                 variant="outlined"
                                 onChange={handleEditChange}
+                                color="secondary"
                             />
                         </Typography>
                     </CardContent>

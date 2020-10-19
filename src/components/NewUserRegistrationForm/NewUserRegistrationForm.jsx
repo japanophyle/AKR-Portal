@@ -111,7 +111,7 @@ class NewUserForm extends Component {
       <div>
         <Grid container justify="center" alignItems="center">
           <Grid item xs={12} >
-            <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px" }}>
+            <Paper style={{ maxWidth: "80%", margin: "auto", padding: "20px", backgroundColor: "#ECE7D1"}}>
               <h6 style={{ color: "red" }}>Fields with * are required.</h6>
               <form onSubmit={this.handleSaveNewUser} autocomplete="on">
                 <NewUserName handleChange={this.handleChange} />
@@ -145,12 +145,13 @@ class NewUserForm extends Component {
                       style={{ margin: 8, minWidth: 300 }}
                       variant="outlined"
                     >
-                      <InputLabel>Dojo</InputLabel>
+                      <InputLabel color="secondary">Dojo</InputLabel>
                       <Select
                         required
                         label="Dojo"
                         name="dojo_id"
                         onChange={this.handleChange('dojo_id')}
+                        color="secondary"
                       >
                         
                         {this.props.store.dojos.map((dojo, id) => {

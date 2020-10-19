@@ -35,6 +35,7 @@ function NewUserPersonal(props) {
                         name="date_of_birth"
                         type="date"
                         onChange={props.handleChange('date_of_birth')}
+                        color="secondary"
                     />
                 </Grid>
                 <Grid item>
@@ -46,6 +47,7 @@ function NewUserPersonal(props) {
                         value={!age2 ? '' : age2}
                         name="age"
                         onChange={(event) => props.handleChange(event)}
+                        color="secondary"
                     />
                 </Grid>
                 <Grid container>
@@ -56,6 +58,7 @@ function NewUserPersonal(props) {
                             variant="outlined"
                             name="gender"
                             onChange={props.handleChange('gender')}
+                            color="secondary"
                         />
                     </Grid>
                     <Grid item>
@@ -66,6 +69,7 @@ function NewUserPersonal(props) {
                             helperText="Give your country code(s) of citizenship"
                             name="citizenship"
                             onChange={props.handleChange('citizenship')}
+                            color="secondary"
                         />
                     </Grid>
                 </Grid>

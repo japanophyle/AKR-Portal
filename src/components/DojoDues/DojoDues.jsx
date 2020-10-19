@@ -80,6 +80,7 @@ class DojoDues extends Component {
                             margin="dense"
                             variant="outlined"
                             name="dues_amount"
+                            color="secondary"
                             label="Dues Amount"
                             onChange={this.handleDues('dues_amount')}
                             fullWidth
@@ -90,6 +91,7 @@ class DojoDues extends Component {
                             margin="dense"
                             variant="outlined"
                             name="dues_date"
+                            color="secondary"
                             type="date"
                             onChange={this.handleDues('dues_date')}
                             label="Dues Date"
@@ -100,7 +102,7 @@ class DojoDues extends Component {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleClose} color="secondary">
                             Cancel
                         </Button>
                         <Button onClick={this.handleSaveDues} color="primary">

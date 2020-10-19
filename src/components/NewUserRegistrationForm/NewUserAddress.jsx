@@ -27,6 +27,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="address_1"
                         onChange={props.handleChange('address_1')}
+                        color="secondary"
                     />
                 </Grid>
                 <Grid item>
@@ -36,6 +37,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="address_2"
                         onChange={props.handleChange('address_2')}
+                        color="secondary"
                     />
                 </Grid>
             </Grid>
@@ -48,6 +50,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="city"
                         onChange={props.handleChange('city')}
+                        color="secondary"
                     />
                 </Grid>
                 <Grid item>
@@ -58,6 +61,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="state"
                         onChange={props.handleChange('state')}
+                        color="secondary"
                     />
                 </Grid>
                 <Grid item>
@@ -68,6 +72,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="zipcode"
                         onChange={props.handleChange('zipcode')}
+                        color="secondary"
                     />
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: -8}}>
@@ -78,6 +83,7 @@ function NewUserAddress(props) {
                         variant="outlined"
                         name="country"
                         onChange={props.handleChange('country')}
+                        color="secondary"
                     />
                 </Grid>
             </Grid>
