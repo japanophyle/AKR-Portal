@@ -6,7 +6,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getMyDojo() {
     try {
         let response = yield axios.get('/api/members/mydojo')
-        console.log('My Dojo:', response.data);
+
         yield put({ type:'SET_MY_DOJO', payload: response.data });
     } catch (error) {
         console.log('error in getMyDojo()', error);

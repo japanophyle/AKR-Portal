@@ -5,7 +5,6 @@ const router = express.Router();
 
 // GETs all ranks, and dates for ranks for logged in user
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    console.log(req.params.id);
     
     let queryText = `SELECT * from "ranks" 
                     WHERE "user_id" = $1 
@@ -21,7 +20,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 // POSTs new rank to rank table and PUTs the new userdata rank info
 router.post('/', rejectUnauthenticated, async (req, res) => {
-    console.log('Adding new rank:', req.body);
+
     const client = await pool.connect();
     try {
         const firstQuery = `INSERT INTO "ranks" ("rank_name", "date_rank_made", "user_id")
@@ -45,14 +44,13 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 // DELETE a rank from ranks history table
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('In Delete:', req.params.id);
+
     let queryText = `
         DELETE FROM "ranks"
         WHERE "id" = $1;
         `
     pool.query(queryText, [req.params.id])
         .then( (result) => {
-        console.log('Delete Rank');
         res.sendStatus(200);
     })
     .catch( (error) => {

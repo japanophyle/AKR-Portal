@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import DojoListItem from '../DojoListItem/DojoListItem.jsx'
 import { Typography, Grid, Paper, Table, TableContainer, TableCell, TableRow, TableHead, TableBody } from '@material-ui/core';
 import CreateDojoDialog from '../CreateDojo/CreateDojoDialog';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 class DojoList extends Component {
     state = {

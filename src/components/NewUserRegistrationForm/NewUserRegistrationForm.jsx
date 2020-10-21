@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import moment from 'moment';
-
-// import Dialog for success submit 
 import FormSuccess from '../FormSuccess/FormSuccess'
 
 //MATERIAL-UI
@@ -72,7 +69,6 @@ class NewUserForm extends Component {
 
   // handle change for note state
   handleChange = (propertyName) => (event) => {
-    console.log(`Changing ${propertyName}`);
     this.setState({
       ...this.state,
       [propertyName]: event.target.value,
@@ -87,9 +83,6 @@ class NewUserForm extends Component {
         [event.target.name]: event.target.checked
       });
   }
-
-
-
   // submit state to db
   handleSaveNewUser = (event) => {
     event.preventDefault();
@@ -100,62 +93,14 @@ class NewUserForm extends Component {
       });
   }
 
-  secretFunction = () => {
-    console.log('woo')
-    this.setState
-      ({
-        ...this.state,
-          fname: 'Alex',
-          lname: 'Severson',
-          user_id: this.props.store.user.id,
-          email: 'Alex@AKRP.io',
-          phone_number: '5556477240',
-          dojo_id: '19',
-          // fname_japanese: 'アレックス',
-          // lname_japanese: 'セバーソン',
-          student_rank: '',
-          date_student_rank: null,
-          teaching_rank: '',
-          date_teaching_rank: null,
-          ikyf: '',
-          years_practice: '',
-          address_1: '4441 Roberts St.',
-          address_2: 'apt. 400',
-          city: 'Saint Paul',
-          state: 'MN',
-          country: 'USA',
-          zipcode: '55104',
-          gender: 'Male',
-          date_of_birth: '1989-04-07',
-          date_began_kyudo: null,
-          citizenship: 'USA',
-          is_current_member: !true,
-          usa_archery_id: '',
-      })
-  }
-
-  secretKatakana = () => {
-    this.setState({
-      ...this.state,
-      fname_japanese: 'アレックス',
-      lname_japanese: 'セバーソン'
-    })
-  }
-
-
-
-
   render() {
-    console.log(this.state);
     return (
       <div>
         <Grid container justify="center" alignItems="center">
 
           <Grid item>
             <Paper style={{ minWidth: "50%", maxWidth: "80%", margin: "auto", padding: "20px", backgroundColor: "#ECE7D1" }}>
-              <h6 onClick={this.secretFunction} style={{ color: "red" }}>Fields with * are required</h6>
-              <h6 onClick={this.secretKatakana} style={{ color: "red" }}>.</h6>
-
+              <h6 style={{ color: "red" }}>Fields with * are required.</h6>
 
               <form onSubmit={this.handleSaveNewUser} autocomplete="on">
                 <NewUserName state={this.state} handleChange={this.handleChange} />
@@ -217,12 +162,9 @@ class NewUserForm extends Component {
                 }
                 <Grid container justify="center">
                   <Grid item>
-
                     {/* Dialog button/popup */}
                     <FormSuccess handleGo={this.handleGo}
                       formState={this.state} />
-
-
                   </Grid>
                 </Grid>
               </form>

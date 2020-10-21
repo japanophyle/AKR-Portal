@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
+
 function InactiveView(props) {
   useEffect(() => {
     props.dispatch({
@@ -19,16 +17,13 @@ function InactiveView(props) {
   }, []);
 
   const [heading, setHeading] = useState('Currently Inactive');
-  console.log('Inactive Page');
+
   return (
     <div>
       <Container>
         <Card height="300px" align="center">
           <h1>{heading}</h1>
           <h3>Please contact your local Dojo to be approved as an active member.</h3>
-
-
-
           <Grid container>
             <Grid item xs={12} align="center">
               {!props.store.info.id &&
@@ -46,7 +41,7 @@ function InactiveView(props) {
                   onClick={() => props.history.push('/new-user-registration')}
                 >
                   Registration Form
-            </Button>
+                </Button>
               }
             </Grid>
           </Grid>

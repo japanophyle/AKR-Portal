@@ -10,11 +10,10 @@ function StudentNotes(props) {
     // when you click the button open the dialog
     const handleClickOpen = () => {
         setOpen(true);
-        console.log(props.id)
-                props.dispatch({
-                    type: "FETCH_USER_INFO",
-                    payload: props.id
-            });    
+        props.dispatch({
+            type: "FETCH_USER_INFO",
+            payload: props.id
+        });
     };
 
     // WHne you click off the dialog close it
@@ -23,7 +22,6 @@ function StudentNotes(props) {
     };
 
     const handleEditChange = (event) => {
-        console.log(`Handle change of ${event.target.id}`);
         props.dispatch(
             {
                 type: 'SET_EDIT',
@@ -32,35 +30,27 @@ function StudentNotes(props) {
     }
 
     const handleSaveEdit = (event) => {
-        console.log(props.store.editInfo);
         props.dispatch(
             {
                 type: 'UPDATE_USER_DATA',
                 payload: props.store.editInfo
             })
-    //         const id = props.member.dojo_id
-    // props.dispatch({ type: 'GET_ACTIVE_USERS', payload: id })
-    // props.dispatch({ type: 'GET_INACTIVE_USERS', payload: id })
         handleClose()
     };
 
     const handleDateReset = (event) => {
-        console.log('cancel')
         props.dispatch({
             type: "FETCH_USER_INFO",
             payload: props.id
-    });
+        });
         handleClose()
     }
-    
+
     return (
         <div>
-            {/* Button that will open p the dialog */}
-            {/* <Button variant="outlined" color="primary" >
-                notes
-            </Button> */}
+ 
             <Tooltip title={<h1>Add Notes</h1>} >
-                <IconButton  onClick={handleClickOpen}>
+                <IconButton onClick={handleClickOpen}>
                     <NoteAddIcon
                         color="primary"
                     ></NoteAddIcon>

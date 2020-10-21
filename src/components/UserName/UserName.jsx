@@ -6,9 +6,6 @@ import EditIcon from '@material-ui/icons/Edit';
 // dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function UserName(props) {
 
   // State used to toggle the edit button on and off
@@ -21,7 +18,7 @@ function UserName(props) {
 
   // function that dispatches to the edit reducer whenever an edit is made to an input 
   const handleEditChange = (event) => {
-    console.log(`Handle change of ${event.target.id}`);
+
     props.dispatch(
       {
         type: 'SET_EDIT',
@@ -30,7 +27,7 @@ function UserName(props) {
   }
   // cancel button resets the reducers 
   const handleDateReset = (event) => {
-    console.log('cancel')
+
     props.dispatch(
       {
         type: 'FETCH_USER_INFO',
@@ -42,7 +39,6 @@ function UserName(props) {
   // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
   const handleSaveEdit = (event) => {
     event.preventDefault()
-    console.log(props.store.editInfo);
     props.dispatch(
       {
         type: 'UPDATE_USER_DATA',

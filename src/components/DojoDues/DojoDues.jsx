@@ -10,7 +10,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
 } from '@material-ui/core'
 
@@ -39,7 +38,7 @@ class DojoDues extends Component {
 
     // handleDues for setting state
     handleDues = (propertyValue) => (event) => {
-        console.log(`changing dues ${propertyValue}`);
+
         this.setState({
             newDues: {
                 ...this.state.newDues,
@@ -51,7 +50,6 @@ class DojoDues extends Component {
     // send newDues to dojos saga
     handleSaveDues = (event) => {
         event.preventDefault();
-        console.log(this.state.newDues);
         this.props.dispatch
             ({
                 type: 'SET_DOJO_DUES',

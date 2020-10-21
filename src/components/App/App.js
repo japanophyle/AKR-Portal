@@ -18,7 +18,6 @@ import SiteAdminAuthRoute from '../ProtectedRoute/SiteAdminAuthRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -53,6 +52,7 @@ class App extends Component {
           main: '#FCBA03', // Gold
           dark: '#A66E01', // Dark Gold
           light: '#E3BE56', // Light Gold
+          
         },
         secondary: {
           main: '#38542B', // Green
@@ -70,7 +70,12 @@ class App extends Component {
         }
       },
       typography: {
-        h5: {},
+        h1: { fontWeight: 'bold'},
+        h2: { fontWeight: 'bold'},
+        h3: { fontWeight: 'bold'},
+        h4: { fontWeight: 'bold'},
+        h5: { fontWeight: 'bold'},
+        h6: { fontWeight: 'bold'},
       },
       overrides: {
         MuiTableRow: {

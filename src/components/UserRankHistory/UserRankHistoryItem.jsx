@@ -8,9 +8,7 @@ import { withRouter } from "react-router";
 import moment from 'moment';
 
 class UserRankHistoryItem extends Component {
-  state = {
-  };
-
+  state = {};
 
   deleteRank = (id) => {
     swal({

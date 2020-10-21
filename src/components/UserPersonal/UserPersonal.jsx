@@ -4,14 +4,9 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Typography, Button, Card, CardContent, Grid, TextField, Tooltip, IconButton } from '@material-ui/core';
 import moment from 'moment';
 import EditIcon from '@material-ui/icons/Edit';
-
-// dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
 
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function UserPersonal(props) {
 
     // State used to toggle the edit button on and off
@@ -24,7 +19,6 @@ function UserPersonal(props) {
 
     // function that dispatches to the edit reducer whenever an edit is made to an input
     const handleEditChange = (event) => {
-        console.log(`Handle change of ${event.target.id}`);
         props.dispatch(
             {
                 type: 'SET_EDIT',
@@ -36,7 +30,6 @@ function UserPersonal(props) {
     const handleSaveEdit = (event) => {
         event.preventDefault()
 
-        console.log(props.store.editInfo);
         props.dispatch(
             {
                 type: 'UPDATE_USER_DATA',
@@ -46,7 +39,6 @@ function UserPersonal(props) {
 
     // cancel button resets the reducers 
     const handleDateReset = (event) => {
-        console.log('cancel')
         props.dispatch(
             {
                 type: 'FETCH_USER_INFO',

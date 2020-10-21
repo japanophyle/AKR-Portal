@@ -18,7 +18,7 @@ function MemberList(props) {
   useEffect(() => {
     const id = props.match.params.id
     props.dispatch({ type: 'GET_ACTIVE_USERS', payload: id })
-    // props.dispatch({ type: 'GET_INACTIVE_USERS', payload: id })
+
   }, [])
 
   return (

@@ -21,7 +21,7 @@ function NationalStudentList(props) {
   }, [])
 
   const search = (event) => {
-    console.log(event.target.value)
+
     props.dispatch({type: 'SEARCH', payload: event.target.value})
     }
 
