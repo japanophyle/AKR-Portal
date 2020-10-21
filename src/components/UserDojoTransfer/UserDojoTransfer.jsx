@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { DialogTitle, DialogContent, DialogActions, DialogContentText, Dialog, InputLabel, Select, MenuItem, FormControl, Typography, Button, Card, CardContent, Grid, TextField, Tooltip, IconButton } from '@material-ui/core';
+import { DialogTitle, DialogContent, DialogActions, DialogContentText, Dialog, InputLabel, Select, MenuItem, FormControl, Typography, Button, Card, CardContent, Grid, Tooltip, IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
 // dialog for save success
 import EditInfoSuccessDialog from '../EditInfoSuccessDialog/EditIntoSuccessDialog'
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function UserDojoTransfer(props) {
 
     // State used to toggle the edit button on and off
@@ -25,7 +22,7 @@ function UserDojoTransfer(props) {
 
     // cancel button resets the reducers 
     const handleDateReset = (event) => {
-        console.log('cancel')
+
         props.dispatch(
             {
                 type: 'FETCH_USER_INFO',
@@ -37,7 +34,7 @@ function UserDojoTransfer(props) {
     // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
     const handleSaveEdit = (event) => {
         event.preventDefault()
-        console.log(props.store.editInfo);
+
         props.dispatch(
             {
                 type: 'UPDATE_USER_DATA',
@@ -46,10 +43,8 @@ function UserDojoTransfer(props) {
     };
 
     const handleChange = (propertyName) => (event) => {
-        console.log(event.target.value);
-        console.log(`Changing ${propertyName}`);
         changeDojoId(event.target.value)
-        console.log(dojo_id)
+
     }
 
     const changeDojo = () => {
@@ -120,7 +115,7 @@ function UserDojoTransfer(props) {
                                         style={{ margin: 5 }}
                                     >
                                         Submit
-            </Button>
+                                    </Button>
                                     {/* cancel will turn the values in the edit reducer back to original info reducer */}
                                     <Button onClick={handleDateReset}
                                         style={{ margin: 5 }}
@@ -165,15 +160,15 @@ function UserDojoTransfer(props) {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
                         Once you change dojos, you will become inactive and will need to contact your new dojos instructors to become active again
-          </DialogContentText>
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={changeDojo} color="secondary">
                         Cancel
-          </Button>
+                    </Button>
                     <Button onClick={changeDojo} color="primary">
                         Yes, I do!
-          </Button>
+                    </Button>
                 </DialogActions>
             </Dialog>
 

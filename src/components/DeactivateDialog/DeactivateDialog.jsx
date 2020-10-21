@@ -8,7 +8,7 @@ function DeactivateDialog(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
-        console.log('woo00000000000000000000000000')
+
     };
 
     const handleClose = () => {

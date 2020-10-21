@@ -5,7 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getRanks(action) {
     try {
         let response = yield axios.get(`/api/ranks/${action.payload}`)
-        console.log('Ranks:', response.data);
+
         yield put({type:'SET_RANKS', payload: response.data});
     } catch (error) {
         console.log('error in getRanks', error)
@@ -16,7 +16,9 @@ function* getRanks(action) {
 function* addRank(action) {
     try {
         yield axios.post('/api/ranks', action.payload )
+
         yield put({ type: 'GET_RANKS', payload: action.payload.user_id })
+        
         yield put({ type: 'FETCH_USER_INFO', payload: action.payload.user_id })
 
     } catch (error) {

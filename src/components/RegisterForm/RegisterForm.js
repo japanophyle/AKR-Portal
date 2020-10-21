@@ -51,17 +51,6 @@ class RegisterForm extends Component {
             required
             onChange={this.handleInputChangeFor('username')}
           />
-          
-          {/* <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}
-              required
-              
-            />
-          </label> */}
         </div>
         <div>
         <TextField
@@ -74,16 +63,6 @@ class RegisterForm extends Component {
             required
             onChange={this.handleInputChangeFor('password')}
           />
-          {/* <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              required
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label> */}
         </div>
         <div>
           <Button

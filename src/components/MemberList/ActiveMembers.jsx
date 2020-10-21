@@ -39,7 +39,7 @@ const StyledTableCell = withStyles((theme) => ({
         fontSize: 14,
         padding: 8,
     },
-    
+
 }))(TableCell);
 
 // styling every other table row
@@ -51,7 +51,7 @@ const StyledTableRow = withStyles((theme) => ({
         '&:nth-of-type(even)': {
             backgroundColor: theme.palette.highlight.light,
         },
-        
+
     },
 
 }))(TableRow);
@@ -66,26 +66,18 @@ const useStyles = makeStyles({
 
 function ActiveMembers(props) {
 
-    useEffect(() => {
-        //Setting users
-        props.dispatch({ type: 'GET_ACTIVE_USERS' })
-
-    }, []);
 
     // function to deactivate a user
     const handleDeactivateMember = (member) => {
-        console.log(`deactivate ${member}`);
         props.dispatch({ type: 'DEACTIVATE_USER', payload: member })
     }
 
     const deleteUser = (member) => {
-        console.log('Deleting;', member);
         props.dispatch({ type: 'DELETE_USER', payload: member })
     }
 
     const classes = useStyles();
 
-    // moment(member.dues_date).calendar()
     return (
         <div>
             <Grid container justify="center" alignItems="center">
@@ -114,17 +106,17 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">{member.fname} {member.lname}</StyledTableCell>
                                             <StyledTableCell align="center">{member.teaching_rank ? member.teaching_rank : member.student_rank}</StyledTableCell>
 
-                                            <StyledTableCell align="center"> {console.log(member.auth_level)}<AuthSelect member={member}/>
-                                                {/* {member.auth_level >= 10 ? 'Dojo Admin' : 'Student'} */}
-                                                </StyledTableCell>
+                                            <StyledTableCell align="center">
+                                                <AuthSelect member={member} />
+                                            </StyledTableCell>
 
                                             <StyledTableCell align="center">{member.dues_amount}</StyledTableCell>
                                             <StyledTableCell align="center">{member.dues_date && moment(member.dues_date).format('ll')}</StyledTableCell>
                                             <StyledTableCell align="center">
                                                 {member.auth_level > 0 &&
-                                                <>
-                                                    <DeactivateDialog handleDeactivateMember={handleDeactivateMember} member={member}/>
-                                                </>
+                                                    <>
+                                                        <DeactivateDialog handleDeactivateMember={handleDeactivateMember} member={member} />
+                                                    </>
                                                 }
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
@@ -139,13 +131,6 @@ function ActiveMembers(props) {
                                                 {/* STUDENT NOTES DIALOG */}
                                                 <NotesDialog member={member} id={member.user_id} />
 
-                                                {/* <Tooltip title="Add Note" placement="left">
-                                                    <IconButton>
-                                                        <NoteAddIcon
-                                                            color="primary"
-                                                        ></NoteAddIcon>
-                                                    </IconButton>
-                                                </Tooltip> */}
                                                 {member.notes || member.equipment_checkout ?
                                                     <Tooltip title={<h1>Instructor Notes</h1>} >
                                                         <IconButton>
@@ -160,7 +145,7 @@ function ActiveMembers(props) {
                                                 <StyledTableCell align="center">
                                                     <Tooltip title={<h1>Delete User</h1>} >
                                                         <IconButton onClick={() => deleteUser(member)} >
-                                                            <DeleteIcon color="error" /> 
+                                                            <DeleteIcon color="error" />
                                                         </IconButton>
                                                     </Tooltip>
                                                 </StyledTableCell>

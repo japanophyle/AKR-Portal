@@ -6,8 +6,7 @@ import { Typography, Grid, Paper, Table, TableContainer, TableCell, TableRow, Ta
 
 
 class UserRankHistory extends Component {
-    state = {
-    };
+    state = {};
 
   componentDidMount() {
     this.props.dispatch({ type: 'GET_RANKS', payload: this.props.store.info.user_id})

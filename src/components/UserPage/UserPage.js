@@ -19,7 +19,6 @@ class UserPage extends Component {
 
 // this component doesn't do much to start, just renders some user info to the DOM
   componentDidMount = () => {
-    console.log('gonna get the profile');
     this.props.dispatch({
       type: "FETCH_USER_INFO",
       payload: this.props.match.params.id
@@ -29,7 +28,6 @@ class UserPage extends Component {
   }
 
   getMyDojo = () => {
-    console.log('Getting "my dojo"')
     this.props.dispatch({
       type: "GET_MY_DOJO"
     })
@@ -39,13 +37,8 @@ class UserPage extends Component {
     render() {
       return (
         <div>
-  {/* <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-        <p>Your ID is: {this.props.store.user.id}</p>
-        <p>Your name is: {this.props.store.info.fname} {this.props.store.info.lname}</p>
-        <LogOutButton className="log-in" />
-        <button onClick={() => this.getMyDojo()}
-        >Get My Dojo</button> */}
-          <h1 align="center">{this.props.store.info.fname}'s {this.props.store.info.lname}'s Information </h1> 
+  
+          <h1 align="center">{this.props.store.info.fname} {this.props.store.info.lname}'s Information </h1> 
           <Container>
           
 

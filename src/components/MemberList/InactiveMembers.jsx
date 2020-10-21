@@ -54,20 +54,15 @@ const useStyles = makeStyles({
 
 function InactiveMembers(props) {
 
-    useEffect(() => {
-        //Setting users
-        props.dispatch({ type: 'GET_INACTIVE_USERS' })
-
-    }, []);
 
     // function to Activate a user
     const handleActivateUser = (member) => {
-        console.log(member);
+
         props.dispatch({ type: 'ACTIVATE_USER', payload: member })
     }
 
     const deleteUser = (member) => {
-        console.log('Deleting;', member);
+
         props.dispatch({ type: 'DELETE_USER', payload: member })
     }
 

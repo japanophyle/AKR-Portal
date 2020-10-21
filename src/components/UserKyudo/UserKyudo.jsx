@@ -25,9 +25,8 @@ const ranks =
         'Kudan',
         'Judan'
     ]
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
+
+
 function UserKyudo(props) {
 
     // State used to toggle the edit button on and off
@@ -52,7 +51,7 @@ function UserKyudo(props) {
 
     // function that dispatches to the edit reducer whenever an edit is made to an input
     const handleEditChange = (event) => {
-        console.log(`Handle change of ${event.target.id}`);
+
         props.dispatch(
             {
                 type: 'SET_EDIT',
@@ -63,7 +62,7 @@ function UserKyudo(props) {
     // function FOR SELECTS ONLY (Since needs name not id)
     //that dispatches to the edit reducer whenever an edit is made to an input
     const name = (event) => {
-        console.log(`Handle change of ${event.target.name}`);
+
         props.dispatch(
             {
                 type: 'SET_EDIT',
@@ -72,7 +71,7 @@ function UserKyudo(props) {
     }
     // cancel button resets the reducers 
     const handleDateReset = (event) => {
-        console.log('cancel')
+
         props.dispatch(
             {
                 type: 'FETCH_USER_INFO',
@@ -86,15 +85,12 @@ function UserKyudo(props) {
     // when the save button is click it will trigger a saga to start a PUT request using editInfo reducer 
     const handleSaveEdit = (event) => {
         event.preventDefault()
-        console.log(props.store.editInfo);
+
         props.dispatch(
             {
                 type: 'UPDATE_USER_DATA',
                 payload: props.store.editInfo
             })
-            // toggleNameEdit(true)
-            // toggleMoreEdit(true)
-            // toggleTeacher(true)
     };
 
     const submitRankHistory = (event) => {
@@ -175,7 +171,7 @@ function UserKyudo(props) {
                             <FormControl variant="outlined">
                                 <InputLabel color="secondary">Kyudo Rank</InputLabel>
                                 <Select
-                                    width="50px"
+                                    style={{ minWidth: 200 }}
                                     id="student_rank"
                                     name="student_rank"
                                     label="Current Kyudo Rank"

@@ -30,31 +30,31 @@ export default function FormSuccess(props) {
         props.handleGo()
     };
 
-    
+
 
     return (
         <div>
             <Button
                 style={{ marginTop: 15, minWidth: 120, }}
-                type="submit" 
-                variant="contained" 
-                color="primary" 
+                type="submit"
+                variant="contained"
+                color="primary"
                 onClick={handleClickOpen}
             >
                 Submit
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
-            <DialogContent>
-                <DialogTitle id="form-dialog-title">Success! Your information has been saved.</DialogTitle>
-                <DialogContentText id="alert-dialog-description">
-            Thanks for signing up. Your account will start out being inactive until you contact
-            you local Dojo and request to be come an active member. 
-          </DialogContentText>
+                <DialogContent>
+                    <DialogTitle id="form-dialog-title">Success! Your information has been saved.</DialogTitle>
+                    <DialogContentText id="alert-dialog-description">
+                        Thanks for signing up. Your account will start out being inactive until you contact
+                        you local Dojo and request to be come an active member.
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Close
-          </Button>
+                    </Button>
                 </DialogActions>
             </Dialog>
         </div>

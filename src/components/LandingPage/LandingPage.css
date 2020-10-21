@@ -81,7 +81,8 @@ Grid
 }
 
 iframe {
-  width: 560px;
-  height: 315px;
+  min-width: 43vmax;
+  min-height: 24.2vmax;
   border: 0px;
+  margin: 5px;
 }

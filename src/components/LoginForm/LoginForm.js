@@ -55,16 +55,6 @@ class LoginForm extends Component {
             required
             onChange={this.handleInputChangeFor('username')}
           />
-          {/* <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </label> */}
         </div>
         <div>
           <TextField
@@ -77,16 +67,6 @@ class LoginForm extends Component {
             required
             onChange={this.handleInputChangeFor('password')}
           />
-          {/* <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              required
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </label> */}
         </div>
         <div>
           <Button
