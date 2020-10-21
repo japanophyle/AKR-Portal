@@ -4,9 +4,6 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, MenuItem, Select, InputLabel, FormControl } from '@material-ui/core';
 
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function AuthSelect(props) {
 
 
@@ -87,10 +84,7 @@ function AuthSelect(props) {
                 label="Age"
                 color="secondary"
               >
-                {/* <MenuItem value="">
-            <em>{auth}</em>
-          </MenuItem> */}
-                {/* <MenuItem value={0}>Inactive</MenuItem> */}
+
                 <MenuItem value={5}>Member</MenuItem>
                 <MenuItem value={10}>Dojo Admin</MenuItem>
               </Select>
