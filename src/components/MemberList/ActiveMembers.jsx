@@ -6,7 +6,6 @@ import moment from 'moment';
 
 //MATERIAL-UI
 import ViewListIcon from '@material-ui/icons/ViewList';
-import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -28,6 +27,7 @@ import {
 import NotesDialog from '../StudentNotes/StudentNotes'
 import DeactivateDialog from '../DeactivateDialog/DeactivateDialog'
 import AuthSelect from '../AuthSelect/AuthSelect'
+import swal from '@sweetalert/with-react';
 
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
@@ -73,7 +73,21 @@ function ActiveMembers(props) {
     }
 
     const deleteUser = (member) => {
-        props.dispatch({ type: 'DELETE_USER', payload: member })
+        swal({
+            title: "Are you sure?",
+            text: `${member.fname} ${member.lname} will be removed!`,
+            icon: "warning",
+            buttons: true,
+        }).then((toDelete) => {
+            if (toDelete) {
+                swal(`${member.fname} ${member.lname} has been removed!`, {
+                    icon: "success",
+                });
+                props.dispatch({ type: 'DELETE_USER', payload: member })
+            } else {
+                swal(`${member.fname} ${member.lname} was not removed!`);
+            }
+        })
     }
 
     const classes = useStyles();
