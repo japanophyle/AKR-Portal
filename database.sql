@@ -31,7 +31,7 @@ CREATE TABLE "user_data" (
 	"lname" varchar(255) NOT NULL,
 	"user_id" INT REFERENCES "user" ON DELETE CASCADE NOT NULL,
 	"email" varchar(255),
-	"phone_number" bigint NOT NULL,
+	"phone_number" varcahr(255) NOT NULL,
 	"dojo_id" INT REFERENCES "dojo" ON DELETE SET NULL,
 	"fname_japanese" varchar(255),
 	"lname_japanese" varchar(255),
