@@ -10,6 +10,7 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 //MATERIAL-UI
 import {
   Button,
+  Grid
 } from '@material-ui/core';
 
 class LandingPage extends Component {
@@ -24,18 +25,22 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="container">
-
-        <div className="grid">
-          <div className="grid-col grid-col_8">
+        <Grid container justify="space-evenly" alignItems="center">
+          <Grid item>
             <h2>{this.state.heading}</h2>
             <iframe title="American Kyudo Renmei Promotional Video" src="https://www.youtube.com/embed/eCp_ICCIkDw?rel=0&wmode=opaque"
-              allowFullScreen="true"
+              allowFullScreen={true}
             >
             </iframe>
-          </div>
-          <div className="grid-col grid-col_4">
-            <RegisterForm />
 
+
+            {/* <div className="grid">
+            <div className="grid-col grid-col_8">
+            </div>
+            <div className="grid-col grid-col_4"> */}
+          </Grid>
+          <Grid item>
+            <RegisterForm />
             <center>
               <h4>Already a Member?</h4>
               <Button
@@ -47,8 +52,10 @@ class LandingPage extends Component {
                 Login
               </Button>
             </center>
-          </div>
-        </div>
+          </Grid>
+          {/* </div> */}
+          {/* </div> */}
+        </Grid>
       </div>
     );
   }

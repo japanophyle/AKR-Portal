@@ -6,7 +6,6 @@ const editInfoReducer = (state = {}, action) => {
       // this handles all the changes to the reducer when edits are done 
       // in the user info page
     case 'SET_EDIT':
-      console.log(action.payload.key, action.payload.value)
       // change the given property to the given value 
       return {
         ...state,

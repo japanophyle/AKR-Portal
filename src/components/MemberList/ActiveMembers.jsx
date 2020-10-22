@@ -6,7 +6,6 @@ import moment from 'moment';
 
 //MATERIAL-UI
 import ViewListIcon from '@material-ui/icons/ViewList';
-import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -28,6 +27,7 @@ import {
 import NotesDialog from '../StudentNotes/StudentNotes'
 import DeactivateDialog from '../DeactivateDialog/DeactivateDialog'
 import AuthSelect from '../AuthSelect/AuthSelect'
+import swal from '@sweetalert/with-react';
 
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
@@ -39,7 +39,7 @@ const StyledTableCell = withStyles((theme) => ({
         fontSize: 14,
         padding: 8,
     },
-    
+
 }))(TableCell);
 
 // styling every other table row
@@ -51,7 +51,7 @@ const StyledTableRow = withStyles((theme) => ({
         '&:nth-of-type(even)': {
             backgroundColor: theme.palette.highlight.light,
         },
-        
+
     },
 
 }))(TableRow);
@@ -66,26 +66,32 @@ const useStyles = makeStyles({
 
 function ActiveMembers(props) {
 
-    useEffect(() => {
-        //Setting users
-        props.dispatch({ type: 'GET_ACTIVE_USERS' })
-
-    }, []);
 
     // function to deactivate a user
     const handleDeactivateMember = (member) => {
-        console.log(`deactivate ${member}`);
         props.dispatch({ type: 'DEACTIVATE_USER', payload: member })
     }
 
     const deleteUser = (member) => {
-        console.log('Deleting;', member);
-        props.dispatch({ type: 'DELETE_USER', payload: member })
+        swal({
+            title: "Are you sure?",
+            text: `${member.fname} ${member.lname} will be removed!`,
+            icon: "warning",
+            buttons: true,
+        }).then((toDelete) => {
+            if (toDelete) {
+                swal(`${member.fname} ${member.lname} has been removed!`, {
+                    icon: "success",
+                });
+                props.dispatch({ type: 'DELETE_USER', payload: member })
+            } else {
+                swal(`${member.fname} ${member.lname} was not removed!`);
+            }
+        })
     }
 
     const classes = useStyles();
 
-    // moment(member.dues_date).calendar()
     return (
         <div>
             <Grid container justify="center" alignItems="center">
@@ -114,17 +120,17 @@ function ActiveMembers(props) {
                                             <StyledTableCell align="center">{member.fname} {member.lname}</StyledTableCell>
                                             <StyledTableCell align="center">{member.teaching_rank ? member.teaching_rank : member.student_rank}</StyledTableCell>
 
-                                            <StyledTableCell align="center"> {console.log(member.auth_level)}<AuthSelect member={member}/>
-                                                {/* {member.auth_level >= 10 ? 'Dojo Admin' : 'Student'} */}
-                                                </StyledTableCell>
+                                            <StyledTableCell align="center">
+                                                <AuthSelect member={member} />
+                                            </StyledTableCell>
 
                                             <StyledTableCell align="center">{member.dues_amount}</StyledTableCell>
                                             <StyledTableCell align="center">{member.dues_date && moment(member.dues_date).format('ll')}</StyledTableCell>
                                             <StyledTableCell align="center">
                                                 {member.auth_level > 0 &&
-                                                <>
-                                                    <DeactivateDialog handleDeactivateMember={handleDeactivateMember} member={member}/>
-                                                </>
+                                                    <>
+                                                        <DeactivateDialog handleDeactivateMember={handleDeactivateMember} member={member} />
+                                                    </>
                                                 }
                                             </StyledTableCell>
                                             <StyledTableCell align="center">
@@ -139,13 +145,6 @@ function ActiveMembers(props) {
                                                 {/* STUDENT NOTES DIALOG */}
                                                 <NotesDialog member={member} id={member.user_id} />
 
-                                                {/* <Tooltip title="Add Note" placement="left">
-                                                    <IconButton>
-                                                        <NoteAddIcon
-                                                            color="primary"
-                                                        ></NoteAddIcon>
-                                                    </IconButton>
-                                                </Tooltip> */}
                                                 {member.notes || member.equipment_checkout ?
                                                     <Tooltip title={<h1>Instructor Notes</h1>} >
                                                         <IconButton>
@@ -160,7 +159,7 @@ function ActiveMembers(props) {
                                                 <StyledTableCell align="center">
                                                     <Tooltip title={<h1>Delete User</h1>} >
                                                         <IconButton onClick={() => deleteUser(member)} >
-                                                            <DeleteIcon color="error" /> 
+                                                            <DeleteIcon color="error" />
                                                         </IconButton>
                                                     </Tooltip>
                                                 </StyledTableCell>

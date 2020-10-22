@@ -17,7 +17,7 @@ class DojoListItem extends Component {
 
 
   manageDojo = (id) => {
-    console.log('Route to individual dojo view;', id);
+
     this.props.history.push(`/memberlist/${id}`)
   }
 
@@ -35,12 +35,6 @@ class DojoListItem extends Component {
           </Tooltip>
         </TableCell>
         <TableCell>
-
-          {/* <Tooltip title={<h1>Delete</h1>} >
-            <IconButton onClick={() => this.deleteDojo(this.props.dojo.id)} >
-              <DeleteIcon color="error" />
-            </IconButton>
-          </Tooltip> */}
           <DojoDeleteDialog dojo={this.props.dojo} deleteDojo={this.deleteDojo}/>
         </TableCell>
       </TableRow>

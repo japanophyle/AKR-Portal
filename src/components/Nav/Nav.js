@@ -17,6 +17,10 @@ const Nav = (props) => {
     loginLinkData.text = 'My Dojo';
   };
 
+  if (props.store.user.auth_level === 0) {
+    loginLinkData.path = '/inactive';
+    loginLinkData.text = 'Currently Inactive';
+  }
 
   let dojoAdminMemberList = {
     path: `/memberlist/${props.store.info.dojo_id}`,
@@ -29,10 +33,9 @@ const Nav = (props) => {
   };
 
 
-
   return (
-    <div 
-    className="nav"
+    <div
+      className="nav"
     >
 
       {/* Logo and Home Link */}
@@ -46,7 +49,8 @@ const Nav = (props) => {
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
-          but call this link 'Home' if they are logged in,
+          but call this link 'My Dojo' if they are logged in and authorized,
+          or call this link Currently Inactive if they haven't been activated yet,
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
         </Link>
@@ -69,7 +73,7 @@ const Nav = (props) => {
         )}
 
         {/* Show the link to the info page and the logout button if the user is logged in */}
-        {props.store.user.auth_level >= 0 && (
+        {props.store.user.auth_level >= 5 && (
           <Link className="nav-link" to="/user/user">
             Info Page
           </Link>

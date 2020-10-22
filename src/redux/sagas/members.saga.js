@@ -6,7 +6,7 @@ function* getActiveUsers(action) {
 
     try {
         let response = yield axios.get(`/api/members/active/${action.payload}`);
-        console.log('Active users:', response.data);
+
         yield put({ type:'SET_ACTIVE_USERS', payload: response.data })  
         yield put({type: 'GET_INACTIVE_USERS', payload: response.data[0].dojo_id});
 
@@ -18,7 +18,7 @@ function* getActiveUsers(action) {
 function* getInactiveUsers(action) {
     try {
         let response = yield axios.get(`/api/members/inactive/${action.payload}`);
-        console.log('Inactive users:', response.data);
+
         yield put({ type:'SET_INACTIVE_USERS', payload: response.data })
     } catch (error) {
         console.log('error in getInactiveUsers():', error);
@@ -28,13 +28,13 @@ function* getInactiveUsers(action) {
 // activate user saga
 function* activateUser(action) {
     const id = {id : action.payload.user_id}
-    console.log(`in activateUser ${action.payload.id}`);
     
     try {
         yield axios.put('/api/members/activate', id)
         //reset dojo list view
         yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
-        // yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
+
+
     } catch (err) {
         console.log('error in activateUser', err)
     }
@@ -43,13 +43,13 @@ function* activateUser(action) {
 //deactivate user saga
 function* deactivateUser(action) {
     const id = {id : action.payload.user_id}
-    console.log(`in activateUser ${id}`);
     
     try {
         yield axios.put('/api/members/deactivate', id)
         //reset dojo view
         yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
-        // yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
+
+
     } catch (err) {
         console.log('error in activateUser', err)
     }
@@ -60,7 +60,8 @@ function* deleteUser(action) {
     try {
         yield axios.delete(`/api/members/${action.payload.user_id}`)
         yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
-        // yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
+
+
     } catch (error) {
         console.log('error in deleteUser', error);
     }
@@ -68,9 +69,11 @@ function* deleteUser(action) {
 
 function* UpdateAuthLevel(action) {
     try {
+
         yield axios.put(`/api/members/promote`, action.payload)
-        console.log(action.payload)
+
         yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
+
     } catch (error) {
         console.log('error in UpdateAuthLevel in the member saga', error)
     }

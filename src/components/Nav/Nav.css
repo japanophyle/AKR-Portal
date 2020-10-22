@@ -1,5 +1,5 @@
-.nav-title {
-    font-size: px;
+.title {
+    font-size: 32vmax;
     font-weight: 700;
     display: inline-block;
     color: #f2f2f2;
@@ -9,7 +9,7 @@
 .nav {
   margin: 0 0 30px;
   background-color: #38542B;
-  /* background-image: url('Kyudoka.jpg'); */
+
   background-position: bottom;
   overflow: hidden;
 }
@@ -21,11 +21,9 @@
   text-align: center;
   padding: 10px 10px;
   text-decoration: none;
-  font-size: 30px;
-  font-weight: bold;
-  /* -webkit-text-stroke-width: 1px; */
-  /* -webkit-text-stroke-color: #38542B; */
-  /* -webkit-text-fill-color: #f2f2f2; */
+  font-size: 19px;
+  font-weight: 500;
+
   /* these last two make the logout button in
   the nav bar look like another link */
   border:none;
@@ -34,32 +32,26 @@
 }
 
 .nav-link:hover {
-  /* background-color: #f7f6f1; */
   -webkit-text-fill-color: #E3BE56;
   text-decoration: underline;
-
-
 }
 
 .nav-left {
   float: left;
-  margin-top: 40px;
+  margin-top: 5vmin;
   color: #ECE7D1;
   padding: 10px 10px;
-  /* background-color: #945C39; */
-  /* -webkit-text-stroke-width: 1px; */
-  /* -webkit-text-stroke-color: #38542B; */
-  /* -webkit-text-fill-color: #E3BE56; */
 
 }
 
 .nav-right {
   float: right;
-  margin-top: 40px;
+  margin-top: 10vmin;
+  padding-bottom: 3px;
 
 }
 
 .sites-logo {
   float: left;
-  margin: 20px;
+  margin: 0.25rem;
 }

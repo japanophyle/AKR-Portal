@@ -5,7 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getDojos() {
     try {
         let response = yield axios.get('/api/dojos')
-        console.log('Dojos:', response.data);
+
         yield put({type:'SET_DOJOS', payload: response.data});
     } catch (error) {
         console.log('error in getDojos', error)
@@ -40,7 +40,7 @@ function* setDojoDues(action) {
 
         // reset the views of the dojo to show new dues
         yield put({type: 'GET_ACTIVE_USERS', payload: action.payload.dojo_id});
-        // yield put({type: 'GET_INACTIVE_USERS', payload: action.payload.dojo_id});
+
     } catch (err) {
         console.log('Error in setDojoDues saga', err);
     }
