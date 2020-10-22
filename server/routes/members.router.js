@@ -7,9 +7,6 @@ const router = express.Router();
 
 //UPDATE ROUTE TO PROMOTE AUTH LEVEL
 router.put('/promote', rejectUnauthenticated, (req, res) => {
-  console.log(req.body.id);
-  console.log(req.body.value);
-
 
   const queryText = `
     UPDATE "user"
@@ -57,7 +54,6 @@ router.put('/activate', rejectUnauthenticated, (req, res) => {
 
 //UPDATE ROUTE TO DEACTIVATE A MEMBER
 router.put('/deactivate', rejectUnauthenticated, (req, res) => {
-  console.log(req.body.id);
 
   const queryText = `
     UPDATE "user"
@@ -77,10 +73,8 @@ router.put('/deactivate', rejectUnauthenticated, (req, res) => {
 });
 
 // GET ALL ACTIVE MEMBERS
-// WHERE "user_data".is_current_member = TRUE
-
 router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
-  console.log('GET active member. Dojo id:', req.params.id)
+
 
   const dojoAdminQueryText = `
     SELECT "user_data".dojo_id FROM "user_data"
@@ -105,7 +99,7 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
       response = await client.query(queryText, [req.params.id, adminDojoId]);
 
       await client.query('COMMIT');
-      console.log(response.rows);
+
       res.send(response.rows)
 
     } catch (error) {
@@ -126,7 +120,6 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
     WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
     `
 
-    // 
     pool.query(siteAdminQueryText, [req.params.id])
       .then(result => {
         res.send(result.rows)
@@ -144,7 +137,6 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
 
 // GET ALL INACTIVE MEMBERS
 router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
-  console.log('GET inactive member. Dojo id:', req.params.id)
 
   const dojoAdminQueryText = `
     SELECT "user_data".dojo_id FROM "user_data"
@@ -190,7 +182,6 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
       WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1;
       `
 
-    // 
     pool.query(siteAdminQueryText, [req.params.id])
       .then(result => {
         res.send(result.rows)
@@ -206,8 +197,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
 
 // GET *ONLY* NAMES AND RANKS (FOR MY DOJO)
 router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
-  console.log('in myDojo route')
-  // console.log(req.user.id);
+
 
   if (req.user.auth_level >= 5) {
 
@@ -227,20 +217,15 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
     "user_data".fname_japanese, "user_data".lname_japanese, 
     "user_data".student_rank, "user_data".teaching_rank 
     FROM "user_data"
-    WHERE "user_data".dojo_id = $1;
+    WHERE "user_data".dojo_id = $1
+    ORDER BY "user_data".id ASC;
     `;
 
       await client.query('BEGIN');
 
-      // console.log(req.user.id)
-      // await client.query(firstQuery, [req.user.id]);
       userDojoId = await client.query(firstQuery, [req.user.id]);
 
-      console.log(userDojoId.rows)
-
       userDojoId = userDojoId.rows[0].dojo_id;
-
-      console.log('we got the userDojoId',userDojoId);
 
       response = await client.query(secondQuery, [userDojoId]);
 
@@ -267,7 +252,6 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
 })
 
 router.get(`/search/:term`, rejectUnauthenticated, (req, res) => {
-  console.log(req.params.term);
 
   if (req.user.auth_level >= 5) {
   queryText = `
@@ -301,7 +285,6 @@ router.post('/', (req, res) => {
 
 // DELETEs all data associated with a user 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-  console.log('In Delete:', req.params.id);
 
   let queryText = `
       DELETE FROM "user"

@@ -4,7 +4,6 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const router = express.Router();
 
 router.put('/', rejectUnauthenticated, async (req, res) => {
-    console.log(req.body);
    
     const firstQuery = `UPDATE "user_data"
     SET "dojo_id" = $1
@@ -20,17 +19,11 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
         try {
           await client.query('BEGIN');
 
-          await console.log('woo')
-    
           //first query to get the admin dojo_id if they are auth_level 10
           await client.query(firstQuery, [req.body.dojo_id, req.body.user_id])
-          
-          await console.log('woo')
     
           await client.query(secondQuery, [req.body.user_id]);
     
-          await console.log('woo')
-
           await client.query('COMMIT');
     
           res.sendStatus(200)
@@ -47,17 +40,11 @@ router.put('/', rejectUnauthenticated, async (req, res) => {
         const client = await pool.connect();
         try {
           await client.query('BEGIN');
-
-          await console.log('woo')
     
           //first query to get the admin dojo_id if they are auth_level 10
           await client.query(firstQuery, [req.body.dojo_id, req.body.user_id])
-          
-          await console.log('woo')
     
           await client.query(secondQuery, [req.body.user_id]);
-    
-          await console.log('woo')
 
           await client.query('COMMIT');
     

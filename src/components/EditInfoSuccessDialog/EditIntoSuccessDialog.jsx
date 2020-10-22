@@ -18,7 +18,6 @@ function EditInfoSuccessDialog(props) {
             props.store.editInfo.email == "" ||
             props.store.editInfo.gender == "" ||
             props.store.editInfo.phone_number == "" ||
-            // props.store.editInfo.years_practiced == "" ||
             props.store.editInfo.zipcode == ""
         ) {
 

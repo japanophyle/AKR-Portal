@@ -17,7 +17,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // POSTs new dojo
 router.post('/', rejectUnauthenticated, async (req, res) => {
-    console.log('Adding new dojo:', req.body);
+
     const client = await pool.connect();
 
     if (req.user.auth_level >= 20) {
@@ -46,14 +46,14 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 // DELETE a dojo
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('In Delete:', req.params.id);
+
     let queryText = `DELETE FROM "dojo"
                     WHERE "id" = $1;`;
 
     if (req.user.auth_level >= 20) {
         pool.query(queryText, [req.params.id])
             .then((result) => {
-                console.log('Delete Dojo');
+
                 res.sendStatus(200);
             })
             .catch((error) => {
@@ -67,7 +67,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 // UPDATE dojo info
 router.put('/', rejectUnauthenticated, (req, res) => {
-    console.log('Editing dojo info:', req.body);
+
     let queryText = `UPDATE "dojo"
                     SET "dojo_name" = $1, "region_name" = $2
                     WHERE "id" = $3;`;
@@ -88,7 +88,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 //route for setting dojo dues
 router.put('/dues', rejectUnauthenticated, (req, res) => {
-    console.log(req.body);
+
     const { dues_amount, dues_date, dojo_id } = req.body
 
     const updateDuesQuery = `

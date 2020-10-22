@@ -3,12 +3,8 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withRouter, Link } from 'react-router-dom';
 
-
-
 //MATERIAL-UI
 import ViewListIcon from '@material-ui/icons/ViewList';
-import NoteAddIcon from '@material-ui/icons/NoteAdd';
-import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {
@@ -24,6 +20,7 @@ import {
     Grid,
     Button,
 } from '@material-ui/core';
+import swal from '@sweetalert/with-react';
 
 // styles for table cells
 const StyledTableCell = withStyles((theme) => ({
@@ -43,7 +40,6 @@ const StyledTableRow = withStyles((theme) => ({
             backgroundColor: theme.palette.action.hover,
         },
     },
-    
 }))(TableRow);
 
 const useStyles = makeStyles({
@@ -54,22 +50,29 @@ const useStyles = makeStyles({
 
 function InactiveMembers(props) {
 
-    useEffect(() => {
-        //Setting users
-        props.dispatch({ type: 'GET_INACTIVE_USERS' })
-
-    }, []);
-
     // function to Activate a user
     const handleActivateUser = (member) => {
-        console.log(member);
         props.dispatch({ type: 'ACTIVATE_USER', payload: member })
     }
 
-    const deleteUser = (member) => {
-        console.log('Deleting;', member);
-        props.dispatch({ type: 'DELETE_USER', payload: member })
-    }
+
+     const deleteUser = (member) => {
+        swal({
+            title: "Are you sure?",
+            text: `${member.fname} ${member.lname} will be removed!`,
+            icon: "warning",
+            buttons: true,
+        }).then((toDelete) => {
+            if (toDelete) {
+                swal(`${member.fname} ${member.lname} has been removed!`, {
+                    icon: "success",
+                });
+                props.dispatch({ type: 'DELETE_USER', payload: member })
+            } else {
+                swal(`${member.fname} ${member.lname} was not removed!`);
+            }
+        })
+      }
 
     const classes = useStyles();
 

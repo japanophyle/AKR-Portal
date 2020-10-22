@@ -105,9 +105,9 @@ router.post('/profile', rejectUnauthenticated, async (req, res) => {
 // selected by admin in the member list and sent as an integer
 // in :id
 router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
-  // :id is undefined
+
   let userToGet = req.params.id;
-  console.log('why is this undefined...', req.params.id)
+
   const client = await pool.connect();
   const queryText = `
     SELECT
@@ -122,13 +122,12 @@ router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
     `;
   // If the user is just getting their own info
   if (userToGet === 'user' || Number(userToGet) === req.user.id) {
-    console.log('userToGet = ', userToGet);
+
     userToGet = req.user.id
     // just do the regular thing
     pool
       .query(queryText, [userToGet])
         .then(response => {
-          console.log('/api/user/profile get response:', response.rows[0]);
           // GET routes don't send res.sendStatuses
           res.send(response.rows[0])
           client.release();
@@ -140,9 +139,6 @@ router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
         })
   // else if the user is getting another user's info...
   } else if (Number.isInteger( Number(userToGet) )) {
-    console.log('userToGet = ', userToGet);
-    console.log(userToGet);
-    // console.log(`${userToGet} times 2 is ${userToGet + userToGet}`);
     // get their auth level from DB first
     // if it's high enough, then proceed to get
     // the desired user's data,
@@ -191,7 +187,6 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
   } else {
     who = req.body.user_id
   }
-  console.log(req.body.user_id)
   
   const queryText =
     `UPDATE "user_data" 
@@ -271,7 +266,6 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     req.body.equipment_checkout // $33
   ])
     .then(response => {
-      console.log('/api/user/edit PUT');
       res.sendStatus(200)
     })
     .catch(error => {

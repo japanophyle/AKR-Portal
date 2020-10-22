@@ -5,13 +5,9 @@ import { withRouter } from 'react-router';
 import CreateDojo from './CreateDojo';
 // MATERIAL-UI
 import {
-    TextField,
     Button,
     Dialog,
-    DialogActions,
     DialogContent,
-    DialogContentText,
-    DialogTitle,
 } from '@material-ui/core'
 
 class CreateDojoDialog extends Component {
