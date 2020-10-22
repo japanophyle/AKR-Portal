@@ -1,120 +1,120 @@
-# Prime Project
 
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+![MIT LICENSE](https://img.shields.io/github/license/scottbromander/the_marketplace.svg?style=flat-square)
+![REPO SIZE](https://img.shields.io/github/repo-size/scottbromander/the_marketplace.svg?style=flat-square)
+![TOP_LANGUAGE](https://img.shields.io/github/languages/top/scottbromander/the_marketplace.svg?style=flat-square)
+![FORKS](https://img.shields.io/github/forks/scottbromander/the_marketplace.svg?style=social)
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+# American Kyudo Renmei Portal
 
-## Use the Template for This Repository (Don't Clone) 
+## Description
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+#### Duration: Two Week Sprint
+
+The American Kyudo Renmei (AKR) Portal is a react based web application created by [Hannan Mir](https://github.com/hannanmir), [Karl Beck](https://github.com/karljohnbeck), [Alex Severson](https://github.com/AseSever), and [Emerson Aagaard](https://github.com/emersona-glitch). The AKR portal was created for the [American Kyudo Renmei](kyudousa.com). The AKR portal allows the AKR to mmanage all of their students in various dojos across America and internationally. This app was created to serve the needs of both the students of Kyudo and the teachers/ administrators. Kyudo is life long martial art, and thus is practiced by students of all ages. As a result easy of use and readiblity was a key theme for us when designing the AKR Portal.
+
+The functionality available to students includes the ability to manage their basic contact information, kyudo information (ranks, membership IDs), and view payment details/ dues dates. Students can also see all other students in their dojo and view their ranks in a virtual bulletin board (My Dojo View).
+
+There are two levels of administration included in the AKR Portal. Dojo admins can manage all the students only in their dojo. This level makes up the bulk of the functionality of the application. When dojo admins are viewing their dojo (Member List View) they see all the students in their dojo and can execute the following actions: change the authorization level of an account, set dues amount and date, navigate to information page for a student, view and edit notes for a student, view and edit equipment checkout/ rental for a student, and deactivate or delete a student's account. Sitewide or national admins can view and manage any dojo in the application. This admin level is the most powerful and can create or delete new dojos, and assign dojo admins to them.
+
+The AKR Portal is an extensive application that will make the lives of teachers/ and administrators at the AKR much easier. Compared to the older system of administrators having to manually manage the data of all their students on an excel document and communicating and sharing these changes by emailing the document around, the AKR portal will have a significant impact on decreasing the headache and strain of managing the information and data on students of kyudo nationwide.
+
+## Screenshots
+
+#### Member List (Dojo Admin +)
+![Member List (Dojo Admin +)](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/memberlist.png)
+#### National Dojo List (National Admin Only)
+![National Dojo List (National Admin Only)](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/national-dojo-list.png)
+#### My Dojo
+![My Dojo](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/my-dojo.png)
+#### User Information
+![User Information](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/user-information.png)
+#### New User Registration
+![New User Registraton](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/new-user-registration.png)
 
 
 ## Prerequisites
-Before you get started, make sure you have the following software installed on your computer:
+
+Link to software that is required to install the app (e.g. node).
 
 - [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+- [Redux.js](https://redux.js.org/)
+- [Sweetalert](https://sweetalert.js.org/)
+- [Material-UI](https://material-ui.com/)
+- [PostgreSQL](https://www.postgresql.org/download/)
 
-## Create database and table
 
-Create a new database called `prime_app` and create a `user` table:
+## Installation
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
+1. Create a database named `akr_portal`,
+2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
+3. Open up your editor of choice and run an `npm install`
+4. Run `npm run server` in your terminal
+5. Run `npm run client` in your terminal
+6. The `npm run client` command will open up a new browser tab for you!
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+## Usage
 
-## Development Setup Instructions
+### New User Registration 
+1. Choose a username and password then hit `REGISTER` to navigate to the input forms.
+2. Input all the forms on the screen.
+3. Any fields marked with an `*` are required.
+4. Select the dojo you are requesting to be added to.
+5. If you are a current practitioner of Kyudo select the current member checkbox and fill the information where relevant.
+6. Once all the pertinent fields have been filled hit `SUBMIT` to finish.
+7. Your account will be inactive until it is activated by an Administrator.
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
+### Current Student +
+1. Upon login current students are brough to the My Dojo view
+2. The My Dojo view shows all the students in your dojo including their names in english and japanese and their relevant Kyodu ranks.
+3. Clicking the `Info Page` in the Navbar will redirect you to your profile page.
+4. The profile page contains all the information you submitted seperated into categories.
+5. Hitting the pencil (Edit) icon will allow you to edit any information in that category.
+6. When you are done updating/ editing hit the `SUBMIT` button to save the edits.
+7. If you would like to cancel any edits hit the `CANCEL` button to revert the changes.
 
-## Debugging
+### Dojo Administrator +
+1. Upon login dojo admins are brought to the My Dojo view.
+2. Clicking the `Member List` in the Navbar will redirect you to information for your specific dojo.
+3. In the Memeber List view you can see all the members in your dojo as well inactive accounts requesting to join the dojo in the non-acitve members table below.
+4. Clicking the `SET DUES` button will open a dialog that will let you set a dues amount as well as due date.
+5. After providing the information and hitting `SAVE` it will be updated for all users in your dojo.
+6. Clicking the `MEMBER DETAILS` button under the More column will allow you to navigate to a users profile page where you can manage any of the user's data including payment information.
+7. Clicking the `ADD NOTES` button in the notes column will open a dialog that will allow you to enter both notes and equipment checkout information for a user.
+8. Clicking the `SAVE` button will save these notes, and the `CANCEL` button will cancel the action and close the dialog.
+9. Under the status column for a user's account hitting `DEACTIVATE` will demote that user back to inactive status similar to when they had initially registered.
+10. All user information is still preserved but their account will be moved from the upper active users table to the lower inactive users table.
+11. If you wish to reactivate a user then simply hit the `ACTIVATE` button in the non-active table.
+12. For activating any users requesting to join your dojo you must also hit the `ACTIVATE` button in the non-active table.
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+### National Administrator
+1. Upon logging in national admins are brought to the National Dojo List view.
+2. This view shows all dojos that are a part of the AKR Portal.
+3. Clicking the `CREATE DOJO` button at the top will open a dialog that allows for the creation of a dojo.
+4. Dojo name, region, and admin account must be provided for dojo creation. 
+5. The admnin account selector will be populated with all eligible accounts that are at least dojo admin level.
+6. Clicking the `CREATE DOJO` plus sign button with all the information provided will create the dojo and assign the specified admin to it.
+7. Clicking the `DELETE` icon in the National Dojo table will prompt you to delete a dojo.
+8. Deleting a dojo will not delete the users inside the dojo, but instead will set their dojo_id as null and will need to be reassigned to another dojo.
+7. Clicking the `MANAGE` launch icon for a dojo in the National Dojo table will navigate you to that dojo's Member List.
+8. National admins have all the actions that a dojo admin has for their specific dojo, but they can manage ANY dojo.
+9. National admins can also hit the `DELETE USER` trash icon under the remove column to delete a user account and information permanently.
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+## Built With
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+- React
+- Redux
+- Node.js
+- PostgreSQL
+- Axios
+- Sweetalert
+- Material-UI
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
+## Acknowledgement
 
-## Testing Routes with Postman
+Thanks to the American Kyudo Renmei and their Vice President, Carly Born, for approaching us to build this application for them. This was a fantastic and fulfilling experience and we are grateful to have had the oppurunity to learn, and showcase our programming abilities. We hope that this app will serve the AKR well and that we as developers can continue to grow and strenghten our own knowledge. 
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
+Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped us to make this application a reality. Special thanks to our instrucors [Dane Smith](https://github.com/DoctorHowser) and [Kris Szafranski](https://github.com/kdszafranski).
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
+## Support
 
-1. Start the server - `npm run server`
-2. [Import the sample routes JSON file](./PostmanPrimeSoloRoutes.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+If you have suggestions or issues, please email us at [hannanmir2@gmail.com](mailto:hannanmir2@gmail.com), [karljohnbeck@gmail.com](mailto:karljohnbeck@gmail.com), [alexsvrsn@gmail.com](mailto:alexsvrsn@gmail.com), [emerson.aagaard@gmail.com](mailto:emerson.aagaard@gmail.com)

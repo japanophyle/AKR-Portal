@@ -14,7 +14,6 @@ export default function FormSuccess(props) {
             props.formState.country == "" ||
             props.formState.date_of_birth == "" ||
             props.formState.email == "" ||
-            props.formState.gender == "" ||
             props.formState.phone_number == "" ||
             props.formState.years_practiced == "" ||
             props.formState.zipcode == ""
