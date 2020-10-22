@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import image from './customLogo.png';
 
 const Nav = (props) => {
   let loginLinkData = {
@@ -12,35 +13,76 @@ const Nav = (props) => {
   };
 
   if (props.store.user.id != null) {
-    loginLinkData.path = '/user';
-    loginLinkData.text = 'Home';
+    loginLinkData.path = '/mydojo';
+    loginLinkData.text = 'My Dojo';
+  };
+
+  if (props.store.user.auth_level === 0) {
+    loginLinkData.path = '/inactive';
+    loginLinkData.text = 'Currently Inactive';
   }
 
+  let dojoAdminMemberList = {
+    path: `/memberlist/${props.store.info.dojo_id}`,
+    text: 'Member List',
+  };
+
+  let siteAdminDojoList = {
+    path: '/nationdojos',
+    text: 'National Dojos'
+  };
+
+
   return (
-    <div className="nav">
+    <div
+      className="nav"
+    >
+
+      {/* Logo and Home Link */}
       <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+        <img id="logo-img-id" src={image} alt="American Kyudo Renmei" className="sites-logo"></img>
       </Link>
+
+      {/* <h2 className="nav-title">Prime GROUP Project   >8^) </h2> */}
+      <h1 id="title" className="nav-left">American Kyudo Renmei Portal</h1>
+
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
-          but call this link 'Home' if they are logged in,
+          but call this link 'My Dojo' if they are logged in and authorized,
+          or call this link Currently Inactive if they haven't been activated yet,
           and call this link 'Login / Register' if they are not */}
           {loginLinkData.text}
         </Link>
-        {/* Show the link to the info page and the logout button if the user is logged in */}
-        {props.store.user.id && (
+
+        {/* conditional rendering -- if authorized, show members list */}
+        {props.store.user.auth_level === 10 && (
           <>
-            <Link className="nav-link" to="/info">
-              Info Page
+            <Link className="nav-link" to={dojoAdminMemberList.path} >
+              {dojoAdminMemberList.text}
             </Link>
-            <LogOutButton className="nav-link" />
           </>
+        )}
+
+        {props.store.user.auth_level >= 20 && (
+          <>
+            <Link className="nav-link" to={siteAdminDojoList.path} >
+              {siteAdminDojoList.text}
+            </Link>
+          </>
+        )}
+
+        {/* Show the link to the info page and the logout button if the user is logged in */}
+        {props.store.user.auth_level >= 5 && (
+          <Link className="nav-link" to="/user/user">
+            Info Page
+          </Link>
         )}
         {/* Always show this link since the about page is not protected */}
         <Link className="nav-link" to="/about">
           About
         </Link>
+        <LogOutButton className="nav-link" />
       </div>
     </div>
   );

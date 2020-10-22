@@ -57,6 +57,7 @@ Grid
 .grid-col_8 {
   flex-basis: 66.66666667%;
   max-width: 66.66666667%;
+  padding-left: 15%;
 }
 
 .grid-col_9 {
@@ -77,4 +78,11 @@ Grid
 .grid-col_12 {
   flex-basis: 100%;
   max-width: 100%;
+}
+
+iframe {
+  min-width: 43vmax;
+  min-height: 24.2vmax;
+  border: 0px;
+  margin: 5px;
 }

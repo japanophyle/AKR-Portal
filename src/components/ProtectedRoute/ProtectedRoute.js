@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LoginPage from '../LoginPage/LoginPage';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import NotAuthorized from '../NotAuthorized/NotAuthorized';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -22,6 +22,9 @@ const ProtectedRoute = (props) => {
     component: ComponentToProtect,
     // redirect path to be used if the user is authorized
     authRedirect,
+    memberRedirect,
+    dojoAdminRedirect,
+    siteAdminRedirect,
     store,
     ...otherProps
   } = props;
@@ -35,12 +38,18 @@ const ProtectedRoute = (props) => {
   } else {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
-    ComponentToShow = LoginPage;
+    ComponentToShow = NotAuthorized;
   }
-
+  
   // redirect a logged in user if an authRedirect prop has been provided
-  if (store.user.id && authRedirect != null) {
-    return <Redirect exact from={otherProps.path} to={authRedirect} />;
+  if (store.user.id && authRedirect != null && store.user.auth_level === 0) {
+    return <Redirect exact from={otherProps.path} to={authRedirect} />
+  } else if (store.user.id && authRedirect != null && store.user.auth_level === 5) {
+    return <Redirect exact from={otherProps.path} to={memberRedirect} />;
+  } else if (store.user.id && authRedirect != null && store.user.auth_level === 10) {
+    return <Redirect exact from={otherProps.path} to={dojoAdminRedirect} />;
+  } else if (store.user.id && authRedirect != null && store.user.auth_level === 20) {
+    return <Redirect exact from={otherProps.path} to={siteAdminRedirect} />;
   } else if (!store.user.id && authRedirect != null) {
     ComponentToShow = ComponentToProtect;
   }

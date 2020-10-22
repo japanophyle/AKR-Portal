@@ -2,10 +2,10 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 // Gets ranks for logged in user
-function* getRanks() {
+function* getRanks(action) {
     try {
-        let response = yield axios.get('/api/ranks')
-        console.log('Ranks:', response.data);
+        let response = yield axios.get(`/api/ranks/${action.payload}`)
+
         yield put({type:'SET_RANKS', payload: response.data});
     } catch (error) {
         console.log('error in getRanks', error)
@@ -16,7 +16,11 @@ function* getRanks() {
 function* addRank(action) {
     try {
         yield axios.post('/api/ranks', action.payload )
-        yield put({ type: 'GET_RANKS' })
+
+        yield put({ type: 'GET_RANKS', payload: action.payload.user_id })
+        
+        yield put({ type: 'FETCH_USER_INFO', payload: action.payload.user_id })
+
     } catch (error) {
         console.log('error in addRank', error);
     }
@@ -25,8 +29,8 @@ function* addRank(action) {
 // Removes a rank from the ranks table
 function* removeRank(action) {
     try {
-        yield axios.delete(`/api/ranks/${action.payload}`)
-        yield put({ type: 'GET_RANKS' })
+        yield axios.delete(`/api/ranks/${action.payload.rank_id}`)
+        yield put({ type: 'GET_RANKS', payload: action.payload.user_id })
     } catch (error) {
         console.log('error in removeRank', error);
     }

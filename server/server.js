@@ -11,6 +11,10 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const ranksRouter = require('./routes/ranks.router');
+const dojosRouter = require('./routes/dojos.router');
+const membersRouter = require('./routes/members.router')
+const adminsRouter = require('./routes/admins.router')
+const dojoTransferRouter = require('./routes/transfer.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -26,8 +30,10 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/ranks', ranksRouter);
-// app.use('/api/profile', userRouter);
-
+app.use('/api/dojos', dojosRouter);
+app.use('/api/members', membersRouter);
+app.use('/api/admins', adminsRouter);
+app.use('/api/dojotransfer', dojoTransferRouter);
 
 // Serve static files
 app.use(express.static('build'));

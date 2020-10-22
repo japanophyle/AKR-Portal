@@ -1,11 +1,15 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
 // GETs all ranks, and dates for ranks for logged in user
-router.get('/', (req, res) => {
-    let queryText = `SELECT * from "ranks" where "user_id" = $1;`;
-    pool.query(queryText, [req.user.id]).then(result => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+    
+    let queryText = `SELECT * from "ranks" 
+                    WHERE "user_id" = $1 
+                    ORDER BY "date_rank_made" DESC;`;
+    pool.query(queryText, [req.params.id]).then(result => {
         res.send(result.rows);
     })
     .catch(error => {
@@ -15,8 +19,8 @@ router.get('/', (req, res) => {
 })
 
 // POSTs new rank to rank table and PUTs the new userdata rank info
-router.post('/', async (req, res) => {
-    console.log('Adding new rank:', req.body);
+router.post('/', rejectUnauthenticated, async (req, res) => {
+
     const client = await pool.connect();
     try {
         const firstQuery = `INSERT INTO "ranks" ("rank_name", "date_rank_made", "user_id")
@@ -25,12 +29,12 @@ router.post('/', async (req, res) => {
                             SET "student_rank" = $1, "date_student_rank" = $2
                             WHERE "user_id" = $3;`;
         await client.query('BEGIN');
-        await client.query(firstQuery, [req.body.rank_name, req.body.date_rank_made, req.user.id])
-        await client.query(secondQuery, [req.body.rank_name, req.body.date_rank_made, req.user.id])
+        await client.query(firstQuery, [req.body.student_rank, req.body.date_student_rank, req.body.user_id])
+        await client.query(secondQuery, [req.body.student_rank, req.body.date_student_rank, req.body.user_id])
         await client.query('COMMIT');
         res.sendStatus(201)
     }  catch (error) {
-        console.log(error);
+        console.log('error in rank router post', error);
         await client.query('ROLLBACK')
         res.sendStatus(500)
       } finally {
@@ -39,15 +43,14 @@ router.post('/', async (req, res) => {
 });
 
 // DELETE a rank from ranks history table
-router.delete('/:id', (req, res) => {
-    console.log('In Delete:', req.params.id);
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+
     let queryText = `
         DELETE FROM "ranks"
-        WHERE "id" = $1 AND "user_id" = $2;
+        WHERE "id" = $1;
         `
-    pool.query(queryText, [req.params.id, req.user.id])
+    pool.query(queryText, [req.params.id])
         .then( (result) => {
-        console.log('Delete Rank');
         res.sendStatus(200);
     })
     .catch( (error) => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LoginPage from '../LoginPage/LoginPage';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import NotAuthorized from '../NotAuthorized/NotAuthorized';
 
 // A Custom Wrapper Component -- This will keep our code DRY.
 // Responsible for watching redux state, and returning an appropriate component
@@ -35,7 +35,7 @@ const SiteAdminAuthRoute = (props) => {
   } else {
     // if they are not logged in, check the loginMode on Redux State
     // if the mode is 'login', show the LoginPage
-    ComponentToShow = LoginPage;
+    ComponentToShow = NotAuthorized;
   }
 
   // redirect a logged in user if an authRedirect prop has been provided

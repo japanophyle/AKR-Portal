@@ -3,7 +3,12 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import ranksSaga from './ranks.saga';
-
+import dojosSaga from './dojos.saga';
+import membersSaga from './members.saga';
+import myDojoSaga from './myDojo.saga';
+import adminsSaga from './admins.saga';
+import searchSaga from './search.saga';
+import dojoTransfer from './dojoTransfer.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -18,5 +23,11 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     ranksSaga(),
+    dojosSaga(),
+    membersSaga(),
+    myDojoSaga(),
+    adminsSaga(),
+    searchSaga(),
+    dojoTransfer(),
   ]);
 }

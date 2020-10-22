@@ -7,6 +7,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  background-color: #acb1a7;
 }
 
 img {
@@ -63,17 +64,18 @@ Button
 .btn_asLink {
   padding: 0;
   border-width: 0;
-  border-bottom: 1px solid #444;
+  /* border-bottom: 1px solid #444; */
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  /* color: #945C39; */
+  
 }
 
 .btn_asLink:hover {
   background-color: transparent;
   border-color: #008183;
-  color: #008183;
+  color: #f0e4af;
 }
 
 /* --------------------------------------------------------------------------------
@@ -109,4 +111,13 @@ Form Treatment
 input {
   margin: 5px;
   margin-bottom: 10px;
+}
+
+/* stuff */
+.table {
+  max-height: 33.9em;
+}
+
+.papertable {
+  max-width: 90vw;
 }
