@@ -21,15 +21,15 @@ The AKR Portal is an extensive application that will make the lives of teachers/
 ## Screenshots
 
 #### Member List (Dojo Admin +)
-![Member List (Dojo Admin +)]()
+![Member List (Dojo Admin +)](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/memberlist.png)
 #### National Dojo List (National Admin Only)
-![National Dojo List (National Admin Only)]()
+![National Dojo List (National Admin Only)](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/national-dojo-list.png)
 #### My Dojo
-![My Dojo]()
+![My Dojo](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/my-dojo.png)
 #### User Information
-![User Information]()
+![User Information](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/user-information.png)
 #### New User Registration
-![New User Registraton]()
+![New User Registraton](https://github.com/American-Kyudo-Renmei-Portal/AKR-Portal/blob/wip/public/images/new-user-registration.png)
 
 
 ## Prerequisites
