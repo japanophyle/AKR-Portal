@@ -45,7 +45,7 @@ class UserPage extends Component {
         <LogOutButton className="log-in" />
         <button onClick={() => this.getMyDojo()}
         >Get My Dojo</button> */}
-          <h1 align="center">{this.props.store.info.fname}'s {this.props.store.info.lname}'s Information </h1> 
+          <h1 align="center">{this.props.store.info.fname} {this.props.store.info.lname}'s Information </h1> 
           <Container>
           
 
