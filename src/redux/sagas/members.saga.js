@@ -10,6 +10,7 @@ function* getActiveUsers(action) {
         yield put({ type:'SET_ACTIVE_USERS', payload: response.data })  
         yield put({type: 'GET_INACTIVE_USERS', payload: action.payload});
 
+        
     } catch (error) {
         console.log('error in getActiveUsers():', error);
     }
