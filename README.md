@@ -111,7 +111,7 @@ Link to software that is required to install the app (e.g. node).
 
 ## Acknowledgement
 
-Thanks to the American Kyudo Renmei and their Vice President, Carly Born, for approaching us to build this application for them. This was a fantastic and fulfilling experience and we are grateful to have had the oppurunity to learn, and showcase our programming abilities. We hope that this app will serve the AKR well and that we as developers can continue to grow and strenghten our own knowledge. 
+Thanks to the American Kyudo Renmei and their Vice President, Carly Born, for approaching us to build this application for them. This was a fantastic and fulfilling experience and we are grateful to have had the oppurunity to learn, and showcase our programming abilities. We hope that this app will serve the AKR well and that we as developers can continue to grow and strengthen our own knowledge. 
 
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped us to make this application a reality. Special thanks to our instrucors [Dane Smith](https://github.com/DoctorHowser) and [Kris Szafranski](https://github.com/kdszafranski).
 
