@@ -31,7 +31,7 @@ function MemberList(props) {
             return (<h1 key={i}>Members of {dojo.dojo_name} </h1>)
             }
           })}
-          <h3>{activeHeading}</h3>
+          {/* <h3>{activeHeading}</h3> */}
         </Grid>
         <Grid item >
           <DojoDues />

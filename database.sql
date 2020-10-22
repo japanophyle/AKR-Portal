@@ -22,7 +22,7 @@ CREATE TABLE "ranks" (
 	"id" SERIAL PRIMARY KEY,
 	"rank_name" VARCHAR(30),
 	"date_rank_made" DATE,
-	"user_id" INT REFERENCES "user_data" ON DELETE CASCADE
+	"user_id" INT REFERENCES "user" ON DELETE CASCADE
 );
 
 CREATE TABLE "user_data" (
