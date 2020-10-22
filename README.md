@@ -40,7 +40,7 @@ Link to software that is required to install the app (e.g. node).
 - [Redux.js](https://redux.js.org/)
 - [Sweetalert](https://sweetalert.js.org/)
 - [Material-UI](https://material-ui.com/)
-- [Postgres](https://www.postgresql.org/download/)
+- [PostgreSQL](https://www.postgresql.org/download/)
 
 
 ## Installation
@@ -117,4 +117,4 @@ Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped u
 
 ## Support
 
-If you have suggestions or issues, please email me us at [hannanmir2@gmail.com](mailto:hannanmir2@gmail.com), [karljohnbeck@gmail.com](mailto:karljohnbeck@gmail.com), [alexsvrsn@gmail.com](mailto:alexsvrsn@gmail.com), [emerson.aagaard@gmail.com](mailto:emerson.aagaard@gmail.com)
+If you have suggestions or issues, please email us at [hannanmir2@gmail.com](mailto:hannanmir2@gmail.com), [karljohnbeck@gmail.com](mailto:karljohnbeck@gmail.com), [alexsvrsn@gmail.com](mailto:alexsvrsn@gmail.com), [emerson.aagaard@gmail.com](mailto:emerson.aagaard@gmail.com)
