@@ -274,35 +274,39 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     })
 })
 
-// END NEW-CODE ====
-
-// BOILER PLATE ====
-
-// Handles Ajax request for user information if user is authenticated
+// Handles GET request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
   res.send(req.user);
 });
 
-// Handles POST request with new user data
-// The only thing different from this and every other post we've seen
-// is that the password gets encrypted before being inserted
-router.post('/register', (req, res, next) => {
+// Handles POST request for new user registration 
+// req.body must have username and plaintext password
+// Note: newly registered users have an auth level of zero, only see their own info
+router.post('/register', (req, res) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
+  const defaultAuthLevel = 0;
 
-  const queryText = `INSERT INTO "user" (username, password, auth_level)
-    VALUES ($1, $2, 0) RETURNING id`;
-  pool
-    .query(queryText, [username, password])
-    .then(() => res.sendStatus(201))
-    .catch(() => res.sendStatus(500));
+  const queryText = `INSERT INTO user (username, password, auth_level)
+      VALUES (?, ?, ?)`;
+  pool.query(queryText, 
+      [username, password, defaultAuthLevel], 
+      (error, results, fields) => {
+        if (error) {
+          console.log(error);
+          res.sendStatus(500);
+        } else {
+          console.log('New user ID', results.insertId);
+          res.sendStatus(201)
+        }
+      }
+    )
 });
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
-// this middleware will run our POST if successful
-// this middleware will send a 404 if not successful
+// this middleware will run our POST if successful & send a 403 if not logged in
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
   res.sendStatus(200);
 });
