@@ -260,7 +260,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     } else {
       console.log(`WARN - invalid date (birthdate) for profile update ${date}, will not set in profile`)
     }
-    }  
+  }  
   if (req.body.date_began_kyudo) {
     const date = momentjs(req.body.date_began_kyudo);
     if ( date.isValid() ) {
@@ -268,7 +268,7 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     } else {
       console.log(`WARN - invalid date (began kyudo) for profile update ${date}, will not set in profile`)
     }
-    }  
+  }  
   if (req.body.citizenship) {
     fieldsToUpdate.citizenship = pool.escape( req.body.citizenship );
   }  
@@ -285,7 +285,12 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     fieldsToUpdate.amount_paid = pool.escape( req.body.amount_paid );
   }  
   if (req.body.dues_date) {
-    fieldsToUpdate.dues_date = pool.escape( req.body.dues_date );
+    const date = momentjs(req.body.dues_date);
+    if ( date.isValid() ) {
+      fieldsToUpdate.dues_date = date.toDate();
+    } else {
+      console.log(`WARN - invalid date (dues date) for profile update ${date}, will not set in profile`)
+    }
   }  
   if (req.body.dues_method) {
     fieldsToUpdate.dues_method = pool.escape( req.body.dues_method );
