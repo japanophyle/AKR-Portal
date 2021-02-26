@@ -6,7 +6,6 @@ import ranksSaga from './ranks.saga';
 import dojosSaga from './dojos.saga';
 import membersSaga from './members.saga';
 import myDojoSaga from './myDojo.saga';
-import adminsSaga from './admins.saga';
 import searchSaga from './search.saga';
 import dojoTransfer from './dojoTransfer.saga';
 
@@ -26,7 +25,6 @@ export default function* rootSaga() {
     dojosSaga(),
     membersSaga(),
     myDojoSaga(),
-    adminsSaga(),
     searchSaga(),
     dojoTransfer(),
   ]);

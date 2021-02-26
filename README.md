@@ -40,7 +40,7 @@ Link to software that is required to install the app (e.g. node).
 - [Redux.js](https://redux.js.org/)
 - [Sweetalert](https://sweetalert.js.org/)
 - [Material-UI](https://material-ui.com/)
-- [PostgreSQL](https://www.postgresql.org/download/)
+- [MySql Database](https://dev.mysql.com/downloads/mysql/)
 
 
 ## Installation
@@ -104,7 +104,7 @@ Link to software that is required to install the app (e.g. node).
 - React
 - Redux
 - Node.js
-- PostgreSQL
+- MySQL
 - Axios
 - Sweetalert
 - Material-UI
