@@ -8,177 +8,88 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
-// NEW CODE ========
-
-// NEW USER POST
+// Handles POST for initial creation of the logged in user's profile
+// TODO - ISSUE - Why age? it will change. Unless intended as age started, 
+//  should calculate for display from birthdate and current date
 router.post('/profile', rejectUnauthenticated, async (req, res) => {
+  const info = req.body;
   const query = `
-    INSERT INTO "user_data" (
-      "fname", 
-      "lname", 
-      "user_id", 
-      "email", 
-      "phone_number", 
-      "dojo_id", 
-      "fname_japanese", 
-      "lname_japanese", 
-      "student_rank", 
-      "date_student_rank",
-      "teaching_rank",
-      "date_teaching_rank",
-      "ikyf",
-      "age",
-      "years_practice",
-      "address_1",
-      "address_2",
-      "city",
-      "state",
-      "country",
-      "zipcode",
-      "gender",
-      "date_of_birth",
-      "date_began_kyudo",
-      "citizenship",
-      "usa_archery_id",
-      "is_current_member"
-      )
-    VALUES (
-      $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
-      $11, $12, $13, $14, $15, $16, $17, $18, $19, $20,
-      $21, $22, $23, $24, $25, $26, $27
-    );
-    `;
-  pool
-    .query(query, [
-      req.body.fname, // $1
-      req.body.lname, // $2
-      // not using this, since it'll be the logged in user:
-      // req.body.user_id,
-      // using this instead:
-      req.user.id, // $3
-      req.body.email, // $4
-      req.body.phone_number, // $5
-      // dojo_id will be sent over as an integer value from client
-      req.body.dojo_id, // $6
-      req.body.fname_japanese, // $7
-      req.body.lname_japanese, // $8
-      // student_rank will be sent over and stored as a string
-      req.body.student_rank, // $9
-      req.body.date_student_rank, // $10
-      // likewise with teaching rank
-      req.body.teaching_rank, // $11
-      req.body.date_teaching_rank, // $12
-      req.body.ikyf, // $13
-      req.body.age, // $14
-      req.body.years_practice, // $15
-      req.body.address_1, // $16
-      req.body.address_2, // $17
-      req.body.city, // $18
-      req.body.state, // $19
-      req.body.country, // $20
-      req.body.zipcode, // $21
-      req.body.gender, // $22
-      req.body.date_of_birth, // $23
-      req.body.date_began_kyudo, // $24
-      req.body.citizenship, // $25
-      req.body.usa_archery_id, // $26
-      req.body.is_current_member, // $27
-    ])
-    .then(
-      () => {
-        res.sendStatus(201)
-      }
-    )
-    .catch(
-      error => {
+    INSERT INTO user_data (
+      fname, lname, user_id, email, phone_number, dojo_id, 
+      fname_japanese, lname_japanese, student_rank, date_student_rank,
+      teaching_rank, date_teaching_rank, ikyf, age, years_practice,
+      address_1, address_2, city, state, country, zipcode, 
+      gender,
+      date_of_birth, date_began_kyudo, citizenship, usa_archery_id, is_current_member
+    ) VALUES (
+      ?, ?, ?, ?, ?, ?, 
+      ?, ?, ?, ?,
+      ?, ?, ?, ?, ?, 
+      ?, ?, ?, ?, ?, ?, 
+      ?, ?, ?, ?, 
+      ?, ?
+    );`;
+  pool.query(query, 
+    [
+      info.fname, info.lname, req.user.id, info.email, info.phone_number, info.dojo_id, 
+      info.fname_japanese, info.lname_japanese, info.student_rank, info.date_student_rank, 
+      info.teaching_rank, info.date_teaching_rank, info.ikyf, info.age, info.years_practice, 
+      info.address_1, info.address_2, info.city, info.state, info.country, info.zipcode, 
+      info.gender, info.date_of_birth, info.date_began_kyudo, info.citizenship,
+      info.usa_archery_id, info.is_current_member
+    ],
+    (error, results, fields) => {
+      if (error){
         console.log('error in /api/user/profile post:', error);
         res.sendStatus(500);
+      } else {
+        res.sendStatus(201);
       }
-    )
+    }
+  );
 });
 
-
-// USER_DATA GET
-// This Route serves to either get the current-user's user_data
-// (in the case that :id is 'user')
-// Or to get a specific member's,
-// selected by admin in the member list and sent as an integer
-// in :id
+// Gets a user profile data by id
+//   Only allows access to the logged in user's profile for auth level < 10
+//   Auth level > 10 may access any profile by id.
 router.get('/profile/:id', rejectUnauthenticated, async (req, res) => {
+  console.log('Logged in user:', req.user);
 
   let userToGet = req.params.id;
 
-  const client = await pool.connect();
-  const queryText = `
-    SELECT
-    "user".username,
-    "user_data".*,
-    "dojo".region_name,
-    "dojo".dojo_name
-    FROM "user"
-    JOIN "user_data" ON "user".id = "user_data".user_id
-    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".id = $1
-    `;
-  // If the user is just getting their own info
+  // TODO - this is weird... fix client to just send user id?
   if (userToGet === 'user' || Number(userToGet) === req.user.id) {
-
     userToGet = req.user.id
-    // just do the regular thing
-    pool
-      .query(queryText, [userToGet])
-        .then(response => {
-          // GET routes don't send res.sendStatuses
-          res.send(response.rows[0])
-          client.release();
-        })
-        .catch(error => {
-          console.log('error in /api/user/profile get:', error);
-          res.sendStatus(500);
-          client.release();
-        })
-  // else if the user is getting another user's info...
-  } else if (Number.isInteger( Number(userToGet) )) {
-    // get their auth level from DB first
-    // if it's high enough, then proceed to get
-    // the desired user's data,
-    // if not, then kick them out... (how?)
-    let userData = [];
-    try {
-      const firstQuery = `
-        SELECT "user".auth_level FROM "user"
-        WHERE "user".id = $1;
-      `;
-      const secondQuery = `
-      `;
-      await client.query('BEGIN');
-      let authLevel = await client.query(firstQuery, [req.user.id]);
-      authLevel = authLevel.rows[0].auth_level;
-      if (authLevel === 10 || authLevel === 15 || authLevel === 20) {
-        userData = await client.query(queryText, [userToGet])
-      } else {
-        console.log('unauthorized');
-        await client.query('ROLLBACK')
-        res.sendStatus(200);
-      }
-      await client.query('COMMIT');
-      res.send(userData.rows[0])
-    } catch (error) {
-      console.log('error getting member\'s data', error)
-      await client.query('ROLLBACK')
-      res.sendStatus(500)
-    } finally {
-      await client.release();
-    }
-  } else {
-    console.log('invalid req.param value');
-    userToGet = NaN;
-    client.release();
   }
+
+  // Must be asking for their own data or at a higher auth level
+  if (req.user.id == userToGet || req.user.auth_level === 10 || 
+      req.user.auth_level === 15 || req.user.auth_level === 20) {
+        // OK, so do query
+        const queryText = `
+            SELECT user.username, user_data.*, dojo.region_name, dojo.dojo_name
+            FROM user
+            JOIN user_data ON user.id = user_data.user_id
+            JOIN dojo ON user_data.dojo_id = dojo.id
+            WHERE user.id = ?`;
+        pool.query(queryText, 
+          [userToGet],
+          (error, result, fields) => {
+            if (error){
+              console.log('error in /api/user/profile get:', error);
+              res.sendStatus(500);
+            } else {
+              res.send(result[0])
+            }
+          }
+        );
+  } else {
+    // Not OK, so forbidden
+    res.sendStatus(403);
+  } 
 });
 
-
-
+// TODO - Update for MySQL
 router.put('/edit', rejectUnauthenticated, (req, res) => {
 
   let who
@@ -274,15 +185,15 @@ router.put('/edit', rejectUnauthenticated, (req, res) => {
     })
 })
 
-// Handles GET request for user information if user is authenticated
+// Gets logged in user information 
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
   res.send(req.user);
 });
 
-// Handles POST request for new user registration 
-// req.body must have username and plaintext password
-// Note: newly registered users have an auth level of zero, only see their own info
+// Add (register) new user  
+//   Body must contain username and password (plaintext) 
+//   Note: newly registered users have an auth level of zero
 router.post('/register', (req, res) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
@@ -304,14 +215,12 @@ router.post('/register', (req, res) => {
     )
 });
 
-// Handles login form authenticate/login POST
-// userStrategy.authenticate('local') is middleware that we run on this route
-// this middleware will run our POST if successful & send a 403 if not logged in
+// Handles user login through Passport local authentication
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
   res.sendStatus(200);
 });
 
-// clear all server session information about this user
+// Handles user logout - clear all server session information about this user
 router.post('/logout', (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();
