@@ -17,13 +17,6 @@ CREATE TABLE dojo (
 	description TEXT
 );
 
-CREATE TABLE ranks (
-	id SERIAL PRIMARY KEY,
-	rank_name VARCHAR(30),
-	date_rank_made DATE,
-	user_id INT REFERENCES user ON DELETE CASCADE
-);
-
 CREATE TABLE user_data (
 	id serial PRIMARY KEY,
 	fname VARCHAR(255) NOT NULL,
