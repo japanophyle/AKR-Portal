@@ -97,7 +97,7 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
   if (req.user.auth_level === 10) {
     // Get logged in user's dojo to make sure it matches what they are asking for
     const dojoAdminQueryText = `SELECT user_data.dojo_id FROM user_data
-        WHERE "user_data".user_id = ? LIMIT 1;`
+        WHERE user_data.user_id = ? LIMIT 1;`
 
     pool.query(dojoAdminQueryText, [req.user.id], 
         (error, result, fields) => {
@@ -105,11 +105,11 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
           console.log('Error - GET active members auth_lvl 10 access:', error);
           res.sendStatus(500);
         } else {
-          console.log('Got back', result)
+          console.log('Got back', result[0], 'Asking for', req.params.id)
           adminDojoId = result[0].dojo_id;
           
           // If the request is for the admin's dojo, select the active members
-          if (adminDojoId === req.params.id) {
+          if (adminDojoId === Number(req.params.id)) {
             const queryText = `
                 SELECT user_data.*, user.id, user.username, user.auth_level, dojo.dojo_name 
                 FROM user
@@ -168,7 +168,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
   if (req.user.auth_level === 10) {
     // Get logged in user's dojo to make sure it matches what they are asking for
     const dojoAdminQueryText = `SELECT user_data.dojo_id FROM user_data
-        WHERE "user_data".user_id = ? LIMIT 1;`
+        WHERE user_data.user_id = ? LIMIT 1;`
 
     pool.query(dojoAdminQueryText, [req.user.id], 
         (error, result, fields) => {
@@ -180,7 +180,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
           adminDojoId = result[0].dojo_id;
           
           // If the request is for the admin's dojo, select the active members
-          if (adminDojoId === req.params.id) {
+          if (adminDojoId === Number(req.params.id)) {
             const queryText = `
                 SELECT user_data.*, user.id, user.username, user.auth_level, dojo.dojo_name 
                 FROM user
@@ -230,59 +230,46 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
   }
 });
 
-// TODO - Update for MySQL
-// GET *ONLY* NAMES AND RANKS (FOR MY DOJO)
+// Gets a list of *ONLY* the names and ranks for the user's dojo
+//   Logged in user must be an active member of a dojo (auth_level >= 5)
 router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
  
   if (req.user.auth_level >= 5) {
+    // Get logged in user's dojo 
+    const sqlText = `SELECT user_data.dojo_id FROM user_data
+        WHERE user_data.user_id = ? LIMIT 1;`
 
-
-    const client = await pool.connect();
-
-    try {
-
-      const firstQuery = `
-
-    SELECT "user_data".dojo_id FROM "user_data"
-    WHERE "user_data".user_id = $1 LIMIT 1;
-    `;
-
-      const secondQuery = `
-    SELECT "user_data".fname, "user_data".lname,
-    "user_data".fname_japanese, "user_data".lname_japanese, 
-    "user_data".student_rank, "user_data".teaching_rank 
-    FROM "user_data"
-    WHERE "user_data".dojo_id = $1
-    ORDER BY "user_data".id ASC;
-    `;
-
-      await client.query('BEGIN');
-
-      userDojoId = await client.query(firstQuery, [req.user.id]);
-
-      userDojoId = userDojoId.rows[0].dojo_id;
-
-      response = await client.query(secondQuery, [userDojoId]);
-
-      await client.query('COMMIT');
-
-      // set our response deals to send back
-      res.send(response.rows)
-
-      // res.sendStatus(200);
-    } catch (error) {
-      console.log('error in mydojo get', error);
-
-      await client.query('ROLLBACK');
-      res.sendStatus(500);
-
-    } finally {
-      await client.release();
-
-    }
+    pool.query(sqlText, 
+        [req.user.id], 
+        (error, result, fields) => {
+          // Get user's dojo id
+          const dojoId = result[0].dojo_id;
+          if (error) {
+            console.log('Error - GET active members auth_lvl 10 access:', error);
+            res.sendStatus(500);
+          } else {
+            // Get member info
+            const queryText = `SELECT user_data.fname, user_data.lname,
+                  user_data.fname_japanese, user_data.lname_japanese, 
+                  user_data.student_rank, user_data.teaching_rank FROM user_data
+                  WHERE user_data.dojo_id = ? ORDER BY user_data.fname ASC;`
+            pool.query(queryText, [dojoId], 
+                (error, result, fields) => {
+                  if (error) {
+                    console.log('Error - get my dojo members:', error);
+                    res.sendStatus(500);
+                  } else {
+                    // Use this to select the active members
+                    res.send(result);
+                  }
+                }
+            );
+          }
+        }
+    );  
   } else {
+    console.log(`WARN - GET inactive members request from ${req.user.username}. User is not active with a dojo.`)
     res.sendStatus(403)
-
   }
 })
 
