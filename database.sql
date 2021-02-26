@@ -1,6 +1,7 @@
 -- Set characterset for unicode supported utf8
-ALTER DATABASE database_name CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+ALTER DATABASE akr_portal CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
+-- Create tables
 CREATE TABLE user (
 	id serial PRIMARY KEY,
 	username VARCHAR(255) NOT NULL UNIQUE,
@@ -61,41 +62,7 @@ CREATE TABLE user_data (
 	include_for_akr BOOLEAN
 );
 
+-- Insert current dojos
 INSERT INTO dojo (dojo_name, region_name)
 VALUES ('Buenos Aires Kyudo', 'Argentina'), ('Arizona Kyudo Kai', 'Arizona'), ('Kyūdō Kai', 'Brasil'), ('Cristián Ferrada Tuset', 'Chile'), ('Reimyo Kyudojo', 'Florida'), ('Ichiya Kyudojo', 'Florida'), ('Tampa Kyudo Dojo', 'Florida'), ('Kashimon Dojo', 'Florida'), ('Bi Toku Kyudo Kai', 'Georgia'), ('Shingetsu Kyudo Kai', 'Georgia'), ('Fuji Kyudojo', 'Georgia'), ('Indiana Kyudo Renmei', 'Indiana'), ('Iowa Kyudo Kai', 'Iowa'), ('Mystique Kyudo Dokokai', 'Maine'), ('Mushin Kyudo Kai', 'Mexico'), ('Zendo Teotihuacan', 'Mexico'), ('Kyudo en la UNAM', 'Mexico'), ('Kyudo Kai Mexico', 'Mexico'), ('Minnesota Kyudo Renmei', 'Minnesota'), ('Nevada Kyudo Kai', 'Nevada'), ('New York/ New Jersey Kyudo Kai', 'New York/ New Jersey'), ('North Carolina Kyudo Renmei', 'North Carolina'), ('Shiseikan Dojo', 'Northern California'), ('Seishinkan Dojo', 'Northern California'), ('Renseikan Dojo', 'Northern California'), ('Redwood Kyudojo', 'Northern California'), ('Kyudo Kai PA', 'Panama'), ('Kyudokai Asuncion ', 'Paraguay'), ('South Carolina Kyudo Renmei', 'South Carolina'), ('Shin Kan Dojo', 'Southern California'), ('San Deigo Kyudo', 'Southern California'), ('Austin Kyudo', 'Texas'), ('Uruguay Kyudo Kai', 'Uruguay'), ('Virginia Kyudo Renmei', 'Virginia'), ('Washington Kyudo Club: Greater Seattle Area', 'Washington'), ('Milwaukee Kyudo Kai', 'Wisconsion');
 
-INSERT INTO user_data (
-fname,
-lname,
-user_id,
-email,
-phone_number,
-dojo_id,
-student_rank,
-date_student_rank,
-address_1,
-city,
-state,
-country,
-zipcode,
-date_of_birth,
-citizenship )
-VALUES 
-('Lilly', 'Potter', '23', 'lilpot@hogwarts.edu', '221-332-4433', '19', 'Nidan', STR_TO_DATE('01-07-2005', '%d-%m-%Y'),
-'123 Godricks ln', 'Godricks Hollow', 'MN', 'United States', '55444', STR_TO_DATE('20-01-1975', '%d-%m-%Y'), 
- 'USA'),
-('James', 'Potter', '19', 'prongs@hogwarts.edu', '221-332-4433', '19', 'Nidan', STR_TO_DATE('01-07-2005', '%d-%m-%Y'),
-'123 Godricks ln', 'Godricks Hollow', 'MN', 'United States', '55444', STR_TO_DATE('20-01-1975', '%d-%m-%Y'), 
- 'USA'),
-('Harry', 'Potter', '18', 'thelasthorcrux@hogwarts.edu', '221-332-4433', '19', 'Nidan', STR_TO_DATE('01-07-2005', '%d-%m-%Y'),
-'123 Godricks ln', 'Godricks Hollow', 'MN', 'United States', '55444', STR_TO_DATE('20-01-1975', '%d-%m-%Y'), 
- 'USA'),
-('Sirius', 'Black', '22', 'padfoot@hogwarts.edu', '221-332-4433', '19', 'Nidan', STR_TO_DATE('01-07-2005', '%d-%m-%Y'),
-'123 Godricks ln', 'Godricks Hollow', 'MN', 'United States', '55444', STR_TO_DATE('20-01-1975', '%d-%m-%Y'), 
- 'USA'),
-('Ron', 'Weasley', '21', 'captainchaser@hogwarts.edu', '221-332-4433', '19', 'Nidan', STR_TO_DATE('01-07-2005', '%d-%m-%Y'),
-'123 Godricks ln', 'Godricks Hollow', 'MN', 'United States', '55444', STR_TO_DATE('20-01-1975', '%d-%m-%Y'), 
- 'USA'),
-('Hermoine', 'Granger', '20', 'ilovebooks@hogwarts.edu', '221-332-4433', '19', 'Nidan', STR_TO_DATE('01-07-2005', '%d-%m-%Y'),
-'123 Godricks ln', 'Godricks Hollow', 'MN', 'United States', '55444', STR_TO_DATE('20-01-1975', '%d-%m-%Y'), 
- 'USA');
