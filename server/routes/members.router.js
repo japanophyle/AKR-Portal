@@ -5,200 +5,235 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-//UPDATE ROUTE TO PROMOTE AUTH LEVEL
+// Update to promote a member 
+//   Logged in user must be at least a dojo admin (auth_level 10) 
+//   Cannot promote user to a auth_level higher than self
 router.put('/promote', rejectUnauthenticated, (req, res) => {
 
-  const queryText = `
-    UPDATE "user"
-    SET "auth_level" = $2
-    WHERE "user".id = $1;`
+  const queryText = `UPDATE user SET auth_level = ? WHERE user.id = ?;`;
 
-    if (req.user.auth_level >= 10 && req.body.value <= 10) {
-  pool.query(queryText, [req.body.id, req.body.value])
-    .then(result => { res.sendStatus(200) })
-    .catch(err => {
-      console.log('error with activate user route', err);
-      res.sendStatus(500);
-    })
-  } else if (req.user.auth_level >= 20 && req.body.value <= 20) {
-    pool.query(queryText, [req.body.id, req.body.value])
-    .then(result => { res.sendStatus(200) })
-    .catch(err => {
-      console.log('error with activate user route', err);
-      res.sendStatus(500);
-    })
+  if (req.user.auth_level >= 10 && req.user.auth_level >= req.body.value) {
+    pool.query(queryText, [req.body.value, req.body.id],
+      (error, result, fields) => {
+        if (error) {
+            console.log('ERROR - activate user:', error);
+            res.sendStatus(500);
+        } else {
+            res.send(result);
+        }
+      }
+    );
   } else {
+    console.log(`WARN - unauthorized attempt to promote user by ${req.user.username}`)
+    console.log(`WARN - unauthorized attempt to promote user ${req.body.id} to level ${req.body.value}`)
     res.sendStatus(403);
   }
 });
 
-//UPDATE ROUTE TO ACTIVATE A MEMBER
+// Update to activate a member
+//   Logged in user must be at least a dojo admin (auth_level 10)
+//   Member auth_level is set to 5 to activate
 router.put('/activate', rejectUnauthenticated, (req, res) => {
 
-  const queryText = `
-    UPDATE "user"
-    SET "auth_level" = 5
-    WHERE "user".id = $1;`
+  // TODO - send user id as param to follow API best practices
+  const memberId = req.body.id
 
   if (req.user.auth_level >= 10) {
-    pool.query(queryText, [req.body.id])
-      .then(result => { res.sendStatus(200) })
-      .catch(err => {
-        console.log('error with activate user route', err);
-        res.sendStatus(500);
-      })
+    const queryText = `UPDATE user SET auth_level = 5 WHERE user.id = ?;`
+    pool.query(queryText, [memberId],
+      (error, result, fields) => {
+        if (error) {
+            console.log('ERROR - activate user route:', error);
+            res.sendStatus(500);
+        } else {
+            res.send(result);
+        }
+      }
+    );
   } else {
+    // Unauthorized
+    console.log(`WARN - unauthorized attempt to activate user by ${req.user.username}`)
+    console.log(`WARN - unauthorized attempt to activate user ${memberId}`)
     res.sendStatus(403);
   }
 });
 
-//UPDATE ROUTE TO DEACTIVATE A MEMBER
+// Update to inactivate a member
+//   Logged in user must be at least a dojo admin (auth_level 10)
+//   Member auth_level is set to 5 to activate
+// TODO - ISSUE - This potentially allows a dojo admin to remove access 
+//   for a site/national admin by setting their auth_level to 0
 router.put('/deactivate', rejectUnauthenticated, (req, res) => {
 
-  const queryText = `
-    UPDATE "user"
-    SET "auth_level" = 0
-    WHERE "user".id = $1;`
+  // TODO - send user id as param to follow API best practices
+  const memberId = req.body.id
 
   if (req.user.auth_level >= 10) {
-    pool.query(queryText, [req.body.id])
-      .then(result => { res.sendStatus(200) })
-      .catch(err => {
-        console.log('error with activate user route', err);
-        res.sendStatus(500);
-      })
+    const queryText = `UPDATE user SET auth_level = 0 WHERE user.id = ?;`
+    pool.query(queryText, [memberId],
+      (error, result, fields) => {
+        if (error) {
+            console.log('ERROR - activate user route:', error);
+            res.sendStatus(500);
+        } else {
+            res.send(result);
+        }
+      }
+    );
   } else {
+    // Unauthorized
+    console.log(`WARN - unauthorized attempt to inactivate user by ${req.user.username}`)
+    console.log(`WARN - unauthorized attempt to inactivate user ${memberId}`)
     res.sendStatus(403);
   }
 });
 
-// GET ALL ACTIVE MEMBERS
+// Get all active members by dojo id
+//   Access is restricted to dojo administration or site/national admin
+// TODO - combine with inactive route to DRY the code, add query string for status
+// TODO - consider move to dojo router for API best practice
 router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
 
-
-  const dojoAdminQueryText = `
-    SELECT "user_data".dojo_id FROM "user_data"
-    WHERE "user_data".user_id = $1 LIMIT 1;`
-
-  const queryText = `
-    SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
-    JOIN "user_data" ON "user".id = "user_data".user_id
-    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1 AND $2 = $1;
-    `;
-
   if (req.user.auth_level === 10) {
-    const client = await pool.connect();
-    try {
-      await client.query('BEGIN');
+    // Get logged in user's dojo to make sure it matches what they are asking for
+    const dojoAdminQueryText = `SELECT user_data.dojo_id FROM user_data
+        WHERE "user_data".user_id = ? LIMIT 1;`
 
-      //first query to get the admin dojo_id if they are auth_level 10
-      let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
-      adminDojoId = adminDojoId.rows[0].dojo_id
-
-      response = await client.query(queryText, [req.params.id, adminDojoId]);
-
-      await client.query('COMMIT');
-
-      res.send(response.rows)
-
-    } catch (error) {
-      console.log('Error in GET active members auth_lvl 10 access', error);
-      await client.query('ROLLBACK');
-      res.sendStatus(500);
-
-    } finally {
-      await client.release();
-
-    }
+    pool.query(dojoAdminQueryText, [req.user.id], 
+        (error, result, fields) => {
+        if (error) {
+          console.log('Error - GET active members auth_lvl 10 access:', error);
+          res.sendStatus(500);
+        } else {
+          console.log('Got back', result)
+          adminDojoId = result[0].dojo_id;
+          
+          // If the request is for the admin's dojo, select the active members
+          if (adminDojoId === req.params.id) {
+            const queryText = `
+                SELECT user_data.*, user.id, user.username, user.auth_level, dojo.dojo_name 
+                FROM user
+                JOIN user_data ON user.id = user_data.user_id
+                JOIN dojo ON user_data.dojo_id = dojo.id
+                WHERE user.auth_level > 0 AND user_data.dojo_id = ?;`;
+            pool.query(queryText, [req.params.id], 
+                (error, result, fields) => {
+                  if (error) {
+                    console.log('Error in GET active members auth_lvl 10 access:', error);
+                    res.sendStatus(500);
+                  } else {
+                    // Use this to select the active members
+                    res.send(result);
+                  }
+                }
+            );
+          } else {
+            console.log(`WARN: GET active members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
+            res.sendStatus(403);
+          }
+        }
+      }
+    );  
   } else if (req.user.auth_level >= 20) {
-
+    // Site/National admin can access all data
     const siteAdminQueryText = `
-    SELECT "user_data".*, "user".id, "user".username, "user".auth_level, "dojo".dojo_name FROM "user"
-    JOIN "user_data" ON "user".id = "user_data".user_id
-    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level > 0 AND "user_data".dojo_id = $1;
-    `
-
-    pool.query(siteAdminQueryText, [req.params.id])
-      .then(result => {
-        res.send(result.rows)
-
-      })
-
-      .catch(error => {
-        console.log('error in /api/members/active get:', error);
-        res.sendStatus(500);
-      })
-    } else {
-      res.sendStatus(403);
-    }
-});
-
-// GET ALL INACTIVE MEMBERS
-router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
-
-  const dojoAdminQueryText = `
-    SELECT "user_data".dojo_id FROM "user_data"
-    WHERE "user_data".user_id = $1 LIMIT 1;`
-
-  const queryText = `
-    SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
-    JOIN "user_data" ON "user".id = "user_data".user_id
-    JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-    WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1 AND $2 = $1;
-    `
-
-  if (req.user.auth_level === 10) {
-    const client = await pool.connect();
-    try {
-      await client.query('BEGIN');
-
-      //first query to get the admin dojo_id if they are auth_level 10
-      let adminDojoId = await client.query(dojoAdminQueryText, [req.user.id])
-      adminDojoId = adminDojoId.rows[0].dojo_id
-
-      response = await client.query(queryText, [req.params.id, adminDojoId]);
-
-      await client.query('COMMIT');
-
-      res.send(response.rows)
-
-    } catch (error) {
-      console.log('Error in GET inactive members auth_lvl 10 access', error);
-      await client.query('ROLLBACK');
-      res.sendStatus(500);
-
-    } finally {
-      await client.release();
-
-    }
-  } else if (req.user.auth_level >= 20) {
-
-    const siteAdminQueryText = `
-      SELECT "user_data".*, "user".id, "user".username, "user".auth_level FROM "user"
-      JOIN "user_data" ON "user".id = "user_data".user_id
-      JOIN "dojo" ON "user_data".dojo_id = "dojo".id
-      WHERE "user".auth_level = 0 AND "user_data".dojo_id = $1;
-      `
-
-    pool.query(siteAdminQueryText, [req.params.id])
-      .then(result => {
-        res.send(result.rows)
-      })
-      .catch(error => {
-        console.log('Error in GET inactive members auth_level 20 access', error);
-        res.sendStatus(500)
-      })
+        SELECT user_data.*, user.id, user.username, user.auth_level, dojo.dojo_name FROM user
+        JOIN user_data ON user.id = user_data.user_id
+        JOIN dojo ON user_data.dojo_id = dojo.id
+        WHERE user.auth_level > 0 AND user_data.dojo_id = ?;
+        `
+    pool.query(siteAdminQueryText, 
+        [req.params.id],
+        (error, result, fields) => {
+          if (error) {
+            console.log('Error - GET active members auth_lvl 20+ access:', error);
+            res.sendStatus(500);
+          } else {
+            res.send(result);
+          }
+        }
+    );
   } else {
+    console.log(`WARN - GET active members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
     res.sendStatus(403);
   }
 });
 
+// Get all inactive members by dojo id
+//   Access is restricted to dojo administration or site/national admin
+// TODO - combine with active route to DRY the code, add query string for status
+// TODO - consider move to dojo router for API best practice
+router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
+
+  if (req.user.auth_level === 10) {
+    // Get logged in user's dojo to make sure it matches what they are asking for
+    const dojoAdminQueryText = `SELECT user_data.dojo_id FROM user_data
+        WHERE "user_data".user_id = ? LIMIT 1;`
+
+    pool.query(dojoAdminQueryText, [req.user.id], 
+        (error, result, fields) => {
+        if (error) {
+          console.log('Error in GET active members auth_lvl 10 access:', error);
+          res.sendStatus(500);
+        } else {
+          console.log('Got back', result)
+          adminDojoId = result[0].dojo_id;
+          
+          // If the request is for the admin's dojo, select the active members
+          if (adminDojoId === req.params.id) {
+            const queryText = `
+                SELECT user_data.*, user.id, user.username, user.auth_level, dojo.dojo_name 
+                FROM user
+                JOIN user_data ON user.id = user_data.user_id
+                JOIN dojo ON user_data.dojo_id = dojo.id
+                WHERE user.auth_level = 0 AND user_data.dojo_id = ?;`;
+            pool.query(queryText, [req.params.id], 
+                (error, result, fields) => {
+                  if (error) {
+                    console.log('Error in GET active members auth_lvl 10 access:', error);
+                    res.sendStatus(500);
+                  } else {
+                    // Use this to select the active members
+                    res.send(result);
+                  }
+                }
+            );
+          } else {
+            console.log(`WARN - GET inactive members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
+            res.sendStatus(403);
+          }
+        }
+      }
+    );  
+  } else if (req.user.auth_level >= 20) {
+    // Site/National admin can access all data
+    const siteAdminQueryText = `
+        SELECT user_data.*, user.id, user.username, user.auth_level, dojo.dojo_name FROM user
+        JOIN user_data ON user.id = user_data.user_id
+        JOIN dojo ON user_data.dojo_id = dojo.id
+        WHERE user.auth_level = 0 AND user_data.dojo_id = ?;`;
+
+    pool.query(siteAdminQueryText, 
+        [req.params.id],
+        (error, result, fields) => {
+          if (error) {
+            console.log('Error in GET active members auth_lvl 20+ access:', error);
+            res.sendStatus(500);
+          } else {
+            res.send(result);
+          }
+        }
+    );
+  } else {
+    console.log(`WARN - GET inactive members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
+    res.sendStatus(403);
+  }
+});
+
+// TODO - Update for MySQL
 // GET *ONLY* NAMES AND RANKS (FOR MY DOJO)
 router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
-
-
+ 
   if (req.user.auth_level >= 5) {
 
 
@@ -251,6 +286,7 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
   }
 })
 
+// TODO - Update for MySQL
 router.get(`/search/:term`, rejectUnauthenticated, (req, res) => {
 
   if (req.user.auth_level >= 5) {
@@ -275,14 +311,7 @@ router.get(`/search/:term`, rejectUnauthenticated, (req, res) => {
   }
 })
 
-
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
-});
-
+// TODO - Update for MySQL
 // DELETEs all data associated with a user 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
