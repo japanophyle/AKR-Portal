@@ -15,16 +15,16 @@ router.put('/promote', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [req.body.value, req.body.id],
       (error, result, fields) => {
         if (error) {
-            console.log('ERROR - activate user:', error);
+            console.log('ERROR - promote user:', error);
             res.sendStatus(500);
         } else {
-            res.send(result);
+            res.sendStatus(200);
         }
       }
     );
   } else {
-    console.log(`WARN - unauthorized attempt to promote user by ${req.user.username}`)
-    console.log(`WARN - unauthorized attempt to promote user ${req.body.id} to level ${req.body.value}`)
+    console.log(`WARN - Rejected unauthorized attempt to promote user ${req.body.id} 
+        to level ${req.body.value} by ${req.user.username}`);
     res.sendStatus(403);
   }
 });
@@ -42,17 +42,16 @@ router.put('/activate', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [memberId],
       (error, result, fields) => {
         if (error) {
-            console.log('ERROR - activate user route:', error);
+            console.log('ERROR - activate user:', error);
             res.sendStatus(500);
         } else {
-            res.send(result);
+            res.sendStatus(200);
         }
       }
     );
   } else {
     // Unauthorized
-    console.log(`WARN - unauthorized attempt to activate user by ${req.user.username}`)
-    console.log(`WARN - unauthorized attempt to activate user ${memberId}`)
+    console.log(`WARN - Rejected unauthorized attempt to activate user ${memberId} by ${req.user.username}`)
     res.sendStatus(403);
   }
 });
@@ -72,17 +71,16 @@ router.put('/deactivate', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [memberId],
       (error, result, fields) => {
         if (error) {
-            console.log('ERROR - activate user route:', error);
+            console.log('ERROR - activate user:', error);
             res.sendStatus(500);
         } else {
-            res.send(result);
+            res.sendStatus(200);
         }
       }
     );
   } else {
     // Unauthorized
-    console.log(`WARN - unauthorized attempt to inactivate user by ${req.user.username}`)
-    console.log(`WARN - unauthorized attempt to inactivate user ${memberId}`)
+    console.log(`WARN - Rejected unauthorized attempt to inactivate user ${memberId} by ${req.user.username}`);
     res.sendStatus(403);
   }
 });
@@ -101,13 +99,11 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
     pool.query(dojoAdminQueryText, [req.user.id], 
         (error, result, fields) => {
         if (error) {
-          console.log('Error - GET active members auth_lvl 10 access:', error);
+          console.log('Error - Get active members auth_lvl 10 access:', error);
           res.sendStatus(500);
         } else {
-          console.log('Got back', result[0], 'Asking for', req.params.id)
-          adminDojoId = result[0].dojo_id;
-          
           // If the request is for the admin's dojo, select the active members
+          const adminDojoId = result[0].dojo_id;
           if (adminDojoId === Number(req.params.id)) {
             const queryText = `
                 SELECT user_data.*, user.id, user.username, user.auth_level, dojo.dojo_name 
@@ -118,7 +114,7 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
             pool.query(queryText, [req.params.id], 
                 (error, result, fields) => {
                   if (error) {
-                    console.log('Error in GET active members auth_lvl 10 access:', error);
+                    console.log('Error - Get active members auth_lvl 10 access:', error);
                     res.sendStatus(500);
                   } else {
                     // Use this to select the active members
@@ -127,7 +123,7 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
                 }
             );
           } else {
-            console.log(`WARN: GET active members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
+            console.log(`WARN: Rejected get active members request from ${req.user.username} for dojo_id=${req.params.id}`)
             res.sendStatus(403);
           }
         }
@@ -145,7 +141,7 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
         [req.params.id],
         (error, result, fields) => {
           if (error) {
-            console.log('Error - GET active members auth_lvl 20+ access:', error);
+            console.log('Error - Get active members auth_lvl 20+ access:', error);
             res.sendStatus(500);
           } else {
             res.send(result);
@@ -153,7 +149,7 @@ router.get('/active/:id', rejectUnauthenticated, async (req, res) => {
         }
     );
   } else {
-    console.log(`WARN - GET active members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
+    console.log(`WARN - Rejected get active members request from ${req.user.username} for dojo_id=${req.params.id}`)
     res.sendStatus(403);
   }
 });
@@ -172,13 +168,11 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
     pool.query(dojoAdminQueryText, [req.user.id], 
         (error, result, fields) => {
         if (error) {
-          console.log('Error in GET active members auth_lvl 10 access:', error);
+          console.log('ERROR - Get inactive members auth_lvl 10 access:', error);
           res.sendStatus(500);
         } else {
-          console.log('Got back', result)
-          adminDojoId = result[0].dojo_id;
-          
           // If the request is for the admin's dojo, select the active members
+          const adminDojoId = result[0].dojo_id;
           if (adminDojoId === Number(req.params.id)) {
             const queryText = `
                 SELECT user_data.*, user.id, user.username, user.auth_level, dojo.dojo_name 
@@ -189,7 +183,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
             pool.query(queryText, [req.params.id], 
                 (error, result, fields) => {
                   if (error) {
-                    console.log('Error in GET active members auth_lvl 10 access:', error);
+                    console.log('Error - Get inactive members auth_lvl 10 access:', error);
                     res.sendStatus(500);
                   } else {
                     // Use this to select the active members
@@ -198,7 +192,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
                 }
             );
           } else {
-            console.log(`WARN - GET inactive members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
+            console.log(`WARN - Rejected get inactive members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
             res.sendStatus(403);
           }
         }
@@ -216,7 +210,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
         [req.params.id],
         (error, result, fields) => {
           if (error) {
-            console.log('Error in GET active members auth_lvl 20+ access:', error);
+            console.log('ERROR - Get inactive members auth_lvl 20+ access:', error);
             res.sendStatus(500);
           } else {
             res.send(result);
@@ -224,7 +218,7 @@ router.get('/inactive/:id', rejectUnauthenticated, async (req, res) => {
         }
     );
   } else {
-    console.log(`WARN - GET inactive members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
+    console.log(`WARN - Rejected get inactive members request from ${req.user.username} for invalid dojo_id=${req.params.id}`)
     res.sendStatus(403);
   }
 });
@@ -267,57 +261,57 @@ router.get('/mydojo', rejectUnauthenticated, async (req, res) => {
         }
     );  
   } else {
-    console.log(`WARN - GET inactive members request from ${req.user.username}. User is not active with a dojo.`)
+    console.log(`WARN - Rejected get dojo members request from ${req.user.username}. User is not active with a dojo.`)
     res.sendStatus(403)
   }
 })
 
-// TODO - Update for MySQL
-router.get(`/search/:term`, rejectUnauthenticated, (req, res) => {
+// TODO - Update for MySQL (not used?)
+// router.get(`/search/:term`, rejectUnauthenticated, (req, res) => {
 
-  if (req.user.auth_level >= 5) {
-  queryText = `
-  SELECT "user_data".*, "user".* FROM "user_data" 
-  JOIN "user" ON "user_data".user_id = "user".id
-  WHERE "user_data".fname ILIKE '%' || $1 || '%';
-  `;
-  // LIMIT ?
-  pool
-    .query(queryText, [req.params.term])
-    .then( (result) => {
-      res.send(result.rows);
-    })
-    .catch(
-      (error) => {
-        console.log('Error in search', error);
-        res.sendStatus(500);
-      })
-  } else {
-    res.sendStatus(403)
-  }
-})
+//   if (req.user.auth_level >= 5) {
+//   queryText = `
+//   SELECT "user_data".*, "user".* FROM "user_data" 
+//   JOIN "user" ON "user_data".user_id = "user".id
+//   WHERE "user_data".fname ILIKE '%' || $1 || '%';
+//   `;
+//   // LIMIT ?
+//   pool
+//     .query(queryText, [req.params.term])
+//     .then( (result) => {
+//       res.send(result.rows);
+//     })
+//     .catch(
+//       (error) => {
+//         console.log('Error in search', error);
+//         res.sendStatus(500);
+//       })
+//   } else {
+//     res.sendStatus(403)
+//   }
+// })
 
-// TODO - Update for MySQL
-// DELETEs all data associated with a user 
+// Deletes all data associated with a user 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
-  let queryText = `
-      DELETE FROM "user"
-      WHERE "id" = $1;
-      `
+  // TODO - ISSUE - should at least be a dojo adim? level >= 10?
+  //   IF can delete self, should also do logout
   if (req.user.auth_level >= 5) {
-
-  pool.query(queryText, [req.params.id])
-      .then( (result) => {
-      res.sendStatus(200);
-  })
-  .catch( (error) => {
-      console.log('Error in delete', error);
-      res.sendStatus(500);
-  })
-} else {
-  res.sendStatus(403)
-}
+    const queryText = `DELETE FROM user WHERE id = ?;`;
+    pool.query(queryText, [req.params.id],
+      (error, result, fields) => {
+          if (error) {
+            console.log('Error - Delete user:', error);
+            res.sendStatus(500);
+          } else {
+            res.sendStatus(200);
+          }
+        }
+    );
+  } else {
+    console.log(`WARN - rejected DELETE user request from ${req.user.username}`)
+    res.sendStatus(403)
+  }
 });
 
 module.exports = router;
