@@ -39,6 +39,8 @@ passport.deserializeUser((id, done) => {
 passport.use(
   'local',
   new LocalStrategy((username, password, done) => {
+    // TODO - Add user_info dojo id from user_info via join
+    //   This will simplify auth checks across API requests
     pool.query('SELECT * FROM user WHERE username = ?', 
         [username],
         (error, results, fields) => {
