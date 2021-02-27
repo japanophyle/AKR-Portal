@@ -3,109 +3,123 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const router = express.Router();
 
-// GETs all dojos
+// Get all dojos, sorted by region name
+// TODO - suggest sorting by name, since the region can't be seen
 router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * from "dojo" ORDER BY "dojo".region_name ASC;`;
-    pool.query(queryText).then(result => {
-        res.send(result.rows);
-    })
-        .catch(error => {
-            console.log('error getting dojos', error);
-            res.sendStatus(500);
-        });
+    let queryText = `SELECT * from dojo ORDER BY dojo.region_name ASC;`;
+    pool.query(queryText,
+        (error, result, fields) => {
+            if (error) {
+                console.log('error getting dojos', error);
+                res.sendStatus(500);
+            } else {
+                res.send(result);
+            }
+        }
+    );
 })
 
-// POSTs new dojo
+// Adds a new dojo
+//   Body must contain dojo_name and region_name
+//   Logged in user must be a site/national admin
 router.post('/', rejectUnauthenticated, async (req, res) => {
-
-    const client = await pool.connect();
-
+    // Must be auth_level 20+ (site/national admin)
     if (req.user.auth_level >= 20) {
-        try {
-            const firstQuery = `INSERT INTO "dojo" ("dojo_name", "region_name")
-                            VALUES ($1, $2) RETURNING "id";`;
-            const secondQuery = `UPDATE "user_data"
-                             SET "dojo_id" = $1
-                             WHERE "user_id"= $2;`;
-            await client.query('BEGIN');
-            const result = await client.query(firstQuery, [req.body.dojo_name, req.body.region_name])
-            await client.query(secondQuery, [result.rows[0].id, req.body.admin_id])
-            await client.query('COMMIT');
-            res.sendStatus(201)
-        } catch (error) {
-            console.log('error in adding dojo', error);
-            await client.query('ROLLBACK')
-            res.sendStatus(500)
-        } finally {
-            await client.release();
-        }
+        const queryText = `INSERT INTO dojo (dojo_name, region_name)
+                            VALUES (?, ?);`;
+        pool.query(queryText, 
+            [req.body.dojo_name, req.body.region_name],
+            (error, result, fields) => {
+                if (error) {
+                    console.log('ERROR - adding dojo:', error);
+                    res.sendStatus(500);
+                } else {
+                    res.send({dojo_id: result.insertId});
+                }
+            }
+        );
     } else {
-        res.sendStatus(403)
+        console.log(`WARN - unauthorized attempt to add dojo by ${req.user.username}`);
+        res.sendStatus(403);
     }
 });
 
-// DELETE a dojo
+
+// Deletes a dojo by id
+//   Logged in user must be a site/national admin 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-
-    let queryText = `DELETE FROM "dojo"
-                    WHERE "id" = $1;`;
-
+    // Must be auth_level 20+ (site/national admin)
     if (req.user.auth_level >= 20) {
-        pool.query(queryText, [req.params.id])
-            .then((result) => {
-
-                res.sendStatus(200);
-            })
-            .catch((error) => {
-                console.log('Error in delete dojo', error);
-                res.sendStatus(500);
-            })
+        const queryText = `DELETE FROM dojo WHERE id = ?;`;
+        pool.query(queryText, [req.params.id],
+            (error, result, fields) => {
+                if (error) {
+                    console.log(`ERROR - deleting dojo id ${req.params.id}:`, error);
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(200);
+                }
+            } 
+        );
     } else {
+        console.log(`WARN - unauthorized attempt to delete dojo by ${req.user.username}`);
         res.sendStatus(403)
     }
 });
 
-// UPDATE dojo info
+// Updates dojo information
+//   Body must contain dojo_name and region_name
+//   Logged in user must be a site/national admin
 router.put('/', rejectUnauthenticated, (req, res) => {
-
-    let queryText = `UPDATE "dojo"
-                    SET "dojo_name" = $1, "region_name" = $2
-                    WHERE "id" = $3;`;
-
+    // Must be auth_level 20+ (site/national admin)
     if (req.user.auth_level >= 20) {
-        pool.query(queryText, [req.body.dojo_name, req.body.region_name, req.body.id])
-            .then(result => {
-                res.sendStatus(201);
-            })
-            .catch(error => {
-                console.log(`Error updating dojo`, error);
-                res.sendStatus(500);
-            });
+        const queryText = `UPDATE dojo SET dojo_name = ?, region_name = ? WHERE id = ?;`;
+        // TODO - update id to be on URL for API best practices
+        const dojoId = req.body.id
+        pool.query(queryText, 
+            [req.body.dojo_name, req.body.region_name, dojoId],
+            (error, result, fields) => {
+                if (error) {
+                    console.log(`ERROR - updating dojo id ${dojoId}:`, error);
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(200);
+                }
+            } 
+        );
     } else {
+        console.log(`WARN - unauthorized attempt to update dojo by ${req.user.username}`);
         res.sendStatus(403)
     }
 });
 
-//route for setting dojo dues
+
+// Updates the dues amount due for all members of a dojo 
+//   Body must contain dojo_id, dues_amount and dues_date
+//   Logged in user must be a dojo admin or a site/national admin
 router.put('/dues', rejectUnauthenticated, (req, res) => {
-
-    const { dues_amount, dues_date, dojo_id } = req.body
-
-    const updateDuesQuery = `
-        UPDATE "user_data" 
-        SET "dues_amount" = $1, "dues_date" = $2
-        WHERE "dojo_id" = $3;    
-        `;
-
+    // Must be at least a dojo admin
+    // TODO - ISSUE - it should have to be the admin for the dojo being set
     if (req.user.auth_level >= 10) {
-        pool.query(updateDuesQuery, [dues_amount, dues_date, dojo_id])
-            .then(result => { res.sendStatus(200) })
-            .catch(err => {
-                console.log('Error in /dues route', err);
-                res.sendStatus(500)
-            });
+        const sqlQuery = `
+                UPDATE user_data SET dues_amount = ?, dues_date = ? 
+                WHERE dojo_id = ?;`;
+        // TODO - update id to be on URL for API best practices
+        const dojoId = req.body.dojo_id;
+        pool.query(sqlQuery, 
+            [req.body.dues_amount, req.body.dues_date, dojoId],
+            (error, result, fields) => {
+                if (error) {
+                    console.log(`ERROR - updating dues for dojo id ${dojoId}:`, error);
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(200);
+                }
+            } 
+        );
     } else {
-        res.sendStatus(403)
+        console.log(`WARN - unauthorized attempt to update dojo dues by ${req.user.username}`);
+        res.sendStatus(403);
     }
 });
 

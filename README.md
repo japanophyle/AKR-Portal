@@ -10,7 +10,7 @@
 
 #### Duration: Two Week Sprint
 
-The American Kyudo Renmei (AKR) Portal is a react based web application created by [Hannan Mir](https://github.com/hannanmir), [Karl Beck](https://github.com/karljohnbeck), [Alex Severson](https://github.com/AseSever), and [Emerson Aagaard](https://github.com/emersona-glitch). The AKR portal was created for the [American Kyudo Renmei](kyudousa.com). The AKR portal allows the AKR to mmanage all of their students in various dojos across America and internationally. This app was created to serve the needs of both the students of Kyudo and the teachers/ administrators. Kyudo is life long martial art, and thus is practiced by students of all ages. As a result easy of use and readiblity was a key theme for us when designing the AKR Portal.
+The American Kyudo Renmei (AKR) Portal is a react based web application created by [Hannan Mir](https://github.com/hannanmir), [Karl Beck](https://github.com/karljohnbeck), [Alex Severson](https://github.com/AseSever), and [Emerson Aagaard](https://github.com/emersona-glitch). The AKR portal was created for the [American Kyudo Renmei](kyudousa.com). The AKR portal allows the AKR to manage all of their students in various dojos across America and internationally. This app was created to serve the needs of both the students of Kyudo and the teachers/ administrators. Kyudo is life long martial art, and thus is practiced by students of all ages. As a result easy of use and readiblity were both key themes for us when designing the AKR Portal.
 
 The functionality available to students includes the ability to manage their basic contact information, kyudo information (ranks, membership IDs), and view payment details/ dues dates. Students can also see all other students in their dojo and view their ranks in a virtual bulletin board (My Dojo View).
 
@@ -40,7 +40,7 @@ Link to software that is required to install the app (e.g. node).
 - [Redux.js](https://redux.js.org/)
 - [Sweetalert](https://sweetalert.js.org/)
 - [Material-UI](https://material-ui.com/)
-- [PostgreSQL](https://www.postgresql.org/download/)
+- [MySql Database](https://dev.mysql.com/downloads/mysql/)
 
 
 ## Installation
@@ -104,14 +104,14 @@ Link to software that is required to install the app (e.g. node).
 - React
 - Redux
 - Node.js
-- PostgreSQL
+- MySQL
 - Axios
 - Sweetalert
 - Material-UI
 
 ## Acknowledgement
 
-Thanks to the American Kyudo Renmei and their Vice President, Carly Born, for approaching us to build this application for them. This was a fantastic and fulfilling experience and we are grateful to have had the oppurunity to learn, and showcase our programming abilities. We hope that this app will serve the AKR well and that we as developers can continue to grow and strenghten our own knowledge. 
+Thanks to the American Kyudo Renmei and their Vice President, Carly Born, for approaching us to build this application for them. This was a fantastic and fulfilling experience and we are grateful to have had the oppurunity to learn, and showcase our programming abilities. We hope that this app will serve the AKR well and that we as developers can continue to grow and strengthen our own knowledge. 
 
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped us to make this application a reality. Special thanks to our instrucors [Dane Smith](https://github.com/DoctorHowser) and [Kris Szafranski](https://github.com/kdszafranski).
 
